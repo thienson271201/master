@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 02, 2025 lúc 06:57 PM
+-- Thời gian đã tạo: Th4 02, 2025 lúc 07:06 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -1163,7 +1163,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `setting_name`, `setting_value`) VALUES
-(1, 'company_name', 'Minh Son Laptop'),
+(1, 'company_name', 'Profix Laptop'),
 (2, 'email', 'vinaphacothailand@gmail.com'),
 (3, 'phone_number', '0856737878'),
 (4, 'zalo', '0856737878'),
@@ -1197,7 +1197,7 @@ CREATE TABLE `thuong_hieu` (
 INSERT INTO `thuong_hieu` (`id`, `duong_dan`, `ten_thuong_hieu`, `hinh_anh`) VALUES
 (2, 'asus', 'Asus', '1743612419.jpg'),
 (3, 'gigabyte', 'Gigabyte', NULL),
-(4, 'acer', 'Acer', NULL),
+(4, 'acer', 'Acer', '1743613191.webp'),
 (5, 'dell', 'Dell', NULL),
 (6, 'lenovo', 'Lenovo', NULL),
 (7, 'msi', 'MSI', NULL),
