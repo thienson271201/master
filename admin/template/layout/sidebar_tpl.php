@@ -39,7 +39,7 @@
                             <a href="?com=product_type&act=list"
                                 class="nav-link <?= $com == 'product_type' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Danh mục cấp 1</p>
+                                <p>Thương Hiệu</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -60,7 +60,7 @@
                 <li class="nav-header">Đăng ký nhận tin</li>
                 <li class="nav-item">
                     <a href="?com=custommer&act=list" class="nav-link <?= $com == 'custommer' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-bag-shopping"></i>
+                        <i class="nav-icon fa-solid fa-pen-to-square"></i>
                         <p>Đăng ký nhận tin</p>
                     </a>
                 </li>

@@ -1,15 +1,8 @@
 <?php
-$product_list = $db->getRaw("SELECT 
-                                products.*, 
-                                product_types.title AS product_type_title
-                            FROM 
-                                products 
-                            LEFT JOIN 
-                                product_types 
-                            ON 
-                                products.product_type_id = product_types.id
-                            ORDER BY 
-                                products.stt ASC");
+$product_list = $db->getRaw("SELECT san_pham.*, thuong_hieu.ten_thuong_hieu
+FROM san_pham
+JOIN thuong_hieu ON san_pham.thuong_hieu_id = thuong_hieu.id;
+");
 $smg = getFlashData('smg');
 ?>
 
@@ -60,8 +53,8 @@ $smg = getFlashData('smg');
                             <tr>
                                 <th width="6%" class="text-center">STT</th>
                                 <th width="15%" class="text-center">Hình</th>
-                                <th>Tiêu đề</th>
-                                <th>Danh mục</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Thương hiệu</th>
                                 <th width="8%" class="text-center">Nổi bật</thư>
                                 <th width="8%" class="text-center">Hiển thị</th>
                                 <th width=" 10%" class="text-center">Thao tác</th>
@@ -74,30 +67,29 @@ $smg = getFlashData('smg');
                                 ?>
                                 <tr>
                                     <td class="text-center">
-                                        <input class="form-control text-center stt-input" type="text" name="stt" data-id="<?= $item['id'] ?>"
-                                            value="<?= $item['stt'] ?>">
+                                        <input class="form-control text-center stt-input" type="text" name="stt" data-id="1"
+                                            value="1">
                                     </td>
                                     <td class="text-center">
                                         <img style="width: 100px; height: 80px; object-fit: cover;"
-                                            src="../assets/images/upload/<?= $item['image'] ?>" alt="<?= $item['image'] ?>"
-                                            onerror="this.src='../assets/images/noimage/noimage.png'">
+                                           >
                                     </td>
                                     <td>
                                         <a href="?com=product&act=edit&id=<?= $item['id'] ?>"
                                             class="text-decoration-none text-black">
-                                            <?= $item['title'] ?>
+                                            <?= $item['ten_san_pham'] ?>
                                         </a>
                                     </td>
                                     <td>
-                                        <?= $item['product_type_title'] ?>
+                                        <?= $item['ten_thuong_hieu'] ?>
                                     </td>
                                     <td class="text-center">
                                         <input data-id="<?=$item['id']?>" type="checkbox" class="form-check-input highlight-checkbox" 
-                                        <?= $item['noibat'] == 1 ?'checked' : '' ?>>
+                                        checked>
                                     </td>
                                     <td class="text-center">
                                         <input data-id="<?=$item['id']?>" type="checkbox" class="form-check-input hienthi-checkbox" 
-                                        <?= $item['hienthi'] == 1 ? 'checked' : '' ?>>
+                                        checked>
                                     </td>
                                     <td class="text-center">
                                         <a href="?com=product&act=edit&id=<?= $item['id'] ?>"

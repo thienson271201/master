@@ -1,5 +1,5 @@
 <?php
-$product_type_list = $db->getRaw("SELECT * FROM product_types ORDER BY stt ASC");
+$product_type_list = $db->getRaw("SELECT * FROM thuong_hieu ");
 $smg = getFlashData('smg');
 ?>
 
@@ -12,13 +12,13 @@ $smg = getFlashData('smg');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Quản lý danh mục cấp 1</h3>
+                    <h3 class="mb-0">Quản lý Thương Hiệu</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="index.php">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Quản lý danh mục cấp 1
+                            Quản lý Thương Hiệu
                         </li>
                     </ol>
                 </div>
@@ -50,8 +50,8 @@ $smg = getFlashData('smg');
                         <thead>
                             <tr>
                                 <th width="6%" class="text-center">STT</th>
-                                <th width="10%">Hình ảnh</th>
-                                <th>Tiêu đề</th>
+                                <!-- <th width="10%">Hình ảnh</th> -->
+                                <th>Tên Thương Hiệu</th>
                                 <th width="10%" class="text-center">Danh mục</th>
                                 <th width="10%" class="text-center">Nổi bật</th>
                                 <th width="10%" class="text-center">Thao tác</th>
@@ -63,26 +63,26 @@ $smg = getFlashData('smg');
                                 ?>
                                 <tr>
                                     <td>
-                                        <input data-id="<?= $item['id'] ?>" class="form-control text-center stt-input"
-                                            type="text" value="<?= $item['stt'] ?>">
+                                        <input data-id="1" class="form-control text-center stt-input"
+                                            type="text" value="1">
                                     </td>
-                                    <td>
-                                        <img style="height: 50px;" onerror="this.src='../assets/images/noimage/noimage.png'"
-                                            src="../assets/images/upload/<?= $item['image'] ?>">
-                                    </td>
+                                    <!-- <td>
+                                        <img style="height: 50px;" 
+                                            src="">
+                                    </td> -->
                                     <td>
                                         <a href="?com=product_type&act=edit&id=<?= $item['id'] ?>"
                                             class="text-decoration-none text-black">
-                                            <?= $item['title'] ?>
+                                            <?= $item['ten_thuong_hieu'] ?>
                                         </a>
                                     </td>
                                     <td class="text-center">
                                         <input data-id="<?= $item['id'] ?>" type="checkbox" name="noibat" id="noibat"
-                                            class="form-check-input danhmuc-checkbox" <?= $item['danhmuc'] == 1 ? 'checked' : '' ?>>
+                                            class="form-check-input danhmuc-checkbox" checked>
                                     </td>
                                     <td class="text-center">
                                         <input data-id="<?= $item['id'] ?>" type="checkbox" name="noibat" id="noibat"
-                                            class="form-check-input highlight-checkbox" <?= $item['noibat'] == 1 ? 'checked' : '' ?>>
+                                            class="form-check-input highlight-checkbox" checked>
                                     </td>
                                     <td class="text-center">
                                         <a href="?com=product_type&act=edit&id=<?= $item['id'] ?>"

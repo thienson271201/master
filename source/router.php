@@ -69,7 +69,7 @@ if (!$get_status)
             $noidung = ob_get_clean();
             break;
         case 'du-an':
-            require_once TEMPLATE . 'new/new_list_tpl.php';
+            require_once TEMPLATE . 'sanpham/chitietsanpham.php';
             $noidung = ob_get_clean();
             break;
         case 'khuyen-mai':

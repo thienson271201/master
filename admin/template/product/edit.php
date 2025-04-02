@@ -4,31 +4,29 @@ if ($func->isPOST())
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
-        'slug' => $filterAll['slug'],
-        'title' => $filterAll['title'],
-        'original_price' => $filterAll['original_price'],
-        'price' => $filterAll['price'],
-        'description' => $filterAll['description'],
-        'content' => $_POST['content'],
-        'seo_title' => $filterAll['seo_title'],
-        'seo_keywords' => $filterAll['seo_keywords'],
-        'seo_desc' => $filterAll['seo_description'],
+        'duong_dan' => $filterAll['slug'],
+        'ten_san_pham' => $filterAll['title'],
+        'gia_goc' => $filterAll['original_price'],
+        'gia_sau_khuyen_mai' => $filterAll['price'],
+        'mo_ta' => $filterAll['description'],
+        'thong_so_kich_thuoc' => $_POST['content'],
+       
     ];
     if (!empty($_POST['product_type_id']))
     {
-        $data_update['product_type_id'] = $_POST['product_type_id'];
+        $data_update['thuong_hieu_id'] = $_POST['product_type_id'];
     }
-    $image = $func->upload('imageUpload', 'upload');
-    if ($image != 'noimage.jpg')
-    {
-        $data_update['image'] = $image;
-    }
-    $db->update('products', $data_update, "id='$id'");
+    // $image = $func->upload('imageUpload', 'upload');
+    // if ($image != 'noimage.jpg')
+    // {
+    //     $data_update['image'] = $image;
+    // }
+    $db->update('san_pham', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
     // $func->redirect("?com=product&act=edit&id=$id");
 }
 $id = $func->filter()['id'];
-$product = $db->oneRaw("SELECT * FROM products WHERE id = '$id'");
+$product = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$id'");
 
 $smg = getFlashData('smg');
 ?>
@@ -85,22 +83,22 @@ $smg = getFlashData('smg');
                                         <label id="slugLabel" for="company_name" class="form-label fw-bold">Đường dẫn
                                             mẫu: <?= $http . $_SERVER['HTTP_HOST'] ?></label>
                                         <input id="slugInput" type="text" name="slug" class="form-control"
-                                            value="<?= $product['slug'] ?>" required>
+                                            value="<?= $product['duong_dan'] ?>" required>
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label for="company_name" class="form-label fw-bold">Tiêu đề:</label>
                                         <input id="title" type="text" name="title" class="form-control"
-                                            value="<?= $product['title'] ?>" required>
+                                            value="<?= $product['ten_san_pham'] ?>" required>
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label for="company_name" class="form-label fw-bold">Giá bán</label>
                                         <input id="original_price" type="text" name="original_price"
-                                            class="form-control tien" value="<?= $product['original_price'] ?>">
+                                            class="form-control tien" value="<?= $product['gia_goc'] ?>">
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label for="discount" class="form-label fw-bold">Giá giảm</label>
                                         <input id="discounted_price" type="text" name="price" class="form-control"
-                                            value="<?= $product['price'] ?>">
+                                            value="<?= $product['gia_sau_khuyen_mai'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -118,12 +116,12 @@ $smg = getFlashData('smg');
                                         <label id="slugLabel" for="company_name" class="form-label fw-bold">Mô
                                             tả:</label>
                                         <textarea name="description" style="min-height: 120px;"
-                                            class="form-control"><?= $product['description'] ?></textarea>
+                                            class="form-control"><?= $product['mo_ta'] ?></textarea>
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label for="company_name" class="form-label fw-bold">Nội dung:</label>
                                         <textarea name="content" id="editor" style="min-height: 120px;"
-                                            class="form-control"><?= $product['content'] ?></textarea>
+                                            class="form-control"><?= $product['thong_so_kich_thuoc'] ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -133,20 +131,20 @@ $smg = getFlashData('smg');
                         <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    Danh mục sản phẩm
+                                    Thương Hiệu
                                 </div>
                             </div>
                             <div class="card-body">
-                                <label for="cap1" class="form-label fw-bold">Danh mục cấp 1:</label>
+                                <label for="cap1" class="form-label fw-bold">Thương Hiệu:</label>
                                 <select name="product_type_id" class="form-select">
                                     <option value>Chọn danh mục</option>
                                     <?php
-                                    $product_type_list = $db->getRaw('SELECT * FROM product_types');
+                                    $product_type_list = $db->getRaw('SELECT * FROM thuong_hieu');
                                     foreach ($product_type_list as $produc_type):
                                         ?>
                                         <option value="<?= $produc_type['id'] ?>"
-                                            <?= $product['product_type_id'] == $produc_type['id'] ? 'selected' : '' ?>>
-                                            <?= $produc_type['title'] ?>
+                                            <?= $product['thuong_hieu_id'] == $produc_type['id'] ? 'selected' : '' ?>>
+                                            <?= $produc_type['ten_thuong_hieu'] ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -161,14 +159,14 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
-                                <img id="previewImage" src="../assets/images/upload/<?= $product['image'] ?>"
+                                <!-- <img id="previewImage" src="../assets/images/upload/<?= $product['image'] ?>"
                                     onerror="this.src='../assets/images/noimage/noimage.png'" alt="Ảnh xem trước"
-                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover">
+                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover"> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="card card-primary card-outline mb-4">
+                        <!-- <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
                                 <div class="card-title">Thiết lập SEO</div>
                             </div>
@@ -191,7 +189,7 @@ $smg = getFlashData('smg');
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
                         <button type="submit" class="btn btn-primary">
                             Lưu

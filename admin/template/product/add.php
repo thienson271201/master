@@ -4,27 +4,28 @@ if ($func->isPOST())
 {
     $filterAll = $func->filter();
     $data_insert = [
-        'slug' => $filterAll['slug'],
-        'title' => $filterAll['title'],
-        'price' => $filterAll['price'],
-        'discount' => $filterAll['discount'],
-        'description' => $filterAll['description'],
-        'content' => $_POST['content'],
-        'seo_title' => $filterAll['seo_title'],
-        'seo_keywords' => $filterAll['seo_keywords'],
-        'seo_desc' => $filterAll['seo_description'],
-        'create_at' => date('Y-m-d H:i:s')
+        'duong_dan' => $filterAll['slug'],
+        'ten_san_pham' => $filterAll['title'],
+        'gia_goc' => $filterAll['price'],
+        'gia_sau_khuyen_mai' => $filterAll['discount'],
+        'mo_ta' => $_POST['description'],
+        'thong_so_kich_thuoc' => $_POST['content'],
+        'ngay_tao' => date('Y-m-d H:i:s')
     ];
     if (!empty($_POST['product_type_id']))
     {
-        $data_insert['product_type_id'] = $_POST['product_type_id'];
+        $data_insert['thuong_hieu_id'] = $_POST['product_type_id'];
     }
-    $image = $func->upload('imageUpload', 'upload');
-    if ($image != 'noimage.jpg')
-    {
-        $data_insert['image'] = $image;
-    }
-    $db->insert('products', $data_insert);
+    // $image = $func->upload('imageUpload', 'upload');
+    // if ($image != 'noimage.jpg')
+    // {
+    //     $data_insert['image'] = $image;
+    // }
+    // echo '<pre>';
+    // print_r($data_insert);
+    // echo '</pre>';
+    // exit;
+    $db->insert('san_pham', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=product&act=list');
 }
@@ -103,7 +104,7 @@ $smg = getFlashData('smg');
                         <div class="card card-primary card-outline mb-4">
                             <!--begin::Header-->
                             <div class="card-header">
-                                <div class="card-title">Nội dung sản phẩm</div>
+                                <div class="card-title">Thông số sản phẩm</div>
                             </div>
                             <!--end::Header-->
                             <!--begin::Form-->
@@ -116,7 +117,7 @@ $smg = getFlashData('smg');
                                             class="form-control"></textarea>
                                     </div>
                                     <div class="mb-3 col-12">
-                                        <label for="company_name" class="form-label fw-bold">Nội dung:</label>
+                                        <label for="company_name" class="form-label fw-bold">Thông số sản phẩm</label>
                                         <textarea name="content" id="editor" style="min-height: 120px;"
                                             class="form-control"></textarea>
                                     </div>
@@ -132,14 +133,14 @@ $smg = getFlashData('smg');
                                 </div>
                             </div>
                             <div class="card-body">
-                                <label for="cap1" class="form-label fw-bold">Danh mục cấp 1:</label>
+                                <label for="cap1" class="form-label fw-bold">Thương Hiệu:</label>
                                 <select name="product_type_id" class="form-select">
                                     <option value>Chọn danh mục</option>
                                     <?php
-                                    $product_type_list = $db->getRaw('SELECT * FROM product_types');
+                                    $product_type_list = $db->getRaw('SELECT * FROM thuong_hieu');
                                     foreach ($product_type_list as $produc_type):
                                         ?>
-                                        <option value="<?= $produc_type['id'] ?>"><?= $produc_type['title'] ?></option>
+                                        <option value="<?= $produc_type['id'] ?>"><?= $produc_type['ten_thuong_hieu'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -150,17 +151,17 @@ $smg = getFlashData('smg');
                                     Hình ảnh sản phẩm
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <!-- <div class="card-body">
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
                                 <img id="previewImage" src="" onerror="this.src='../assets/images/noimage/noimage.png'"
                                     alt="Ảnh xem trước"
                                     style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="card card-primary card-outline mb-4">
+                        <!-- <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
                                 <div class="card-title">Thiết lập SEO</div>
                             </div>
@@ -181,7 +182,7 @@ $smg = getFlashData('smg');
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary">
                             Lưu
                         </button>

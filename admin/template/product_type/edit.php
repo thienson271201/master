@@ -5,23 +5,23 @@ if ($func->isPOST())
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
-        'slug' => $filterAll['slug'],
-        'title' => $filterAll['title'],
-        'seo_title' => $filterAll['seo_title'],
-        'seo_keywords' => $filterAll['seo_keywords'],
-        'seo_desc' => $filterAll['seo_description']
+        'duong_dan' => $filterAll['slug'],
+        'ten_thuong_hieu' => $filterAll['title'],
+        // 'seo_title' => $filterAll['seo_title'],
+        // 'seo_keywords' => $filterAll['seo_keywords'],
+        // 'seo_desc' => $filterAll['seo_description']
     ];
-    $image = $func->upload('imageUpload', 'upload');
-    if ($image != 'noimage.jpg')
-    {
-        $data_update['image'] = $image;
-    }
-    $db->update('product_types', $data_update, "id='$id'");
+    // $image = $func->upload('imageUpload', 'upload');
+    // if ($image != 'noimage.jpg')
+    // {
+    //     $data_update['image'] = $image;
+    // }
+     $db->update('thuong_hieu', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
 }
 
 $id = $func->filter()['id'];
-$cap1 = $db->oneRaw("SELECT * FROM product_types WHERE id = '$id'");
+$cap1 = $db->oneRaw("SELECT * FROM thuong_hieu WHERE id = '$id'");
 $smg = getFlashData('smg');
 ?>
 
@@ -34,13 +34,13 @@ $smg = getFlashData('smg');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Chỉnh sửa danh mục cấp 1</h3>
+                    <h3 class="mb-0">Chỉnh sửa Thương Hiệu</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="index.php">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Chỉnh sửa danh mục cấp 1
+                            Chỉnh sửa Thương Hiệu
                         </li>
                     </ol>
                 </div>
@@ -61,7 +61,7 @@ $smg = getFlashData('smg');
             }
             ?>
             <form method="post" enctype="multipart/form-data">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-4">
                         <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
@@ -78,11 +78,11 @@ $smg = getFlashData('smg');
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">
-                        <div class="card-title">Nội dung danh mục cấp 1 <span class="text-danger text-sm">(vui lòng
+                        <div class="card-title">Nội dung Thương Hiệu <span class="text-danger text-sm">(vui lòng
                                 không nhập trùng tiêu đề)</span></div>
                     </div>
                     <!--end::Header-->
@@ -93,17 +93,17 @@ $smg = getFlashData('smg');
                                 <label id="slugLabel" for="company_name" class="form-label fw-bold">Đường dẫn
                                     mẫu: <?= $http . $_SERVER['HTTP_HOST'] ?></label>
                                 <input id="slugInput" type="text" name="slug" class="form-control"
-                                    value="<?= $cap1['slug'] ?>">
+                                    value="<?= $cap1['duong_dan'] ?>">
                             </div>
                             <div class="mb-3 col-12">
-                                <label for="company_name" class="form-label fw-bold">Tiêu đề:</label>
+                                <label for="company_name" class="form-label fw-bold">Tên thương hiệu:</label>
                                 <input id="title" type="text" name="title" class="form-control"
-                                    value="<?= $cap1['title'] ?>">
+                                    value="<?= $cap1['ten_thuong_hieu'] ?>">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card card-primary card-outline mb-4">
+                <!-- <div class="card card-primary card-outline mb-4">
                     <div class="card-header">
                         <div class="card-title">Thiết lập SEO</div>
                     </div>
@@ -126,7 +126,7 @@ $smg = getFlashData('smg');
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <input type="hidden" name="id" value="<?= $cap1['id'] ?>">
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">

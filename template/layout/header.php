@@ -1,142 +1,116 @@
 <?php
 $logo = $db->oneRaw("SELECT * FROM images WHERE type = 'logo'")['image'];
 $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
-$cap1 = $db->getRaw('SELECT * FROM product_types');
-$number_of_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+
 ?>
 
+<header class="header">
+      <input
+        id="header-default"
+        type="radio"
+        class="collapse"
+        checked="checked"
+        name="siteheader"
+      />
+      <input
+        id="header-shown"
+        type="radio"
+        class="collapse"
+        name="siteheader"
+      />
+      <input
+        id="header-hidden"
+        type="radio"
+        class="collapse"
+        name="siteheader"
+      />
+      <nav class="stick-menu menu-wrap shop-menu line">
+        <div class="menu-container">
+          <div class="menu-row">
+            <!-- Logo -->
+            <div class="logo">
+              <a href="index-2.html"
+                ><img src="assets/images/service/logo-alt.png" alt="ProFix"
+              /></a>
+            </div>
 
-<header id="header">
-    <div class="header-layout wrap-content flex-column flex-md-row">
-        <div class="header-left logo-image">
-            <a href="./">
-                <img style="width: 277px; height: 76px;" src="assets/images/upload/<?= $logo ?>" alt="logo">
-            </a>
-        </div>
-        <div class="header-right">
-            <div class="header-right-top">
-                <form action="./" method="get" class="form-search">
-                    <div class="search-container">
-                        <input name="timkiem" type="text" placeholder="Tìm kiếm sản phẩm bạn cần">
-                        <button type="submit">
-                            <img src="assets/images/page/icon-search.svg" class="me-sm-1">
-                            <span class="d-none d-sm-inline" style="padding-top: 2px;">Search</span>
-                        </button>
-                    </div>
-                </form>
-                <a href="./gio-hang" class="text-decoration-none">
-                    <div class="cart-icon border rounded-circle">
-                        <i style="color: var(--primary-color);" class="fa-solid fa-cart-shopping"></i>
-                        <span id="number-of-cart" class="number-of-cart"><?= $number_of_cart ?></span>
-                    </div>
-                </a>
-                <div class="header-tel-box d-none d-md-flex">
-                    <div class="icon-call">
-                        <img src="assets/images/page/Vector.svg" onerror="this.src='assets/images/noimage/noimage.png'">
-                    </div>
-                    <div class="d-flex flex-column justify-content-evenly ms-2">
-                        <span class="header-hotline-title">Hotline 24/7</span>
-                        <span class="header-hotline-content" id="phone-number">(+84) <?= $phone_number ?></span>
-                    </div>
+            <!-- Search -->
+            <form action="#" class="menu-search">
+              <div class="menu-search-field">
+                <div class="field-group">
+                  <div class="field-wrap">
+                    <input
+                      class="field-control"
+                      name="search"
+                      placeholder="Tìm sản phẩm"
+                      required="required"
+                    />
+                    <span class="field-back"></span>
+                  </div>
                 </div>
+              </div>
+              <div class="menu-search-btn">
+                <button class="btn sides-lg" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </form>
+
+            <!-- menu-extra – Thanh menu chứa các tính năng bổ sung -->
+            <div class="menu-extra">
+              <!-- menu-extra-items – Danh sách các mục trong thanh menu -->
+              <ul class="menu-extra-items">
+                <li class="xs-shown">
+                  <a href="#" data-show-block="search"
+                    ><i class="fas fa-search" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-user"></i>
+                    <span class="xs-hidden menu-extra-text">Tài khoản</span></a
+                  >
+                </li>
+                <li class="xs-hidden">
+                  <a href="#"><i class="fas fa-heart"></i></a>
+                </li>
+                <li>
+                  <a href="#" data-show-block="cart"
+                    ><i class="fas fa-shopping-cart" aria-hidden="true"></i
+                    ><span class="item-label-sale item-label">3</span></a
+                  >
+                </li>
+              </ul>
             </div>
-            <div class="header-right-bottom d-none d-md-block">
-                <nav class="menu-box">
-                    <ul class="menu-list">
-                        <li class="menu-item"><a href="./"><img src="assets/images/page/home-icon.svg"></a></li>
-                        <li class="menu-item"><a class="menu-link <?= $url == 'gioi-thieu' ? 'active' : '' ?>"
-                                href="gioi-thieu">GIỚI THIỆU</a></li>
-                        <li id="sanpham-header" class="menu-item position-relative"><a
-                                class="menu-link mucsanpham <?= $url == 'san-pham' ? 'active' : '' ?>"
-                                href="san-pham">SẢN PHẨM</a>
-                            <div id="cap1" class="cap1 shadow-lg d-none">
-                                <ul>
-                                    <?php foreach ($cap1 as $product_type): ?>
-                                        <li class="dropdown-item"><a
-                                                href="<?= $product_type['slug'] ?>"><?= $product_type['title'] ?></a></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu-item"><a class="menu-link <?= $url == 'du-an' ? 'active' : '' ?>"
-                                href="du-an">DỰ ÁN</a></li>
-                        <li class="menu-item"><a class="menu-link <?= $url == 'catalogue' ? 'active' : '' ?>"
-                                href="catalogue">CATALOGUE</a></li>
-                        <li class="menu-item"><a class="menu-link <?= $url == 'tin-tuc' ? 'active' : '' ?>"
-                                href="tin-tuc">TIN TỨC</a></li>
-                        <li class="menu-item"><a class="menu-link <?= $url == 'tuyen-dung' ? 'active' : '' ?>"
-                                href="tuyen-dung">TUYỂN DỤNG</a></li>
-                        <li class="menu-item"><a class="menu-link <?= $url == 'lien-he' ? 'active' : '' ?>"
-                                href="lien-he">LIÊN HỆ</a></li>
-                    </ul>
-                </nav>
+
+            <!-- header-toggler – Bộ điều khiển menu trên thiết bị nhỏ -->
+            <div class="header-toggler xs-shown pull-right">
+              <label class="header-shown-sign" for="header-hidden"
+                ><i class="fas fa-times" aria-hidden="true"></i
+              ></label>
+              <label class="header-hidden-sign" for="header-shown"
+                ><i class="fas fa-bars" aria-hidden="true"></i
+              ></label>
             </div>
+
+            <!-- menu -->
+            <div class="menu">
+              <ul class="menu-items menu-no-sides">
+                <li>
+                  <a href="index-2.html">Trang chủ</a>
+                </li>
+                <li>
+                  <a href="shop-category.html">Sản phẩm</a>
+                </li>
+                <li>
+                  <a href="shop-category.html">Tin tức</a>
+                </li>
+                <li>
+                  <a href="contact-us.html">Liên hệ</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div>
-</header>
-
-<!-- menu mobile -->
-<div id="header-mobile" class="d-md-none">
-    <button class="btn ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample">
-        <i class="fa-solid fa-bars text-white fs-2 pt-1"></i>
-    </button>
-
-    <div class="offcanvas offcanvas-start custom-theme-mobile" tabindex="-1" id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title text-white fw-bold" id="offcanvasExampleLabel">Danh mục</h5>
-            <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="menu-mobile">
-                <li>
-                    <a <?= $url == '' ? 'class="yellow"' : '' ?> href="./">TRANG CHỦ</a>
-                </li>
-                <li>
-                    <a <?= $url == 'gioi-thieu' ? 'class="yellow"' : '' ?> href="gioi-thieu">GIỚI THIỆU</a>
-                </li>
-                <li>
-                    <a <?= $url == 'san-pham' ? 'class="yellow"' : '' ?> href="san-pham">SẢN PHẨM</a>
-                </li>
-                <li>
-                    <a <?= $url == 'du-an' ? 'class="yellow"' : '' ?> href="du-an">DỰ ÁN</a>
-                </li>
-                <li>
-                    <a <?= $url == 'catalogue' ? 'class="yellow"' : '' ?> href="catalogue">CATALOGUE</a>
-                </li>
-                <li>
-                    <a <?= $url == 'tin-tuc' ? 'class="yellow"' : '' ?> href="tin-tuc">TIN TỨC</a>
-                </li>
-                <li>
-                    <a <?= $url == 'tuyen-dung' ? 'class="yellow"' : '' ?> href="tuyen-dung">TUYỂN DỤNG</a>
-                </li>
-                <li>
-                    <a <?= $url == 'lien-he' ? 'class="yellow"' : '' ?> href="lien-he">LIÊN HỆ</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(document).ready(function () {
-        var timeout;
-
-        // Khi hover vào #sanpham-header hoặc #cap1
-        $('#sanpham-header, #cap1').hover(
-            function () {
-                // Clear timeout nếu đang tồn tại
-                clearTimeout(timeout);
-                // Hiển thị #cap1
-                $('#cap1').removeClass('d-none');
-            },
-            function () {
-                // Đặt timeout để add class sau 1 giây nếu không hover vào gì cả
-                timeout = setTimeout(function () {
-                    $('#cap1').addClass('d-none');
-                }, 100);
-            }
-        );
-    });
-</script>
+      </nav>
+    </header>

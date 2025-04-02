@@ -4,18 +4,18 @@ if ($func->isPOST())
 {
     $filterAll = $func->filter();
     $data_insert = [
-        'slug' => $filterAll['slug'],
-        'title' => $filterAll['title'],
-        'seo_title' => $filterAll['seo_title'],
-        'seo_keywords' => $filterAll['seo_keywords'],
-        'seo_desc' => $filterAll['seo_description']
+        'duong_dan' => $filterAll['slug'],
+        'ten_thuong_hieu' => $filterAll['title'],
+        // 'seo_title' => $filterAll['seo_title'],
+        // 'seo_keywords' => $filterAll['seo_keywords'],
+        // 'seo_desc' => $filterAll['seo_description']
     ];
-    $image = $func->upload('imageUpload', 'upload');
-    if ($image != 'noimage.jpg')
-    {
-        $data_insert['image'] = $image;
-    }
-    $db->insert('product_types', $data_insert);
+    // $image = $func->upload('imageUpload', 'upload');
+    // if ($image != 'noimage.jpg')
+    // {
+    //     $data_insert['image'] = $image;
+    // }
+    $db->insert('thuong_hieu', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=product_type&act=list');
 }
@@ -32,13 +32,13 @@ $smg = getFlashData('smg');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Thêm mới danh mục cấp 1</h3>
+                    <h3 class="mb-0">Thêm mới Thương Hiệu</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="index.php">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Quản lý danh mục cấp 1
+                            Quản lý Thương Hiệu
                         </li>
                     </ol>
                 </div>
@@ -59,7 +59,7 @@ $smg = getFlashData('smg');
             }
             ?>
             <form method="post" enctype="multipart/form-data">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-4">
                         <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
@@ -76,11 +76,11 @@ $smg = getFlashData('smg');
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">
-                        <div class="card-title">Nội dung danh mục cấp 1 <span class="text-danger text-sm">(vui
+                        <div class="card-title">Nội dung Thương Hiệu <span class="text-danger text-sm">(vui
                                 lòng
                                 không nhập trùng tiêu đề)</span></div>
                     </div>
@@ -100,7 +100,7 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                 </div>
-                <div class="card card-primary card-outline mb-4">
+                <!-- <div class="card card-primary card-outline mb-4">
                     <div class="card-header">
                         <div class="card-title">Thiết lập SEO</div>
                     </div>
@@ -121,7 +121,7 @@ $smg = getFlashData('smg');
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">
                     Lưu
