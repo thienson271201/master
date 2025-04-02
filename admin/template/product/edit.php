@@ -16,11 +16,11 @@ if ($func->isPOST())
     {
         $data_update['thuong_hieu_id'] = $_POST['product_type_id'];
     }
-    // $image = $func->upload('imageUpload', 'upload');
-    // if ($image != 'noimage.jpg')
-    // {
-    //     $data_update['image'] = $image;
-    // }
+    $image = $func->upload('imageUpload', 'images');
+    if ($image != 'noimage.jpg')
+    {
+        $data_update['hinh_anh'] = $image;
+    }
     $db->update('san_pham', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
     // $func->redirect("?com=product&act=edit&id=$id");
@@ -159,9 +159,9 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
-                                <!-- <img id="previewImage" src="../assets/images/upload/<?= $product['image'] ?>"
-                                    onerror="this.src='../assets/images/noimage/noimage.png'" alt="Ảnh xem trước"
-                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover"> -->
+                                <img id="previewImage" src="../upload/images/<?= $product['hinh_anh'] ?>"
+                                    onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
+                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover">
                             </div>
                         </div>
                     </div>

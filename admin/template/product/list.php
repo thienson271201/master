@@ -71,7 +71,8 @@ $smg = getFlashData('smg');
                                             value="1">
                                     </td>
                                     <td class="text-center">
-                                        <img style="width: 100px; height: 80px; object-fit: cover;"
+                                        <img  src="../upload/images/<?= $item['hinh_anh'] ?>" style="width: 100px; height: 80px; object-fit: cover;" 
+                                        onerror="this.src='assets/img/noimage.jpg'" 
                                            >
                                     </td>
                                     <td>

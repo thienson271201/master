@@ -26,6 +26,7 @@ define('HOST', $http . $_SERVER['HTTP_HOST'] . '/' . URL);
 define('_PATH', __DIR__);
 define('_PATH_TEMPLATE', _PATH . '/template');
 define('_PATH_ASSETS', _PATH . '/assets');
+define('_PATH_UPLOAD', _PATH . '/upload/');
 
 // Thiết lập mailer
 define('_username', '');

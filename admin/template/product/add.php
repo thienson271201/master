@@ -16,15 +16,16 @@ if ($func->isPOST())
     {
         $data_insert['thuong_hieu_id'] = $_POST['product_type_id'];
     }
-    // $image = $func->upload('imageUpload', 'upload');
-    // if ($image != 'noimage.jpg')
-    // {
-    //     $data_insert['image'] = $image;
-    // }
+    $image = $func->upload('imageUpload', 'images');
+    if ($image != 'noimage.jpg')
+    {
+        $data_insert['hinh_anh'] = $image;
+    }
     // echo '<pre>';
     // print_r($data_insert);
     // echo '</pre>';
     // exit;
+    
     $db->insert('san_pham', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=product&act=list');
@@ -151,13 +152,13 @@ $smg = getFlashData('smg');
                                     Hình ảnh sản phẩm
                                 </div>
                             </div>
-                            <!-- <div class="card-body">
+                            <div class="card-body">
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
-                                <img id="previewImage" src="" onerror="this.src='../assets/images/noimage/noimage.png'"
+                                <img id="previewImage" src="" onerror="this.src='assets/img/noimage.jpg'"
                                     alt="Ảnh xem trước"
                                     style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover">
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="col-12">

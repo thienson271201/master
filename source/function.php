@@ -58,7 +58,7 @@ class func
         $check = true;
 
         // Đảm bảo đường dẫn tùy chỉnh bắt đầu bằng dấu gạch chéo và kết thúc bằng dấu gạch chéo
-        $target_dir = rtrim(_PATH_ASSETS, '/') . '/images/' . trim($path, '/') . '/';
+        $target_dir = _PATH_UPLOAD  . trim($path, '/') . '/';
 
         // Kiểm tra và thay đổi quyền nếu cần thiết
         if (!is_writable($target_dir))
