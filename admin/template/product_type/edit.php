@@ -7,15 +7,13 @@ if ($func->isPOST())
     $data_update = [
         'duong_dan' => $filterAll['slug'],
         'ten_thuong_hieu' => $filterAll['title'],
-        // 'seo_title' => $filterAll['seo_title'],
-        // 'seo_keywords' => $filterAll['seo_keywords'],
-        // 'seo_desc' => $filterAll['seo_description']
+       
     ];
-    // $image = $func->upload('imageUpload', 'upload');
-    // if ($image != 'noimage.jpg')
-    // {
-    //     $data_update['image'] = $image;
-    // }
+    $image = $func->upload('imageUpload', 'images');
+    if ($image != 'noimage.jpg')
+    {
+        $data_update['hinh_anh'] = $image;
+    }
      $db->update('thuong_hieu', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
 }
@@ -61,24 +59,24 @@ $smg = getFlashData('smg');
             }
             ?>
             <form method="post" enctype="multipart/form-data">
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    Hình ảnh danh mục
+                                    Hình ảnh thương hiệu
                                 </div>
                             </div>
                             <div class="card-body">
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
-                                <img id="previewImage" src="../assets/images/upload/<?= $cap1['image'] ?>"
-                                    onerror="this.src='../assets/images/noimage/noimage.png'" alt="Ảnh xem trước"
+                                <img id="previewImage" src="../upload/images/<?= $cap1['hinh_anh'] ?>"
+                                onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
                                     style="width: 100%; height: 200px; margin-top: 20px; object-fit: contain">
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">

@@ -39,7 +39,7 @@ $list_noi_bat= $db->getRaw('select * from san_pham ');
               <div class="item-back"></div>
               <a href="shop-item.html" class="item-image responsive-1by1">
                 <img
-                  src="https://lh3.googleusercontent.com/FmwdqeH5jZljx0HLQ30G2FLA2emY-SxLgSmOPg-i8pRow7ahxrPe3cZtCiguFp0kWMzb7QEy1zdDV6GnNUWGg374NYhG-xID=w1000-rw"
+                  src="upload/images/<?=$noi_bat['hinh_anh'] ?>"
                   alt=""
                 />
               </a>

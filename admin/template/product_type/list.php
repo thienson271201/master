@@ -50,7 +50,7 @@ $smg = getFlashData('smg');
                         <thead>
                             <tr>
                                 <th width="6%" class="text-center">STT</th>
-                                <!-- <th width="10%">Hình ảnh</th> -->
+                                <th width="10%">Hình ảnh</th>
                                 <th>Tên Thương Hiệu</th>
                                 <th width="10%" class="text-center">Danh mục</th>
                                 <th width="10%" class="text-center">Nổi bật</th>
@@ -59,17 +59,20 @@ $smg = getFlashData('smg');
                         </thead>
                         <tbody>
                             <?php
+                            $dem=1;
                             foreach ($product_type_list as $item):
                                 ?>
                                 <tr>
                                     <td>
                                         <input data-id="1" class="form-control text-center stt-input"
-                                            type="text" value="1">
+                                            type="text" value="<?= $dem++?>">
                                     </td>
-                                    <!-- <td>
+                                    <td>
                                         <img style="height: 50px;" 
-                                            src="">
-                                    </td> -->
+                                            src="../upload/images/<?= $item['hinh_anh'] ?>"   
+                                            onerror="this.src='assets/img/noimage.jpg'" >
+
+                                    </td>
                                     <td>
                                         <a href="?com=product_type&act=edit&id=<?= $item['id'] ?>"
                                             class="text-decoration-none text-black">

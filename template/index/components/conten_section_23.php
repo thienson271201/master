@@ -43,8 +43,7 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
               </div>
               <a href="shop-item.html" class="item-image responsive-1by1">
                 <img
-                  src="https://lh3.googleusercontent.com/Zuk5cnlhTQD5jMp2owReNtZePMfzoFSEDC7xGQew1lIYsGglIL0i4bgb-ghfV1KT_pRTQD2MYJBCRFhsQFxPl8MJDP2IQtI=w1000-rw"
-                  
+                  src="upload/images/<?=$san_pham['hinh_anh'] ?>"
                 />
               </a>
               <div class="item-content text-center">

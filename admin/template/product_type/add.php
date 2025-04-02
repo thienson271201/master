@@ -6,15 +6,16 @@ if ($func->isPOST())
     $data_insert = [
         'duong_dan' => $filterAll['slug'],
         'ten_thuong_hieu' => $filterAll['title'],
-        // 'seo_title' => $filterAll['seo_title'],
-        // 'seo_keywords' => $filterAll['seo_keywords'],
-        // 'seo_desc' => $filterAll['seo_description']
     ];
-    // $image = $func->upload('imageUpload', 'upload');
-    // if ($image != 'noimage.jpg')
-    // {
-    //     $data_insert['image'] = $image;
-    // }
+    $image = $func->upload('imageUpload', 'images');
+    if ($image != 'noimage.jpg')
+    {
+        $data_insert['hinh_anh'] = $image;
+    }
+    //  echo '<pre>';
+    // print_r($data_insert);
+    // echo '</pre>';
+    // exit;
     $db->insert('thuong_hieu', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=product_type&act=list');
@@ -59,24 +60,24 @@ $smg = getFlashData('smg');
             }
             ?>
             <form method="post" enctype="multipart/form-data">
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    Hình ảnh danh mục
+                                    Hình ảnh thương hiệu
                                 </div>
                             </div>
                             <div class="card-body">
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
-                                <img id="previewImage" src="" onerror="this.src='../assets/images/noimage/noimage.png'"
+                                <img id="previewImage" src="" onerror="this.src='assets/img/noimage.jpg'"
                                     alt="Ảnh xem trước"
                                     style="width: 100%; height: 200px; margin-top: 20px; object-fit: contain">
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">
@@ -100,28 +101,7 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                 </div>
-                <!-- <div class="card card-primary card-outline mb-4">
-                    <div class="card-header">
-                        <div class="card-title">Thiết lập SEO</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="mb-3 col-12">
-                                <label for="seo_title" class="form-label fw-bold">SEO Title:</label>
-                                <input type="text" name="seo_title" class="form-control">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="seo_keywords" class="form-label fw-bold">SEO Keywords:</label>
-                                <input type="text" name="seo_keywords" class="form-control">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="seo_description" class="form-label fw-bold">SEO Description:</label>
-                                <textarea type="text" name="seo_description" class="form-control"
-                                    style="height: 120px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">
                     Lưu
