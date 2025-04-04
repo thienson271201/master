@@ -4,16 +4,7 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
 // echo '<pre>';
 // print_r ($list_san_pham);
 // echo '</pre>';
-
-
-
-
-
-
-
 ?>
-
-
 <!-- content-section -->
 <section class="content-section">
       <div class="container">
@@ -41,14 +32,14 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
               <div class="item-lables">
                 <a class="item-label-sale item-label" href="#">Giảm giá</a>
               </div>
-              <a href="shop-item.html" class="item-image responsive-1by1">
+              <a href="<?= $san_pham['duong_dan']?>" class="item-image responsive-1by1">
                 <img
                   src="upload/images/<?=$san_pham['hinh_anh'] ?>"
                 />
               </a>
               <div class="item-content text-center">
                 <div class="item-title text-upper mb-0">
-                  <a href="shop-item.html" class="content-link"
+                  <a href="<?= $san_pham['duong_dan']?>" class="content-link"
                     ><?= $san_pham['ten_san_pham']?></a
                   >
                 </div>

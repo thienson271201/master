@@ -121,11 +121,11 @@ if (!$get_status)
                 break;
             }
 
-            $product = $db->oneRaw("SELECT * FROM products WHERE slug = '$url'");
+            $product = $db->oneRaw("SELECT * FROM san_pham WHERE duong_dan = '$url'");
             if (!empty($product))
             {
-                $title = $product['title'];
-                require_once TEMPLATE . 'product/product_item_tpl.php';
+                $title = $product['ten_san_pham'];
+                require_once TEMPLATE . 'sanpham/chitietsanpham.php';
                 $noidung = ob_get_clean();
                 break;
             }

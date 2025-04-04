@@ -56,49 +56,14 @@
                       target="_blank"
                       href="assets/images/shop/usb-hub.jpg"
                       data-preview-image-source="product-preview"
-                      ><img src="assets/images/shop/usb-hub.jpg" alt=""
+                      ><img src="upload/images/<?= $product['hinh_anh'] ?>" alt=""
                     /></a>
                   </div>
-                  <div class="item">
-                    <a
-                      class="responsive-1by1"
-                      target="_blank"
-                      href="assets/images/shop/usb-hub1.jpg"
-                      data-preview-image-source="product-preview"
-                      ><img src="assets/images/shop/usb-hub1.jpg" alt=""
-                    /></a>
-                  </div>
-                  <div class="item">
-                    <a
-                      class="responsive-1by1"
-                      target="_blank"
-                      href="assets/images/shop/usb-hub2.jpg"
-                      data-preview-image-source="product-preview"
-                      ><img src="assets/images/shop/usb-hub2.jpg" alt=""
-                    /></a>
-                  </div>
-                  <div class="item">
-                    <a
-                      class="responsive-1by1"
-                      target="_blank"
-                      href="assets/images/shop/usb-hub3.jpg"
-                      data-preview-image-source="product-preview"
-                      ><img src="assets/images/shop/usb-hub3.jpg" alt=""
-                    /></a>
-                  </div>
-                  <div class="item">
-                    <a
-                      class="responsive-1by1"
-                      target="_blank"
-                      href="assets/images/shop/usb-hub4.jpg"
-                      data-preview-image-source="product-preview"
-                      ><img src="assets/images/shop/usb-hub4.jpg" alt=""
-                    /></a>
-                  </div>
+               
                 </div>
               </div>
               <div class="md-col-7">
-                <h4 class="text-upper offs-sm">Laptop Gaming ASUS ROG</h4>
+                <h4 class="text-upper offs-sm"><?= $product['ten_san_pham'] ?></h4>
                 <div class="user-feedback">
                   <div class="user-rating">
                     <span class="rating-star"
@@ -134,14 +99,12 @@
                     >
                   </div>
                 </div>
-                <div class="product-price">35.990.000₫</div>
+                <div class="product-price"><?= number_format($product["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
                 <div class="product-available">
                   Tình trạng: <span class="text-colorful">Còn hàng</span>
                 </div>
                 <div class="product-short">
-                  Laptop ASUS ROG mạnh mẽ với CPU Intel Core i7, GPU RTX 4060,
-                  màn hình 15.6 inch 165Hz, RAM 16GB, SSD 512GB. Phù hợp cho
-                  gaming và đồ họa chuyên nghiệp.
+                <?= $product['mo_ta'] ?>
                 </div>
                 <form class="out-lg">
                   <div class="row cols-md rows-md">
