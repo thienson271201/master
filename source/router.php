@@ -60,22 +60,20 @@ if (!$get_status)
             require_once TEMPLATE . 'new/new_list_tpl.php';
             $noidung = ob_get_clean();
             break;
-        case 'tuyen-dung':
-            require_once TEMPLATE . 'new/new_list_tpl.php';
+       
+       
+        case 'dang-ky':
+            $title='Đăng Ký';
+            require_once TEMPLATE . 'khachhang/dangky.php';
             $noidung = ob_get_clean();
             break;
-        case 'catalogue':
-            require_once TEMPLATE . 'file/list_tpl.php';
+
+        case 'dang-nhap':
+            $title='Đăng Nhập';
+            require_once TEMPLATE . 'khachhang/dangnhap.php';
             $noidung = ob_get_clean();
             break;
-        case 'du-an':
-            require_once TEMPLATE . 'sanpham/chitietsanpham.php';
-            $noidung = ob_get_clean();
-            break;
-        case 'khuyen-mai':
-            require_once TEMPLATE . 'new/new_list_tpl.php';
-            $noidung = ob_get_clean();
-            break;
+        
         case 'san-pham':
             $title = 'Sản phẩm';
             require_once TEMPLATE . 'product/product_list_tpl.php';

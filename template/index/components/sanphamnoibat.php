@@ -37,7 +37,7 @@ $list_noi_bat= $db->getRaw('select * from san_pham ');
               data-inview-showup="showup-scale"
             >
               <div class="item-back"></div>
-              <a href="shop-item.html" class="item-image responsive-1by1">
+              <a href="<?= $noi_bat['duong_dan']?>" class="item-image responsive-1by1">
                 <img
                   src="upload/images/<?=$noi_bat['hinh_anh'] ?>"
                   alt=""
@@ -45,12 +45,12 @@ $list_noi_bat= $db->getRaw('select * from san_pham ');
               </a>
               <div class="item-content text-center">
                 <div class="item-title text-upper mb-0">
-                  <a href="shop-item.html" class="content-link"
+                  <a href="<?= $noi_bat['duong_dan']?>" class="content-link"
                     ><?= $noi_bat['ten_san_pham']?></a
                   >
                 </div>
                 <div class="item-prices">
-                  <div class="item-price"><?= number_format($noi_bat["gia_sau_khuyen_mai"], 0, ',', '.') ?>₫</div>
+                  <div class="item-price"><?= number_format($noi_bat["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
                 </div>
                 <div class="item-links">
                   <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered"
