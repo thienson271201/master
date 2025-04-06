@@ -11,7 +11,7 @@
             class="section-title text-upper text-lg"
             data-inview-showup="showup-translate-right"
           >
-            Sản phẩm cửa hàng
+            Chi Tiết Sản Phẩm
           </h1>
         </div>
       </div>
