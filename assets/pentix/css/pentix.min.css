@@ -518,6 +518,7 @@ label.required:after {
     display: table;
     border-collapse: separate;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .field-wrap .field-control,
