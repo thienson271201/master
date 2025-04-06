@@ -7,7 +7,7 @@
             data-inview-showup="showup-translate-up"
           >
             <img
-              src="assets/images/shop/banner-phone.png"
+              src="assets/images/shop/laptop-1.png"
               alt=""
               data-cover-image="true"
             />
@@ -16,9 +16,9 @@
                 <div
                   class="banner-main-text text-md text-upper mb-3 text-colorful"
                 >
-                  New phones
+                 Laptop Văn Phòng
                 </div>
-                <a class="text-upper px-4 btns-bordered btn" href="#">more</a>
+                <a class="text-upper px-4 btns-bordered btn" href="#">Xem thêm...</a>
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@
             data-inview-showup="showup-translate-up"
           >
             <img
-              src="assets/images/shop/banner-laptop.png"
+              src="assets/images/shop/laptop-4.jpg"
               alt=""
               data-cover-image="true"
             />
@@ -38,9 +38,9 @@
                 <div
                   class="banner-main-text text-md text-upper mb-3 text-colorful"
                 >
-                  Easy Fix your laptop
+                  Laptop Mỏng Nhẹ
                 </div>
-                <a class="text-upper px-4 btns-bordered btn" href="#">more</a>
+                <a class="text-upper px-4 btns-bordered btn" href="#">Xem thêm...</a>
               </div>
             </div>
           </div>
@@ -67,10 +67,10 @@
                 </div>
                 <div class="banner-main-text text-md mb-4">
                   <span class="item-old-price mr-3 text-muted text-md"
-                    >$2100</span
-                  ><span class="item-price text-lg text-white">$1430</span>
+                    ></span
+                  ><span class="item-price text-lg text-white">19.990.000 đ</span>
                 </div>
-                <a class="text-upper px-5 btn" href="#">read more</a>
+                <a class="text-upper px-5 btn" href="#">Xem thêm</a>
               </div>
             </div>
           </div>
