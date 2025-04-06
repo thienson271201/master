@@ -154,7 +154,7 @@
                     <span class="text-upper description-title"
                       >Mã sản phẩm:</span
                     >
-                    <span class="description-value alt-color">ROG2024</span>
+                    <span class="description-value alt-color"><?= $product['ten_san_pham'] ?></span>
                   </div>
                   <div class="description-line">
                     <span class="text-upper description-title">Chia sẻ:</span>
@@ -188,13 +188,13 @@
               data-inview-showup="showup-translate-up"
             >
               <ul class="tabs-head">
-                <li><a href="#" data-tab="description">Description</a></li>
-                <li><a href="#" data-tab="reviews">Reviews (2)</a></li>
-                <li>
+                <li><a href="#" data-tab="description">Thông Số Sản Phẩm</a></li>
+                <li><a href="#" data-tab="reviews">Đánh Giá</a></li>
+                <!-- <li>
                   <a href="#" data-tab="additionalInformation"
                     >Additional Information</a
                   >
-                </li>
+                </li> -->
               </ul>
               <div class="tabs-line">
                 <div
@@ -205,30 +205,9 @@
               <div class="tabs-content">
                 <div class="tab-content" data-tab-content="description">
                   <div class="content-text">
-                    <h6>
-                      Laptop Gaming ASUS ROG - Hiệu suất mạnh mẽ, thiết kế
-                      gaming ấn tượng
-                    </h6>
-                    <h6>Thông số kỹ thuật:</h6>
-                    <ul>
-                      <li>- Tên sản phẩm: Laptop Gaming ASUS ROG</li>
-                      <li>- Màn hình: 15.6 inch, Full HD, 165Hz</li>
-                      <li>- Bộ vi xử lý: Intel Core i7-12700H</li>
-                      <li>- RAM: 16GB DDR5</li>
-                      <li>- Ổ cứng: 512GB SSD NVMe</li>
-                      <li>- Card đồ họa: NVIDIA GeForce RTX 4060 8GB</li>
-                      <li>
-                        - Cổng kết nối: USB 3.2, HDMI, Thunderbolt 4, Jack 3.5mm
-                      </li>
-                      <li>- Hệ điều hành: Windows 11</li>
-                      <li>- Kích thước: 354 x 259 x 22.8 mm</li>
-                      <li>- Trọng lượng: 2.3kg</li>
-                      <li>- Màu sắc: Đen/Xám</li>
-                      <li>
-                        - Tương thích: Hỗ trợ game và phần mềm đồ họa chuyên
-                        nghiệp
-                      </li>
-                    </ul>
+                    
+                    <h6><?= $product['thong_so_kich_thuoc'] ?></h6>
+                  
                   </div>
                 </div>
                 <div class="tab-content" data-tab-content="reviews">
@@ -446,7 +425,7 @@
                   class="tab-content"
                   data-tab-content="additionalInformation"
                 >
-                  <div class="description-table">
+                  <!-- <div class="description-table">
                     <div class="table-line">
                       <div class="col-title">Brand Name</div>
                       <div class="col-value alt-color text-bold">
@@ -486,7 +465,7 @@
                         SD/MMC/M2/MS/MS Pro Duo
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -495,7 +474,7 @@
             class="top-separator out-lg"
             data-inview-showup="showup-translate-up"
           ></div>
-          <div data-inview-showup="showup-translate-up">
+          <!-- <div data-inview-showup="showup-translate-up">
             <h4 class="text-upper">Related Products</h4>
             <div class="row cols-md rows-xl">
               <div class="lg-col-4 md-col-6">
@@ -588,7 +567,7 @@
               </div>
             </div>
             <div class="text-center shift-xl"></div>
-          </div>
+          </div> -->
         </section>
       </div>
     </div>
