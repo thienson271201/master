@@ -47,8 +47,8 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
                 <?= $san_pham['thong_so_kich_thuoc']?>
                 </div>
                 <div class="item-prices">
-                  <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> VNĐ</div>
-                  <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> VNĐ</div>
+                  <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
+                  <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
                 </div>
                 <div class="item-links">
                   <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">

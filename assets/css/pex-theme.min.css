@@ -5250,6 +5250,7 @@ a.item-label:hover {
   color: #999;
   text-decoration: line-through;
   font-family: Montserrat;
+  font-size: 12px;
 }
 .item-price {
   color: #35354a;
@@ -5287,7 +5288,7 @@ a.item-label:hover {
   float: left;
 }
 .shop-item .item-price {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
 }
 .shop-item .item-old-price {
