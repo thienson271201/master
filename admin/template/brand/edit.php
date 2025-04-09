@@ -6,16 +6,20 @@ if ($func->isPOST())
     $id = $filterAll['id'];
     $data_update = [
         'duong_dan' => $filterAll['slug'],
-        'ten_danh_muc' => $filterAll['title'],
+        'ten_thuong_hieu' => $filterAll['title'],
        
     ];
-   
-     $db->update('danh_muc_san_pham', $data_update, "id='$id'");
+    $image = $func->upload('imageUpload', 'images');
+    if ($image != 'noimage.jpg')
+    {
+        $data_update['hinh_anh'] = $image;
+    }
+     $db->update('thuong_hieu', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
 }
 
 $id = $func->filter()['id'];
-$cap1 = $db->oneRaw("SELECT * FROM danh_muc_san_pham WHERE id = '$id'");
+$cap1 = $db->oneRaw("SELECT * FROM thuong_hieu WHERE id = '$id'");
 $smg = getFlashData('smg');
 ?>
 
@@ -28,13 +32,13 @@ $smg = getFlashData('smg');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Chỉnh sửa Danh Mục</h3>
+                    <h3 class="mb-0">Chỉnh sửa Thương Hiệu</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="index.php">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Chỉnh sửa Danh Mục
+                            Chỉnh sửa Thương Hiệu
                         </li>
                     </ol>
                 </div>
@@ -55,11 +59,28 @@ $smg = getFlashData('smg');
             }
             ?>
             <form method="post" enctype="multipart/form-data">
-                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline mb-4">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    Hình ảnh thương hiệu
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <input type="file" class="form-control" name="imageUpload" id="imageUpload"
+                                    accept="image/*">
+                                <img id="previewImage" src="../upload/images/<?= $cap1['hinh_anh'] ?>"
+                                onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
+                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">
-                        <div class="card-title">Nội dung Danh Mục <span class="text-danger text-sm">(vui lòng
+                        <div class="card-title">Nội dung Thương Hiệu <span class="text-danger text-sm">(vui lòng
                                 không nhập trùng tiêu đề)</span></div>
                     </div>
                     <!--end::Header-->
@@ -73,37 +94,14 @@ $smg = getFlashData('smg');
                                     value="<?= $cap1['duong_dan'] ?>">
                             </div>
                             <div class="mb-3 col-12">
-                                <label for="company_name" class="form-label fw-bold">Tên danh mục:</label>
+                                <label for="company_name" class="form-label fw-bold">Tên thương hiệu:</label>
                                 <input id="title" type="text" name="title" class="form-control"
-                                    value="<?= $cap1['ten_danh_muc'] ?>">
+                                    value="<?= $cap1['ten_thuong_hieu'] ?>">
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="card card-primary card-outline mb-4">
-                    <div class="card-header">
-                        <div class="card-title">Thiết lập SEO</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="mb-3 col-12">
-                                <label for="seo_title" class="form-label fw-bold">SEO Title:</label>
-                                <input type="text" name="seo_title" class="form-control"
-                                    value="<?= $cap1['seo_title'] ?>">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="seo_keywords" class="form-label fw-bold">SEO Keywords:</label>
-                                <input type="text" name="seo_keywords" class="form-control"
-                                    value="<?= $cap1['seo_keywords'] ?>">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="seo_description" class="form-label fw-bold">SEO Description:</label>
-                                <textarea type="text" name="seo_description" class="form-control"
-                                    style="height: 120px;"><?= $cap1['seo_desc'] ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+               
                 <input type="hidden" name="id" value="<?= $cap1['id'] ?>">
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">

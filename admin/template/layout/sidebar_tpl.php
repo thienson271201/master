@@ -26,8 +26,8 @@
                     </a>
                 </li>
                 <li class="nav-header">Quản lý sản phẩm</li>
-                <li class="nav-item <?= $com == 'product' || $com == 'product_type' ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link <?= $com == 'product' || $com == 'product_type' ? 'active' : '' ?>">
+                <li class="nav-item <?= $com == 'product' || $com == 'product_type'||$com=='brand' ? 'menu-open' : '' ?>">
+                    <a href="#" class="nav-link <?= $com == 'product' || $com == 'product_type'||$com=='brand' ? 'active' : '' ?>">
                         <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
                             Quản lý sản phẩm
@@ -36,10 +36,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="?com=brand&act=list"
+                                class="nav-link <?= $com == 'brand' ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Thương Hiệu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="?com=product_type&act=list"
                                 class="nav-link <?= $com == 'product_type' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Thương Hiệu</p>
+                                <p>Danh mục sản phẩm</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -25,7 +25,8 @@ $db = new Database();
 $ad = new admin();
 $func = new func();
 
-
+$com='';
+$act='';
 
 // Điều hướng
 if (!empty($_GET['com']))
@@ -117,6 +118,14 @@ if ($ad->isLogin())
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+            ClassicEditor
+            .create(document.querySelector('#editor2'))
             .then(editor => {
                 window.editor = editor;
             })

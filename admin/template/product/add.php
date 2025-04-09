@@ -4,17 +4,23 @@ if ($func->isPOST())
 {
     $filterAll = $func->filter();
     $data_insert = [
+        'ma_san_pham'=>$filterAll['maSP'],
         'duong_dan' => $filterAll['slug'],
         'ten_san_pham' => $filterAll['title'],
         'gia_goc' => $filterAll['price'],
         'gia_sau_khuyen_mai' => $filterAll['discount'],
         'mo_ta' => $_POST['description'],
+        'mo_ta_dai'=>$_POST['mo_ta_dai'],
         'thong_so_kich_thuoc' => $_POST['content'],
         'ngay_tao' => date('Y-m-d H:i:s')
     ];
     if (!empty($_POST['product_type_id']))
     {
         $data_insert['thuong_hieu_id'] = $_POST['product_type_id'];
+    }
+    if (!empty($_POST['danh_muc_san_pham_id']))
+    {
+        $data_insert['danh_muc_san_pham_id'] = $_POST['danh_muc_san_pham_id'];
     }
     $image = $func->upload('imageUpload', 'images');
     if ($image != 'noimage.jpg')
@@ -83,6 +89,11 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-12">
+                                        <label for="maSP" class="form-label fw-bold">Mã sản phẩm:</label>
+                                        <input id="maSP" type="text" name="maSP" class="form-control"
+                                           required>
+                                    </div>
+                                    <div class="mb-3 col-12">
                                         <label id="slugLabel" for="company_name" class="form-label fw-bold">Đường dẫn
                                             mẫu: <?= $http . $_SERVER['HTTP_HOST'] ?></label>
                                         <input id="slugInput" type="text" name="slug" class="form-control" required>
@@ -112,14 +123,18 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-12">
-                                        <label id="slugLabel" for="company_name" class="form-label fw-bold">Mô
-                                            tả:</label>
+                                        <label id="slugLabel" for="company_name" class="form-label fw-bold">Giới thiệu sản phẩm:</label>
                                         <textarea name="description" style="min-height: 120px;"
                                             class="form-control"></textarea>
                                     </div>
                                     <div class="mb-3 col-12">
-                                        <label for="company_name" class="form-label fw-bold">Thông số sản phẩm</label>
-                                        <textarea name="content" id="editor" style="min-height: 120px;"
+                                        <label for="company_name" class="form-label fw-bold">Mô tả dài:</label>
+                                        <textarea name="mo_ta_dai" id="editor" style="min-height: 120px;"
+                                            class="form-control"></textarea>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="company_name" class="form-label fw-bold">Thông số kích thước (trang chủ):</label>
+                                        <textarea name="content" id="editor2" style="min-height: 120px;"
                                             class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -134,14 +149,24 @@ $smg = getFlashData('smg');
                                 </div>
                             </div>
                             <div class="card-body">
-                                <label for="cap1" class="form-label fw-bold">Thương Hiệu:</label>
-                                <select name="product_type_id" class="form-select">
-                                    <option value>Chọn danh mục</option>
+                                <label for="cap1" class="form-label fw-bold">Thương Hiệu và Danh Mục</label>
+                                <select name="product_type_id" class="form-select mb-3">
+                                    <option value>Chọn thương hiệu</option>
                                     <?php
-                                    $product_type_list = $db->getRaw('SELECT * FROM thuong_hieu');
-                                    foreach ($product_type_list as $produc_type):
+                                    $brand_list = $db->getRaw('SELECT * FROM thuong_hieu');
+                                    foreach ($brand_list as $brand):
                                         ?>
-                                        <option value="<?= $produc_type['id'] ?>"><?= $produc_type['ten_thuong_hieu'] ?></option>
+                                        <option value="<?= $brand['id'] ?>"><?= $brand['ten_thuong_hieu'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <label for=""class="form-label fw-bold"> Danh Mục</label>
+                                <select name="danh_muc_san_pham_id" class="form-select">
+                                    <option value>Chọn Danh Mục</option>
+                                    <?php 
+                                    $product_type_list=$db->getRaw("SELECT * FROM danh_muc_san_pham");
+                                    foreach($product_type_list as $product_type): 
+                                    ?>
+                                    <option value="<?=$product_type['id'] ?>"><?=$product_type['ten_danh_muc'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

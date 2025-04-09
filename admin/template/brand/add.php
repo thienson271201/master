@@ -5,16 +5,20 @@ if ($func->isPOST())
     $filterAll = $func->filter();
     $data_insert = [
         'duong_dan' => $filterAll['slug'],
-        'ten_danh_muc' => $filterAll['title'],
+        'ten_thuong_hieu' => $filterAll['title'],
     ];
-    
+    $image = $func->upload('imageUpload', 'images');
+    if ($image != 'noimage.jpg')
+    {
+        $data_insert['hinh_anh'] = $image;
+    }
     //  echo '<pre>';
     // print_r($data_insert);
     // echo '</pre>';
     // exit;
-    $db->insert('danh_muc_san_pham', $data_insert);
+    $db->insert('thuong_hieu', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
-    $func->redirect('?com=product_type&act=list');
+    $func->redirect('?com=brand&act=list');
 }
 
 $smg = getFlashData('smg');
@@ -29,13 +33,13 @@ $smg = getFlashData('smg');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Thêm mới Danh mục</h3>
+                    <h3 class="mb-0">Thêm mới Thương Hiệu</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="index.php">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Quản lý Danh Mục
+                            Quản lý Thương Hiệu
                         </li>
                     </ol>
                 </div>
@@ -56,11 +60,28 @@ $smg = getFlashData('smg');
             }
             ?>
             <form method="post" enctype="multipart/form-data">
-                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline mb-4">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    Hình ảnh thương hiệu
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <input type="file" class="form-control" name="imageUpload" id="imageUpload"
+                                    accept="image/*">
+                                <img id="previewImage" src="" onerror="this.src='assets/img/noimage.jpg'"
+                                    alt="Ảnh xem trước"
+                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">
-                        <div class="card-title">Nội dung Danh mục <span class="text-danger text-sm">(vui
+                        <div class="card-title">Nội dung Thương Hiệu <span class="text-danger text-sm">(vui
                                 lòng
                                 không nhập trùng tiêu đề)</span></div>
                     </div>

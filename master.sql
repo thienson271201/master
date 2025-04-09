@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 02, 2025 lúc 07:06 PM
+-- Thời gian đã tạo: Th4 09, 2025 lúc 07:02 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -90,7 +90,10 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (134, 1, '7a6419231135295d201b4c2f5dbae1e843683c4d', '2025-03-28 20:13:25'),
 (135, 1, 'd71bd39d5ace800ea2e608376536c7aa10e3d885', '2025-03-29 21:33:42'),
 (136, 1, '3fea8148621db336728463ce256d9d296156b1f4', '2025-03-30 09:36:08'),
-(137, 1, 'cd6aa8eba62b1e883abc737cadf1efc6f407a8e8', '2025-04-02 21:45:20');
+(137, 1, 'cd6aa8eba62b1e883abc737cadf1efc6f407a8e8', '2025-04-02 21:45:20'),
+(138, 1, '3b663872699dc48fbd5b10f4d2c792f7e006257c', '2025-04-04 21:56:30'),
+(139, 1, '7e654c460114b9f93f9cf4f924354f5466557fe1', '2025-04-06 09:08:57'),
+(140, 1, '9b4301d3a2a1fa2d000349a993fde875cd3fa41a', '2025-04-09 21:41:58');
 
 -- --------------------------------------------------------
 
@@ -103,6 +106,28 @@ CREATE TABLE `custommer` (
   `info` varchar(200) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `danh_muc_san_pham`
+--
+
+CREATE TABLE `danh_muc_san_pham` (
+  `id` int(11) NOT NULL,
+  `duong_dan` varchar(100) DEFAULT NULL,
+  `ten_danh_muc` varchar(100) DEFAULT NULL,
+  `ngay_tao` timestamp NULL DEFAULT NULL,
+  `ngay_cap_nhat` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `danh_muc_san_pham`
+--
+
+INSERT INTO `danh_muc_san_pham` (`id`, `duong_dan`, `ten_danh_muc`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(2, 'laptop-van-phong', 'Laptop Văn Phòng', NULL, NULL),
+(3, 'laptop-gaming', 'Laptop Gaming', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -151,6 +176,54 @@ INSERT INTO `images` (`id`, `type`, `image`, `link`) VALUES
 (46, 'slide', '1724337216.png', ''),
 (47, 'slide', '1724338172.png', ''),
 (48, 'slide', '1724338828.png', '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khach_hang`
+--
+
+CREATE TABLE `khach_hang` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `so_dien_thoai` varchar(20) DEFAULT NULL,
+  `ten_khach_hang` varchar(255) DEFAULT NULL,
+  `mat_khau` varchar(255) DEFAULT NULL,
+  `ngay_tao` timestamp NULL DEFAULT NULL,
+  `ngay_cap_nhat` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khach_hang`
+--
+
+INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `mat_khau`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(9, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', '$2y$10$Y25.h8Vnq7xupTPzREPL5.C1AeyyOPoWBO6PYckeZbgIg034Rb6.6', '2025-04-06 02:56:56', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khach_hang_token`
+--
+
+CREATE TABLE `khach_hang_token` (
+  `id` int(11) NOT NULL,
+  `khach_hang_id` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `ngay_tao` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khach_hang_token`
+--
+
+INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
+(1, 5, '97471d007619cb6277fc718fb68c72ef5eaf68cc', '2025-04-04 16:19:53'),
+(2, 5, '1cf0259053194f8118d5cca4d3c08eea8638ee88', '2025-04-04 16:37:35'),
+(3, 5, '466e605c19817a2672542dfa589ce7e4ab5f3be7', '2025-04-04 16:38:08'),
+(4, 7, '176235eca4a81af8dc8d2d0fa2a264cd183a5c54', '2025-04-06 02:46:08'),
+(5, 8, '14bdb5bf10e48b73e2e38d1d9273d617c21a1ff4', '2025-04-06 02:52:12'),
+(6, 9, 'dd1aedb34e8dc3a9ebac2586d6b7c4048d55cb8b', '2025-04-06 02:57:26');
 
 -- --------------------------------------------------------
 
@@ -1087,13 +1160,16 @@ INSERT INTO `quanhuyen` (`maqh`, `name`, `type`, `matp`) VALUES
 
 CREATE TABLE `san_pham` (
   `id` int(11) NOT NULL,
+  `ma_san_pham` varchar(50) DEFAULT NULL,
   `duong_dan` varchar(255) DEFAULT NULL,
   `ten_san_pham` varchar(255) DEFAULT NULL,
   `hinh_anh` varchar(50) DEFAULT NULL,
   `gia_goc` double DEFAULT NULL,
   `gia_sau_khuyen_mai` double DEFAULT NULL,
   `thuong_hieu_id` int(11) DEFAULT NULL,
+  `danh_muc_san_pham_id` int(11) DEFAULT NULL,
   `mo_ta` mediumtext DEFAULT NULL,
+  `mo_ta_dai` mediumtext DEFAULT NULL,
   `thong_so_kich_thuoc` mediumtext DEFAULT NULL,
   `trong_luong` varchar(50) DEFAULT NULL,
   `bo_xu_ly` varchar(50) DEFAULT NULL,
@@ -1112,11 +1188,12 @@ CREATE TABLE `san_pham` (
 -- Đang đổ dữ liệu cho bảng `san_pham`
 --
 
-INSERT INTO `san_pham` (`id`, `duong_dan`, `ten_san_pham`, `hinh_anh`, `gia_goc`, `gia_sau_khuyen_mai`, `thuong_hieu_id`, `mo_ta`, `thong_so_kich_thuoc`, `trong_luong`, `bo_xu_ly`, `ram`, `o_cung`, `card_do_hoa`, `pin`, `he_dieu_hanh`, `ngay_ra_mat`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(3, 'vostro-1539', 'Vostro 1539', '1743611166.jpg', 20000000, 19990000, 5, 'aaaa', '<p>CPU: I5 11400H</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RTX 3050 4GB</p><p>Màn Hình: 15.6 inch 1920x1080 144hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-29 15:33:44', NULL),
-(4, 'gigabyte-g5-gd', 'Gigabyte G5 GD', '1743611117.jpg', 22000000, 18000000, 3, 'Laptop', '<p>CPU: I5 12500HX</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: 30600Ti</p><p>Màn Hình: 1920x1080</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-29 16:00:16', NULL),
-(5, 'lenovo-legion-5', 'Lenovo Legion 5', '1743611133.jpg', 24000000, 22990000, 6, 'Lenovo Legion 5', '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-30 02:54:40', NULL),
-(6, 'msi-moden-15', 'MSI Moden 15', '1743611144.jpg', 25000000, 22000000, 7, 'MSI Moden 15', '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-30 02:56:46', NULL);
+INSERT INTO `san_pham` (`id`, `ma_san_pham`, `duong_dan`, `ten_san_pham`, `hinh_anh`, `gia_goc`, `gia_sau_khuyen_mai`, `thuong_hieu_id`, `danh_muc_san_pham_id`, `mo_ta`, `mo_ta_dai`, `thong_so_kich_thuoc`, `trong_luong`, `bo_xu_ly`, `ram`, `o_cung`, `card_do_hoa`, `pin`, `he_dieu_hanh`, `ngay_ra_mat`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(3, 'Dell_Vostro1539_01', 'dell-vostro-1539', 'Dell Vostro 1539', '1743611166.jpg', 20000000, 19990000, 5, 2, 'CPU: I5 11400H, RAM: 8GB, Ổ Cứng: 512GB, Card Đồ Họa: RTX 3050 4GB, Màn Hình: 15.6 inch 144Hz', '<p><strong>Thông số kỹ thuật:</strong></p><ul><li>CPU: i5</li><li>Ram: 8</li></ul>', '<p>CPU: I5 11400H</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RTX 3050 4GB</p><p>Màn Hình: 15.6 inch 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-29 15:33:44', NULL),
+(4, 'Gigabyte_G5_GD_01', 'gigabyte-g5-gd', 'Gigabyte G5 GD', '1743611117.jpg', 22000000, 18000000, 3, 3, 'CPU: I5 12500HX, RAM: 8GB, Ổ Cứng: 512GB, Card Đồ Họa: 3060Ti, Màn Hình: 1920x1080', '', '<p>CPU: I5 12500HX</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: 30600Ti</p><p>Màn Hình: 1920x1080</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-29 16:00:16', NULL),
+(5, NULL, 'lenovo-legion-5', 'Lenovo Legion 5', '1743611133.jpg', 24000000, 22990000, 6, 3, 'CPU: i7 11400H, RAM: 16GB, Ổ Cứng: 512GB, Card Đồ Họa: RXT 4060 6GB, Màn Hình: 15.6 FHD 144Hz', NULL, '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-30 02:54:40', NULL),
+(6, 'MSI_Moden_15', 'msi-moden-15', 'MSI Moden 15', '1743611144.jpg', 25000000, 22000000, 7, 3, 'CPU: i7 11400H, RAM: 16GB, Ổ Cứng: 512GB, Card Đồ Họa: RXT 4060 6GB, Màn Hình: 15.6 FHD 144Hz', '', '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-30 02:56:46', NULL),
+(9, 'Asus_Gaming_K16_01', 'asus-gaming-k16-k3607vj-rp131w', 'Asus Gaming K16 K3607VJ-RP131W', '1743905461.webp', 24490000, 23490000, 2, 3, '&#13;&#10;CPU: Intel® Core™ 5 210H (2.2 GHz - 4.8 GHz/ 12MB/ 8 nhân, 12 luồng), &#13;&#10;RAM: 2 x 16GB 5600MHz DDR5 (Hỗ trợ tối đa 32GB), &#13;&#10;VGA: GeForce RTX™ 3050 6GB GDDR6, &#13;&#10;Ổ cứng: 512GB SSD M.2 NVMe, &#13;&#10;Màn hình: 16&#34; WUXGA (1920 x 1200) IPS, 144Hz,  OS: Windows 11 Home', '', '<p>CPU: Core 5 210H</p><p>RAM: 16GB 5600Hz</p><p>VGA: RTX 3050 6GB</p><p>Ổ Cứng: 512GB Nvme</p><p>Màn Hình: 16 inch 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-06 02:11:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -1195,13 +1272,12 @@ CREATE TABLE `thuong_hieu` (
 --
 
 INSERT INTO `thuong_hieu` (`id`, `duong_dan`, `ten_thuong_hieu`, `hinh_anh`) VALUES
-(2, 'asus', 'Asus', '1743612419.jpg'),
-(3, 'gigabyte', 'Gigabyte', NULL),
+(2, 'asus', 'Asus', '1743613908.jpg'),
+(3, 'gigabyte', 'Gigabyte', '1743613953.png'),
 (4, 'acer', 'Acer', '1743613191.webp'),
-(5, 'dell', 'Dell', NULL),
-(6, 'lenovo', 'Lenovo', NULL),
-(7, 'msi', 'MSI', NULL),
-(11, 'apple', 'Apple', '1743612367.jpg');
+(5, 'dell', 'Dell', '1743614481.png'),
+(6, 'lenovo', 'Lenovo', '1743613985.webp'),
+(7, 'msi', 'MSI', '1743614008.webp');
 
 -- --------------------------------------------------------
 
@@ -11939,6 +12015,12 @@ ALTER TABLE `custommer`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `danh_muc_san_pham`
+--
+ALTER TABLE `danh_muc_san_pham`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `files`
 --
 ALTER TABLE `files`
@@ -11948,6 +12030,18 @@ ALTER TABLE `files`
 -- Chỉ mục cho bảng `images`
 --
 ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `khach_hang`
+--
+ALTER TABLE `khach_hang`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `khach_hang_token`
+--
+ALTER TABLE `khach_hang_token`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -11992,7 +12086,8 @@ ALTER TABLE `quanhuyen`
 --
 ALTER TABLE `san_pham`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `thuong_hieu_id` (`thuong_hieu_id`);
+  ADD KEY `thuong_hieu_id` (`thuong_hieu_id`),
+  ADD KEY `danh_muc_san_pham_id` (`danh_muc_san_pham_id`);
 
 --
 -- Chỉ mục cho bảng `seo`
@@ -12039,13 +12134,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT cho bảng `custommer`
 --
 ALTER TABLE `custommer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
+--
+ALTER TABLE `danh_muc_san_pham`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `files`
@@ -12058,6 +12159,18 @@ ALTER TABLE `files`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT cho bảng `khach_hang`
+--
+ALTER TABLE `khach_hang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT cho bảng `khach_hang_token`
+--
+ALTER TABLE `khach_hang_token`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `news`
@@ -12093,7 +12206,7 @@ ALTER TABLE `product_types`
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `seo`
@@ -12111,7 +12224,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT cho bảng `thuong_hieu`
 --
 ALTER TABLE `thuong_hieu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -12122,6 +12235,13 @@ ALTER TABLE `thuong_hieu`
 --
 ALTER TABLE `admin_token`
   ADD CONSTRAINT `admin_token_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
+
+--
+-- Các ràng buộc cho bảng `san_pham`
+--
+ALTER TABLE `san_pham`
+  ADD CONSTRAINT `san_pham_ibfk_1` FOREIGN KEY (`thuong_hieu_id`) REFERENCES `thuong_hieu` (`id`),
+  ADD CONSTRAINT `san_pham_ibfk_2` FOREIGN KEY (`danh_muc_san_pham_id`) REFERENCES `danh_muc_san_pham` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

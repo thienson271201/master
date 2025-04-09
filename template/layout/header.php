@@ -66,7 +66,7 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
                   ></a>
                 </li>
                 <li>
-                  <a href="#"
+                  <a href="dang-nhap"
                     ><i class="fas fa-user"></i>
                     <span class="xs-hidden menu-extra-text">Tài khoản</span></a
                   >

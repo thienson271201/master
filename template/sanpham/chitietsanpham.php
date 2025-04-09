@@ -1,3 +1,7 @@
+<?php 
+$id=$product['danh_muc_san_pham_id'];
+$danhmuc=$db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
+?>
 <section class="with-bg solid-section">
       <div
         class="fix-image-wrap"
@@ -154,29 +158,13 @@
                     <span class="text-upper description-title"
                       >Mã sản phẩm:</span
                     >
-                    <span class="description-value alt-color"><?= $product['ten_san_pham'] ?></span>
+                    <span class="description-value alt-color"><?= $product['ma_san_pham'] ?></span>
                   </div>
-                  <div class="description-line">
-                    <span class="text-upper description-title">Chia sẻ:</span>
-                    <span class="description-value text-muted"
-                      ><span class="cols-list cols-sm"
-                        ><a href="#" class="list-item content-link"
-                          ><i class="fab fa-facebook-f" aria-hidden="true"></i
-                        ></a>
-                        <a href="#" class="list-item content-link"
-                          ><i class="fab fa-twitter" aria-hidden="true"></i
-                        ></a>
-                        <a href="#" class="list-item content-link"
-                          ><i
-                            class="fab fa-google-plus-g"
-                            aria-hidden="true"
-                          ></i></a></span
-                    ></span>
-                  </div>
+                  
                   <div class="description-line">
                     <span class="text-upper description-title">Danh mục:</span>
                     <span class="description-value colorful-text"
-                      ><a href="shop-category.html">Laptop Gaming</a></span
+                      ><a href="<?=$danhmuc['duong_dan'] ?>"><?=$danhmuc['ten_danh_muc'] ?></a></span
                     >
                   </div>
                 </div>
@@ -206,7 +194,7 @@
                 <div class="tab-content" data-tab-content="description">
                   <div class="content-text">
                     
-                    <h6><?= $product['thong_so_kich_thuoc'] ?></h6>
+                   <?= $product['mo_ta_dai'] ?>
                   
                   </div>
                 </div>
@@ -425,47 +413,7 @@
                   class="tab-content"
                   data-tab-content="additionalInformation"
                 >
-                  <!-- <div class="description-table">
-                    <div class="table-line">
-                      <div class="col-title">Brand Name</div>
-                      <div class="col-value alt-color text-bold">
-                        SHENGMEIYU
-                      </div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">Ports</div>
-                      <div class="col-value text-colorful text-semibold">3</div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">Model</div>
-                      <div class="col-value">USB Hub</div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">Funtion</div>
-                      <div class="col-value">Reader</div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">System</div>
-                      <div class="col-value solid-color">
-                        Windows 7,Vista,XP,98,2000,ME and Mac OS 10.2 and Linux
-                        systems
-                      </div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">Size</div>
-                      <div class="col-value">77*45*25mm</div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">Interface Type</div>
-                      <div class="col-value">USB 2.0</div>
-                    </div>
-                    <div class="table-line">
-                      <div class="col-title">Support Ports</div>
-                      <div class="col-value text-colorful">
-                        SD/MMC/M2/MS/MS Pro Duo
-                      </div>
-                    </div>
-                  </div> -->
+                 
                 </div>
               </div>
             </div>
@@ -474,100 +422,7 @@
             class="top-separator out-lg"
             data-inview-showup="showup-translate-up"
           ></div>
-          <!-- <div data-inview-showup="showup-translate-up">
-            <h4 class="text-upper">Related Products</h4>
-            <div class="row cols-md rows-xl">
-              <div class="lg-col-4 md-col-6">
-                <div class="item shop-item shop-item-lined text-center">
-                  <div class="item-image-wrap">
-                    <div class="item-back"></div>
-                    <div class="item-lables">
-                      <a class="item-label-sale item-label" href="#">sale</a>
-                      <a class="item-label-trending item-label" href="#"
-                        >trending</a
-                      >
-                    </div>
-                    <a href="shop-item.html" class="item-image responsive-1by1"
-                      ><img src="assets/images/shop/wifi-router.jpg" alt=""
-                    /></a>
-                  </div>
-                  <div class="item-title text-upper">
-                    <a href="shop-item.html" class="content-link"
-                      >Wi-Fi Router repieter</a
-                    >
-                  </div>
-                  <div class="item-prices">
-                    <div class="item-price">$32.15</div>
-                    <div class="item-old-price">$72.5</div>
-                  </div>
-                  <div class="item-links">
-                    <a
-                      href="shop-item.html"
-                      class="btn text-upper btn-sm btns-bordered"
-                      >view</a
-                    >
-                    <a href="#" class="btn text-upper btn-sm">add to cart</a>
-                  </div>
-                </div>
-              </div>
-              <div class="lg-col-4 md-col-6">
-                <div class="item shop-item shop-item-lined text-center">
-                  <div class="item-image-wrap">
-                    <div class="item-back"></div>
-                    <a href="shop-item.html" class="item-image responsive-1by1"
-                      ><img src="assets/images/shop/hdd.jpg" alt=""
-                    /></a>
-                  </div>
-                  <div class="item-title text-upper">
-                    <a href="shop-item.html" class="content-link"
-                      >External HDD Drive</a
-                    >
-                  </div>
-                  <div class="item-prices">
-                    <div class="item-price">$102.05</div>
-                  </div>
-                  <div class="item-links">
-                    <a
-                      href="shop-item.html"
-                      class="btn text-upper btn-sm btns-bordered"
-                      >view</a
-                    >
-                    <a href="#" class="btn text-upper btn-sm">add to cart</a>
-                  </div>
-                </div>
-              </div>
-              <div class="lg-col-4 md-col-6">
-                <div class="item shop-item shop-item-lined text-center">
-                  <div class="item-image-wrap">
-                    <div class="item-back"></div>
-                    <div class="item-lables">
-                      <a class="item-label-new item-label" href="#">new</a>
-                    </div>
-                    <a href="shop-item.html" class="item-image responsive-1by1"
-                      ><img src="assets/images/shop/cable-organizer.jpg" alt=""
-                    /></a>
-                  </div>
-                  <div class="item-title text-upper">
-                    <a href="shop-item.html" class="content-link"
-                      >Cable Organizer</a
-                    >
-                  </div>
-                  <div class="item-prices">
-                    <div class="item-price">$15.25</div>
-                  </div>
-                  <div class="item-links">
-                    <a
-                      href="shop-item.html"
-                      class="btn text-upper btn-sm btns-bordered"
-                      >view</a
-                    >
-                    <a href="#" class="btn text-upper btn-sm">add to cart</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="text-center shift-xl"></div>
-          </div> -->
+          
         </section>
       </div>
     </div>

@@ -1,7 +1,15 @@
 <?php
-$product_list = $db->getRaw("SELECT san_pham.*, thuong_hieu.ten_thuong_hieu
-FROM san_pham
-JOIN thuong_hieu ON san_pham.thuong_hieu_id = thuong_hieu.id;
+$product_list = $db->getRaw("SELECT 
+    san_pham.*, 
+    thuong_hieu.ten_thuong_hieu,
+    danh_muc_san_pham.ten_danh_muc
+FROM 
+    san_pham
+JOIN 
+    thuong_hieu ON san_pham.thuong_hieu_id = thuong_hieu.id
+JOIN 
+    danh_muc_san_pham ON san_pham.danh_muc_san_pham_id = danh_muc_san_pham.id;
+
 ");
 $smg = getFlashData('smg');
 ?>
@@ -55,6 +63,7 @@ $smg = getFlashData('smg');
                                 <th width="15%" class="text-center">Hình</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Thương hiệu</th>
+                                <th>Danh mục</th>
                                 <th width="8%" class="text-center">Nổi bật</thư>
                                 <th width="8%" class="text-center">Hiển thị</th>
                                 <th width=" 10%" class="text-center">Thao tác</th>
@@ -83,6 +92,9 @@ $smg = getFlashData('smg');
                                     </td>
                                     <td>
                                         <?= $item['ten_thuong_hieu'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $item['ten_danh_muc'] ?>
                                     </td>
                                     <td class="text-center">
                                         <input data-id="<?=$item['id']?>" type="checkbox" class="form-check-input highlight-checkbox" 

@@ -4,17 +4,24 @@ if ($func->isPOST())
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
+        'ma_san_pham'=>$filterAll['maSP'],
         'duong_dan' => $filterAll['slug'],
         'ten_san_pham' => $filterAll['title'],
         'gia_goc' => $filterAll['original_price'],
         'gia_sau_khuyen_mai' => $filterAll['price'],
         'mo_ta' => $filterAll['description'],
+        'mo_ta_dai'=>$_POST['mo_ta_dai'],
         'thong_so_kich_thuoc' => $_POST['content'],
+        
        
     ];
     if (!empty($_POST['product_type_id']))
     {
         $data_update['thuong_hieu_id'] = $_POST['product_type_id'];
+    }
+    if (!empty($_POST['danh_muc_san_pham_id']))
+    {
+        $data_update['danh_muc_san_pham_id'] = $_POST['danh_muc_san_pham_id'];
     }
     $image = $func->upload('imageUpload', 'images');
     if ($image != 'noimage.jpg')
@@ -80,6 +87,11 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-12">
+                                        <label for="maSP" class="form-label fw-bold">Mã sản phẩm:</label>
+                                        <input id="maSP" type="text" name="maSP" class="form-control"
+                                            value="<?= $product['ma_san_pham'] ?>" required>
+                                    </div>
+                                    <div class="mb-3 col-12">
                                         <label id="slugLabel" for="company_name" class="form-label fw-bold">Đường dẫn
                                             mẫu: <?= $http . $_SERVER['HTTP_HOST'] ?></label>
                                         <input id="slugInput" type="text" name="slug" class="form-control"
@@ -113,14 +125,18 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-12">
-                                        <label id="slugLabel" for="company_name" class="form-label fw-bold">Mô
-                                            tả:</label>
+                                        <label id="slugLabel" for="company_name" class="form-label fw-bold">Giới thiệu sản phẩm:</label>
                                         <textarea name="description" style="min-height: 120px;"
                                             class="form-control"><?= $product['mo_ta'] ?></textarea>
                                     </div>
                                     <div class="mb-3 col-12">
-                                        <label for="company_name" class="form-label fw-bold">Nội dung:</label>
-                                        <textarea name="content" id="editor" style="min-height: 120px;"
+                                        <label for="company_name" class="form-label fw-bold">Mô tả dài:</label>
+                                        <textarea name="mo_ta_dai" id="editor" style="min-height: 120px;"
+                                            class="form-control"><?= $product['mo_ta_dai'] ?></textarea>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="company_name" class="form-label fw-bold">Thông số kích thước (trang chủ):</label>
+                                        <textarea name="content" id="editor2" style="min-height: 120px;"
                                             class="form-control"><?= $product['thong_so_kich_thuoc'] ?></textarea>
                                     </div>
                                 </div>
@@ -131,20 +147,33 @@ $smg = getFlashData('smg');
                         <div class="card card-primary card-outline mb-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    Thương Hiệu
+                                    Thương Hiệu và Danh Mục
                                 </div>
                             </div>
                             <div class="card-body">
                                 <label for="cap1" class="form-label fw-bold">Thương Hiệu:</label>
-                                <select name="product_type_id" class="form-select">
-                                    <option value>Chọn danh mục</option>
+                                <select name="product_type_id" class="form-select mb-3">
+                                  
                                     <?php
-                                    $product_type_list = $db->getRaw('SELECT * FROM thuong_hieu');
+                                    $brand_list = $db->getRaw('SELECT * FROM thuong_hieu');
+                                    foreach ($brand_list as $brand):
+                                        ?>
+                                        <option value="<?= $brand['id'] ?>"
+                                            <?= $product['thuong_hieu_id'] == $brand['id'] ? 'selected' : '' ?>>
+                                            <?= $brand['ten_thuong_hieu'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <label for="cap1" class="form-label fw-bold">Danh Mục:</label>
+                                <select name="danh_muc_san_pham_id" class="form-select">
+                              
+                                    <?php
+                                    $product_type_list = $db->getRaw('SELECT * FROM danh_muc_san_pham');
                                     foreach ($product_type_list as $produc_type):
                                         ?>
                                         <option value="<?= $produc_type['id'] ?>"
-                                            <?= $product['thuong_hieu_id'] == $produc_type['id'] ? 'selected' : '' ?>>
-                                            <?= $produc_type['ten_thuong_hieu'] ?>
+                                            <?= $product['danh_muc_san_pham_id'] == $produc_type['id'] ? 'selected' : '' ?>>
+                                            <?= $produc_type['ten_danh_muc'] ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
