@@ -1,8 +1,8 @@
 <?php
-$list_noi_bat= $db->getRaw('select * from san_pham ');
+$list_noi_bat= $db->getRaw('select * from san_pham where noi_bat = 1');
 
 // echo '<pre>';
-// print_r ($list_san_pham);
+// print_r ($list_noi_bat);
 // echo '</pre>';
 
 ?>

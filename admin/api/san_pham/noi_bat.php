@@ -22,9 +22,9 @@ if (!empty($filterAll))
     // print_r($filterAll);
     $id = $filterAll['id'];
     $data_update = [
-        'hienthi' => $filterAll['highlight'],
+        'noi_bat' => $filterAll['highlight'],
     ];
-    $update_status = $db->update('products', $data_update, "id = '$id'");
+    $update_status = $db->update('san_pham', $data_update, "id = '$id'");
     // if ($update_status)
     // {
     //     echo 'Thành công';

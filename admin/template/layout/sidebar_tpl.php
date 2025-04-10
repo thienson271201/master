@@ -26,8 +26,8 @@
                     </a>
                 </li>
                 <li class="nav-header">Quản lý sản phẩm</li>
-                <li class="nav-item <?= $com == 'product' || $com == 'product_type'||$com=='brand' ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link <?= $com == 'product' || $com == 'product_type'||$com=='brand' ? 'active' : '' ?>">
+                <li class="nav-item <?= $com == 'san_pham' || $com == 'danh_muc'||$com=='brand' ? 'menu-open' : '' ?>">
+                    <a href="#" class="nav-link <?= $com == 'san_pham' || $com == 'danh_muc'||$com=='brand' ? 'active' : '' ?>">
                         <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
                             Quản lý sản phẩm
@@ -43,14 +43,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="?com=product_type&act=list"
-                                class="nav-link <?= $com == 'product_type' ? 'active' : '' ?>">
+                            <a href="?com=danh_muc&act=danh_sach"
+                                class="nav-link <?= $com == 'danh_muc' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Danh mục sản phẩm</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="?com=product&act=list" class="nav-link <?= $com == 'product' ? 'active' : '' ?>">
+                            <a href="?com=san_pham&act=danh_sach" class="nav-link <?= $com == 'san_pham' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Sản phẩm</p>
                             </a>
