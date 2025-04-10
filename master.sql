@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 09, 2025 lúc 07:02 PM
+-- Thời gian đã tạo: Th4 10, 2025 lúc 07:59 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Phiên bản PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,7 +93,8 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (137, 1, 'cd6aa8eba62b1e883abc737cadf1efc6f407a8e8', '2025-04-02 21:45:20'),
 (138, 1, '3b663872699dc48fbd5b10f4d2c792f7e006257c', '2025-04-04 21:56:30'),
 (139, 1, '7e654c460114b9f93f9cf4f924354f5466557fe1', '2025-04-06 09:08:57'),
-(140, 1, '9b4301d3a2a1fa2d000349a993fde875cd3fa41a', '2025-04-09 21:41:58');
+(140, 1, '9b4301d3a2a1fa2d000349a993fde875cd3fa41a', '2025-04-09 21:41:58'),
+(141, 1, '704009eb0eb1ac7bbe4fc6c6551e7cfb239dfa83', '2025-04-10 12:01:41');
 
 -- --------------------------------------------------------
 
@@ -1179,6 +1180,7 @@ CREATE TABLE `san_pham` (
   `pin` varchar(50) DEFAULT NULL,
   `he_dieu_hanh` varchar(50) DEFAULT NULL,
   `ngay_ra_mat` timestamp NULL DEFAULT NULL,
+  `noi_bat` int(11) DEFAULT NULL,
   `trang_thai` int(11) DEFAULT NULL,
   `ngay_tao` timestamp NULL DEFAULT NULL,
   `ngay_cap_nhat` timestamp NULL DEFAULT NULL
@@ -1188,12 +1190,12 @@ CREATE TABLE `san_pham` (
 -- Đang đổ dữ liệu cho bảng `san_pham`
 --
 
-INSERT INTO `san_pham` (`id`, `ma_san_pham`, `duong_dan`, `ten_san_pham`, `hinh_anh`, `gia_goc`, `gia_sau_khuyen_mai`, `thuong_hieu_id`, `danh_muc_san_pham_id`, `mo_ta`, `mo_ta_dai`, `thong_so_kich_thuoc`, `trong_luong`, `bo_xu_ly`, `ram`, `o_cung`, `card_do_hoa`, `pin`, `he_dieu_hanh`, `ngay_ra_mat`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(3, 'Dell_Vostro1539_01', 'dell-vostro-1539', 'Dell Vostro 1539', '1743611166.jpg', 20000000, 19990000, 5, 2, 'CPU: I5 11400H, RAM: 8GB, Ổ Cứng: 512GB, Card Đồ Họa: RTX 3050 4GB, Màn Hình: 15.6 inch 144Hz', '<p><strong>Thông số kỹ thuật:</strong></p><ul><li>CPU: i5</li><li>Ram: 8</li></ul>', '<p>CPU: I5 11400H</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RTX 3050 4GB</p><p>Màn Hình: 15.6 inch 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-29 15:33:44', NULL),
-(4, 'Gigabyte_G5_GD_01', 'gigabyte-g5-gd', 'Gigabyte G5 GD', '1743611117.jpg', 22000000, 18000000, 3, 3, 'CPU: I5 12500HX, RAM: 8GB, Ổ Cứng: 512GB, Card Đồ Họa: 3060Ti, Màn Hình: 1920x1080', '', '<p>CPU: I5 12500HX</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: 30600Ti</p><p>Màn Hình: 1920x1080</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-29 16:00:16', NULL),
-(5, NULL, 'lenovo-legion-5', 'Lenovo Legion 5', '1743611133.jpg', 24000000, 22990000, 6, 3, 'CPU: i7 11400H, RAM: 16GB, Ổ Cứng: 512GB, Card Đồ Họa: RXT 4060 6GB, Màn Hình: 15.6 FHD 144Hz', NULL, '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-30 02:54:40', NULL),
-(6, 'MSI_Moden_15', 'msi-moden-15', 'MSI Moden 15', '1743611144.jpg', 25000000, 22000000, 7, 3, 'CPU: i7 11400H, RAM: 16GB, Ổ Cứng: 512GB, Card Đồ Họa: RXT 4060 6GB, Màn Hình: 15.6 FHD 144Hz', '', '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-30 02:56:46', NULL),
-(9, 'Asus_Gaming_K16_01', 'asus-gaming-k16-k3607vj-rp131w', 'Asus Gaming K16 K3607VJ-RP131W', '1743905461.webp', 24490000, 23490000, 2, 3, '&#13;&#10;CPU: Intel® Core™ 5 210H (2.2 GHz - 4.8 GHz/ 12MB/ 8 nhân, 12 luồng), &#13;&#10;RAM: 2 x 16GB 5600MHz DDR5 (Hỗ trợ tối đa 32GB), &#13;&#10;VGA: GeForce RTX™ 3050 6GB GDDR6, &#13;&#10;Ổ cứng: 512GB SSD M.2 NVMe, &#13;&#10;Màn hình: 16&#34; WUXGA (1920 x 1200) IPS, 144Hz,  OS: Windows 11 Home', '', '<p>CPU: Core 5 210H</p><p>RAM: 16GB 5600Hz</p><p>VGA: RTX 3050 6GB</p><p>Ổ Cứng: 512GB Nvme</p><p>Màn Hình: 16 inch 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-06 02:11:01', NULL);
+INSERT INTO `san_pham` (`id`, `ma_san_pham`, `duong_dan`, `ten_san_pham`, `hinh_anh`, `gia_goc`, `gia_sau_khuyen_mai`, `thuong_hieu_id`, `danh_muc_san_pham_id`, `mo_ta`, `mo_ta_dai`, `thong_so_kich_thuoc`, `trong_luong`, `bo_xu_ly`, `ram`, `o_cung`, `card_do_hoa`, `pin`, `he_dieu_hanh`, `ngay_ra_mat`, `noi_bat`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(3, 'Dell_Vostro1539_01', 'dell-vostro-1539', 'Dell Vostro 1539', '1743611166.jpg', 20000000, 19990000, 5, 2, 'CPU: I5 11400H, RAM: 8GB, Ổ Cứng: 512GB, Card Đồ Họa: RTX 3050 4GB, Màn Hình: 15.6 inch 144Hz', '<p><strong>Thông số kỹ thuật:</strong></p><ul><li>CPU: i5</li><li>Ram: 8</li></ul>', '<p>CPU: I5 11400H</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RTX 3050 4GB</p><p>Màn Hình: 15.6 inch 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '2025-03-29 15:33:44', NULL),
+(4, 'Gigabyte_G5_GD_01', 'gigabyte-g5-gd', 'Gigabyte G5 GD', '1743611117.jpg', 22000000, 18000000, 3, 3, 'CPU: I5 12500HX, RAM: 8GB, Ổ Cứng: 512GB, Card Đồ Họa: 3060Ti, Màn Hình: 1920x1080', '', '<p>CPU: I5 12500HX</p><p>RAM: 8GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: 30600Ti</p><p>Màn Hình: 1920x1080</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2025-03-29 16:00:16', NULL),
+(5, NULL, 'lenovo-legion-5', 'Lenovo Legion 5', '1743611133.jpg', 24000000, 22990000, 6, 3, 'CPU: i7 11400H, RAM: 16GB, Ổ Cứng: 512GB, Card Đồ Họa: RXT 4060 6GB, Màn Hình: 15.6 FHD 144Hz', NULL, '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2025-03-30 02:54:40', NULL),
+(6, 'MSI_Moden_15', 'msi-moden-15', 'MSI Moden 15', '1743611144.jpg', 25000000, 22000000, 7, 3, 'CPU: i7 11400H, RAM: 16GB, Ổ Cứng: 512GB, Card Đồ Họa: RXT 4060 6GB, Màn Hình: 15.6 FHD 144Hz', '', '<p>CPU: i7 11400H</p><p>RAM: 16GB</p><p>Ổ Cứng: 512GB</p><p>Card Đồ Họa: RXT 4060 6GB</p><p>Màn Hình: 15.6 FHD 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2025-03-30 02:56:46', NULL),
+(9, 'Asus_Gaming_K16_01', 'asus-gaming-k16-k3607vj-rp131w', 'Asus Gaming K16 K3607VJ-RP131W', '1743905461.webp', 24490000, 23490000, 2, 3, '&#13;&#10;CPU: Intel® Core™ 5 210H (2.2 GHz - 4.8 GHz/ 12MB/ 8 nhân, 12 luồng), &#13;&#10;RAM: 2 x 16GB 5600MHz DDR5 (Hỗ trợ tối đa 32GB), &#13;&#10;VGA: GeForce RTX™ 3050 6GB GDDR6, &#13;&#10;Ổ cứng: 512GB SSD M.2 NVMe, &#13;&#10;Màn hình: 16&#34; WUXGA (1920 x 1200) IPS, 144Hz,  OS: Windows 11 Home', '', '<p>CPU: Core 5 210H</p><p>RAM: 16GB 5600Hz</p><p>VGA: RTX 3050 6GB</p><p>Ổ Cứng: 512GB Nvme</p><p>Màn Hình: 16 inch 144Hz</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2025-04-06 02:11:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -12134,7 +12136,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT cho bảng `custommer`
@@ -12206,7 +12208,7 @@ ALTER TABLE `product_types`
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `seo`
