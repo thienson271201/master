@@ -1,26 +1,28 @@
 <?php
-if($f->isPOST())
-{
-    $filterAll=$f->filter();
-    $khach_hang=[
-        'ten_khach_hang'=>$filterAll['ten_khach_hang'],
-        'email'=>$filterAll['email'],
-        'mat_khau'=>password_hash($filterAll['mat_khau'], PASSWORD_DEFAULT),
-       
+if ($f->isPOST()) {
+    $filterAll = $f->filter();
+    
+    // Kiểm tra số điện thoại: bắt đầu bằng 0 và đúng 10 chữ số
+    if (!preg_match('/^0\d{9}$/', $filterAll['so_dien_thoai'])) {
+        echo '<script>alert("Số điện thoại không hợp lệ. Phải bắt đầu bằng số 0 và có đúng 10 chữ số.");</script>';
+    } elseif ($filterAll['mat_khau'] !== $filterAll['nhap_lai_mat_khau']) {
+        echo '<script>alert("Mật khẩu và nhập lại mật khẩu không khớp.");</script>';
+    } else {
+        $khach_hang = [
+            'ten_khach_hang' => $filterAll['ten_khach_hang'],
+            'email' => $filterAll['email'],
+            'mat_khau' => password_hash($filterAll['mat_khau'], PASSWORD_DEFAULT),
+            'so_dien_thoai' => $filterAll['so_dien_thoai'],
+            'ngay_tao' => date('Y-m-d H:i:s')
+        ];
 
-        'so_dien_thoai'=>$filterAll['so_dien_thoai'],
-        'ngay_tao'=>date('Y-m-d H:i:s')
-
-    ];
-    // echo '<pre>';
-    // print_r($khach_hang);
-    // echo '</pre>';
-    // exit;
-    $insertStatus=$db->insert('khach_hang',$khach_hang);
-    if($insertStatus)
-    $f->redirect('dang-nhap');
+        $insertStatus = $db->insert('khach_hang', $khach_hang);
+        if ($insertStatus)
+            $f->redirect('dang-nhap');
+    }
 }
 ?>
+
 <section class="with-bg solid-section">
       <div
         class="fix-image-wrap"
