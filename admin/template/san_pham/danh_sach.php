@@ -79,9 +79,9 @@ $smg = getFlashData('smg');
                             foreach ($product_list as $item):
                                 ?>
                                 <tr>
-                                    <td class="text-center">
-                                        <input class="form-control text-center stt-input" type="text" name="stt" data-id="1"
-                                            value="1">
+                                    <td>
+                                        <input data-id="1" class="form-control text-center stt-input"
+                                            type="text" value="<?= $dem++?>">
                                     </td>
                                     <td class="text-center">
                                         <img  src="../upload/images/<?= $item['hinh_anh'] ?>" style="width: 100px; height: 80px; object-fit: cover;" 
