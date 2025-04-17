@@ -90,6 +90,7 @@ if($f->isPOST())
                   <div class="offs-lg">
                     <div class="field-group">
                       <div class="field-wrap">
+                      
                         <input
                           class="field-control"
                           name="email"
