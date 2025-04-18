@@ -25,8 +25,8 @@ $db = new Database();
 $ad = new admin();
 $func = new func();
 
-$com='';
-$act='';
+$com = '';
+$act = '';
 
 // Điều hướng
 if (!empty($_GET['com']))
@@ -114,6 +114,7 @@ if ($ad->isLogin())
         require_once $path;
     }
     ?>
+    <!-- editor -->
     <script src="ckeditor/ckeditor.js"></script>
     <script>
         ClassicEditor
@@ -124,7 +125,7 @@ if ($ad->isLogin())
             .catch(err => {
                 console.error(err.stack);
             });
-            ClassicEditor
+        ClassicEditor
             .create(document.querySelector('#editor2'))
             .then(editor => {
                 window.editor = editor;
@@ -148,7 +149,7 @@ if ($ad->isLogin())
         integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <script src="assets/js/adminlte.js"></script>
+    <script src="assets/js/adminlte.js?v=<?= rand(10, 99) ?>"></script>
     <!--end::Required Plugin(AdminLTE)-->
     <!--begin::OverlayScrollbars Configure-->
     <script>
@@ -176,6 +177,10 @@ if ($ad->isLogin())
     </script>
     <!--end::OverlayScrollbars Configure-->
     <!-- OPTIONAL SCRIPTS -->
+    <!-- sortablejs -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
+        integrity="sha256-ipiJrswvAR4VAx/th+6zWsdeYmVae0iJuiR+6OqHJHQ=" crossorigin="anonymous"></script>
+    <!-- sortablejs -->
     <script>
         const connectedSortables =
             document.querySelectorAll(".connectedSortable");

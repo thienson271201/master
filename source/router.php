@@ -43,37 +43,36 @@ if (!$get_status)
 
     switch ($url)
     {
+        // Trang chủ
         case '':
             require_once TEMPLATE . 'index/index_tpl.php';
             $title = $setting_info[0]['setting_value'];
             $active = 'trang-chu';
             $noidung = ob_get_clean();
             break;
-        case 'gioi-thieu':
-            $new = $db->oneRaw("SELECT * FROM news WHERE type = 'gioi-thieu'");
-            $title = 'Giới thiệu - ' . $setting_info[0]['setting_value'];
-            $active = 'gioi-thieu';
-            require_once TEMPLATE . 'new/new_item_tpl.php';
-            $noidung = ob_get_clean();
-            break;
         case 'tin-tuc':
             require_once TEMPLATE . 'new/new_list_tpl.php';
             $noidung = ob_get_clean();
             break;
-       
-       
+        // Đăng ký
         case 'dang-ky':
-            $title='Đăng Ký';
+            $title = 'Đăng Ký';
             require_once TEMPLATE . 'khachhang/dangky.php';
             $noidung = ob_get_clean();
             break;
-
+        // Đăng nhập
         case 'dang-nhap':
-            $title='Đăng Nhập';
+            $title = 'Đăng Nhập';
             require_once TEMPLATE . 'khachhang/dangnhap.php';
             $noidung = ob_get_clean();
             break;
-        
+        // Thông tin khách hàng
+        case 'thanh-vien':
+            $title = 'Thông tin cá nhân';
+            require_once TEMPLATE . 'khachhang/thongtinkhachhang.php';
+            $noidung = ob_get_clean();
+            break;
+        // Danh sách sản phẩm
         case 'san-pham':
             $title = 'Sản phẩm';
             require_once TEMPLATE . 'product/product_list_tpl.php';
@@ -85,15 +84,13 @@ if (!$get_status)
             $active = 'lien-he';
             $noidung = ob_get_clean();
             break;
-        case 'video':
-            require_once TEMPLATE . 'video/list_tpl.php';
-            $noidung = ob_get_clean();
-            break;
+        // Giỏ hàng
         case 'gio-hang':
             $title = 'Giỏ hàng';
             require_once TEMPLATE . 'thanhtoan/cart_tpl.php';
             $noidung = ob_get_clean();
             break;
+        // Thanh toán
         case 'thanh-toan':
             require_once TEMPLATE . 'thanhtoan/thanhtoan_tpl.php';
             $noidung = ob_get_clean();
@@ -101,6 +98,7 @@ if (!$get_status)
         default:
             $slug = ltrim($url, '/');
 
+            // Tra cứu tin tức
             $new = $db->oneRaw("SELECT * FROM news WHERE slug = '$slug'");
             if (!empty($new))
             {
@@ -109,6 +107,7 @@ if (!$get_status)
                 $noidung = ob_get_clean();
                 break;
             }
+            // Tìm kiếm loại sản phẩm
             $product_type = $db->oneRaw("SELECT * FROM product_types WHERE slug = '$url'");
             if (!empty($product_type))
             {
@@ -118,7 +117,7 @@ if (!$get_status)
                 $noidung = ob_get_clean();
                 break;
             }
-
+            // Tra cứu sản phẩm
             $product = $db->oneRaw("SELECT * FROM san_pham WHERE duong_dan = '$url'");
             if (!empty($product))
             {
@@ -128,7 +127,7 @@ if (!$get_status)
                 break;
             }
 
-            // Nếu đường dẫn không có
+            // Nếu đường dẫn không có quay về lại trang chủ
             $f->redirect('./');
     }
 }
