@@ -58,7 +58,7 @@ class func
         $check = true;
 
         // Đảm bảo đường dẫn tùy chỉnh bắt đầu bằng dấu gạch chéo và kết thúc bằng dấu gạch chéo
-        $target_dir = _PATH_UPLOAD  . trim($path, '/') . '/';
+        $target_dir = _PATH_UPLOAD . trim($path, '/') . '/';
 
         // Kiểm tra và thay đổi quyền nếu cần thiết
         if (!is_writable($target_dir))
@@ -130,30 +130,6 @@ class func
         }
     }
 
-    public function image_exists($filename, $path = '')
-    {
-        $defaultImage = '../assets/images/noimage/noimage.png'; // Đường dẫn tới ảnh mặc định
-        if (empty($filename))
-        {
-            return $defaultImage;
-        }
-        $imagePath = _PATH_ASSETS . '/images/' . $path . '/' . $filename; // Đường dẫn tới ảnh cần kiểm tra
-
-        if (file_exists($imagePath))
-        {
-            return 'assets/images/' . $path . '/' . $filename;
-        } else
-        {
-            return $defaultImage;
-        }
-    }
-
-    public function getYouTubeVideoId($url)
-    {
-        $pattern = '/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
-        preg_match($pattern, $url, $matches);
-        return isset($matches[1]) ? $matches[1] : null;
-    }
     public function formatPhoneNumber($phoneNumber)
     {
         // Xóa bỏ tất cả ký tự không phải số
@@ -206,5 +182,26 @@ class func
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function isLogin()
+    {
+        $checkLogin = false;
+        if (getSession('userLoginToken'))
+        {
+            $userLoginToken = getSession('userLoginToken');
+            $khach_hang_id = getSession('khach_hang_id');
+            $db = new Database();
+            //Kiểm tra token có giống trong database không
+            $queryToken = $db->oneRaw("SELECT * FROM khach_hang_token WHERE token = '$userLoginToken' AND khach_hang_id = '$khach_hang_id'");
+            if (!empty($queryToken))
+            {
+                $checkLogin = true;
+            } else
+            {
+                removeSession("userLoginToken");
+            }
+        }
+        return $checkLogin;
     }
 }

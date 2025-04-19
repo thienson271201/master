@@ -1,3 +1,6 @@
+<?php
+$user_profile = $db->oneRaw('SELECT * FROM khach_hang');
+?>
 <section class="with-bg solid-section">
     <div class="fix-image-wrap" data-image-src="./assets/images/service/tools.jpg" data-parallax="scroll"></div>
     <div class="theme-back"></div>
@@ -11,7 +14,7 @@
     <div class="section-footer">
         <div class="container" data-inview-showup="showup-translate-down">
             <ul class="page-path">
-                <li><a href="index-2.html">Trang chủ</a></li>
+                <li><a href="./">Trang chủ</a></li>
                 <li class="path-separator">
                     <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </li>
@@ -25,12 +28,12 @@
         <nav class="user-dashboard-menu">
             <ul>
                 <li class="menu-item">
-                    <a href="dashboard.html">Bảng điều khiển</a>
+                    <a href="?page=thong_tin_tai_khoan">Bảng điều khiển</a>
                 </li>
-                <li class="menu-item"><a href="profile.html">Hồ sơ</a></li>
-                <li class="menu-item"><a href="orders.html">Đơn hàng</a></li>
+                <li class="menu-item"><a href="?page=thong_tin_ca_nhan">Hồ sơ</a></li>
+                <li class="menu-item"><a href="?page=lich_su_don_hang">Đơn hàng</a></li>
                 <li class="menu-btn menu-stick-right">
-                    <a class="btn btns-bordered-alt text-upper" href="new-ticket.html">Đăng xuất</a>
+                    <a class="btn btns-bordered-alt text-upper" href="?page=dang_xuat">Đăng xuất</a>
                 </li>
             </ul>
         </nav>
@@ -38,7 +41,7 @@
 </section>
 <section class="shift-lg content-section">
     <div class="container">
-        <form class="user-profile">
+        <form class="user-profile" method="POST">
             <h4 class="text-upper" data-inview-showup="showup-translate-right">
                 Thông tin cá nhân
             </h4>
@@ -46,16 +49,17 @@
                 <!-- Hình ảnh -->
                 <div class="sm-col-12" data-inview-showup="showup-translate-right">
                     <div class="field-group field-type-image">
-                        <label>Upload new avatar - JPEG 70x70</label>
+                        <label>Tải ảnh đại diện - JPEG 70x70</label>
                         <div class="field-wrap">
                             <input class="field-file-control" name="avatar" type="file" />
-                            <input class="field-control" name="avatarPlaceholder" placeholder="No file choosen" />
-                            <span class="field-addon-btn"><a class="field-file-btn text-upper btn" href="#">Choose
-                                    file</a></span>
+                            <input class="field-control" name="avatarPlaceholder"
+                                placeholder="Không có ảnh nào được tải lên" />
+                            <span class="field-addon-btn"><a class="field-file-btn text-upper btn" href="#">Tải ảnh
+                                    lên</a></span>
                             <span class="field-back"></span>
                             <div class="file-preview">
                                 <div class="file-preview-image">
-                                    <img src="assets/images/outsource/user-small.jpg" alt="" />
+                                    <img src="" alt="" />
                                 </div>
                                 <div class="file-no-preview">
                                     <i class="fas fa-user"></i>

@@ -68,10 +68,34 @@ if (!$get_status)
             break;
         // Thông tin khách hàng
         case 'thanh-vien':
-            $title = 'Thông tin cá nhân';
-            require_once TEMPLATE . 'khachhang/thongtinkhachhang.php';
-            $noidung = ob_get_clean();
-            break;
+            if ($f->isLogin())
+            {
+                if ($_GET['page'] == 'thong_tin_ca_nhan')
+                {
+                    $title = 'Thông tin cá nhân';
+                }
+                if ($_GET['page'] == 'lich_su_don_hang')
+                {
+                    $title = 'Lịch sử đơn hàng';
+                }
+                if ($_GET['page'] == 'thong_tin_tai_khoan')
+                {
+                    $title = 'Thông tin tài khoản';
+                }
+                require_once TEMPLATE . 'khachhang/thongtinkhachhang.php';
+                $noidung = ob_get_clean();
+                break;
+
+                // Xử lý đăng xuất
+                if ($_GET['page'] == 'dang_xuat')
+                {
+                    removeSession('userLoginToken');
+                }
+            } else
+            {
+                $f->redirect('dang-nhap');
+            }
+
         // Danh sách sản phẩm
         case 'san-pham':
             $title = 'Sản phẩm';
