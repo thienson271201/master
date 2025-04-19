@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 12, 2025 lúc 06:00 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th4 19, 2025 lúc 05:23 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -95,7 +95,10 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (139, 1, '7e654c460114b9f93f9cf4f924354f5466557fe1', '2025-04-06 09:08:57'),
 (140, 1, '9b4301d3a2a1fa2d000349a993fde875cd3fa41a', '2025-04-09 21:41:58'),
 (141, 1, '704009eb0eb1ac7bbe4fc6c6551e7cfb239dfa83', '2025-04-10 12:01:41'),
-(142, 1, 'b804d27cfab963f1a67e3055277a5616b7e3c289', '2025-04-12 22:16:19');
+(142, 1, 'b804d27cfab963f1a67e3055277a5616b7e3c289', '2025-04-12 22:16:19'),
+(143, 1, 'ef1d2e6a07be21998146a1c4715a054275bad824', '2025-04-15 22:43:29'),
+(144, 1, '25aa3526ce9cdf87b4711f903c3d7981839a2954', '2025-04-17 21:29:13'),
+(145, 1, '062c931110f36ec7df2ee099fec1d6bd544575bc', '2025-04-18 11:00:17');
 
 -- --------------------------------------------------------
 
@@ -130,25 +133,6 @@ CREATE TABLE `danh_muc_san_pham` (
 INSERT INTO `danh_muc_san_pham` (`id`, `duong_dan`, `ten_danh_muc`, `ngay_tao`, `ngay_cap_nhat`) VALUES
 (2, 'laptop-van-phong', 'Laptop Văn Phòng', NULL, NULL),
 (3, 'laptop-gaming', 'Laptop Gaming', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `files`
---
-
-CREATE TABLE `files` (
-  `id` int(11) NOT NULL,
-  `filename` varchar(200) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `files`
---
-
-INSERT INTO `files` (`id`, `filename`, `create_at`) VALUES
-(3, 'Catalogue VNPC 2024-08_low.pdf', '2024-08-22 07:41:40');
 
 -- --------------------------------------------------------
 
@@ -190,10 +174,22 @@ CREATE TABLE `khach_hang` (
   `email` varchar(255) DEFAULT NULL,
   `so_dien_thoai` varchar(20) DEFAULT NULL,
   `ten_khach_hang` varchar(255) DEFAULT NULL,
+  `dia_chi` varchar(255) DEFAULT NULL,
+  `xa_phuong` int(11) DEFAULT NULL,
+  `quan_huyen` int(11) DEFAULT NULL,
+  `tinh_thanhpho` int(11) DEFAULT NULL,
   `mat_khau` varchar(255) DEFAULT NULL,
+  `anh_dai_dien` varchar(200) DEFAULT NULL,
   `ngay_tao` timestamp NULL DEFAULT NULL,
   `ngay_cap_nhat` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khach_hang`
+--
+
+INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(12, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, NULL, NULL, NULL, '$2y$10$1FHjfCOEn/tBsnHgKZUKNO3t9QUg06odhYqIjXS5bSfTnkBGH/hdm', NULL, '2025-04-19 13:56:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -213,13 +209,10 @@ CREATE TABLE `khach_hang_token` (
 --
 
 INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
-(1, 5, '97471d007619cb6277fc718fb68c72ef5eaf68cc', '2025-04-04 16:19:53'),
-(2, 5, '1cf0259053194f8118d5cca4d3c08eea8638ee88', '2025-04-04 16:37:35'),
-(3, 5, '466e605c19817a2672542dfa589ce7e4ab5f3be7', '2025-04-04 16:38:08'),
-(4, 7, '176235eca4a81af8dc8d2d0fa2a264cd183a5c54', '2025-04-06 02:46:08'),
-(5, 8, '14bdb5bf10e48b73e2e38d1d9273d617c21a1ff4', '2025-04-06 02:52:12'),
-(6, 9, 'dd1aedb34e8dc3a9ebac2586d6b7c4048d55cb8b', '2025-04-06 02:57:26'),
-(7, 10, '08f4eb3716dd208f2959714e8eeb1541a474838a', '2025-04-12 15:27:24');
+(13, 12, 'e184cd0744fcfac1c089de2a00c2193a6cff90b9', '2025-04-19 14:34:20'),
+(14, 12, 'ea47b77be2fde055f94765e0e865e55da07069dd', '2025-04-19 14:36:13'),
+(15, 12, '11995c4426299992ecd547bc9c77676812f8c43d', '2025-04-19 14:44:01'),
+(16, 12, '2b8453e2304c1454ca580cde85a3288277b41302', '2025-04-19 15:22:39');
 
 -- --------------------------------------------------------
 
@@ -12022,12 +12015,6 @@ ALTER TABLE `danh_muc_san_pham`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `files`
---
-ALTER TABLE `files`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `images`
 --
 ALTER TABLE `images`
@@ -12135,7 +12122,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT cho bảng `custommer`
@@ -12150,12 +12137,6 @@ ALTER TABLE `danh_muc_san_pham`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `files`
---
-ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT cho bảng `images`
 --
 ALTER TABLE `images`
@@ -12165,13 +12146,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `news`

@@ -10,3 +10,5 @@ $favicon = $db->oneRaw("SELECT * FROM images WHERE type = 'favicon'")['image'];
 <?php $favicon = $db->oneRaw("SELECT * FROM images WHERE type = 'favicon'")['image'] ?>
 <!-- icon -->
 <link rel="icon" href="assets/images/upload/<?= $favicon ?>" type="image/x-icon" />
+
+<script src="assets/jquery/jquery-3.3.1.min.js"></script>

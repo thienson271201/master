@@ -1,5 +1,20 @@
 <?php
-$user_profile = $db->oneRaw('SELECT * FROM khach_hang');
+// show thông tin khách hàng
+$khach_hang_id = getSession('khach_hang_id');
+$user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id = '$khach_hang_id'");
+echo '<pre>';
+print_r($user_profile);
+echo '</pre>';
+
+// cập nhật thông tin khách hàng
+if ($f->isPOST())
+{
+    $filterAll = $f->filter();
+    echo '<pre>';
+    print_r($filterAll);
+    echo '</pre>';
+
+}
 ?>
 <section class="with-bg solid-section">
     <div class="fix-image-wrap" data-image-src="./assets/images/service/tools.jpg" data-parallax="scroll"></div>
@@ -73,83 +88,85 @@ $user_profile = $db->oneRaw('SELECT * FROM khach_hang');
                 <div class="sm-col-12" data-inview-showup="showup-translate-right">
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input class="field-control" name="fullName" placeholder="Họ và tên" required="required" />
+                            <input class="field-control" name="fullName" placeholder="Họ và tên" required="required"
+                                value="<?= $user_profile['ten_khach_hang'] ?>" />
                             <span class="field-back"></span>
                         </div>
                     </div>
-                </div>
-                <!-- Email -->
-                <div class="sm-col-12" data-inview-showup="showup-translate-right">
                     <div class="field-group">
                         <div class="field-wrap">
                             <input class="field-control" name="email" type="email" placeholder="Email"
+                                required="required" value="<?= $user_profile['email'] ?>" />
+                            <span class="field-back"></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-wrap">
+                            <input class="field-control" name="phone" placeholder="Số điện thoại" required="required"
+                                value="<?= $user_profile['so_dien_thoai'] ?>" />
+                            <span class="field-back"></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-wrap">
+                            <input class="field-control" name="address" placeholder="Địa chỉ" required="required">
+                            <span class="field-back"></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-wrap">
+                            <select class="field-control" name="ward" required>
+                                <option value="">Chọn Phường / Xã</option>
+                                <?php
+                                $dsxa = $db->getRaw('SELECT * FROM xaphuongthitran');
+                                foreach ($dsxa as $xa):
+                                    ?>
+                                    <option value="<?= $xa['xaid'] ?>"><?= $xa['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <span class="field-back"></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-wrap">
+                            <select class="field-control" name="ward" required>
+                                <option value="">Chọn Quận / Huyện</option>
+                                <?php
+                                $dshuyen = $db->getRaw('SELECT * FROM quanhuyen');
+                                foreach ($dshuyen as $huyen):
+                                    ?>
+                                    <option value="<?= $huyen['maqh'] ?>"><?= $huyen['name'] ?></option>
+                                <?php endforeach; ?>
+                                <!-- thêm option khác tùy bạn -->
+                            </select>
+                            <span class="field-back"></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-wrap">
+                            <select class="field-control" name="ward" required>
+                                <option value="">Chọn Tỉnh / Thành phố</option>
+                                <?php
+                                $dstinh = $db->getRaw('SELECT * FROM tinhthanhpho');
+                                foreach ($dstinh as $tinh):
+                                    ?>
+                                    <option value="<?= $tinh['matp'] ?>"><?= $tinh['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <span class="field-back"></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-wrap">
+                            <input class="field-control" name="password" type="password" placeholder="Mật khẩu"
                                 required="required" />
                             <span class="field-back"></span>
                         </div>
                     </div>
-                </div>
-                <!-- Số điện thoại -->
-                <div class="sm-col-12" data-inview-showup="showup-translate-left">
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <input class="field-control" name="phone" placeholder="Số điện thoại" required="required" />
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row cols-lg rows-md">
-                <div class="sm-col-6" data-inview-showup="showup-translate-right">
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <input class="field-control" name="company" placeholder="Company" />
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <textarea class="field-control" name="address" placeholder="Address"
-                                required="required"></textarea>
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="sm-col-6" data-inview-showup="showup-translate-left">
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <input class="field-control" name="town" placeholder="Town / City" required="required" />
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <input class="field-control" name="zip" placeholder="Postcode / ZIP" required="required" />
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <input class="field-control" name="country" placeholder="Country" required="required" />
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row cols-lg rows-md">
-                <div class="sm-col-6" data-inview-showup="showup-translate-right">
-                    <div class="field-group">
-                        <div class="field-wrap">
-                            <input class="field-control" name="password" type="password" placeholder="Password"
-                                required="required" />
-                            <span class="field-back"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="sm-col-6" data-inview-showup="showup-translate-left">
                     <div class="field-group">
                         <div class="field-wrap">
                             <input class="field-control" name="confirmPassword" type="password"
-                                placeholder="Confirm Password" required="required" />
+                                placeholder="Nhập lại mật khẩu" required="required" />
                             <span class="field-back"></span>
                         </div>
                     </div>

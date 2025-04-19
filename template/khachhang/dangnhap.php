@@ -94,8 +94,8 @@ if ($f->isPOST())
                 </div>
                 <div class="field-group">
                   <div class="field-wrap">
-                    <input class="field-control" name="mat_khau" type="password" placeholder="Mật khẩu"
-                      required="required" />
+                    <input id="mat_khau_input" class="field-control" name="mat_khau" type="password"
+                      placeholder="Mật khẩu" required="required" />
                     <span class="field-back"></span>
                   </div>
                 </div>
@@ -104,9 +104,9 @@ if ($f->isPOST())
                 <div class="col-6">
                   <div class="field-group">
                     <div class="checkbox">
-                      <label><input class="field-control" name="keepLogged" type="checkbox" />
+                      <label><input id="hien-mat-khau" class="field-control" name="keepLogged" type="checkbox" />
                         <span class="check-icon"><span class="check-block"><span class="check-pin"></span>
-                          </span></span><span class="label">Giữ tôi luôn đăng nhập</span></label>
+                          </span></span><span class="label">Hiện mật khẩu</span></label>
                     </div>
                   </div>
                 </div>
@@ -145,3 +145,13 @@ if ($f->isPOST())
     </form>
   </div>
 </section>
+
+<script>
+  $(document).ready(function () {
+    $('#hien-mat-khau').on('change', function () {
+      const matKhauInput = $('#mat_khau_input');
+      const type = $(this).is(':checked') ? 'text' : 'password';
+      matKhauInput.attr('type', type);
+    });
+  });
+</script>
