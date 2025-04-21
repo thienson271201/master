@@ -28,7 +28,7 @@ if ($f->isPOST())
       {
         setSession('userLoginToken', $tokenLogin);
         setSession('khach_hang_id', $khach_hang_id);
-        $f->redirect('thanh-vien?page=thong_tin_ca_nhan');
+        $f->redirect('thanh-vien');
       }
     }
   } else
