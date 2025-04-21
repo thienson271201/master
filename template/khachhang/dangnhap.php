@@ -39,6 +39,39 @@ if ($f->isPOST())
 
 }
 ?>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    .field-group {
+      margin: 20px;
+    }
+
+    .field-wrap {
+      position: relative;
+      width: 300px;
+    }
+
+    .field-control {
+      width: 100%;
+      padding: 10px 40px 10px 10px; /* chừa chỗ bên phải cho icon */
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+      font-size: 18px;
+    }
+
+    .field-back {
+      display: none; /* không cần dùng trong ví dụ này */
+    }
+  </style>
 <section class="with-bg solid-section">
   <div class="fix-image-wrap" data-image-src="./assets/images/service/harddrive.jpg" data-parallax="scroll"></div>
   <div class="theme-back"></div>
@@ -94,14 +127,16 @@ if ($f->isPOST())
                 </div>
                 <div class="field-group">
                   <div class="field-wrap">
-                    <input id="mat_khau_input" class="field-control" name="mat_khau" type="password"
+                    <input id="password" class="field-control" name="mat_khau" type="password"
                       placeholder="Mật khẩu" required="required" />
                     <span class="field-back"></span>
                   </div>
+                  <!-- Icon mắt -->
+            <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword"></i>
                 </div>
               </div>
               <div class="row cols-md offs-md">
-                <div class="col-6">
+                <!-- <div class="col-6">
                   <div class="field-group">
                     <div class="checkbox">
                       <label><input id="hien-mat-khau" class="field-control" name="keepLogged" type="checkbox" />
@@ -109,8 +144,8 @@ if ($f->isPOST())
                           </span></span><span class="label">Hiện mật khẩu</span></label>
                     </div>
                   </div>
-                </div>
-                <div class="col-6 text-right shift-xs">
+                </div> -->
+                <div class="col-12 text-right shift-xs">
                   <a href="forgot-password.html">Quên mật khẩu?</a>
                 </div>
               </div>
@@ -147,11 +182,17 @@ if ($f->isPOST())
 </section>
 
 <script>
-  $(document).ready(function () {
-    $('#hien-mat-khau').on('change', function () {
-      const matKhauInput = $('#mat_khau_input');
-      const type = $(this).is(':checked') ? 'text' : 'password';
-      matKhauInput.attr('type', type);
+    document.addEventListener('DOMContentLoaded', function () {
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('togglePassword');
+
+      toggleIcon.addEventListener('click', function () {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+
+        // Đổi icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+      });
     });
-  });
-</script>
+  </script>

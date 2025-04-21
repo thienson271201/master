@@ -26,6 +26,38 @@ if ($f->isPOST())
   }
 }
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    .field-group {
+      margin: 20px;
+    }
+
+    .field-wrap {
+      position: relative;
+      width: 300px;
+    }
+
+    .field-control {
+      width: 100%;
+      padding: 10px 40px 10px 10px; /* chừa chỗ bên phải cho icon */
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+      font-size: 18px;
+    }
+
+    .field-back {
+      display: none; /* không cần dùng trong ví dụ này */
+    }
+  </style>
 
 <section class="with-bg solid-section">
   <div class="fix-image-wrap" data-image-src="./assets/images/service/harddrive.jpg" data-parallax="scroll"></div>
@@ -86,18 +118,25 @@ if ($f->isPOST())
         <div class="sm-col-12" data-inview-showup="showup-translate-right">
           <div class="field-group">
             <div class="field-wrap">
-              <input class="field-control" name="mat_khau" type="password" placeholder="Mật khẩu" required="required" />
+              <input class="field-control" name="mat_khau" id="password1" type="password" placeholder="Mật khẩu" required="required" />
               <span class="field-back"></span>
+              
             </div>
+            <!-- Icon mắt -->
+            <i class="fa-regular fa-eye-slash toggle-password"
+            id="togglePassword1"></i>
+
           </div>
         </div>
         <div class="sm-col-12" data-inview-showup="showup-translate-left">
           <div class="field-group">
             <div class="field-wrap">
-              <input class="field-control" name="nhap_lai_mat_khau" type="password" placeholder="Nhập lại mật khẩu"
+              <input class="field-control" name="nhap_lai_mat_khau" id="password2" type="password" placeholder="Nhập lại mật khẩu"
                 required="required" />
               <span class="field-back"></span>
             </div>
+            <!-- Icon mắt -->
+            <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword2"></i>
           </div>
         </div>
       </div>
@@ -110,3 +149,24 @@ if ($f->isPOST())
     </form>
   </div>
 </section>
+
+<script>
+  function setupToggle(iconId, inputId) {
+    const icon = document.getElementById(iconId);
+    const input = document.getElementById(inputId);
+
+    icon.addEventListener('click', function () {
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+  }
+
+  // Gắn cho từng cặp input + icon
+  document.addEventListener('DOMContentLoaded', function () {
+    setupToggle('togglePassword1', 'password1');
+    setupToggle('togglePassword2', 'password2');
+  });
+</script>
