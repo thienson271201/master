@@ -7,15 +7,12 @@ $maqh = $user_profile['quan_huyen'];
 $tenhuyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
 $xaid = $user_profile['xa_phuong'];
 $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
-echo '<pre>';
-print_r($user_profile);
-echo '</pre>';
 ?>
 <section class="shift-lg offs-lg">
   <div class="container">
     <div class="user-dashboard-personal-info">
       <div class="rows-md cols-md row">
-        <div class="md-col-7">
+        <div class="md-col-5">
           <div class="user-dashboard-user">
             <div class="user-dashboard-user-image">
               <div class="responsive-1by1">
@@ -30,7 +27,7 @@ echo '</pre>';
             </div>
           </div>
         </div>
-        <div class="md-col-5">
+        <div class="md-col-7">
           <div class="cols-md row">
             <div class="sm-col-6">
               <div class="user-dashboard-info-line">

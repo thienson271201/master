@@ -4,13 +4,13 @@ if ($func->isPOST())
 {
     $filterAll = $func->filter();
     $data_insert = [
-        'ma_san_pham'=>$filterAll['maSP'],
+        'ma_san_pham' => $filterAll['maSP'],
         'duong_dan' => $filterAll['slug'],
         'ten_san_pham' => $filterAll['title'],
         'gia_goc' => $filterAll['price'],
         'gia_sau_khuyen_mai' => $filterAll['discount'],
         'mo_ta' => $_POST['description'],
-        'mo_ta_dai'=>$_POST['mo_ta_dai'],
+        'mo_ta_dai' => $_POST['mo_ta_dai'],
         'thong_so_kich_thuoc' => $_POST['content'],
         'ngay_tao' => date('Y-m-d H:i:s')
     ];
@@ -31,7 +31,7 @@ if ($func->isPOST())
     // print_r($data_insert);
     // echo '</pre>';
     // exit;
-    
+
     $db->insert('san_pham', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=san_pham&act=danh_sach');
@@ -90,8 +90,7 @@ $smg = getFlashData('smg');
                                 <div class="row">
                                     <div class="mb-3 col-12">
                                         <label for="maSP" class="form-label fw-bold">Mã sản phẩm:</label>
-                                        <input id="maSP" type="text" name="maSP" class="form-control"
-                                           required>
+                                        <input id="maSP" type="text" name="maSP" class="form-control" required>
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label id="slugLabel" for="company_name" class="form-label fw-bold">Đường dẫn
@@ -123,7 +122,8 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-12">
-                                        <label id="slugLabel" for="company_name" class="form-label fw-bold">Giới thiệu sản phẩm:</label>
+                                        <label id="slugLabel" for="company_name" class="form-label fw-bold">Giới thiệu
+                                            sản phẩm:</label>
                                         <textarea name="description" style="min-height: 120px;"
                                             class="form-control"></textarea>
                                     </div>
@@ -133,7 +133,8 @@ $smg = getFlashData('smg');
                                             class="form-control"></textarea>
                                     </div>
                                     <div class="mb-3 col-12">
-                                        <label for="company_name" class="form-label fw-bold">Thông số kích thước (trang chủ):</label>
+                                        <label for="company_name" class="form-label fw-bold">Thông số kích thước (trang
+                                            chủ):</label>
                                         <textarea name="content" id="editor2" style="min-height: 120px;"
                                             class="form-control"></textarea>
                                     </div>
@@ -159,14 +160,15 @@ $smg = getFlashData('smg');
                                         <option value="<?= $brand['id'] ?>"><?= $brand['ten_thuong_hieu'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <label for=""class="form-label fw-bold"> Danh Mục</label>
+                                <label for="" class="form-label fw-bold"> Danh Mục</label>
                                 <select name="danh_muc_san_pham_id" class="form-select">
                                     <option value>Chọn Danh Mục</option>
-                                    <?php 
-                                    $product_type_list=$db->getRaw("SELECT * FROM danh_muc_san_pham");
-                                    foreach($product_type_list as $product_type): 
-                                    ?>
-                                    <option value="<?=$product_type['id'] ?>"><?=$product_type['ten_danh_muc'] ?></option>
+                                    <?php
+                                    $product_type_list = $db->getRaw("SELECT * FROM danh_muc_san_pham");
+                                    foreach ($product_type_list as $product_type):
+                                        ?>
+                                        <option value="<?= $product_type['id'] ?>"><?= $product_type['ten_danh_muc'] ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -187,34 +189,11 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                     <div class="col-12">
-                        <!-- <div class="card card-primary card-outline mb-4">
-                            <div class="card-header">
-                                <div class="card-title">Thiết lập SEO</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-12">
-                                        <label for="seo_title" class="form-label fw-bold">SEO Title:</label>
-                                        <input type="text" name="seo_title" class="form-control">
-                                    </div>
-                                    <div class="mb-3 col-12">
-                                        <label for="seo_keywords" class="form-label fw-bold">SEO Keywords:</label>
-                                        <input type="text" name="seo_keywords" class="form-control">
-                                    </div>
-                                    <div class="mb-3 col-12">
-                                        <label for="seo_description" class="form-label fw-bold">SEO Description:</label>
-                                        <textarea type="text" name="seo_description" class="form-control"
-                                            style="height: 120px;"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <button type="submit" class="btn btn-primary">
                             Lưu
                         </button>
                     </div>
                     <!--begin::Footer-->
-
                 </div>
             </form>
             <!--end::Form-->

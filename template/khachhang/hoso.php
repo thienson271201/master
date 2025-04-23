@@ -3,9 +3,7 @@
 if ($f->isPOST())
 {
     $filterAll = $f->filter();
-    echo '<pre>';
-    print_r($filterAll);
-    echo '</pre>';
+
     $data_update = [
         'ten_khach_hang' => $filterAll['ten_khach_hang'],
         'email' => $filterAll['email'],
@@ -14,24 +12,28 @@ if ($f->isPOST())
         'quan_huyen' => $filterAll['quan_huyen'],
         'xa_phuong' => $filterAll['xa_phuong'],
         'dia_chi' => $filterAll['dia_chi'],
-        'mat_khau' => password_hash($filterAll['mat_khau'], PASSWORD_DEFAULT)
+        'ngay_cap_nhat' => date('Y-m-d H:i:s')
     ];
+    if (!empty($filterAll['mat_khau']))
+    {
+        $data_update['mat_khau'] = password_hash($filterAll['mat_khau'], PASSWORD_DEFAULT);
+    }
+    $anhdaidien = $f->upload('anh_dai_dien', 'images');
+    if ($anhdaidien != 'noimage.jpg')
+    {
+        $data_update['anh_dai_dien'] = $anhdaidien;
+    }
     $id = getSession('khach_hang_id');
     $update_status = $db->update('khach_hang', $data_update, "id=$id");
 }
 // show thông tin khách hàng
 $khach_hang_id = getSession('khach_hang_id');
 $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id = '$khach_hang_id'");
-echo '<pre>';
-print_r($user_profile);
-echo '</pre>';
-
-
 ?>
 
 <section class="shift-lg content-section">
     <div class="container">
-        <form onsubmit="return checkPasswords()" class="user-profile" method="POST">
+        <form onsubmit="return checkPasswords()" class="user-profile" method="POST" enctype="multipart/form-data">
             <h4 class="text-upper" data-inview-showup="showup-translate-right">
                 Thông tin cá nhân
             </h4>
@@ -41,7 +43,7 @@ echo '</pre>';
                     <div class="field-group field-type-image">
                         <label>Tải ảnh đại diện - JPEG 70x70</label>
                         <div class="field-wrap">
-                            <input class="field-file-control" name="avatar" type="file" />
+                            <input class="field-file-control" name="anh_dai_dien" type="file" accept="image/*" />
                             <input class="field-control" name="avatarPlaceholder"
                                 placeholder="Không có ảnh nào được tải lên" />
                             <span class="field-addon-btn"><a class="field-file-btn text-upper btn" href="#">Tải ảnh
@@ -49,7 +51,7 @@ echo '</pre>';
                             <span class="field-back"></span>
                             <div class="file-preview">
                                 <div class="file-preview-image">
-                                    <img src="" alt="" />
+                                    <img src="upload/images/<?= $user_profile['anh_dai_dien'] ?>" alt="" />
                                 </div>
                                 <div class="file-no-preview">
                                     <i class="fas fa-user"></i>
@@ -144,17 +146,21 @@ echo '</pre>';
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input id="password" class="field-control" name="mat_khau" type="password"
-                                placeholder="Mật khẩu" />
+                            <input class="field-control" name="mat_khau" type="password" placeholder="Mật khẩu"
+                                id="password1" />
                             <span class="field-back"></span>
                         </div>
+                        <!-- Icon mắt -->
+                        <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword1"></i>
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input id="confirmPassword" class="field-control" name="nhap_lai_mat_khau" type="password"
-                                placeholder="Nhập lại mật khẩu" />
+                            <input class="field-control" name="nhap_lai_mat_khau" type="password"
+                                placeholder="Nhập lại mật khẩu" id="password2" />
                             <span class="field-back"></span>
                         </div>
+                        <!-- Icon mắt -->
+                        <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword2"></i>
                     </div>
                 </div>
             </div>
@@ -173,10 +179,30 @@ echo '</pre>';
     function checkPasswords() {
         const password = document.getElementById('password').value;
         const confirm = document.getElementById('confirmPassword').value;
-
+        // Nếu cả 2 ô đều trống thì không kiểm tra
+        if (password === '' && confirm === '') {
+            return true;
+        }
         if (password !== confirm) {
             alert('Mật khẩu không khớp!');
             return false; // ngăn form submit
+        }
+        // Kiểm tra độ dài tối thiểu
+        if (password.length < 8) {
+            alert('Mật khẩu phải có ít nhất 8 ký tự!');
+            return false;
+        }
+
+        // Kiểm tra có ít nhất 1 chữ cái viết hoa
+        if (!/[A-Z]/.test(password)) {
+            alert('Mật khẩu phải có ít nhất 1 chữ cái viết hoa!');
+            return false;
+        }
+
+        // Kiểm tra có ít nhất 1 chữ số
+        if (!/[0-9]/.test(password)) {
+            alert('Mật khẩu phải có ít nhất 1 chữ số!');
+            return false;
         }
         return true; // cho phép submit
     }
@@ -222,5 +248,25 @@ echo '</pre>';
                 alert('Có lỗi khi tải danh sách xã/phường');
             }
         });
+    });
+</script>
+<script>
+    function setupToggle(iconId, inputId) {
+        const icon = document.getElementById(iconId);
+        const input = document.getElementById(inputId);
+
+        icon.addEventListener('click', function () {
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // Gắn cho từng cặp input + icon
+    document.addEventListener('DOMContentLoaded', function () {
+        setupToggle('togglePassword1', 'password1');
+        setupToggle('togglePassword2', 'password2');
     });
 </script>

@@ -89,11 +89,9 @@ if ($f->isPOST())
               <input class="field-control" name="mat_khau" id="password1" type="password" placeholder="Mật khẩu"
                 required="required" />
               <span class="field-back"></span>
-
             </div>
             <!-- Icon mắt -->
             <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword1"></i>
-
           </div>
         </div>
         <div class="sm-col-8" data-inview-showup="showup-translate-left">
