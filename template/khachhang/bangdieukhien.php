@@ -1,12 +1,15 @@
 <?php
 $khach_hang_id = getSession('khach_hang_id');
 $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id = '$khach_hang_id'");
-$matp = $user_profile['tinh_thanhpho'];
-$tentinh = $db->oneRaw("SELECT * FROM tinhthanhpho WHERE matp = $matp")['name'];
-$maqh = $user_profile['quan_huyen'];
-$tenhuyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
-$xaid = $user_profile['xa_phuong'];
-$tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
+if (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']) && !empty($user_profile['xa_phuong']) && !empty($user_profile['dia_chi']))
+{
+  $matp = $user_profile['tinh_thanhpho'];
+  $tentinh = $db->oneRaw("SELECT * FROM tinhthanhpho WHERE matp = $matp")['name'];
+  $maqh = $user_profile['quan_huyen'];
+  $tenhuyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
+  $xaid = $user_profile['xa_phuong'];
+  $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
+}
 ?>
 <section class="shift-lg offs-lg">
   <div class="container">
@@ -16,7 +19,8 @@ $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name']
           <div class="user-dashboard-user">
             <div class="user-dashboard-user-image">
               <div class="responsive-1by1">
-                <img src="assets/images/outsource/user-small.jpg" alt="" />
+                <img src="upload/images/<?= $user_profile['anh_dai_dien'] ?>" alt=""
+                  onerror="this.src='assets/images/noimage/user.png'" />
               </div>
             </div>
             <div class="user-dashboard-user-content">
@@ -52,7 +56,7 @@ $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name']
                   <i class="fas fa-map-marker-alt fa-fw"></i>
                 </div>
                 <div class="user-order-info-value">
-                  <?= $user_profile['dia_chi'] . ', ' . $tenxa . ', ' . $tenhuyen . ', ' . $tentinh ?>
+                  <?= (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']) && !empty($user_profile['xa_phuong']) && !empty($user_profile['dia_chi'])) ? $user_profile['dia_chi'] . ', ' . $tenxa . ', ' . $tenhuyen . ', ' . $tentinh : 'Chưa cập nhật địa chỉ' ?>
                 </div>
               </div>
             </div>

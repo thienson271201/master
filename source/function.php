@@ -66,7 +66,7 @@ class func
             // Cố gắng thay đổi quyền thư mục thành writable (0775)
             if (!chmod($target_dir, 0775))
             {
-                $this->getSmg('Không thể thay đổi quyền thư mục. Vui lòng kiểm tra lại.', 'danger');
+                // $this->getSmg('Không thể thay đổi quyền thư mục. Vui lòng kiểm tra lại.', 'danger');
                 return "noimage.jpg";
             }
         }
@@ -79,7 +79,7 @@ class func
         // Kiểm tra nếu không có file được chọn
         if (!isset($_FILES[$filenameupload]) || $_FILES[$filenameupload]['error'] == UPLOAD_ERR_NO_FILE)
         {
-            $this->getSmg('Không có file nào được chọn.', 'danger');
+            // $this->getSmg('Không có file nào được chọn.', 'danger');
             return "noimage.jpg";
         }
 
@@ -87,28 +87,28 @@ class func
         $checkImage = getimagesize($_FILES[$filenameupload]["tmp_name"]);
         if ($checkImage === false)
         {
-            $this->getSmg('File upload không phải là hình ảnh!', 'danger');
+            // $this->getSmg('File upload không phải là hình ảnh!', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra định dạng file
         if (!in_array($imageFileType, $allow_file_upload))
         {
-            $this->getSmg('Định dạng file không hợp lệ! Chỉ chấp nhận JPG, JPEG, PNG, GIF, JFIF.', 'danger');
+            // $this->getSmg('Định dạng file không hợp lệ! Chỉ chấp nhận JPG, JPEG, PNG, GIF, JFIF.', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra kích thước file (ví dụ: giới hạn 5MB)
         if ($_FILES[$filenameupload]["size"] > 5000000)
         {
-            $this->getSmg('File upload quá lớn! Giới hạn 5MB.', 'danger');
+            // $this->getSmg('File upload quá lớn! Giới hạn 5MB.', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra nếu file đã tồn tại (tránh ghi đè file)
         if (file_exists($target_dir . $new_filename))
         {
-            $this->getSmg('File đã tồn tại.', 'danger');
+            // $this->getSmg('File đã tồn tại.', 'danger');
             return "noimage.jpg";
         }
 

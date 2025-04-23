@@ -10,7 +10,6 @@ if ($f->isPOST())
   if ($khach_hang_query)
   {
     // Trường hợp có email
-    echo 'Email có tồn tại';
     $passwordHash = $khach_hang_query['mat_khau'];
     $khach_hang_id = $khach_hang_query['id'];
     if (password_verify($mat_khau, $passwordHash))
