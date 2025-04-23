@@ -1,6 +1,7 @@
 <?php
 // cập nhật thông tin khách hàng
-if ($f->isPOST()) {
+if ($f->isPOST())
+{
     $filterAll = $f->filter();
     echo '<pre>';
     print_r($filterAll);
@@ -62,8 +63,8 @@ echo '</pre>';
                 <div class="sm-col-12" data-inview-showup="showup-translate-right">
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input class="field-control" name="ten_khach_hang" placeholder="Họ và tên" required="required"
-                                value="<?= $user_profile['ten_khach_hang'] ?>" />
+                            <input class="field-control" name="ten_khach_hang" placeholder="Họ và tên"
+                                required="required" value="<?= $user_profile['ten_khach_hang'] ?>" />
                             <span class="field-back"></span>
                         </div>
                     </div>
@@ -76,8 +77,8 @@ echo '</pre>';
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input class="field-control" name="so_dien_thoai" placeholder="Số điện thoại" required="required"
-                                value="<?= $user_profile['so_dien_thoai'] ?>" />
+                            <input class="field-control" name="so_dien_thoai" placeholder="Số điện thoại"
+                                required="required" value="<?= $user_profile['so_dien_thoai'] ?>" />
                             <span class="field-back"></span>
                         </div>
                     </div>
@@ -88,8 +89,9 @@ echo '</pre>';
                                 <?php
                                 $dstinh = $db->getRaw('SELECT * FROM tinhthanhpho');
                                 foreach ($dstinh as $tinh):
-                                ?>
-                                    <option <?= $tinh['matp'] == $user_profile['tinh_thanhpho'] ? 'selected' : '' ?> value="<?= $tinh['matp'] ?>"><?= $tinh['name'] ?></option>
+                                    ?>
+                                    <option <?= $tinh['matp'] == $user_profile['tinh_thanhpho'] ? 'selected' : '' ?>
+                                        value="<?= $tinh['matp'] ?>"><?= $tinh['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <span class="field-back"></span>
@@ -101,12 +103,15 @@ echo '</pre>';
                             <select class="field-control" name="quan_huyen" id="quan_huyen" required>
                                 <option value="">Chọn Quận / Huyện</option>
                                 <?php
-                                $tinh = $user_profile['tinh_thanhpho'];
-                                $dshuyen = $db->getRaw("SELECT * FROM quanhuyen where matp=$tinh");
-                                foreach ($dshuyen as $huyen):
-                                ?>
-                                    <option <?= $huyen['maqh'] == $user_profile['quan_huyen'] ? 'selected' : '' ?> value="<?= $huyen['maqh'] ?>"><?= $huyen['name'] ?></option>
-                                <?php endforeach; ?>
+                                if (!empty($user_profile['tinh_thanhpho'])):
+                                    $tinh = $user_profile['tinh_thanhpho'];
+                                    $dshuyen = $db->getRaw("SELECT * FROM quanhuyen where matp=$tinh");
+                                    foreach ($dshuyen as $huyen):
+                                        ?>
+                                        <option <?= $huyen['maqh'] == $user_profile['quan_huyen'] ? 'selected' : '' ?>
+                                            value="<?= $huyen['maqh'] ?>"><?= $huyen['name'] ?></option>
+                                    <?php endforeach;
+                                endif; ?>
                                 <!-- thêm option khác tùy bạn -->
                             </select>
                             <span class="field-back"></span>
@@ -117,25 +122,30 @@ echo '</pre>';
                             <select class="field-control" name="xa_phuong" id="xa_phuong" required>
                                 <option value="">Chọn Phường / Xã</option>
                                 <?php
-                                $huyen = $user_profile['quan_huyen'];
-                                $dsxa = $db->getRaw("SELECT * FROM xaphuongthitran where maqh=$huyen");
-                                foreach ($dsxa as $xa):
-                                ?>
-                                    <option <?= $xa['xaid'] == $user_profile['xa_phuong'] ? 'selected' : '' ?> value="<?= $xa['xaid'] ?>"><?= $xa['name'] ?></option>
-                                <?php endforeach; ?>
+                                if (!empty($user_profile['quan_huyen'])):
+                                    $huyen = $user_profile['quan_huyen'];
+                                    $dsxa = $db->getRaw("SELECT * FROM xaphuongthitran where maqh=$huyen");
+                                    foreach ($dsxa as $xa):
+                                        ?>
+                                        <option <?= $xa['xaid'] == $user_profile['xa_phuong'] ? 'selected' : '' ?>
+                                            value="<?= $xa['xaid'] ?>"><?= $xa['name'] ?></option>
+                                    <?php endforeach;
+                                endif; ?>
                             </select>
                             <span class="field-back"></span>
                         </div>
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input class="field-control" name="dia_chi" placeholder="Địa chỉ" value="<?= $user_profile['dia_chi'] ?>" required="required">
+                            <input class="field-control" name="dia_chi" placeholder="Địa chỉ"
+                                value="<?= $user_profile['dia_chi'] ?>" required="required">
                             <span class="field-back"></span>
                         </div>
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input id="password" class="field-control" name="mat_khau" type="password" placeholder="Mật khẩu" />
+                            <input id="password" class="field-control" name="mat_khau" type="password"
+                                placeholder="Mật khẩu" />
                             <span class="field-back"></span>
                         </div>
                     </div>
@@ -172,8 +182,8 @@ echo '</pre>';
     }
 </script>
 <script>
-    $(document).ready(function() {
-        $('#tinh_thanhpho').on('change', function() {
+    $(document).ready(function () {
+        $('#tinh_thanhpho').on('change', function () {
             var matp = $(this).val();
             // Reset quận và xã trước khi load lại
             $('#quan_huyen').html('<option value="">Chọn Quận / Huyện</option>');
@@ -185,16 +195,16 @@ echo '</pre>';
                     key: 'quanhuyen',
                     matp: matp
                 },
-                success: function(data) {
+                success: function (data) {
                     $('#quan_huyen').html(data);
                 },
-                error: function() {
+                error: function () {
                     alert('Có lỗi khi tải danh sách quận/huyện');
                 }
             });
         });
     });
-    $('#quan_huyen').on('change', function() {
+    $('#quan_huyen').on('change', function () {
         var maqh = $(this).val();
         // Reset xã trước khi load lại
         $('#xa_phuong').html('<option value="">Chọn Phường / Xã</option>');
@@ -205,10 +215,10 @@ echo '</pre>';
                 key: 'xaphuong',
                 maqh: maqh
             },
-            success: function(data) {
+            success: function (data) {
                 $('#xa_phuong').html(data);
             },
-            error: function() {
+            error: function () {
                 alert('Có lỗi khi tải danh sách xã/phường');
             }
         });

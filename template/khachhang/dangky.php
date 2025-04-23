@@ -26,39 +26,6 @@ if ($f->isPOST())
   }
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-    .field-group {
-      margin: 20px;
-    }
-
-    .field-wrap {
-      position: relative;
-      width: 300px;
-    }
-
-    .field-control {
-      width: 100%;
-      padding: 10px 40px 10px 10px; /* chừa chỗ bên phải cho icon */
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #888;
-      font-size: 18px;
-    }
-
-    .field-back {
-      display: none; /* không cần dùng trong ví dụ này */
-    }
-  </style>
-
 <section class="with-bg solid-section">
   <div class="fix-image-wrap" data-image-src="./assets/images/service/harddrive.jpg" data-parallax="scroll"></div>
   <div class="theme-back"></div>
@@ -88,9 +55,10 @@ if ($f->isPOST())
         data-inview-showup="showup-translate-right">
         Đăng ký
       </h2>
-      <div class="row cols-lg rows-md" style="display: flex; flex-direction: column; align-items: center">
-
-        <div class="sm-col-12" data-inview-showup="showup-translate-left">
+      <div class="row cols-lg rows-md d-flex" style="display: flex;
+      flex-direction: column;
+      align-items: center;">
+        <div class="sm-col-8" data-inview-showup="showup-translate-left">
           <div class="field-group">
             <div class="field-wrap">
               <input class="field-control width:100%" name="ten_khach_hang" placeholder="Họ và tên"
@@ -99,7 +67,7 @@ if ($f->isPOST())
             </div>
           </div>
         </div>
-        <div class="sm-col-12" data-inview-showup="showup-translate-right">
+        <div class="sm-col-8" data-inview-showup="showup-translate-right">
           <div class="field-group">
             <div class="field-wrap">
               <input class="field-control" name="email" type="email" placeholder="Email" required="required" />
@@ -107,7 +75,7 @@ if ($f->isPOST())
             </div>
           </div>
         </div>
-        <div class="sm-col-12" data-inview-showup="showup-translate-left">
+        <div class="sm-col-8" data-inview-showup="showup-translate-left">
           <div class="field-group">
             <div class="field-wrap">
               <input class="field-control" name="so_dien_thoai" placeholder="Số điện thoại" required="required" />
@@ -115,24 +83,24 @@ if ($f->isPOST())
             </div>
           </div>
         </div>
-        <div class="sm-col-12" data-inview-showup="showup-translate-right">
+        <div class="sm-col-8" data-inview-showup="showup-translate-right">
           <div class="field-group">
             <div class="field-wrap">
-              <input class="field-control" name="mat_khau" id="password1" type="password" placeholder="Mật khẩu" required="required" />
+              <input class="field-control" name="mat_khau" id="password1" type="password" placeholder="Mật khẩu"
+                required="required" />
               <span class="field-back"></span>
-              
+
             </div>
             <!-- Icon mắt -->
-            <i class="fa-regular fa-eye-slash toggle-password"
-            id="togglePassword1"></i>
+            <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword1"></i>
 
           </div>
         </div>
-        <div class="sm-col-12" data-inview-showup="showup-translate-left">
+        <div class="sm-col-8" data-inview-showup="showup-translate-left">
           <div class="field-group">
             <div class="field-wrap">
-              <input class="field-control" name="nhap_lai_mat_khau" id="password2" type="password" placeholder="Nhập lại mật khẩu"
-                required="required" />
+              <input class="field-control" name="nhap_lai_mat_khau" id="password2" type="password"
+                placeholder="Nhập lại mật khẩu" required="required" />
               <span class="field-back"></span>
             </div>
             <!-- Icon mắt -->
@@ -140,11 +108,16 @@ if ($f->isPOST())
           </div>
         </div>
       </div>
-      <div class="shift-lg offs-lg" style="display: flex; justify-content: center"
-        data-inview-showup="showup-translate-right">
-        <button class="btn md-col-2 text-upper" type="submit">
-          ĐĂNG KÝ
-        </button>
+
+      <div class="row cols-lg rows-md text-right" style="display: flex;
+      flex-direction: column;
+      align-items: center;">
+        <div class="sm-col-8 shift-lg offs-lg" data-inview-showup="showup-translate-right">
+          <a class="text-medium mr-3" href="dang-nhap"><i class="fas fa-edit"></i>&nbsp;&nbsp;Đăng nhập</a>
+          <button class="btn text-upper" type="submit">
+            ĐĂNG KÝ
+          </button>
+        </div>
       </div>
     </form>
   </div>

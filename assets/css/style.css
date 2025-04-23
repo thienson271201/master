@@ -1,0 +1,10 @@
+#togglePassword,
+#togglePassword2,
+#togglePassword1 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  z-index: 9999;
+  cursor: pointer;
+}
