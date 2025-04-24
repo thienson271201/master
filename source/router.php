@@ -8,7 +8,8 @@ $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $base_path = '/' . URL;
 
 // Loại bỏ base path khỏi URL
-if (strpos($url, $base_path) === 0) {
+if (strpos($url, $base_path) === 0)
+{
     $url = substr($url, strlen($base_path));
 }
 
@@ -20,7 +21,8 @@ $url = ltrim($url, '/');
 ob_start();
 
 $get_status = false;
-if (isset($_GET['timkiem'])) {
+if (isset($_GET['timkiem']))
+{
     $get_status = true;
     $search_keyword = $_GET['timkiem'];
     $list_result = $db->getRaw("SELECT * FROM products WHERE title LIKE '%$search_keyword%'");
@@ -29,15 +31,18 @@ if (isset($_GET['timkiem'])) {
     require_once TEMPLATE . 'product/product_list_tpl.php';
     $noidung = ob_get_clean();
 }
-if (isset($_GET['order_status'])) {
+if (isset($_GET['order_status']))
+{
     $get_status = true;
     $title = "Đặt hàng thành công";
     require_once TEMPLATE . 'thanhtoan/status.php';
     $noidung = ob_get_clean();
 }
-if (!$get_status) {
+if (!$get_status)
+{
 
-    switch ($url) {
+    switch ($url)
+    {
         // Trang chủ
         case '':
             require_once TEMPLATE . 'index/index_tpl.php';
@@ -57,54 +62,63 @@ if (!$get_status) {
             break;
         // Đăng nhập
         case 'dang-nhap':
-            if ($f->isLogin()) {
+            if ($f->isLogin())
+            {
                 $f->redirect('thanh-vien?page=thong_tin_khach_hang');
-            } else {
+            } else
+            {
                 $title = 'Đăng Nhập';
                 require_once TEMPLATE . 'khachhang/dangnhap.php';
                 $noidung = ob_get_clean();
                 break;
             }
-            // Thông tin khách hàng
+        // Thông tin khách hàng
         case 'thanh-vien':
-            if(!empty($_GET['page'])){
-                $duongdan=$_GET['page'];
-            }
-            else{
-                $duongdan='bang-dieu-khien';
+            if (!empty($_GET['page']))
+            {
+                $duongdan = $_GET['page'];
+            } else
+            {
+                $duongdan = 'bang-dieu-khien';
             }
             // Xử lý đăng xuất
-            if ($duongdan == 'dang_xuat') {
+            if ($duongdan == 'dang_xuat')
+            {
                 removeSession('userLoginToken');
             }
-            if ($f->isLogin()) {
+            if ($f->isLogin())
+            {
                 require_once TEMPLATE . 'khachhang/layout/top.php';
-                
-                if ($duongdan == 'bang-dieu-khien') {
+
+                if ($duongdan == 'bang-dieu-khien')
+                {
                     $title = 'Bảng điều khiển';
                     require_once TEMPLATE . 'khachhang/bangdieukhien.php';
                     $noidung = ob_get_clean();
                     break;
                 }
-                if ($duongdan == 'ho-so') {
+                if ($duongdan == 'ho-so')
+                {
                     $title = 'Hồ sơ';
                     require_once TEMPLATE . 'khachhang/hoso.php';
                     $noidung = ob_get_clean();
                     break;
                 }
-                if ($duongdan == 'don-hang') {
+                if ($duongdan == 'don-hang')
+                {
                     $title = 'Đơn hàng';
                     require_once TEMPLATE . 'khachhang/donhang.php';
                     $noidung = ob_get_clean();
                     break;
                 }
-            } else {
+            } else
+            {
                 $f->redirect('dang-nhap');
             }
-            // Danh sách sản phẩm
+        // Danh sách sản phẩm
         case 'san-pham':
             $title = 'Sản phẩm';
-            require_once TEMPLATE . 'product/product_list_tpl.php';
+            require_once TEMPLATE . 'sanpham/danhsachsanpham.php';
             $noidung = ob_get_clean();
             break;
         case 'lien-he':
@@ -129,7 +143,8 @@ if (!$get_status) {
 
             // Tra cứu tin tức
             $new = $db->oneRaw("SELECT * FROM news WHERE slug = '$slug'");
-            if (!empty($new)) {
+            if (!empty($new))
+            {
                 $title = $new['title'];
                 require_once TEMPLATE . 'new/new_item_tpl.php';
                 $noidung = ob_get_clean();
@@ -137,7 +152,8 @@ if (!$get_status) {
             }
             // Tìm kiếm loại sản phẩm
             $product_type = $db->oneRaw("SELECT * FROM product_types WHERE slug = '$url'");
-            if (!empty($product_type)) {
+            if (!empty($product_type))
+            {
                 $title = $product_type['title'];
                 $type_id = $product_type['id'];
                 require_once TEMPLATE . 'product/product_list_tpl.php';
@@ -146,7 +162,8 @@ if (!$get_status) {
             }
             // Tra cứu sản phẩm
             $product = $db->oneRaw("SELECT * FROM san_pham WHERE duong_dan = '$url'");
-            if (!empty($product)) {
+            if (!empty($product))
+            {
                 $title = $product['ten_san_pham'];
                 require_once TEMPLATE . 'sanpham/chitietsanpham.php';
                 $noidung = ob_get_clean();

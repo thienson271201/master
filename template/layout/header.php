@@ -13,7 +13,7 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
       <div class="menu-row">
         <!-- Logo -->
         <div class="logo">
-          <a href="index-2.html"><img src="assets/images/service/logo-alt.png" alt="ProFix" /></a>
+          <a href="./"><img src="assets/images/service/logo-alt.png" alt="ProFix" /></a>
         </div>
 
         <!-- Search -->
@@ -64,10 +64,10 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
         <div class="menu">
           <ul class="menu-items menu-no-sides">
             <li>
-              <a href="index-2.html">Trang chủ</a>
+              <a href="./">Trang chủ</a>
             </li>
             <li>
-              <a href="shop-category.html">Sản phẩm</a>
+              <a href="san-pham">Sản phẩm</a>
             </li>
             <li>
               <a href="shop-category.html">Tin tức</a>
