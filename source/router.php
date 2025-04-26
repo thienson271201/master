@@ -130,12 +130,13 @@ if (!$get_status)
         // Giỏ hàng
         case 'gio-hang':
             $title = 'Giỏ hàng';
-            require_once TEMPLATE . 'thanhtoan/cart_tpl.php';
+            require_once TEMPLATE . 'thanhtoan/giohang.php';
             $noidung = ob_get_clean();
             break;
         // Thanh toán
         case 'thanh-toan':
-            require_once TEMPLATE . 'thanhtoan/thanhtoan_tpl.php';
+            $title = 'Thanh toán';
+            require_once TEMPLATE . 'thanhtoan/thanhtoan.php';
             $noidung = ob_get_clean();
             break;
         default:

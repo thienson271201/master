@@ -5,7 +5,7 @@ if ($func->isPOST())
     $type = $filterAll['type'];
     //xử lý insert
     $dataInsert = [
-        'image' => $func->upload('imageUpload', 'upload'),
+        'image' => $func->upload('imageUpload', 'images'),
     ];
     $insertStatus = $db->update('images', $dataInsert, "type = '$type'");
     if ($insertStatus)
@@ -89,8 +89,8 @@ $smg = getFlashData('smg');
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <img onerror="this.src='../assets/images/noimage/noimage.png'" id="previewImage"
-                                    src="../assets/images/upload/<?= $image ?>" alt="Ảnh xem trước"
+                                <img onerror="this.src='../assets/images/noimage/noimage.jpg'" id="previewImage"
+                                    src="../upload/images/<?= $image ?>" alt="Ảnh xem trước"
                                     style="height: 250px; object-fit: cover; max-width: 100%;">
                             </div>
                         </div>

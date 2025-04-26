@@ -11,13 +11,16 @@
 </head>
 
 <body class="body loader-loading">
-    
+
     <!-- Header -->
     <?php require_once TEMPLATE . LAYOUT . "header.php" ?>
 
 
     <!-- Nội dung web -->
     <?= $noidung ?>
+
+    <!-- Giỏ hàng hover -->
+    <?php require_once TEMPLATE . LAYOUT . "giohang.php" ?>
 
     <!-- Footer -->
     <?php require_once TEMPLATE . LAYOUT . "footer.php" ?>
