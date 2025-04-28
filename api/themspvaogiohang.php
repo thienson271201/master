@@ -6,19 +6,19 @@ if (isset($_POST['id']))
     $id = (int) $_POST['id'];
 
     // Nếu chưa có giỏ hàng, khởi tạo
-    if (!isset($_SESSION['cart']))
+    if (!isset($_SESSION['gio_hang']))
     {
-        $_SESSION['cart'] = [];
+        $_SESSION['gio_hang'] = [];
     }
 
     // Nếu sản phẩm đã có trong giỏ, tăng số lượng
-    if (isset($_SESSION['cart'][$id]))
+    if (isset($_SESSION['gio_hang'][$id]))
     {
-        $_SESSION['cart'][$id]['quantity']++;
+        $_SESSION['gio_hang'][$id]['quantity']++;
     } else
     {
         // Ngược lại, thêm mới
-        $_SESSION['cart'][$id] = [
+        $_SESSION['gio_hang'][$id] = [
             'id' => $id,
             'quantity' => 1
         ];
