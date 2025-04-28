@@ -10,6 +10,7 @@ if (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']
   $xaid = $user_profile['xa_phuong'];
   $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
 }
+
 ?>
 <section class="shift-lg offs-lg">
   <div class="container">

@@ -1,5 +1,6 @@
 <?php
 
+// Gán session
 function setSession($key, $value)
 {
     return $_SESSION[$key] = $value;

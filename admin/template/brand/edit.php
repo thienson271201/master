@@ -7,14 +7,14 @@ if ($func->isPOST())
     $data_update = [
         'duong_dan' => $filterAll['slug'],
         'ten_thuong_hieu' => $filterAll['title'],
-       
+
     ];
     $image = $func->upload('imageUpload', 'images');
     if ($image != 'noimage.jpg')
     {
         $data_update['hinh_anh'] = $image;
     }
-     $db->update('thuong_hieu', $data_update, "id='$id'");
+    $db->update('thuong_hieu', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
 }
 
@@ -71,7 +71,7 @@ $smg = getFlashData('smg');
                                 <input type="file" class="form-control" name="imageUpload" id="imageUpload"
                                     accept="image/*">
                                 <img id="previewImage" src="../upload/images/<?= $cap1['hinh_anh'] ?>"
-                                onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
+                                    onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
                                     style="width: 100%; height: 200px; margin-top: 20px; object-fit: contain">
                             </div>
                         </div>
@@ -101,7 +101,7 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                 </div>
-               
+
                 <input type="hidden" name="id" value="<?= $cap1['id'] ?>">
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">
