@@ -24,110 +24,194 @@
         </div>
     </div>
 </section>
-<section class="content-section">
-    <div class="container">
-        <form action="https://amigos-themes.com/profix/cart.html" method="POST">
-            <div class="cart-line-items offs-lg" data-inview-showup="showup-translate-up">
-                <div class="items-head text-upper">
-                    <div class="item-image">Sản phẩm</div>
-                    <div class="item-name">Tên sản phẩm</div>
-                    <div class="item-price">Đơn giá</div>
-                    <div class="item-quantity">Số lượng</div>
-                    <div class="item-total">Thành tiền</div>
-                    <div class="item-remove">&nbsp;</div>
-                </div>
-                <div class="items">
-                    <?php
-                    $tong=0;
-                    foreach ($_SESSION['gio_hang'] as $item):
-                        
-                        $id = $item['id'];
-                        $sanphamgiohang = $db->oneRaw("select * from san_pham where id = $id");
-                        $tong+=$sanphamgiohang['gia_sau_khuyen_mai']*$item['quantity']
-                    ?>
-                        <div class="item cart-item-line" data-inview-showup="showup-translate-up">
-                            <div class="item-image">
-                                <div class="responsive-1by1">
-                                    <img src="upload/images/<?=$sanphamgiohang['hinh_anh'] ?>"
-                                        alt="" />
-                                </div>
-                            </div>
-                            <div class="item-name">
-                                <a href="shop-item.html" class="content-link"><?= $sanphamgiohang['ten_san_pham'] ?></a>
-                            </div>
-                            <div class="item-price"><?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai']) ?>₫</div>
-                            <div class="item-quantity">
-                                <div class="field-group field-spin-sides">
-                                    <div class="field-wrap">
-                                        <input class="field-control montserrat-bold alt-color text-sm text-center"
-                                            type="text" name="quantity" value="<?=$item['quantity'] ?>" min="0" max="100"
-                                            data-action-role="field-wheel-spin field-arrows-spin" autocomplete="off" />
-                                        <span class="field-back"></span>
-                                        <span class="field-actions"><span class="field-increment"
-                                                data-action-role="field-increment"><i class="fas fa-plus"
-                                                    aria-hidden="true"></i></span><span class="field-decrement"
-                                                data-action-role="field-decrement"><i class="fas fa-minus"
-                                                    aria-hidden="true"></i></span></span>
+<?php
+if (isset($_SESSION['gio_hang'])):
+?>
+    <section class="content-section">
+        <div class="container">
+            <form method="POST">
+                <div class="cart-line-items offs-lg" data-inview-showup="showup-translate-up">
+                    <div class="items-head text-upper">
+                        <div class="item-image">Sản phẩm</div>
+                        <div class="item-name">Tên sản phẩm</div>
+                        <div class="item-price">Đơn giá</div>
+                        <div class="item-quantity">Số lượng</div>
+                        <div class="item-total">Thành tiền</div>
+                        <div class="item-remove">&nbsp;</div>
+                    </div>
+                    <div class="items">
+                        <?php
+                        $tong = 0;
+                        foreach ($_SESSION['gio_hang'] as $item):
+
+                            $id = $item['id'];
+                            $sanphamgiohang = $db->oneRaw("select * from san_pham where id = $id");
+                            $tong += $sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']
+                        ?>
+                            <div class="item cart-item-line" data-inview-showup="showup-translate-up">
+                                <div class="item-image">
+                                    <div class="responsive-1by1">
+                                        <img src="upload/images/<?= $sanphamgiohang['hinh_anh'] ?>"
+                                            alt="" />
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item-total"><?=$f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai']*$item['quantity']) ?>₫</div>
-                            <div class="item-remove">
-                                <a href="#" class="remove"><i class="fas fa-times"></i></a>
-                            </div>
-                        </div>
-                    <?php
-                    endforeach;
-                    ?>
-                </div>
-            </div>
-            <div class="row cols-md rows-md offs-xl" data-inview-showup="showup-translate-up">
-                <div class="md-col-3 sm-col-6">
-                    <button class="btn btns-bordered text-upper col-12">
-                        Xóa giỏ hàng
-                    </button>
-                </div>
-                <div class="md-col-3 md-push-6 sm-col-12">
-                    <a href="#" class="btn btns-bordered text-upper col-12">Tiếp tục mua sắm</a>
-                </div>
-            </div>
-        </form>
-        <div class="muted-bg block-md" data-inview-showup="showup-translate-up">
-            <div class="row cols-lg rows-lg">
-                <div class="sm-col-6">
-                    <form action="https://amigos-themes.com/profix/cart.html" method="POST" class="offs-md">
-                        <h5 class="text-upper">Mã giảm giá</h5>
-                        <div class="row cols-md rows-md">
-                            <div class="sm-col-7">
-                                <div class="field-group">
-                                    <div class="field-wrap">
-                                        <input class="field-control" name="coupon" placeholder="Nhập mã giảm giá"
-                                            required="required" />
-                                        <span class="field-back"></span>
+                                <div class="item-name">
+                                    <a href="shop-item.html" class="content-link"><?= $sanphamgiohang['ten_san_pham'] ?></a>
+                                </div>
+                                <div class="item-price"><?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai']) ?>₫</div>
+                                <div class="item-quantity">
+                                    <div class="field-group field-spin-sides">
+                                        <div class="field-wrap">
+                                            <input class="field-control montserrat-bold alt-color text-sm soluonginput text-center"
+                                                type="text" name="quantity" value="<?= $item['quantity'] ?>" min="0" max="100" data-id="<?= $item['id'] ?>"
+                                                data-action-role="field-wheel-spin field-arrows-spin" autocomplete="off" />
+                                            <span class="field-back"></span>
+                                            <span class="field-actions"><span class="field-increment"
+                                                    data-action-role="field-increment"><i class="fas fa-plus"
+                                                        aria-hidden="true"></i></span><span class="field-decrement"
+                                                    data-action-role="field-decrement"><i class="fas fa-minus"
+                                                        aria-hidden="true"></i></span></span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="item-total"><?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']) ?>₫</div>
+                                <div class="item-remove">
+                                    <a href="#" class="remove"><i class="fas fa-times"></i></a>
+                                </div>
                             </div>
-                            <div class="sm-col-5">
-                                <button class="btn btns-bordered text-upper col-12">
-                                    Áp dụng
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        <?php
+                        endforeach;
+                        ?>
+                    </div>
                 </div>
-                <div class="sm-col-4 sm-push-2">
-                    <div class="cart-total-line offs-sm shift-sm">
-                        <div class="title text-upper">Khuyến mãi</div>
-                        <div class="value">0₫</div>
+                <div class="row cols-md rows-md offs-xl" data-inview-showup="showup-translate-up">
+                    <div class="md-col-3 sm-col-6">
+                        <button type="button" id="btn-xoa-gio-hang" class="btn btns-bordered text-upper col-12">
+                            Xóa giỏ hàng
+                        </button>
                     </div>
-                    <div class="cart-total-line text-sm">
-                        <div class="title text-upper text-semibold">Tạm tính</div>
-                        <div class="value text-colorful text-bold"><?=$f->format_tiente($tong)?>₫</div>
+                    <div class="md-col-3 md-push-6 sm-col-12">
+                        <a href="#" class="btn btns-bordered text-upper col-12">Tiếp tục mua sắm</a>
                     </div>
-                    <div class="top-separator out-lg"></div>
-                    <a href="checkout.html" class="btn text-upper col-12">Tiến hành thanh toán</a>
+                </div>
+            </form>
+            <div class="muted-bg block-md" data-inview-showup="showup-translate-up">
+                <div class="row cols-lg rows-lg">
+                    <div class="sm-col-6">
+                        <form action="https://amigos-themes.com/profix/cart.html" method="POST" class="offs-md">
+                            <h5 class="text-upper">Mã giảm giá</h5>
+                            <div class="row cols-md rows-md">
+                                <div class="sm-col-7">
+                                    <div class="field-group">
+                                        <div class="field-wrap">
+                                            <input class="field-control" name="coupon" placeholder="Nhập mã giảm giá"
+                                                required="required" />
+                                            <span class="field-back"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sm-col-5">
+                                    <button class="btn btns-bordered text-upper col-12">
+                                        Áp dụng
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="sm-col-4 sm-push-2">
+                        <div class="cart-total-line offs-sm shift-sm">
+                            <div class="title text-upper">Khuyến mãi</div>
+                            <div class="value">0₫</div>
+                        </div>
+                        <div class="cart-total-line text-sm">
+                            <div class="title text-upper text-semibold">Tạm tính</div>
+                            <div class="value text-colorful text-bold"><?= $f->format_tiente($tong) ?>₫</div>
+                        </div>
+                        <div class="top-separator out-lg"></div>
+                        <a href="checkout.html" class="btn text-upper col-12">Tiến hành thanh toán</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+<?php
+else:
+?>
+    <section class="text-center content-section">
+        <div class="container">
+            <img
+                class="image offs-md"
+                src="assets/images/error/404.png"
+                alt=""
+                data-inview-showup="showup-scale" />
+            <div class="section-head text-center container-md">
+
+                <p data-inview-showup="showup-translate-left">
+                    Giỏ hàng của bạn còn trống
+                </p>
+            </div>
+            <a
+                class="btn text-upper"
+                href="./"
+                data-inview-showup="showup-translate-up">Quay về trang chủ</a>
+        </div>
+    </section>
+
+<?php
+endif;
+?>
+<script>
+    $('#btn-xoa-gio-hang').on('click', function() {
+        if (confirm('Bạn chắc chắn muốn xóa giỏ hàng?')) {
+            $.ajax({
+                url: 'api/xoa_gio_hang.php',
+                type: 'POST',
+                success: function(response) {
+                    alert('Đã xóa giỏ hàng.');
+                    location.reload();
+                },
+                error: function() {
+                    alert('Đã xảy ra lỗi khi xóa giỏ hàng.');
+                }
+            });
+        }
+    });
+</script>
+<script>
+$(document).ready(function () {
+  // Lắng nghe khi bấm nút + hoặc -
+  $('.field-increment, .field-decrement').on('click', function () {
+    // Tìm ô input số lượng gần nhất
+    const $wrap = $(this).closest('.field-wrap');
+    const $input = $wrap.find('input[name="quantity"]');
+
+    // Chờ 100ms để template cập nhật giá trị xong
+    setTimeout(function () {
+      const productId = $input.data('id');
+      const quantity = parseInt($input.val());
+
+      // Kiểm tra xem đã lấy được dữ liệu chưa
+    //   console.log('ID:', productId, 'Quantity:', quantity);
+    //   alert('ID: ' + productId + ' | Quantity: ' + quantity);
+
+      // Gửi AJAX nếu cần
+    
+      $.post('api/cap_nhat_so_luong.php', {
+          id: productId,
+          quantity: quantity
+      }, function (response) {  console.log('Server response:', response);
+          if (response.success) {
+            //   $wrap.closest('.cart-item').find('.item-total').text(response.item_total + '₫');
+            //   $('.cart-total-line .value').text(response.cart_total + '₫');
+              alert (response.item_total);
+          }
+      }, 'json');
+   
+    }, 100);
+  });
+});
+
+
+
+
+</script>
