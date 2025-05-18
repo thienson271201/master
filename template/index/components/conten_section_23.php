@@ -51,7 +51,8 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
                   <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
                 </div>
                 <div class="item-links">
-                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                  <a href="#" data-id="<?= $san_pham['id'] ?>"
+                  class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered" >
                     <i class="fas fa-shopping-cart"></i>
                   </a>
                   <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
@@ -269,3 +270,29 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
         </div>
       </div>
     </div>
+
+
+    <script>
+  $(document).ready(function () {
+    $('.btn-add-to-cart').off('click').on('click', function (e) {
+      e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
+      let productId = $(this).data('id');
+
+      $.ajax({
+        url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
+        method: 'POST',
+        data: {
+          id: productId
+        },
+        success: function (response) {
+          // Xử lý sau khi thêm thành công
+          alert('Đã thêm sản phẩm vào giỏ hàng!');
+          // Hoặc bạn có thể cập nhật số lượng giỏ hàng ở header, etc.
+        },
+        error: function () {
+          alert('Đã xảy ra lỗi, vui lòng thử lại.');
+        }
+      });
+    });
+  });
+</script>

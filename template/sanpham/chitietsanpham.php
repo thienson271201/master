@@ -146,7 +146,7 @@ $danhmuc=$db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                       </div>
                     </div>
                     <div class="sm-col-7">
-                      <button class="btn text-upper col-12">
+                      <button class="btn-add-to-cart btn text-upper col-12" data-id="<?= $product['id'] ?>">
                         <i class="fas fa-plus" aria-hidden="true"></i
                         >&nbsp;&nbsp; Thêm vào giỏ hàng
                       </button>
@@ -576,3 +576,30 @@ $danhmuc=$db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
         <img class="image" src="assets/images/parts/loader.gif" alt="" />
       </div>
     </div>
+
+
+
+    <script>
+  $(document).ready(function () {
+    $('.btn-add-to-cart').off('click').on('click', function (e) {
+      e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
+      let productId = $(this).data('id');
+
+      $.ajax({
+        url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
+        method: 'POST',
+        data: {
+          id: productId
+        },
+        success: function (response) {
+          // Xử lý sau khi thêm thành công
+          alert('Đã thêm sản phẩm vào giỏ hàng!');
+          // Hoặc bạn có thể cập nhật số lượng giỏ hàng ở header, etc.
+        },
+        error: function () {
+          alert('Đã xảy ra lỗi, vui lòng thử lại.');
+        }
+      });
+    });
+  });
+</script>

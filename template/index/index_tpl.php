@@ -1,8 +1,8 @@
 <?php
 
-echo '<pre>';
-print_r($_SESSION['gio_hang']);
-echo '</pre>';
+// echo '<pre>';
+// print_r($_SESSION['gio_hang']);
+// echo '</pre>';
 
 
 require_once 'components/banner.php';

@@ -56,7 +56,7 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
 
 <script>
   $(document).ready(function () {
-    $('.btn-add-to-cart').on('click', function (e) {
+    $('.btn-add-to-cart').off('click').on('click', function (e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
