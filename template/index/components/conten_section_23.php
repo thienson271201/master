@@ -29,9 +29,14 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
               data-inview-showup="showup-scale"
             >
               <div class="item-back"></div>
-              <div class="item-lables">
-                <a class="item-label-sale item-label" href="#">Giảm giá</a>
+              <?php
+              $phan_tram = round((($san_pham['gia_goc'] - $san_pham['gia_sau_khuyen_mai']) / $san_pham['gia_goc']) * 100);
+              if($phan_tram > 1): ?>
+                <div class="item-lables">
+                <a class="item-label-sale item-label" href="#">Giảm giá <?= 
+                $phan_tram ?>%</a>
               </div>
+              <?php endif; ?>
               <a href="<?= $san_pham['duong_dan']?>" class="item-image responsive-1by1">
                 <img
                   src="upload/images/<?=$san_pham['hinh_anh'] ?>"
@@ -48,7 +53,9 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
                 </div>
                 <div class="item-prices">
                   <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
-                  <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
+                  <?php if($phan_tram > 1) :?>
+                    <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
+                  <?php endif; ?>
                 </div>
                 <div class="item-links">
                   <a href="#" data-id="<?= $san_pham['id'] ?>"
