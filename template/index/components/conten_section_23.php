@@ -4,6 +4,9 @@ $list_san_pham= $db->getRaw('select * from san_pham ');
 // echo '<pre>';
 // print_r ($list_san_pham);
 // echo '</pre>';
+
+
+// up lai db
 ?>
 <!-- content-section -->
 <section class="content-section">
