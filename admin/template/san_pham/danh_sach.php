@@ -68,6 +68,7 @@ $smg = getFlashData('smg');
                                 <th>Tên sản phẩm</th>
                                 <th>Thương hiệu</th>
                                 <th>Danh mục</th>
+                                <th width="8%" class="text-center">Tồn kho</th>
                                 <th width="8%" class="text-center">Nổi bật</thư>
                                 <th width="8%" class="text-center">Hiển thị</th>
                                 <th width=" 10%" class="text-center">Thao tác</th>
@@ -100,6 +101,9 @@ $smg = getFlashData('smg');
                                     <td>
                                         <?= $item['ten_danh_muc'] ?>
                                     </td>
+                                     <td class="text-center fw-bold <?=$item['so_luong_ton_kho']>5?'':'text-danger' ?>"> 
+                                        <?= $item['so_luong_ton_kho'] ?>
+                                    </td>
                                     <td class="text-center">
                                         <input data-id="<?=$item['id']?>" type="checkbox" class="form-check-input highlight-checkbox" 
                                         <?= $item['noi_bat'] == 1?"checked":"" ?>
@@ -110,6 +114,7 @@ $smg = getFlashData('smg');
                                         <?= $item['trang_thai'] == 1?"checked":"" ?>
                                         >
                                     </td>
+                                   
                                     <td class="text-center">
                                         <a href="?com=san_pham&act=sua&id=<?= $item['id'] ?>"
                                             class="btn btn-warning btn-sm">

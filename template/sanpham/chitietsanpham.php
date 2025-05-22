@@ -1,498 +1,408 @@
-<?php 
-$id=$product['danh_muc_san_pham_id'];
-$danhmuc=$db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
+<?php
+$id = $product['danh_muc_san_pham_id'];
+$danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
 ?>
 <section class="with-bg solid-section">
-      <div
-        class="fix-image-wrap"
-        data-image-src="./assets/images/service/tools.jpg"
-        data-parallax="scroll"
-      ></div>
-      <div class="theme-back"></div>
-      <div class="container page-info">
-        <div class="section-alt-head container-md">
-          <h1
-            class="section-title text-upper text-lg"
-            data-inview-showup="showup-translate-right"
-          >
-            Chi Tiết Sản Phẩm
-          </h1>
-        </div>
-      </div>
-      <div class="section-footer">
-        <div class="container" data-inview-showup="showup-translate-down">
-          <ul class="page-path">
-            <li><a href="index-2.html">Trang chủ</a></li>
-            <li class="path-separator">
-              <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="shop-category.html">Cửa hàng</a></li>
-            <li class="path-separator">
-              <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li>Laptop</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <div class="clearfix page-sidebar-right container">
-      <div class="page-content">
-        <section class="content-section">
-          <div class="product">
+  <div
+    class="fix-image-wrap"
+    data-image-src="./assets/images/service/tools.jpg"
+    data-parallax="scroll"></div>
+  <div class="theme-back"></div>
+  <div class="container page-info">
+    <div class="section-alt-head container-md">
+      <h1
+        class="section-title text-upper text-lg"
+        data-inview-showup="showup-translate-right">
+        Chi Tiết Sản Phẩm
+      </h1>
+    </div>
+  </div>
+  <div class="section-footer">
+    <div class="container" data-inview-showup="showup-translate-down">
+      <ul class="page-path">
+        <li><a href="index-2.html">Trang chủ</a></li>
+        <li class="path-separator">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </li>
+        <li><a href="shop-category.html">Cửa hàng</a></li>
+        <li class="path-separator">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </li>
+        <li>Laptop</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="clearfix page-sidebar-right container">
+  <div class="page-content">
+    <section class="content-section">
+      <div class="product">
+        <div
+          class="row offs-lg cols-md rows-lg offs-lg"
+          data-inview-showup="showup-translate-up">
+          <div class="md-col-5">
             <div
-              class="row offs-lg cols-md rows-lg offs-lg"
-              data-inview-showup="showup-translate-up"
-            >
-              <div class="md-col-5">
-                <div
-                  class="responsive-1by1 offs-md"
-                  data-preview-image="product-preview"
-                ></div>
-                <div
-                  class="owl-carousel"
-                  data-autoplay="false"
-                  data-owl-loop="false"
-                  data-owl-responsive="3;3;3;3"
-                >
-                  <div class="item">
-                    <a
-                      class="responsive-1by1"
-                      target="_blank"
-                      href="assets/images/shop/usb-hub.jpg"
-                      data-preview-image-source="product-preview"
-                      ><img src="upload/images/<?= $product['hinh_anh'] ?>" alt=""
-                    /></a>
-                  </div>
-               
-                </div>
+              class="responsive-1by1 offs-md"
+              data-preview-image="product-preview"></div>
+            <div
+              class="owl-carousel"
+              data-autoplay="false"
+              data-owl-loop="false"
+              data-owl-responsive="3;3;3;3">
+              <div class="item">
+                <a
+                  class="responsive-1by1"
+                  target="_blank"
+                  href="assets/images/shop/usb-hub.jpg"
+                  data-preview-image-source="product-preview"><img src="upload/images/<?= $product['hinh_anh'] ?>" alt="" /></a>
               </div>
-              <div class="md-col-7">
-                <h4 class="text-upper offs-sm"><?= $product['ten_san_pham'] ?></h4>
-                <div class="user-feedback">
-                  <div class="user-rating">
-                    <span class="rating-star"
-                      ><i class="fas fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="rating-star"
-                      ><i class="fas fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="rating-star"
-                      ><i class="fas fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="rating-star"
-                      ><i class="fas fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="rating-star fa-stack"
-                      ><i class="far fa-star fa-stack-1x"></i
-                      ><i class="fas fa-star-half fa-stack-1x"></i
-                    ></span>
-                  </div>
-                  <div class="user-reviews">
-                    <a
-                      href="#"
-                      class="content-link"
-                      data-action-role="show-tab"
-                      data-tab-name="reviews"
-                      >2 Đánh giá</a
-                    >&nbsp;&nbsp;|&nbsp;&nbsp;<a
-                      href="#"
-                      class="content-link"
-                      data-action-role="show-tab"
-                      data-tab-name="reviews"
-                      >Viết đánh giá</a
-                    >
-                  </div>
-                </div>
-                <div class="product-price"><?= number_format($product["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
-                <div class="product-available">
-                  Tình trạng: <span class="text-colorful">Còn hàng</span>
-                </div>
-                <div class="product-short">
-                <?= $product['mo_ta'] ?>
-                </div>
-                <form class="out-lg">
-                  <div class="row cols-md rows-md">
-                    <div class="sm-col-5">
-                      <div class="field-group field-spin-sides">
-                        <div class="field-wrap">
-                          <input
-                            class="field-control montserrat-bold alt-color text-sm text-center"
-                            type="text"
-                            name="quantity"
-                            value="1"
-                            min="1"
-                            max="100"
-                            data-action-role="field-wheel-spin field-arrows-spin"
-                            autocomplete="off"
-                          />
-                          <span class="field-back"></span>
-                          <span class="field-actions"
-                            ><span
-                              class="field-increment"
-                              data-action-role="field-increment"
-                              ><i
-                                class="fas fa-plus"
-                                aria-hidden="true"
-                              ></i></span
-                            ><span
-                              class="field-decrement"
-                              data-action-role="field-decrement"
-                              ><i
-                                class="fas fa-minus"
-                                aria-hidden="true"
-                              ></i></span
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="sm-col-7">
-                      <button class="btn-add-to-cart btn text-upper col-12" data-id="<?= $product['id'] ?>">
-                        <i class="fas fa-plus" aria-hidden="true"></i
-                        >&nbsp;&nbsp; Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </form>
-                <div class="description-lines">
-                  <div class="description-line">
-                    <span class="text-upper description-title"
-                      >Mã sản phẩm:</span
-                    >
-                    <span class="description-value alt-color"><?= $product['ma_san_pham'] ?></span>
-                  </div>
-                  
-                  <div class="description-line">
-                    <span class="text-upper description-title">Danh mục:</span>
-                    <span class="description-value colorful-text"
-                      ><a href="<?=$danhmuc['duong_dan'] ?>"><?=$danhmuc['ten_danh_muc'] ?></a></span
-                    >
-                  </div>
-                </div>
+
+            </div>
+          </div>
+          <div class="md-col-7">
+            <h4 class="text-upper offs-sm"><?= $product['ten_san_pham'] ?></h4>
+            <div class="user-feedback">
+              <div class="user-rating">
+                <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
+                <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
+                <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
+                <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
+                <span class="rating-star fa-stack"><i class="far fa-star fa-stack-1x"></i><i class="fas fa-star-half fa-stack-1x"></i></span>
+              </div>
+              <div class="user-reviews">
+                <a
+                  href="#"
+                  class="content-link"
+                  data-action-role="show-tab"
+                  data-tab-name="reviews">2 Đánh giá</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+                  href="#"
+                  class="content-link"
+                  data-action-role="show-tab"
+                  data-tab-name="reviews">Viết đánh giá</a>
               </div>
             </div>
-            <div
-              class="tabs-lined"
-              data-action-role="tabs"
-              data-inview-showup="showup-translate-up"
-            >
-              <ul class="tabs-head">
-                <li><a href="#" data-tab="description">Thông Số Sản Phẩm</a></li>
-                <li><a href="#" data-tab="reviews">Đánh Giá</a></li>
-                <!-- <li>
+            <div class="product-price"><?= number_format($product["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
+            <div class="product-available">
+              Tình trạng: <span class="text-colorful">Còn hàng</span>
+            </div>
+            <div class="product-short">
+              <?= $product['mo_ta'] ?>
+            </div>
+            <form class="out-lg">
+              <div class="row cols-md rows-md">
+                <div class="sm-col-5">
+                  <div class="field-group field-spin-sides">
+                    <div class="field-wrap">
+                      <input
+                        class="field-control montserrat-bold alt-color text-sm text-center"
+                        type="text"
+                        name="quantity"
+                        value="1"
+                        min="1"
+                        max="100"
+                        data-action-role="field-wheel-spin field-arrows-spin"
+                        autocomplete="off" />
+                      <span class="field-back"></span>
+                      <span class="field-actions"><span
+                          class="field-increment"
+                          data-action-role="field-increment"><i
+                            class="fas fa-plus"
+                            aria-hidden="true"></i></span><span
+                          class="field-decrement"
+                          data-action-role="field-decrement"><i
+                            class="fas fa-minus"
+                            aria-hidden="true"></i></span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sm-col-7">
+                  <button class="btn-add-to-cart btn text-upper col-12" data-id="<?= $product['id'] ?>">
+                    <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp; Thêm vào giỏ hàng
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="description-lines">
+              <div class="description-line">
+                <span class="text-upper description-title">Mã sản phẩm:</span>
+                <span class="description-value alt-color"><?= $product['ma_san_pham'] ?></span>
+              </div>
+
+              <div class="description-line">
+                <span class="text-upper description-title">Danh mục:</span>
+                <span class="description-value colorful-text"><a href="<?= $danhmuc['duong_dan'] ?>"><?= $danhmuc['ten_danh_muc'] ?></a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tabs-lined"
+          data-action-role="tabs"
+          data-inview-showup="showup-translate-up">
+          <ul class="tabs-head">
+            <li><a href="#" data-tab="description">Thông Số Sản Phẩm</a></li>
+            <li><a href="#" data-tab="reviews">Đánh Giá</a></li>
+            <!-- <li>
                   <a href="#" data-tab="additionalInformation"
                     >Additional Information</a
                   >
                 </li> -->
-              </ul>
-              <div class="tabs-line">
-                <div
-                  class="tab-active-line"
-                  data-action-role="active-tab-line"
-                ></div>
+          </ul>
+          <div class="tabs-line">
+            <div
+              class="tab-active-line"
+              data-action-role="active-tab-line"></div>
+          </div>
+          <div class="tabs-content">
+            <div class="tab-content" data-tab-content="description">
+              <div class="content-text">
+
+                <?= $product['mo_ta_dai'] ?>
+
               </div>
-              <div class="tabs-content">
-                <div class="tab-content" data-tab-content="description">
-                  <div class="content-text">
-                    
-                   <?= $product['mo_ta_dai'] ?>
-                  
+            </div>
+            <div class="tab-content" data-tab-content="reviews">
+              <div class="comments">
+                <div
+                  class="comment"
+                  data-inview-showup="showup-translate-up">
+                  <div class="icon">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                  </div>
+                  <div class="content">
+                    <div class="title">
+                      <b class="alt-color">Lie Stone</b> -
+                      <i>Web Developer</i>
+                    </div>
+                    <div class="user-rating">
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="far fa-star"></i></span>
+                    </div>
+                    <div class="text-content">
+                      <p>
+                        Comment example here. Nulla risus lacus, vehicula id
+                        mi vitae, auctor accumsan nulla. Sed a mi quam. In
+                        euismod urna ac massa adipiscing interdum.
+                      </p>
+                    </div>
+                    <div class="text-right text-xs">Jul 15, 2017</div>
                   </div>
                 </div>
-                <div class="tab-content" data-tab-content="reviews">
-                  <div class="comments">
-                    <div
-                      class="comment"
-                      data-inview-showup="showup-translate-up"
-                    >
-                      <div class="icon">
-                        <i class="fas fa-user" aria-hidden="true"></i>
-                      </div>
-                      <div class="content">
-                        <div class="title">
-                          <b class="alt-color">Lie Stone</b> -
-                          <i>Web Developer</i>
-                        </div>
-                        <div class="user-rating">
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="far fa-star"></i
-                          ></span>
-                        </div>
-                        <div class="text-content">
-                          <p>
-                            Comment example here. Nulla risus lacus, vehicula id
-                            mi vitae, auctor accumsan nulla. Sed a mi quam. In
-                            euismod urna ac massa adipiscing interdum.
-                          </p>
-                        </div>
-                        <div class="text-right text-xs">Jul 15, 2017</div>
-                      </div>
+                <div
+                  class="comment"
+                  data-inview-showup="showup-translate-up">
+                  <div class="icon">
+                    <img
+                      class="image"
+                      src="assets/images/outsource/user-image.jpg"
+                      alt="" />
+                  </div>
+                  <div class="content">
+                    <div class="title">
+                      <b class="alt-color">John Bond</b>
                     </div>
-                    <div
-                      class="comment"
-                      data-inview-showup="showup-translate-up"
-                    >
-                      <div class="icon">
-                        <img
-                          class="image"
-                          src="assets/images/outsource/user-image.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="content">
-                        <div class="title">
-                          <b class="alt-color">John Bond</b>
-                        </div>
-                        <div class="user-rating">
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                          <span class="rating-star"
-                            ><i class="fas fa-star"></i
-                          ></span>
-                        </div>
-                        <div class="text-content">
-                          <p>
-                            Comment example here. Nulla risus lacus, vehicula id
-                            mi vitae, auctor accumsan nulla. Sed a mi quam. In
-                            euismod urna ac massa adipiscing interdum.
-                          </p>
-                        </div>
-                        <div class="text-right text-xs">
-                          Jul 17, 2017 - 15 hours ago
-                        </div>
-                      </div>
+                    <div class="user-rating">
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                      <span class="rating-star"><i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="text-content">
+                      <p>
+                        Comment example here. Nulla risus lacus, vehicula id
+                        mi vitae, auctor accumsan nulla. Sed a mi quam. In
+                        euismod urna ac massa adipiscing interdum.
+                      </p>
+                    </div>
+                    <div class="text-right text-xs">
+                      Jul 17, 2017 - 15 hours ago
                     </div>
                   </div>
-                  <div
-                    class="top-separator out-lg"
-                    data-inview-showup="showup-translate-up"
-                  ></div>
-                  <form data-inview-showup="showup-translate-up">
-                    <h4 class="text-upper">Add a review</h4>
-                    <p>
-                      Your email address will not be published. Required fields
-                      are marked *
-                    </p>
-                    <div class="field-group field-line">
-                      <label class="default-color">Your Rating</label>
-                      <div class="rating-field">
-                        <div class="pull-left">
-                          <input
-                            type="radio"
-                            id="user-rating-5"
-                            name="rating"
-                            value="5"
-                            checked="checked"
-                          />
-                          <label for="user-rating-5"
-                            ><span class="rating-active-icon"
-                              ><i class="fas fa-star"></i></span
-                            ><span class="rating-icon"
-                              ><i class="far fa-star"></i></span
-                          ></label>
-                          <input
-                            type="radio"
-                            id="user-rating-4"
-                            name="rating"
-                            value="4"
-                          />
-                          <label for="user-rating-4"
-                            ><span class="rating-active-icon"
-                              ><i class="fas fa-star"></i></span
-                            ><span class="rating-icon"
-                              ><i class="far fa-star"></i></span
-                          ></label>
-                          <input
-                            type="radio"
-                            id="user-rating-3"
-                            name="rating"
-                            value="3"
-                          />
-                          <label for="user-rating-3"
-                            ><span class="rating-active-icon"
-                              ><i class="fas fa-star"></i></span
-                            ><span class="rating-icon"
-                              ><i class="far fa-star"></i></span
-                          ></label>
-                          <input
-                            type="radio"
-                            id="user-rating-2"
-                            name="rating"
-                            value="2"
-                          />
-                          <label for="user-rating-2"
-                            ><span class="rating-active-icon"
-                              ><i class="fas fa-star"></i></span
-                            ><span class="rating-icon"
-                              ><i class="far fa-star"></i></span
-                          ></label>
-                          <input
-                            type="radio"
-                            id="user-rating-1"
-                            name="rating"
-                            value="1"
-                          />
-                          <label for="user-rating-1"
-                            ><span class="rating-active-icon"
-                              ><i class="fas fa-star"></i></span
-                            ><span class="rating-icon"
-                              ><i class="far fa-star"></i></span
-                          ></label>
-                        </div>
-                      </div>
+                </div>
+              </div>
+              <div
+                class="top-separator out-lg"
+                data-inview-showup="showup-translate-up"></div>
+              <form data-inview-showup="showup-translate-up">
+                <h4 class="text-upper">Add a review</h4>
+                <p>
+                  Your email address will not be published. Required fields
+                  are marked *
+                </p>
+                <div class="field-group field-line">
+                  <label class="default-color">Your Rating</label>
+                  <div class="rating-field">
+                    <div class="pull-left">
+                      <input
+                        type="radio"
+                        id="user-rating-5"
+                        name="rating"
+                        value="5"
+                        checked="checked" />
+                      <label for="user-rating-5"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
+                      <input
+                        type="radio"
+                        id="user-rating-4"
+                        name="rating"
+                        value="4" />
+                      <label for="user-rating-4"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
+                      <input
+                        type="radio"
+                        id="user-rating-3"
+                        name="rating"
+                        value="3" />
+                      <label for="user-rating-3"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
+                      <input
+                        type="radio"
+                        id="user-rating-2"
+                        name="rating"
+                        value="2" />
+                      <label for="user-rating-2"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
+                      <input
+                        type="radio"
+                        id="user-rating-1"
+                        name="rating"
+                        value="1" />
+                      <label for="user-rating-1"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
                     </div>
-                    <div class="row cols-md rows-md offs-md">
-                      <div class="sm-col-6">
-                        <div class="field-group">
-                          <div class="field-wrap">
-                            <input
-                              class="field-control"
-                              name="name"
-                              placeholder="Name"
-                              required="required"
-                            />
-                            <span class="field-back"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="sm-col-6">
-                        <div class="field-group">
-                          <div class="field-wrap">
-                            <input
-                              class="field-control"
-                              name="email"
-                              type="email"
-                              placeholder="Email"
-                              required="required"
-                            />
-                            <span class="field-back"></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  </div>
+                </div>
+                <div class="row cols-md rows-md offs-md">
+                  <div class="sm-col-6">
                     <div class="field-group">
                       <div class="field-wrap">
-                        <textarea
+                        <input
                           class="field-control"
-                          name="message"
-                          placeholder="Message"
-                          required="required"
-                        ></textarea>
+                          name="name"
+                          placeholder="Name"
+                          required="required" />
                         <span class="field-back"></span>
                       </div>
                     </div>
-                    <div class="btn-block">
-                      <button class="btn text-upper" type="submit">
-                        add review
-                      </button>
+                  </div>
+                  <div class="sm-col-6">
+                    <div class="field-group">
+                      <div class="field-wrap">
+                        <input
+                          class="field-control"
+                          name="email"
+                          type="email"
+                          placeholder="Email"
+                          required="required" />
+                        <span class="field-back"></span>
+                      </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
-                <div
-                  class="tab-content"
-                  data-tab-content="additionalInformation"
-                >
-                 
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="top-separator out-lg"
-            data-inview-showup="showup-translate-up"
-          ></div>
-          
-        </section>
-      </div>
-    </div>
-    
-    <div
-      class="singlepage-block collapse alt-bg"
-      data-block="search"
-      data-show-block-class="animation-scale-top-right"
-      data-hide-block-class="animation-unscale-top-right"
-    >
-      <a href="#" class="close-link" data-close-block
-        ><i class="fas fa-times" aria-hidden="true"></i
-      ></a>
-      <div class="pos-v-center col-12">
-        <div class="container">
-          <form action="#">
-            <div class="row cols-md rows-md">
-              <div class="lg-col-9 md-col-8 sm-col-12">
                 <div class="field-group">
                   <div class="field-wrap">
-                    <input
+                    <textarea
                       class="field-control"
-                      name="search"
-                      placeholder="Search Tags"
-                      required="required"
-                    />
+                      name="message"
+                      placeholder="Message"
+                      required="required"></textarea>
                     <span class="field-back"></span>
                   </div>
                 </div>
-              </div>
-              <div class="lg-col-3 md-col-4 sm-col-6">
-                <button
-                  class="btn btns-white-bordered text-upper"
-                  type="submit"
-                >
-                  search
-                </button>
-              </div>
+                <div class="btn-block">
+                  <button class="btn text-upper" type="submit">
+                    add review
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
+            <div
+              class="tab-content"
+              data-tab-content="additionalInformation">
+
+            </div>
+          </div>
         </div>
       </div>
+      <div
+        class="top-separator out-lg"
+        data-inview-showup="showup-translate-up"></div>
+
+    </section>
+  </div>
+</div>
+
+<div
+  class="singlepage-block collapse alt-bg"
+  data-block="search"
+  data-show-block-class="animation-scale-top-right"
+  data-hide-block-class="animation-unscale-top-right">
+  <a href="#" class="close-link" data-close-block><i class="fas fa-times" aria-hidden="true"></i></a>
+  <div class="pos-v-center col-12">
+    <div class="container">
+      <form action="#">
+        <div class="row cols-md rows-md">
+          <div class="lg-col-9 md-col-8 sm-col-12">
+            <div class="field-group">
+              <div class="field-wrap">
+                <input
+                  class="field-control"
+                  name="search"
+                  placeholder="Search Tags"
+                  required="required" />
+                <span class="field-back"></span>
+              </div>
+            </div>
+          </div>
+          <div class="lg-col-3 md-col-4 sm-col-6">
+            <button
+              class="btn btns-white-bordered text-upper"
+              type="submit">
+              search
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="loader-block">
-      <div class="loader-back alt-bg"></div>
-      <div class="loader-image">
-        <img class="image" src="assets/images/parts/loader.gif" alt="" />
-      </div>
-    </div>
+  </div>
+</div>
+<div class="loader-block">
+  <div class="loader-back alt-bg"></div>
+  <div class="loader-image">
+    <img class="image" src="assets/images/parts/loader.gif" alt="" />
+  </div>
+</div>
 
 
 
-    <script>
-  $(document).ready(function () {
-    $('.btn-add-to-cart').off('click').on('click', function (e) {
+<script>
+  $(document).ready(function() {
+    $('.btn-add-to-cart').off('click').on('click', function(e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
       $.ajax({
         url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
         method: 'POST',
+        dataType: 'json',
         data: {
           id: productId
         },
-        success: function (response) {
+        success: function(response) {
           // Xử lý sau khi thêm thành công
           alert('Đã thêm sản phẩm vào giỏ hàng!');
           // Hoặc bạn có thể cập nhật số lượng giỏ hàng ở header, etc.
+          const htmlString = response.html;
+
+          // Tạo DOM tạm
+          const $temp = $('<div>').html(htmlString);
+
+          // Lấy phần nội dung bên trong .items
+          const newItemsContent = $temp.find('.cart-inner-inner').html();
+
+          // Cập nhật vào DOM thật
+          $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
         },
-        error: function () {
+        error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });
