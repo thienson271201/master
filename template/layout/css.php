@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <link href="assets/animate.css/animate.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/fontawesome/css/all.min.css" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet" />

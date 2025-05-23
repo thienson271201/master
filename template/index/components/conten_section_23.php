@@ -31,8 +31,7 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
             $phan_tram = round((($san_pham['gia_goc'] - $san_pham['gia_sau_khuyen_mai']) / $san_pham['gia_goc']) * 100);
             if ($phan_tram > 1): ?>
               <div class="item-lables">
-                <a class="item-label-sale item-label" href="#">Giảm giá <?=
-                                                                        $phan_tram ?>%</a>
+                <a class="item-label-sale item-label" href="#">Giảm giá <?= $phan_tram ?>%</a>
               </div>
             <?php endif; ?>
             <a href="<?= $san_pham['duong_dan'] ?>" class="item-image responsive-1by1">

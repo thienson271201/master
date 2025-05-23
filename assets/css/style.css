@@ -8,3 +8,9 @@
   z-index: 9999;
   cursor: pointer;
 }
+
+.tabs-danh-muc{
+  display: flex;
+  justify-content: space-around;
+}
+
