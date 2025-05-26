@@ -8,15 +8,15 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
 <!-- content-section -->
 <section class="content-section">
   <div class="container">
-    <div class="section-head text-center container-md">
+    <div class="section-head text-left container-md">
       <h2
         class="section-title text-upper text-lg"
         data-inview-showup="showup-translate-right">
-        Laptop mới nhất
+        Deal Laptop cực sốc
       </h2>
-      <p data-inview-showup="showup-translate-left">
+      <!-- <p data-inview-showup="showup-translate-left">
         Những mẫu laptop mới nhất với giá tốt nhất
-      </p>
+      </p> -->
     </div>
     <div class="row rows-stuck-2 cols-stuck-2">
       <?php

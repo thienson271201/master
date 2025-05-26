@@ -7,13 +7,13 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
 ?>
 <section class="content-section">
     <div class="container">
-        <div class="section-head text-center container-md">
+        <div class="section-head text-left container-md">
       <h2 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
-        Sản phẩm nổi bật
+        Laptop theo phong cách của bạn
       </h2>
-      <p data-inview-showup="showup-translate-left">
+      <!-- <p data-inview-showup="showup-translate-left">
         Một số sản phẩm tốt nhất của chúng tôi
-      </p>
+      </p> -->
     </div>
         <ul class="tabs-danh-muc nav nav-tabs mb-4" id="category-tabs">
             <li class="nav-item"><a class="nav-link active" href="#" data-category="all">Tất cả</a></li>

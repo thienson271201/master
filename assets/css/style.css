@@ -9,8 +9,45 @@
   cursor: pointer;
 }
 
-.tabs-danh-muc{
+/* .tabs-danh-muc{
   display: flex;
   justify-content: space-around;
+} */
+
+.tabs-danh-muc {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* khoảng cách giữa các tab */
+  flex-wrap: nowrap; /* không cho xuống dòng */
+  overflow-x: auto; /* nếu nhỏ quá thì cuộn ngang */
 }
 
+.tabs-danh-muc .nav-item {
+  flex: 1; /* chia đều độ rộng 3 tab */
+  text-align: center;
+}
+
+.tabs-danh-muc .nav-link {
+  display: block;
+  font-weight: 500;
+  color: #333;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  padding: 10px 16px;
+  white-space: nowrap; /* tránh ngắt dòng */
+}
+
+.tabs-danh-muc .nav-link:hover {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+  background-color: #f8f9fa;
+}
+
+.tabs-danh-muc .nav-link.active {
+  color: #007bff;
+  font-weight: 600;
+  border-bottom: 2px solid #007bff;
+  background-color: #e9ecef;
+  border-radius: 5px 5px 0 0;
+}

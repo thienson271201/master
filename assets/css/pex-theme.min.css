@@ -7,7 +7,7 @@ body .raleway-semi-bold,
 body .raleway-bold,
 body .raleway-extra-bold,
 body .raleway-black {
-  font-family: "Raleway" !important;
+  font-family: Roboto !important;
 }
 body .raleway-light {
   font-weight: 300;
@@ -55,7 +55,7 @@ body .raleway-black {
 }
 
 .body {
-  font-family: Raleway;
+  font-family: Roboto;
   color: #666;
   font-size: 14px;
   line-height: 1.2;

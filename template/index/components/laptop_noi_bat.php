@@ -11,13 +11,13 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
 <!-- Phần sản phẩm nổi bật -->
 <section class="content-section">
   <div class="container">
-    <div class="section-head text-center container-md">
+    <div class="section-head text-left container-md">
       <h2 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
-        Sản phẩm nổi bật
+        Top Laptop được săn đón
       </h2>
-      <p data-inview-showup="showup-translate-left">
+      <!-- <p data-inview-showup="showup-translate-left">
         Một số sản phẩm tốt nhất của chúng tôi
-      </p>
+      </p> -->
     </div>
     <div class="pos-relative">
       <div class="owl-carousel owl-list-product-stick" data-autoplay="false" data-owl-section-arrows="true"
