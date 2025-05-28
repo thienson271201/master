@@ -37,10 +37,10 @@ body .raleway-black {
   font-size: 14px; /* Giảm kích thước chữ */
   font-family:'Times New Roman';
   color: #333;
-  margin: 6px 0; /* Giảm khoảng cách giữa bảng và các phần khác */
+  margin: 6px 10px; /* Giảm khoảng cách giữa bảng và các phần khác */
   text-align: left;
   border: 1px solid #ddd;
-  width: 90%; /* Giảm chiều rộng để không chiếm quá nhiều không gian */
+   /* Giảm chiều rộng để không chiếm quá nhiều không gian */
   border-left: 4px solid #007bff;
 }
 
