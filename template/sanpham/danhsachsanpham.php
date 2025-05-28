@@ -1,4 +1,11 @@
-    <section class="with-bg solid-section">
+ <?php
+$list_san_pham = $db->getRaw('select * from san_pham ');
+
+// echo '<pre>';
+// print_r ($list_san_pham);
+// echo '</pre>';
+?>
+ <section class="with-bg solid-section">
       <div
         class="fix-image-wrap"
         data-image-src="./assets/images/service/tools.jpg"
@@ -73,50 +80,135 @@
               </div>
             </div>
           </form>
-          <div class="row cols-md rows-md">
-            <div class="md-col-6">
-              <?php include "sanPham.php" ?>
-            </div>
-            <div class="md-col-6">
-            <?php include "sanPham.php" ?>
-            </div>
-            <div class="md-col-6">
+          <div class="row rows-stuck-2 cols-stuck-2">
+            <div class="md-col-4">
               <div
-                class="item shop-item shop-item-simple"
-                data-inview-showup="showup-scale"
-              >
-                <div class="item-back"></div>
-                <a href="shop-item.html" class="item-image responsive-1by1"
-                  ><img
-                    src="assets/images/shop/laptop-ac-power-adapter.jpg"
-                    alt=""
-                /></a>
-                <div class="item-content shift-md">
-                  <div class="item-textes">
-                    <div class="item-title text-upper">
-                      <a href="shop-item.html" class="content-link"
-                        >Laptop Power Adapter</a
-                      >
-                    </div>
-                    <div class="item-categories">
-                      <a href="shop-category.html" class="content-link"
-                        >accessories</a
-                      >
-                    </div>
-                  </div>
-                  <div class="item-prices">
-                    <div class="item-price">$45.05</div>
-                  </div>
+              class="item shop-item shop-item-short item-dash-border"
+              data-inview-showup="showup-scale"
+            >
+              <div class="item-back"></div>
+              <div class="item-lables">
+                <a class="item-label-sale item-label" href="#">Giảm giá</a>
+              </div>
+              <a href="shop-item.html" class="item-image responsive-1by1">
+                <img
+                  src="https://lh3.googleusercontent.com/FmwdqeH5jZljx0HLQ30G2FLA2emY-SxLgSmOPg-i8pRow7ahxrPe3cZtCiguFp0kWMzb7QEy1zdDV6GnNUWGg374NYhG-xID=w1000-rw"
+                  alt="MacBook Air M2"
+                />
+              </a>
+              <div class="item-content text-center">
+                <div class="item-title text-upper mb-0">
+                  <a href="shop-item.html" class="content-link"
+                    >MacBook Air M2</a
+                  >
+                </div>
+                <div class="item-specs">
+                  <p><strong>CPU:</strong> Apple M2</p>
+                  <p><strong>RAM:</strong> 8GB</p>
+                  <p><strong>Card đồ họa:</strong> GPU Apple 10-core</p>
+                  <p><strong>Ổ cứng:</strong> 256GB SSD</p>
+                  <p><strong>Màn hình:</strong> Retina 13.3 inch</p>
+                </div>
+                <div class="item-prices">
+                  <div class="item-price">27.990.000 d</div>
+                  <div class="item-old-price">32.990.000 d</div>
                 </div>
                 <div class="item-links">
-                  <a
-                    href="shop-item.html"
-                    class="btn text-upper btn-md btns-bordered"
-                    >view</a
-                  >
-                  <a href="#" class="btn text-upper btn-md">add to cart</a>
+                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                    <i class="fas fa-heart"></i>
+                  </a>
                 </div>
               </div>
+            </div>
+            </div>
+            <div class="md-col-4">
+            <div
+              class="item shop-item shop-item-short item-dash-border"
+              data-inview-showup="showup-scale"
+            >
+              <div class="item-back"></div>
+              <div class="item-lables">
+                <a class="item-label-sale item-label" href="#">Giảm giá</a>
+              </div>
+              <a href="shop-item.html" class="item-image responsive-1by1">
+                <img
+                  src="https://lh3.googleusercontent.com/FmwdqeH5jZljx0HLQ30G2FLA2emY-SxLgSmOPg-i8pRow7ahxrPe3cZtCiguFp0kWMzb7QEy1zdDV6GnNUWGg374NYhG-xID=w1000-rw"
+                  alt="MacBook Air M2"
+                />
+              </a>
+              <div class="item-content text-center">
+                <div class="item-title text-upper mb-0">
+                  <a href="shop-item.html" class="content-link"
+                    >MacBook Air M2</a
+                  >
+                </div>
+                <div class="item-specs">
+                  <p><strong>CPU:</strong> Apple M2</p>
+                  <p><strong>RAM:</strong> 8GB</p>
+                  <p><strong>Card đồ họa:</strong> GPU Apple 10-core</p>
+                  <p><strong>Ổ cứng:</strong> 256GB SSD</p>
+                  <p><strong>Màn hình:</strong> Retina 13.3 inch</p>
+                </div>
+                <div class="item-prices">
+                  <div class="item-price">27.990.000 d</div>
+                  <div class="item-old-price">32.990.000 d</div>
+                </div>
+                <div class="item-links">
+                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                    <i class="fas fa-heart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="md-col-4">
+              <div
+              class="item shop-item shop-item-short item-dash-border"
+              data-inview-showup="showup-scale"
+            >
+              <div class="item-back"></div>
+              <div class="item-lables">
+                <a class="item-label-sale item-label" href="#">Giảm giá</a>
+              </div>
+              <a href="shop-item.html" class="item-image responsive-1by1">
+                <img
+                  src="https://lh3.googleusercontent.com/FmwdqeH5jZljx0HLQ30G2FLA2emY-SxLgSmOPg-i8pRow7ahxrPe3cZtCiguFp0kWMzb7QEy1zdDV6GnNUWGg374NYhG-xID=w1000-rw"
+                  alt="MacBook Air M2"
+                />
+              </a>
+              <div class="item-content text-center">
+                <div class="item-title text-upper mb-0">
+                  <a href="shop-item.html" class="content-link"
+                    >MacBook Air M2</a
+                  >
+                </div>
+                <div class="item-specs">
+                  <p><strong>CPU:</strong> Apple M2</p>
+                  <p><strong>RAM:</strong> 8GB</p>
+                  <p><strong>Card đồ họa:</strong> GPU Apple 10-core</p>
+                  <p><strong>Ổ cứng:</strong> 256GB SSD</p>
+                  <p><strong>Màn hình:</strong> Retina 13.3 inch</p>
+                </div>
+                <div class="item-prices">
+                  <div class="item-price">27.990.000 d</div>
+                  <div class="item-old-price">32.990.000 d</div>
+                </div>
+                <div class="item-links">
+                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
+                    <i class="fas fa-heart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
             </div>
             <div class="md-col-6">
               <div
