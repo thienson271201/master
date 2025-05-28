@@ -97,3 +97,40 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
         filterProducts('all');
     });
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('.btn-add-to-cart').off('click').on('click', function(e) {
+      e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
+      let productId = $(this).data('id');
+
+      $.ajax({
+        url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
+        method: 'POST',
+        dataType: 'json',
+        data: {
+          id: productId
+        },
+        success: function(response) {
+          // Xử lý sau khi thêm thành công
+          alert('Đã thêm sản phẩm vào giỏ hàng!');
+          console.log(response.html);
+          const htmlString = response.html;
+
+          // Tạo DOM tạm
+          const $temp = $('<div>').html(htmlString);
+
+          // Lấy phần nội dung bên trong .items
+          const newItemsContent = $temp.find('.cart-inner-inner').html();
+
+          // Cập nhật vào DOM thật
+          $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
+
+        },
+        error: function() {
+          alert('Đã xảy ra lỗi, vui lòng thử lại.');
+        }
+      });
+    });
+  });
+</script>

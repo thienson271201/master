@@ -54,24 +54,37 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
   </div>
 </section>
 
+
 <script>
-  $(document).ready(function () {
-    $('.btn-add-to-cart').off('click').on('click', function (e) {
+  $(document).ready(function() {
+    $('.btn-add-to-cart').off('click').on('click', function(e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
       $.ajax({
         url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
         method: 'POST',
+        dataType: 'json',
         data: {
           id: productId
         },
-        success: function (response) {
+        success: function(response) {
           // Xử lý sau khi thêm thành công
           alert('Đã thêm sản phẩm vào giỏ hàng!');
-          // Hoặc bạn có thể cập nhật số lượng giỏ hàng ở header, etc.
+          console.log(response.html);
+          const htmlString = response.html;
+
+          // Tạo DOM tạm
+          const $temp = $('<div>').html(htmlString);
+
+          // Lấy phần nội dung bên trong .items
+          const newItemsContent = $temp.find('.cart-inner-inner').html();
+
+          // Cập nhật vào DOM thật
+          $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
+
         },
-        error: function () {
+        error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });

@@ -21,7 +21,13 @@
 
     <!-- Giỏ hàng hover -->
     <?php require_once TEMPLATE . LAYOUT . "giohang.php" ?>
-
+    <a href="#" class="scroll-top disabled"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+    <div class="loader-block">
+        <div class="loader-back alt-bg"></div>
+        <div class="loader-image">
+            <img class="image" src="assets/images/parts/loader.gif" alt="" />
+        </div>
+    </div>
     <!-- Footer -->
     <?php require_once TEMPLATE . LAYOUT . "footer.php" ?>
 
