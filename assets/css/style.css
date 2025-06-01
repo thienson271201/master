@@ -17,13 +17,17 @@
 .tabs-danh-muc {
   display: flex;
   justify-content: space-between;
-  gap: 10px; /* khoảng cách giữa các tab */
-  flex-wrap: nowrap; /* không cho xuống dòng */
-  overflow-x: auto; /* nếu nhỏ quá thì cuộn ngang */
+  gap: 10px;
+  /* khoảng cách giữa các tab */
+  flex-wrap: nowrap;
+  /* không cho xuống dòng */
+  overflow-x: auto;
+  /* nếu nhỏ quá thì cuộn ngang */
 }
 
 .tabs-danh-muc .nav-item {
-  flex: 1; /* chia đều độ rộng 3 tab */
+  flex: 1;
+  /* chia đều độ rộng 3 tab */
   text-align: center;
 }
 
@@ -35,7 +39,8 @@
   border-bottom: 2px solid transparent;
   transition: all 0.3s ease;
   padding: 10px 16px;
-  white-space: nowrap; /* tránh ngắt dòng */
+  white-space: nowrap;
+  /* tránh ngắt dòng */
 }
 
 .tabs-danh-muc .nav-link:hover {
@@ -51,3 +56,46 @@
   background-color: #e9ecef;
   border-radius: 5px 5px 0 0;
 }
+
+
+/* .contact .hook h3::after {
+    display: none;
+}
+.contact {
+    margin-bottom: 20px;
+}
+
+.contact img {
+    height: 550px;
+}
+.contact p {
+    color: rgb(148, 146, 146);
+}
+.contact .info h3 {
+    font-family: var(--font-sencondary);
+    padding-top: 25px;
+}
+.contact .info p {
+    font-size: 18px;
+}
+.contact .name {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.contact .title {
+    margin: 0px;
+}
+.contact .name input {
+    width: 100%;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    background-color: rgb(217, 217, 217);
+}
+
+.contact .map {
+    width: 100%;
+    border: 1px solid orange;
+    padding: 5px;
+} */

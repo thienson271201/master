@@ -54,6 +54,11 @@ if (!$get_status)
             require_once TEMPLATE . 'new/new_list_tpl.php';
             $noidung = ob_get_clean();
             break;
+        case 'lien-he':
+            $title = 'Liên hệ';
+            require_once TEMPLATE . 'lienhe/lienhe.php';
+            $noidung = ob_get_clean();
+            break;
         // Đăng ký
         case 'dang-ky':
             $title = 'Đăng Ký';

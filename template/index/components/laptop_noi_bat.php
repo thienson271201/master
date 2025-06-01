@@ -15,9 +15,6 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
       <h2 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
         Top Laptop được săn đón
       </h2>
-      <!-- <p data-inview-showup="showup-translate-left">
-        Một số sản phẩm tốt nhất của chúng tôi
-      </p> -->
     </div>
     <div class="pos-relative">
       <div class="owl-carousel owl-list-product-stick" data-autoplay="false" data-owl-section-arrows="true"
@@ -27,6 +24,13 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
           ?>
           <div class="item shop-item shop-item-short item-dash-border" data-inview-showup="showup-scale">
             <div class="item-back"></div>
+            <?php
+            $phan_tram = round((($noi_bat['gia_goc'] - $noi_bat['gia_sau_khuyen_mai']) / $noi_bat['gia_goc']) * 100);
+            if ($phan_tram > 1): ?>
+              <div class="item-lables">
+                <a class="item-label-sale item-label" href="#">-<?= $phan_tram ?>%</a>
+              </div>
+            <?php endif; ?>
             <a href="<?= $noi_bat['duong_dan'] ?>" class="item-image responsive-1by1">
               <img src="upload/images/<?= $noi_bat['hinh_anh'] ?>" alt="" />
             </a>

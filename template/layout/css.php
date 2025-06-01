@@ -7,7 +7,7 @@
 <link href="assets/chosen/chosen.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/jquery-ui-custom/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/pentix/css/pentix.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/css/pex-theme.min.css?v=12" rel="stylesheet" type="text/css" />
+<link href="assets/css/pex-theme.min.css" rel="stylesheet" type="text/css" />
 
 <!-- <link rel="stylesheet" href="assets/css/style.css?v=<?= rand(10, 99) ?>"> -->
 <link rel="stylesheet" href="assets/css/style.css">

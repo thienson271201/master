@@ -14,7 +14,7 @@
                     Miễn phí vận chuyển
                   </div>
                   <div class="feature-text">
-                    Miễn phí vận chuyển cho đơn hàng trên 5.000.000đ
+                    Miễn phí vận chuyển cho tất cả đơn hàng.
                   </div>
                 </div>
               </div>

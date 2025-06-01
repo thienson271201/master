@@ -4816,7 +4816,7 @@ body.body .text-valid {
 .page-path li {
   font-family: Montserrat;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 15px;
   float: left;
 }
 .page-path li a {
@@ -5200,7 +5200,7 @@ body.body .text-valid {
 } /* shop items, featured */
 .item-label {
   padding: 5px 10px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.2;
   color: #fff;
   background: #666;

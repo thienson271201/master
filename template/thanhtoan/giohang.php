@@ -26,7 +26,7 @@
 </section>
 <?php
 if (isset($_SESSION['gio_hang'])):
-    ?>
+?>
     <section class="content-section">
         <div class="container">
             <form method="POST">
@@ -47,7 +47,7 @@ if (isset($_SESSION['gio_hang'])):
                             $id = $item['id'];
                             $sanphamgiohang = $db->oneRaw("select * from san_pham where id = $id");
                             $tong += $sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']
-                                ?>
+                        ?>
                             <div class="item cart-item-line" data-inview-showup="showup-translate-up">
                                 <div class="item-image">
                                     <div class="responsive-1by1">
@@ -82,7 +82,7 @@ if (isset($_SESSION['gio_hang'])):
                                     <a href="#" class="remove"><i class="fas fa-times"></i></a>
                                 </div>
                             </div>
-                            <?php
+                        <?php
                         endforeach;
                         ?>
                     </div>
@@ -131,42 +131,40 @@ if (isset($_SESSION['gio_hang'])):
                             <div class="value text-colorful text-bold"><?= $f->format_tiente($tong) ?>₫</div>
                         </div>
                         <div class="top-separator out-lg"></div>
-                        <a href="checkout.html" class="btn text-upper col-12">Tiến hành thanh toán</a>
+                        <a href="./thanh-toan" class="btn text-upper col-12">Tiến hành thanh toán</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <?php
+<?php
 else:
-    ?>
+?>
     <section class="text-center content-section">
         <div class="container">
-            <img class="image offs-md" src="assets/images/error/404.png" alt="" data-inview-showup="showup-scale" />
+            <!-- <img class="image offs-md" src="assets/images/error/404.png" alt="" data-inview-showup="showup-scale" /> -->
             <div class="section-head text-center container-md">
-
                 <p data-inview-showup="showup-translate-left">
-                    Giỏ hàng của bạn còn trống
+                    Bạn chưa có sản phẩm nào trong giỏ hàng của mình.
                 </p>
             </div>
             <a class="btn text-upper" href="./" data-inview-showup="showup-translate-up">Quay về trang chủ</a>
         </div>
     </section>
-
-    <?php
+<?php
 endif;
 ?>
 <script>
-    $('#btn-xoa-gio-hang').on('click', function () {
+    $('#btn-xoa-gio-hang').on('click', function() {
         if (confirm('Bạn chắc chắn muốn xóa giỏ hàng?')) {
             $.ajax({
                 url: 'api/xoa_gio_hang.php',
                 type: 'POST',
-                success: function (response) {
+                success: function(response) {
                     alert('Đã xóa giỏ hàng.');
                     location.reload();
                 },
-                error: function () {
+                error: function() {
                     alert('Đã xảy ra lỗi khi xóa giỏ hàng.');
                 }
             });
@@ -174,15 +172,15 @@ endif;
     });
 </script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Lắng nghe khi bấm nút + hoặc -
-        $('.field-increment, .field-decrement').on('click', function () {
+        $('.field-increment, .field-decrement').on('click', function() {
             // Tìm ô input số lượng gần nhất
             const $wrap = $(this).closest('.field-wrap');
             const $input = $wrap.find('input[name="quantity"]');
 
             // Chờ 100ms để template cập nhật giá trị xong
-            setTimeout(function () {
+            setTimeout(function() {
                 const productId = $input.data('id');
                 const quantity = parseInt($input.val());
 
@@ -195,7 +193,7 @@ endif;
                 $.post('api/cap_nhat_so_luong.php', {
                     id: productId,
                     quantity: quantity
-                }, function (response) {
+                }, function(response) {
                     console.log('Server response:', response);
                     if (response.success) {
                         $wrap.closest('.cart-item-line').find('.item-total').text(response.item_total + '₫');
