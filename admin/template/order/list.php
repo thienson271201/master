@@ -1,5 +1,5 @@
 <?php
-$list_order = $db->getRaw("SELECT * FROM orders");
+$list_order = $db->getRaw("SELECT * FROM don_hang");
 $smg = getFlashData('smg');
 ?>
 
@@ -59,18 +59,28 @@ $smg = getFlashData('smg');
                         <tbody>
                             <?php
                             foreach ($list_order as $item):
+                                if($item['khach_hang_id']!="")
+                                {
+                                    $id=$item['khach_hang_id'];
+                                    $khach_hang_profile=$db->oneRaw("SELECT * FROM khach_hang WHERE id=$id");
+                                    $ten_khach_hang=$khach_hang_profile['ten_khach_hang'];
+                                }
+                                else
+                                {
+                                    $ten_khach_hang=$item['ten_khach_hang'];
+                                }
                                 ?>
                                 <tr>
-                                    <td class="text-center"><?= $item['code'] ?></td>
+                                    <td class="text-center"><?= $item['ma_don_hang'] ?></td>
                                     <td>
                                         <a class="text-decoration-none fw-bold text-black"
                                             href="?com=order&act=edit&id=<?= $item['id'] ?>">
-                                            <?= $item['fullname'] ?>
+                                            <?= $ten_khach_hang ?>
                                         </a>
                                     </td>
-                                    <td><?= date('d-m-Y H:i:s', strtotime($item['create_at'])) ?></td>
-                                    <td class="fw-bold text-end"><?= $func->format_tiente($item['total_price']) ?>đ</td>
-                                    <td class="fw-bold text-center"><?= $func->status_order($item['status']) ?></td>
+                                    <td><?= date('d-m-Y H:i:s', strtotime($item['ngay_tao'])) ?></td>
+                                    <td class="fw-bold text-end"><?= $func->format_tiente($item['tong_tien']) ?>đ</td>
+                                    <td class="fw-bold text-center"><?= $func->status_order($item['trang_thai']) ?></td>
                                     <td class="text-center">
                                         <a href="?com=order&act=edit&id=<?= $item['id'] ?>" class="btn btn-warning btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>

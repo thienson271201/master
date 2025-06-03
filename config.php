@@ -10,11 +10,9 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 
 /* Cấu hình http */
-if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
-{
+if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
     $http = 'https://';
-} else
-{
+} else {
     $http = 'http://';
 }
 
@@ -48,3 +46,12 @@ class DatabaseConfig
         return $conn;
     }
 }
+
+$vnp_TmnCode = "1V2PX8I5"; //Mã định danh merchant kết nối (Terminal Id)
+$vnp_HashSecret = "OBZFKP3IPO5DEO555RIEPCDBDEJDUB3R"; //Secret key
+$vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+$vnp_Returnurl = "http://localhost/master/thanh-toan";
+//Config input format
+//Expire
+$startTime = date("YmdHis");
+$expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));

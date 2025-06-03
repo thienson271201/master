@@ -9,9 +9,17 @@ if ($f->isPOST()) {
         'ma_don_hang' => $madonhang,
         'hinh_thuc_thanh_toan' => $filterAll['phuong_thuc_thanh_toan'],
         'ghi_chu' => $filterAll['ghi_chu'],
+        'tong_tien' => $filterAll['tong_tien'],
         'trang_thai' => 1,
         'ngay_tao' => date('Y-m-d H:i:s'),
     ];
+    if ($f->isLogin()) {
+        $data_insert['khach_hang_id'] = getSession('khach_hang_id');
+    }
+    if($filterAll['phuong_thuc_thanh_toan']=='vnpay')
+    {
+        require_once 'vnpay/vnpay_create_payment.php';
+    }
     $db->insert('don_hang', $data_insert);
     $don_hang_id = $db->getLastInsertId();
     foreach ($_SESSION['gio_hang'] as $key => $value) {
@@ -258,6 +266,7 @@ if ($f->isLogin()) {
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="tong_tien" value="<?= $tong_tien ?>">
                     <button class="btn text-upper shift-md col-12 md-col-8 lg-col-6" type="submit">
                         Thanh toán
                     </button>

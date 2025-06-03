@@ -1,12 +1,9 @@
 <?php
 // Lấy ID
 $id = $func->filter()['id'];
-// Lấy dữ liệu bảng orders
-$order = $db->oneRaw("SELECT * FROM orders WHERE id = '$id'");
-$code = $order['code'];
 // Xoá bảng order_details
-$db->delete('order_details', "code = '$code'");
+$db->delete('chi_tiet_don_hang', "don_hang_id = '$id'");
 // Xoá bảng orders
-$db->delete('orders', "id = '$id'");
+$db->delete('don_hang', "id = '$id'");
 setFlashData('smg', 'Đã xoá thành công đơn hàng');
 $func->redirect('?com=order&act=list');
