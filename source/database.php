@@ -27,6 +27,10 @@ class Database
         // die();
         return $this->conn->query($sql);
     }
+    //hàm lấy id của bản ghi vừa insert
+    public function getLastInsertId() {
+        return $this->conn->insert_id;
+    }
     //hàm cập nhật(sửa)
     public function update($table, $data, $condition = '')
     {
