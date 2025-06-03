@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 25, 2025 lúc 05:12 AM
+-- Thời gian đã tạo: Th6 03, 2025 lúc 04:46 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -101,7 +101,37 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (145, 1, '062c931110f36ec7df2ee099fec1d6bd544575bc', '2025-04-18 11:00:17'),
 (146, 1, '804574aae6e9aeab32df67fc3f829c537421c20f', '2025-05-24 00:25:41'),
 (147, 1, '6223f6b1929891865bf8c4a61b59770b4eb1bdc9', '2025-05-24 00:36:33'),
-(148, 1, 'a441ada805afe451e944f12bf5b29fc29eefbd90', '2025-05-25 08:45:29');
+(148, 1, 'a441ada805afe451e944f12bf5b29fc29eefbd90', '2025-05-25 08:45:29'),
+(149, 1, '8ac12dd25d0c7c57ea724317b319a4060922294d', '2025-05-28 21:10:16');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chi_tiet_don_hang`
+--
+
+CREATE TABLE `chi_tiet_don_hang` (
+  `id` int(11) NOT NULL,
+  `don_hang_id` int(11) NOT NULL,
+  `san_pham_id` int(11) NOT NULL,
+  `so_luong` int(11) NOT NULL,
+  `don_gia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
+--
+
+INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`, `don_gia`) VALUES
+(1, 8, 5, 1, 0),
+(2, 9, 5, 1, 0),
+(3, 10, 5, 1, 0),
+(4, 11, 9, 2, 0),
+(5, 11, 3, 3, 0),
+(8, 12, 9, 2, 0),
+(9, 12, 3, 3, 0),
+(10, 13, 9, 2, 0),
+(11, 13, 3, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -136,6 +166,47 @@ CREATE TABLE `danh_muc_san_pham` (
 INSERT INTO `danh_muc_san_pham` (`id`, `duong_dan`, `ten_danh_muc`, `ngay_tao`, `ngay_cap_nhat`) VALUES
 (2, 'laptop-van-phong', 'Laptop Văn Phòng', NULL, NULL),
 (3, 'laptop-gaming', 'Laptop Gaming', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `don_hang`
+--
+
+CREATE TABLE `don_hang` (
+  `id` int(11) NOT NULL,
+  `ma_don_hang` varchar(10) DEFAULT NULL,
+  `khach_hang_id` int(11) DEFAULT NULL,
+  `ten_khach_hang` varchar(200) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `so_dien_thoai` varchar(10) DEFAULT NULL,
+  `dia_chi` varchar(200) DEFAULT NULL,
+  `ghi_chu` mediumtext DEFAULT NULL,
+  `tong_tien` double DEFAULT NULL,
+  `hinh_thuc_thanh_toan` varchar(10) DEFAULT NULL,
+  `trang_thai` int(11) DEFAULT NULL,
+  `ngay_tao` timestamp NULL DEFAULT NULL,
+  `ngay_cap_nhat` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hang`
+--
+
+INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, `email`, `so_dien_thoai`, `dia_chi`, `ghi_chu`, `tong_tien`, `hinh_thuc_thanh_toan`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(1, '9', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'KFH8INUQ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'N83GCG1Q', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL),
+(4, '9VC267H0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cod', NULL, NULL, NULL),
+(5, 'ASON9Q45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cod', 1, '2025-06-03 03:25:53', NULL),
+(6, 'M8V38222', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cod', 1, '2025-06-03 03:33:30', NULL),
+(7, 'DT7INRP1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cod', 1, '2025-06-03 03:33:37', NULL),
+(8, 'JXKNUFH1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cod', 1, '2025-06-03 03:35:36', NULL),
+(9, '6AAF5LVP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'check', 1, '2025-06-03 03:35:39', NULL),
+(10, '785WUN4R', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'check', 1, '2025-06-03 03:36:48', NULL),
+(11, 'BNXEU42W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'transfer', 1, '2025-06-03 03:49:42', NULL),
+(12, 'K8SAZUBT', NULL, NULL, NULL, NULL, NULL, 'zzzzz', NULL, 'cod', 1, '2025-06-03 03:52:54', NULL),
+(13, 'TX5OG26W', NULL, NULL, NULL, NULL, NULL, 'zzzzz', NULL, 'cod', 1, '2025-06-03 03:53:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -193,7 +264,8 @@ CREATE TABLE `khach_hang` (
 
 INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
 (12, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, NULL, NULL, NULL, '$2y$10$1FHjfCOEn/tBsnHgKZUKNO3t9QUg06odhYqIjXS5bSfTnkBGH/hdm', NULL, '2025-04-19 13:56:15', NULL),
-(13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', NULL, NULL, NULL, NULL, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', NULL, '2025-05-25 01:49:37', NULL);
+(13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', NULL, NULL, NULL, NULL, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', NULL, '2025-05-25 01:49:37', NULL),
+(14, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$KXViUn63d6X3VaKMXy2MmuOWmMsXWkQKHCoHrR8N7mKgDXRojBkX.', NULL, '2025-05-30 16:51:34', '2025-06-03 02:55:32');
 
 -- --------------------------------------------------------
 
@@ -217,7 +289,10 @@ INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALU
 (14, 12, 'ea47b77be2fde055f94765e0e865e55da07069dd', '2025-04-19 14:36:13'),
 (15, 12, '11995c4426299992ecd547bc9c77676812f8c43d', '2025-04-19 14:44:01'),
 (16, 12, '2b8453e2304c1454ca580cde85a3288277b41302', '2025-04-19 15:22:39'),
-(17, 13, 'ed09c268ea801bd414f227dd755da30186c1a9e4', '2025-05-25 01:49:45');
+(17, 13, 'ed09c268ea801bd414f227dd755da30186c1a9e4', '2025-05-25 01:49:45'),
+(18, 14, 'f079e2446ee9179ddc5d08cd78034ded861dab4c', '2025-05-30 16:51:42'),
+(19, 14, 'dd372378663a3bf55267086130027ef1224c6498', '2025-06-01 05:08:47'),
+(20, 14, '66d72358687090845e272a0ea7b0b5ccbb73617e', '2025-06-03 02:52:09');
 
 -- --------------------------------------------------------
 
@@ -12009,6 +12084,14 @@ ALTER TABLE `admin_token`
   ADD KEY `admin_id` (`admin_id`);
 
 --
+-- Chỉ mục cho bảng `chi_tiet_don_hang`
+--
+ALTER TABLE `chi_tiet_don_hang`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `don_hang_id` (`don_hang_id`),
+  ADD KEY `san_pham_id` (`san_pham_id`);
+
+--
 -- Chỉ mục cho bảng `custommer`
 --
 ALTER TABLE `custommer`
@@ -12019,6 +12102,13 @@ ALTER TABLE `custommer`
 --
 ALTER TABLE `danh_muc_san_pham`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `don_hang`
+--
+ALTER TABLE `don_hang`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `khach_hang_id` (`khach_hang_id`);
 
 --
 -- Chỉ mục cho bảng `images`
@@ -12128,7 +12218,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+
+--
+-- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
+--
+ALTER TABLE `chi_tiet_don_hang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `custommer`
@@ -12143,6 +12239,12 @@ ALTER TABLE `danh_muc_san_pham`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT cho bảng `don_hang`
+--
+ALTER TABLE `don_hang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT cho bảng `images`
 --
 ALTER TABLE `images`
@@ -12152,13 +12254,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `news`
@@ -12223,6 +12325,19 @@ ALTER TABLE `thuong_hieu`
 --
 ALTER TABLE `admin_token`
   ADD CONSTRAINT `admin_token_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
+
+--
+-- Các ràng buộc cho bảng `chi_tiet_don_hang`
+--
+ALTER TABLE `chi_tiet_don_hang`
+  ADD CONSTRAINT `chi_tiet_don_hang_ibfk_1` FOREIGN KEY (`don_hang_id`) REFERENCES `don_hang` (`id`),
+  ADD CONSTRAINT `chi_tiet_don_hang_ibfk_2` FOREIGN KEY (`san_pham_id`) REFERENCES `san_pham` (`id`);
+
+--
+-- Các ràng buộc cho bảng `don_hang`
+--
+ALTER TABLE `don_hang`
+  ADD CONSTRAINT `don_hang_ibfk_1` FOREIGN KEY (`khach_hang_id`) REFERENCES `khach_hang` (`id`);
 
 --
 -- Các ràng buộc cho bảng `san_pham`
