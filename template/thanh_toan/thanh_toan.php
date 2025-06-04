@@ -46,7 +46,7 @@ if ($f->isLogin()) {
             <h1
                 class="section-title text-upper text-lg"
                 data-inview-showup="showup-translate-right">
-                Checkout
+                THANH TOÁN
             </h1>
         </div>
     </div>
@@ -61,7 +61,7 @@ if ($f->isLogin()) {
                 <li class="path-separator">
                     <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </li>
-                <li>Checkout</li>
+                <li>Thanh toán</li>
             </ul>
         </div>
     </div>
