@@ -1,9 +1,9 @@
 <?php
 if ($f->isPOST()) {
     $filterAll = $f->filter();
-    echo '<pre>';
-    print_r($filterAll);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($filterAll);
+    // echo '</pre>';
     $madonhang = $f->generateOrderCode();
     $data_insert = [
         'ma_don_hang' => $madonhang,
