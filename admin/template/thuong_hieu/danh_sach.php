@@ -42,7 +42,7 @@ $smg = getFlashData('smg');
             <div class="card card-primary card-outline mb-4">
                 <!--begin::Header-->
                 <div class="card-header">
-                    <a href="?com=brand&act=add" class="btn btn-success">Thêm mục</a>
+                    <a href="?com=thuong_hieu&act=them" class="btn btn-success">Thêm mục</a>
                 </div>
                 <!--end::Header-->
                 <div class="card-body">
@@ -74,7 +74,7 @@ $smg = getFlashData('smg');
 
                                     </td>
                                     <td>
-                                        <a href="?com=brand&act=edit&id=<?= $item['id'] ?>"
+                                        <a href="?com=thuong_hieu&act=sua&id=<?= $item['id'] ?>"
                                             class="text-decoration-none text-black">
                                             <?= $item['ten_thuong_hieu'] ?>
                                         </a>
@@ -88,11 +88,11 @@ $smg = getFlashData('smg');
                                             class="form-check-input highlight-checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <a href="?com=brand&act=edit&id=<?= $item['id'] ?>"
+                                        <a href="?com=thuong_hieu&act=sua&id=<?= $item['id'] ?>"
                                             class="btn btn-warning btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="?com=brand&act=delete&id=<?= $item['id'] ?>"
+                                        <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
                                             class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>

@@ -36,8 +36,8 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="?com=brand&act=list"
-                                class="nav-link <?= $com == 'brand' ? 'active' : '' ?>">
+                            <a href="?com=thuong_hieu&act=danh_sach"
+                                class="nav-link <?= $com == 'thuong_hieu' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Thương Hiệu</p>
                             </a>
@@ -59,7 +59,7 @@
                 </li>
                 <li class="nav-header">Quản lý đơn hàng</li>
                 <li class="nav-item">
-                    <a href="?com=order&act=list" class="nav-link <?= $com == 'order' ? 'active' : '' ?>">
+                    <a href="?com=don_hang&act=danh_sach" class="nav-link <?= $com == 'don_hang' ? 'active' : '' ?>">
                         <i class="nav-icon fa-solid fa-bag-shopping"></i>
                         <p>Quản lý đơn hàng</p>
                     </a>

@@ -74,7 +74,7 @@ $smg = getFlashData('smg');
                                     <td class="text-center"><?= $item['ma_don_hang'] ?></td>
                                     <td>
                                         <a class="text-decoration-none fw-bold text-black"
-                                            href="?com=order&act=edit&id=<?= $item['id'] ?>">
+                                            href="?com=don_hang&act=sua&id=<?= $item['id'] ?>">
                                             <?= $ten_khach_hang ?>
                                         </a>
                                     </td>
@@ -82,10 +82,10 @@ $smg = getFlashData('smg');
                                     <td class="fw-bold text-end"><?= $func->format_tiente($item['tong_tien']) ?>đ</td>
                                     <td class="fw-bold text-center"><?= $func->status_order($item['trang_thai']) ?></td>
                                     <td class="text-center">
-                                        <a href="?com=order&act=edit&id=<?= $item['id'] ?>" class="btn btn-warning btn-sm">
+                                        <a href="?com=don_hang&act=sua&id=<?= $item['id'] ?>" class="btn btn-warning btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="?com=order&act=delete&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">
+                                        <a href="?com=don_hang&act=xoa&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>

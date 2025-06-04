@@ -90,7 +90,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
             </div>
             <form class="out-lg">
               <div class="row cols-md rows-md">
-                <div class="sm-col-5">
+                <!-- <div class="sm-col-5">
                   <div class="field-group field-spin-sides">
                     <div class="field-wrap">
                       <input
@@ -114,8 +114,8 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                             aria-hidden="true"></i></span></span>
                     </div>
                   </div>
-                </div>
-                <div class="sm-col-7">
+                </div> -->
+                <div class="sm-col-12">
                   <button class="btn-add-to-cart btn text-upper col-12" data-id="<?= $product['id'] ?>">
                     <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp; Thêm vào giỏ hàng
                   </button>
