@@ -10,6 +10,6 @@
 <link href="assets/css/pex-theme.min.css" rel="stylesheet" type="text/css" />
 
 <!-- <link rel="stylesheet" href="assets/css/style.css?v=<?= rand(10, 99) ?>"> -->
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?=20">
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

@@ -70,7 +70,7 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
               <a href="san-pham">Sản phẩm</a>
             </li>
             <li>
-              <a href="shop-category.html">Tin tức</a>
+              <a href="tin-tuc">Tin tức</a>
             </li>
             <li>
               <a href="lien-he">Liên hệ</a>

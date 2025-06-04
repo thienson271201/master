@@ -51,12 +51,18 @@ if (!$get_status)
             $noidung = ob_get_clean();
             break;
         case 'tin-tuc':
-            require_once TEMPLATE . 'new/new_list_tpl.php';
+            $title = 'Tin tức';
+            require_once TEMPLATE . 'tin_tuc/tin_tuc.php';
+            $noidung = ob_get_clean();
+            break;
+        case 'chi-tiet-tin-tuc':
+            $title = 'Chi tiết tin tức';
+            require_once TEMPLATE . 'tin_tuc/chi_tiet_tin_tuc.php';
             $noidung = ob_get_clean();
             break;
         case 'lien-he':
             $title = 'Liên hệ';
-            require_once TEMPLATE . 'lienhe/lienhe.php';
+            require_once TEMPLATE . 'lien_he/lien_he.php';
             $noidung = ob_get_clean();
             break;
         // Đăng ký
@@ -126,6 +132,7 @@ if (!$get_status)
             require_once TEMPLATE . 'sanpham/danhsachsanpham.php';
             $noidung = ob_get_clean();
             break;
+        // Liên hệ
         case 'lien-he':
             require_once TEMPLATE . 'contact/contact_tpl.php';
             $title = 'Liên hệ';

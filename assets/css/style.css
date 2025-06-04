@@ -58,7 +58,7 @@
 }
 
 
-/* .contact .hook h3::after {
+.contact .hook h3::after {
     display: none;
 }
 .contact {
@@ -68,34 +68,42 @@
 .contact img {
     height: 550px;
 }
-.contact p {
-    color: rgb(148, 146, 146);
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
 }
-.contact .info h3 {
-    font-family: var(--font-sencondary);
-    padding-top: 25px;
+
+.contact-col {
+  flex: 1;
+  min-width: 300px;
 }
-.contact .info p {
-    font-size: 18px;
+
+.contact-left,
+.contact-right {
+  max-width: 48%;
+  flex-basis: 48%;
 }
-.contact .name {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+
+.contact-left h2,
+.contact-right h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
-.contact .title {
-    margin: 0px;
-}
-.contact .name input {
-    width: 100%;
-    padding: 10px 15px;
-    outline: none;
-    border: none;
-    background-color: rgb(217, 217, 217);
+
+.contact-col p {
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .contact .map {
-    width: 100%;
-    border: 1px solid orange;
-    padding: 5px;
-} */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 80%; /* hoặc 600px nếu bạn muốn cố định */
+  height: 450px;
+  border: 1px solid orange;
+}
