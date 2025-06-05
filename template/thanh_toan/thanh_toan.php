@@ -16,20 +16,11 @@ if ($f->isPOST()) {
     if ($f->isLogin()) {
         $data_insert['khach_hang_id'] = getSession('khach_hang_id');
     }
-    if($filterAll['phuong_thuc_thanh_toan']=='vnpay')
-    {
+    if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay') {
+        setFlashData('data_vnpay',$data_insert);
         require_once 'vnpay/vnpay_create_payment.php';
     }
-    $db->insert('don_hang', $data_insert);
-    $don_hang_id = $db->getLastInsertId();
-    foreach ($_SESSION['gio_hang'] as $key => $value) {
-        $data_insert = [
-            'don_hang_id' => $don_hang_id,
-            'san_pham_id' => $value['id'],
-            'so_luong' => $value['quantity'],
-        ];
-        $db->insert('chi_tiet_don_hang', $data_insert);
-    }
+   require_once 'cod/cod.php';
 }
 if ($f->isLogin()) {
     $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id='" . getSession('khach_hang_id') . "'");

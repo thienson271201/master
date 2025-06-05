@@ -33,8 +33,7 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg))
-            {
+            if (!empty($smg)) {
                 $func->getSmg($smg);
             }
             ?>
@@ -51,25 +50,23 @@ $smg = getFlashData('smg');
                                 <th width="10%" class="text-center">Mã đơn hàng</th>
                                 <th>Họ tên</th>
                                 <th width="150px" class="text-center">Ngày đặt</th>
-                                <th width="10%" class="text-center">Tổng giá</thư>
-                                <th width="15%" class="text-center">Tình trạng</th>
+                                <th width="10%" class="text-center">Tổng giá</th>
+                                <th width="10%" class="text-center">Hình thức</th>
+                                <th width="10%" class="text-center">Tình trạng</th>
                                 <th width=" 10%" class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             foreach ($list_order as $item):
-                                if($item['khach_hang_id']!="")
-                                {
-                                    $id=$item['khach_hang_id'];
-                                    $khach_hang_profile=$db->oneRaw("SELECT * FROM khach_hang WHERE id=$id");
-                                    $ten_khach_hang=$khach_hang_profile['ten_khach_hang'];
+                                if ($item['khach_hang_id'] != "") {
+                                    $id = $item['khach_hang_id'];
+                                    $khach_hang_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id=$id");
+                                    $ten_khach_hang = $khach_hang_profile['ten_khach_hang'];
+                                } else {
+                                    $ten_khach_hang = $item['ten_khach_hang'];
                                 }
-                                else
-                                {
-                                    $ten_khach_hang=$item['ten_khach_hang'];
-                                }
-                                ?>
+                            ?>
                                 <tr>
                                     <td class="text-center"><?= $item['ma_don_hang'] ?></td>
                                     <td>
@@ -79,7 +76,8 @@ $smg = getFlashData('smg');
                                         </a>
                                     </td>
                                     <td><?= date('d-m-Y H:i:s', strtotime($item['ngay_tao'])) ?></td>
-                                    <td class="fw-bold text-end"><?= $func->format_tiente($item['tong_tien']) ?>đ</td>
+                                    <td class="fw-bold text-center"><?= $func->format_tiente($item['tong_tien']) ?>đ</td>
+                                    <td style="text-transform: uppercase;" class="text-center fw-bold text-end"><?= $item['hinh_thuc_thanh_toan'] ?></td>
                                     <td class="fw-bold text-center"><?= $func->status_order($item['trang_thai']) ?></td>
                                     <td class="text-center">
                                         <a href="?com=don_hang&act=sua&id=<?= $item['id'] ?>" class="btn btn-warning btn-sm">
