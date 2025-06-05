@@ -57,17 +57,11 @@
   border-radius: 5px 5px 0 0;
 }
 
-
-.contact .hook h3::after {
-    display: none;
-}
+/* Tin tức */
 .contact {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.contact img {
-    height: 550px;
-}
 .contact-row {
   display: flex;
   flex-wrap: wrap;
@@ -81,17 +75,12 @@
   min-width: 300px;
 }
 
-.contact-left,
-.contact-right {
-  max-width: 48%;
-  flex-basis: 48%;
-}
-
-.contact-left h2,
-.contact-right h3 {
+.contact-col h2 {
   font-size: 24px;
-  font-weight: bold;
   margin-bottom: 10px;
+  color: #333;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .contact-col p {
@@ -103,7 +92,31 @@
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  width: 80%; /* hoặc 600px nếu bạn muốn cố định */
+  width: 80%;
   height: 450px;
   border: 1px solid orange;
+}
+
+.contact-col i {
+  margin-right: 8px;
+  color: #333;
+}
+
+/* Footer */
+.list-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.list-footer i {
+  font-size: 18px;
+  width: 20px;
+  /* Cố định chiều rộng để các icon thẳng hàng */
+  text-align: center;
+  color: #4da6ff;
+  /* Hoặc màu bạn đang dùng cho icon */
 }

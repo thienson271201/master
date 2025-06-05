@@ -52,16 +52,22 @@ if (!$get_status)
             break;
         case 'tin-tuc':
             $title = 'Tin tức';
+            include_once TEMPLATE . 'layout/tieu_de_trang.php';
+            hien_thi_tieu_de_trang($title);
             require_once TEMPLATE . 'tin_tuc/tin_tuc.php';
             $noidung = ob_get_clean();
             break;
         case 'chi-tiet-tin-tuc':
             $title = 'Chi tiết tin tức';
+            include_once TEMPLATE . 'layout/tieu_de_trang.php';
+            hien_thi_tieu_de_trang($title);
             require_once TEMPLATE . 'tin_tuc/chi_tiet_tin_tuc.php';
             $noidung = ob_get_clean();
             break;
         case 'lien-he':
             $title = 'Liên hệ';
+            include_once TEMPLATE . 'layout/tieu_de_trang.php';
+            hien_thi_tieu_de_trang($title);
             require_once TEMPLATE . 'lien_he/lien_he.php';
             $noidung = ob_get_clean();
             break;
@@ -129,6 +135,8 @@ if (!$get_status)
         // Danh sách sản phẩm
         case 'san-pham':
             $title = 'Sản phẩm';
+            include_once TEMPLATE . 'layout/tieu_de_trang.php';
+            hien_thi_tieu_de_trang($title);
             require_once TEMPLATE . 'sanpham/danhsachsanpham.php';
             $noidung = ob_get_clean();
             break;

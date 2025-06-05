@@ -8,8 +8,7 @@
                 <img src="assets/images/service/logo.png" alt="ProFix" />
               </div>
               <div class="footer-text sm-text-justify">
-                Profix là một mẫu PSD cao cấp. Lựa chọn tốt nhất cho cửa hàng
-                trực tuyến của bạn. Hãy mua ngay để tận hưởng!
+                Chào mừng bạn đến với Profix – địa chỉ tin cậy hàng đầu chuyên cung cấp các dòng laptop chất lượng, đa dạng mẫu mã và phù hợp với mọi nhu cầu từ học tập, làm việc đến giải trí.
               </div>
               <div class="cols-list cols-md inline-block shift-md text-sm">
                 <a href="#" class="content-link list-item"
@@ -88,16 +87,9 @@
                     Thông tin của chúng tôi
                   </div>
                   <ul class="list">
-                    <li>(+84) 123-456-789</li>
-                    <li>
-                      <a
-                        href="https://amigos-themes.com/cdn-cgi/l/email-protection"
-                        class="__cf_email__"
-                        data-cfemail="d7beb9b1b897a7a5b8b1beaff9b4b8ba"
-                        >contact@profix.com</a
-                      >
-                    </li>
-                    <li>123 Đường Nguyễn Văn A, Quận 1, TP. Hồ Chí Minh</li>
+                    <li class="list-footer"><i class="fas fa-map-marker-alt"></i> <span>65 Huỳnh Thúc Kháng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</span></li>
+                    <li class="list-footer"><i class="fas fa-phone"></i> <span>0779767361</span></li>
+                    <li class="list-footer"><i class="fas fa-envelope"></i> <span>0306201257@caothang.edu.vn</span> </li>  
                   </ul>
                 </div>
               </div>
@@ -105,7 +97,7 @@
           </div>
         </div>
         <div class="footer-copyrights text-center ins-md solid-border-top">
-          &copy; 2017 <b>ProFix</b>. Tất cả các quyền được bảo lưu.
+          &copy; 2025 <b>ProFix</b>. Tất cả các quyền được bảo lưu.
         </div>
       </div>
     </footer>
