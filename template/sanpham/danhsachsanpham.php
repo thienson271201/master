@@ -4,6 +4,30 @@
   // echo '<pre>';
   // print_r ($list_san_pham);
   // echo '</pre>';
+
+  if (isset($_GET['sortby'])) {
+    $sortby = $_GET['sortby'];
+
+    if ($sortby == '1') {
+      // Sắp xếp tăng dần theo giá sau khuyến mãi
+      usort($list_san_pham, function ($a, $b) {
+        return $a['gia_sau_khuyen_mai'] <=> $b['gia_sau_khuyen_mai'];
+      });
+    } elseif ($sortby == '2') {
+      // Sắp xếp giảm dần theo giá sau khuyến mãi
+      usort($list_san_pham, function ($a, $b) {
+        return $b['gia_sau_khuyen_mai'] <=> $a['gia_sau_khuyen_mai'];
+      });
+    }
+  }
+
+  if (isset($_GET['show']) && $_GET['show'] !== '') {
+    $thuong_hieu = $_GET['show'];
+    $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($thuong_hieu) {
+      return $san_pham['thuong_hieu_id'] === $thuong_hieu;
+    });
+  }
+
   ?>
  <div class="clearfix page-sidebar-right container">
    <div class="page-content">
@@ -14,11 +38,13 @@
              <div class="field-group shop-line-field chosen-field">
                <label>Sắp xếp</label>
                <div class="field-wrap">
-                 <select class="field-control" name="sortby">
-                   <option name="sortby">Giá</option>
-                   <option name="sortby" value="1">Tăng dần</option>
-                   <option name="sortby" value="2">Giảm dần</option>
-                 </select>
+                 <form method="get">
+                   <select class="field-control" name="sortby" onchange="this.form.submit()">
+                     <option name="sortby">Giá</option>
+                     <option name="sortby" value="1" <?= isset($_GET['sortby']) && $_GET['sortby'] == '1' ? 'selected' : '' ?>>Tăng dần</option>
+                     <option name="sortby" value="2" <?= isset($_GET['sortby']) && $_GET['sortby'] == '2' ? 'selected' : '' ?>>Giảm dần</option>
+                   </select>
+                 </form>
                  <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
                  <span class="field-back"></span>
                </div>
@@ -28,17 +54,20 @@
              <div class="field-group shop-line-field chosen-field">
                <label>Thương hiệu</label>
                <div class="field-wrap">
-                 <select
-                   class="field-control"
-                   name="show"
-                   selected="selected">
-                   <option name="show" selected="selected">Chọn</option>
-                   <option name="show" value="1">
-                     Asus
-                   </option>
-                   <option name="show" value="2">Dell</option>
-                   <option name="show" value="3">Msi</option>
-                 </select>
+                 <form method="get">
+                   <select
+                     class="field-control"
+                     name="show"
+                     selected="selected"
+                     onchange="this.form.submit()">
+                     <option name="show" selected="selected">Chọn</option>
+                     <option name="show" value="2" <?= isset($_GET['show']) && $_GET['show'] == 'Asus' ? 'selected' : '' ?>>
+                       Asus
+                     </option>
+                     <option name="show" value="5" <?= isset($_GET['show']) && $_GET['show'] == 'Dell' ? 'selected' : '' ?>>Dell</option>
+                     <option name="show" value="3" <?= isset($_GET['show']) && $_GET['show'] == 'Msi'  ? 'selected' : '' ?>>Msi</option>
+                   </select>
+                 </form>
                  <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
                  <span class="field-back"></span>
                </div>
@@ -80,9 +109,9 @@
                  </div>
                  <div class="item-links">
                    <a href="#" data-id="<?= $sanpham['id'] ?>"
-                  class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
+                     class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered">
+                     <i class="fas fa-shopping-cart"></i>
+                   </a>
                    <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
                      <i class="fas fa-heart"></i>
                    </a>
@@ -383,40 +412,40 @@
      </section>
    </aside>
  </div>
- 
-<script>
-  $(document).ready(function() {
-    $('.btn-add-to-cart').off('click').on('click', function(e) {
-      e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
-      let productId = $(this).data('id');
 
-      $.ajax({
-        url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
-        method: 'POST',
-        dataType: 'json',
-        data: {
-          id: productId
-        },
-        success: function(response) {
-          // Xử lý sau khi thêm thành công
-          alert('Đã thêm sản phẩm vào giỏ hàng!');
-          console.log(response.html);
-          const htmlString = response.html;
+ <script>
+   $(document).ready(function() {
+     $('.btn-add-to-cart').off('click').on('click', function(e) {
+       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
+       let productId = $(this).data('id');
 
-          // Tạo DOM tạm
-          const $temp = $('<div>').html(htmlString);
+       $.ajax({
+         url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
+         method: 'POST',
+         dataType: 'json',
+         data: {
+           id: productId
+         },
+         success: function(response) {
+           // Xử lý sau khi thêm thành công
+           alert('Đã thêm sản phẩm vào giỏ hàng!');
+           console.log(response.html);
+           const htmlString = response.html;
 
-          // Lấy phần nội dung bên trong .items
-          const newItemsContent = $temp.find('.cart-inner-inner').html();
+           // Tạo DOM tạm
+           const $temp = $('<div>').html(htmlString);
 
-          // Cập nhật vào DOM thật
-          $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
+           // Lấy phần nội dung bên trong .items
+           const newItemsContent = $temp.find('.cart-inner-inner').html();
 
-        },
-        error: function() {
-          alert('Đã xảy ra lỗi, vui lòng thử lại.');
-        }
-      });
-    });
-  });
-</script>
+           // Cập nhật vào DOM thật
+           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
+
+         },
+         error: function() {
+           alert('Đã xảy ra lỗi, vui lòng thử lại.');
+         }
+       });
+     });
+   });
+ </script>
