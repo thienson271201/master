@@ -1,7 +1,12 @@
 <?php
 $logo = $db->oneRaw("SELECT * FROM images WHERE type = 'logo'")['image'];
 $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
-
+if ($f->isLogin())
+{
+  $id = $_SESSION['khach_hang_id'];
+  $taikhoan = $db->oneRaw("SELECT ten_khach_hang FROM khach_hang WHERE id = '$id'")['ten_khach_hang'];
+} else
+  $taikhoan = 'Đăng nhập';
 ?>
 
 <header class="header">
@@ -42,7 +47,7 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
             </li>
             <li>
               <a href="<?= $f->isLogin() ? 'thanh-vien' : 'dang-nhap' ?>"><i class="fas fa-user"></i>
-                <span class="xs-hidden menu-extra-text"><?= $f->isLogin() ? 'Tài khoản' : 'Đăng nhập' ?></span></a>
+                <span class="xs-hidden menu-extra-text"><?= $taikhoan ?></span></a>
             </li>
             <li class="xs-hidden">
               <a href="#"><i class="fas fa-heart"></i></a>

@@ -27,9 +27,9 @@
                 </li>
                 <li class="nav-header">Quản lý sản phẩm</li>
                 <li
-                    class="nav-item <?= $com == 'san_pham' || $com == 'danh_muc' || $com == 'brand' ? 'menu-open' : '' ?>">
+                    class="nav-item <?= $com == 'san_pham' || $com == 'danh_muc' || $com == 'thuong_hieu' ? 'menu-open' : '' ?>">
                     <a href="#"
-                        class="nav-link <?= $com == 'san_pham' || $com == 'danh_muc' || $com == 'brand' ? 'active' : '' ?>">
+                        class="nav-link <?= $com == 'san_pham' || $com == 'danh_muc' || $com == 'thuong_hieu' ? 'active' : '' ?>">
                         <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
                             Quản lý sản phẩm
@@ -67,8 +67,15 @@
                         <p>Quản lý đơn hàng</p>
                     </a>
                 </li>
+                <li class="nav-header">Quản lý nhập hàng</li>
+                <li class="nav-item">
+                    <a href="?com=nhap_hang&act=danh_sach" class="nav-link <?= $com == 'nhap_hang' ? 'active' : '' ?>">
+                        <i class="nav-icon fa-solid fa-right-to-bracket fa-rotate-90"></i>
+                        <p>Quản lý nhập hàng</p>
+                    </a>
+                </li>
                 <li class="nav-header">Đa phương tiện</li>
-                <li class="nav-item <?= $com == 'photo' || $com == 'video' ? 'menu-open' : '' ?>">
+                <li class="nav-item <?= $com == 'photo' ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link <?= $com == 'photo' ? 'active' : '' ?>">
                         <i class="nav-icon bi bi-images"></i>
                         <p>
@@ -77,7 +84,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item <?= $com == 'photo' && $_GET['type'] != 'video' ? 'menu-open' : '' ?>">
                         <li class="nav-item">
                             <a href="?com=photo&act=photo_static&type=favicon"
                                 class="nav-link <?= $_GET['type'] == 'favicon' ? 'active' : '' ?>">

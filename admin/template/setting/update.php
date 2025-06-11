@@ -96,7 +96,7 @@ $smg = getFlashData('smg');
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-12">
-                                <label for="company_name" class="form-label fw-bold">Tên công ty:</label>
+                                <label for="company_name" class="form-label fw-bold">Tiêu đề website:</label>
                                 <input type="text" name="company_name" class="form-control"
                                     value="<?= $company_name ?>">
                             </div>
