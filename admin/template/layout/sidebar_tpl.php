@@ -79,13 +79,6 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item <?= $com == 'photo' && $_GET['type'] != 'video' ? 'menu-open' : '' ?>">
                         <li class="nav-item">
-                            <a href="?com=photo&act=photo_static&type=logo"
-                                class="nav-link <?= $_GET['type'] == 'logo' ? 'active' : '' ?>">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Logo</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="?com=photo&act=photo_static&type=favicon"
                                 class="nav-link <?= $_GET['type'] == 'favicon' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
