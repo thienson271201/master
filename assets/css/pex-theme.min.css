@@ -35,7 +35,7 @@ body .raleway-black {
   padding: 5px 8px; /* Giảm padding để bảng nhỏ hơn */
   border-radius: 6px; /* Bo góc nhẹ hơn */
   font-size: 14px; /* Giảm kích thước chữ */
-  font-family:'Times New Roman';
+  font-family:'Roboto';
   color: #333;
   margin: 6px 10px; /* Giảm khoảng cách giữa bảng và các phần khác */
   text-align: left;
@@ -5290,6 +5290,7 @@ a.item-label:hover {
 .shop-item .item-price {
   font-size: 15px;
   font-weight: 700;
+  color: red;
 }
 .shop-item .item-old-price {
   font-weight: 700;
