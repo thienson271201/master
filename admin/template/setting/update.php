@@ -126,7 +126,6 @@ $smg = getFlashData('smg');
                     <!--end::Header-->
                     <!--begin::Form-->
                     <div class="card-body">
-
                         <div class="row">
                             <div class="mb-3 col-12">
                                 <label for="company_name" class="form-label fw-bold">Tên công ty:</label>
@@ -149,74 +148,6 @@ $smg = getFlashData('smg');
                             <div class="mb-3 col-6 col-lg-4">
                                 <label for="zalo" class="form-label fw-bold">Zalo:</label>
                                 <input type="text" name="zalo" class="form-control" value="<?= $zalo ?>">
-                            </div>
-                            <div class="mb-3 col-12 col-lg-4">
-                                <label for="link_fanpage" class="form-label fw-bold">Fanpage:</label>
-                                <input type="text" name="link_fanpage" class="form-control"
-                                    value="<?= $link_fanpage ?>">
-                            </div>
-                            <div class="mb-3 col-12 col-lg-4">
-                                <label for="link_messenger" class="form-label fw-bold">Link chat facebook:</label>
-                                <input type="text" name="link_messenger" class="form-control"
-                                    value="<?= $link_messenger ?>">
-                                <div id="emailHelp" class="form-text text-danger">
-                                    Truy cập <a href="https://m.me">m.me</a> để lấy link chat facebook
-                                </div>
-                            </div>
-                            <div class="mb-3 col-12 col-md-4">
-                                <label for="link_google_map" class="form-label fw-bold">Link google map:</label>
-                                <input type="text" name="link_google_map" class="form-control"
-                                    value="<?= $link_google_map ?>">
-                            </div>
-                            <div class="mb-3 col-md-12">
-                                <label for="iframe_google_map" class="form-label fw-bold">Tọa độ google map iframe: <a
-                                        target="_blank" href="https://www.google.com/maps">(Lấy mã nhúng)</a></label>
-                                <textarea type="text" name="iframe_google_map" class="form-control"
-                                    style="height: 120px;"><?= $iframe_google_map ?></textarea>
-                            </div>
-                            <div class="mb-3 col-md-12">
-                                <label for="google_analytic" class="form-label fw-bold">Google analytics:</label>
-                                <textarea type="text" name="google_analytic" class="form-control"
-                                    style="height: 120px;"><?= $google_analytic ?></textarea>
-                            </div>
-                            <div class="mb-3 col-md-12">
-                                <label for="google_webmaster_tool" class="form-label fw-bold">Google Webmaster
-                                    Tool:</label>
-                                <textarea type="text" name="google_webmaster_tool" class="form-control"
-                                    style="height: 120px;"><?= $google_webmaster_tool ?></textarea>
-                            </div>
-                            <div class="mb-3 col-md-12">
-                                <label for="head_js" class="form-label fw-bold">Head JS:</label>
-                                <textarea type="text" name="head_js" class="form-control"
-                                    style="height: 120px;"><?= $head_js ?></textarea>
-                            </div>
-                            <div class="mb-3 col-md-12">
-                                <label for="body_js" class="form-label fw-bold">Body JS:</label>
-                                <textarea type="text" name="body_js" class="form-control"
-                                    style="height: 120px;"><?= $body_js ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-primary card-outline mb-4">
-                    <div class="card-header">
-                        <div class="card-title">Thiết lập SEO</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="mb-3 col-12">
-                                <label for="seo_title" class="form-label fw-bold">SEO Title:</label>
-                                <input type="text" name="seo_title" class="form-control" value="<?= $seo_title ?>">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="seo_keywords" class="form-label fw-bold">SEO Keywords:</label>
-                                <input type="text" name="seo_keywords" class="form-control"
-                                    value="<?= $seo_keywords ?>">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="seo_description" class="form-label fw-bold">SEO Description:</label>
-                                <textarea type="text" name="seo_description" class="form-control"
-                                    style="height: 120px;"><?= $seo_description ?></textarea>
                             </div>
                         </div>
                     </div>
