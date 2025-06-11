@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th6 11, 2025 lúc 07:17 PM
+-- Thời gian đã tạo: Th6 11, 2025 lúc 08:15 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -185,8 +185,7 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `type`, `image`) VALUES
-(1, 'logo', '1724057889.png'),
-(2, 'favicon', '1743168502.jpg');
+(2, 'favicon', '1749662398.png');
 
 -- --------------------------------------------------------
 
