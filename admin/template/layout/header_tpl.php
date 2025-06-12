@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a href="?com=user&act=logout" class="nav-link">
                     Đăng xuất
-                    <i data-lte-icon="maximize" class="bi bi-box-arrow-right ms-2"></i>
+                    <i class="ms-1 fa-solid fa-right-from-bracket"></i>
                 </a>
             </li>
             <!-- end::logout -->
