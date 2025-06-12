@@ -22,11 +22,11 @@ if ($f->isLogin())
         </div>
 
         <!-- Search -->
-        <form action="#" class="menu-search">
+        <form action="./san-pham" class="menu-search">
           <div class="menu-search-field">
             <div class="field-group">
               <div class="field-wrap">
-                <input class="field-control" name="search" placeholder="Tìm sản phẩm" required="required" />
+                <input class="field-control" name="tim-kiem" placeholder="Tìm sản phẩm" required="required" />
                 <span class="field-back"></span>
               </div>
             </div>
