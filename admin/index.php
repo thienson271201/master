@@ -67,6 +67,7 @@ if ($ad->isLogin())
     <title>Administrator</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/img/AdminLTELogo.png" type="image/x-icon" />
     <?php require_once 'template/layout/css.php' ?>
     <style>
         .ck-editor__editable_inline {
