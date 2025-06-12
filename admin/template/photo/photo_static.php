@@ -110,8 +110,6 @@ $smg = getFlashData('smg');
 </main>
 <!--end::App Main-->
 
-
-
 <script>
     $(document).ready(function () {
         // Lắng nghe sự kiện change trên input file
