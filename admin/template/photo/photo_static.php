@@ -23,14 +23,8 @@ $type = $filterAll = $func->filter()['type'];
 $image = $db->oneRaw("SELECT * FROM images WHERE type = '$type'")['image'];
 switch ($type)
 {
-    case 'logo':
-        $vietsub = 'hình Logo';
-        break;
     case 'favicon':
         $vietsub = 'hình Favicon';
-        break;
-    case 'banner':
-        $vietsub = 'hình Banner';
         break;
 }
 $smg = getFlashData('smg');
@@ -89,9 +83,12 @@ $smg = getFlashData('smg');
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <img onerror="this.src='../assets/images/noimage/noimage.jpg'" id="previewImage"
-                                    src="../upload/images/<?= $image ?>" alt="Ảnh xem trước"
-                                    style="height: 250px; object-fit: cover; max-width: 100%;">
+                                <div class="border rounded d-flex align-items-center justify-content-center"
+                                    style=" width: 230px; height: 230px;">
+                                    <img onerror="this.src='../assets/images/noimage/noimage.jpg'" id="previewImage"
+                                        src="../upload/images/<?= $image ?>" alt="Ảnh xem trước"
+                                        style="width: 200px object-fit: cover; max-width: 200px;">
+                                </div>
                             </div>
                         </div>
 
@@ -112,8 +109,6 @@ $smg = getFlashData('smg');
     <!--end::App Content-->
 </main>
 <!--end::App Main-->
-
-
 
 <script>
     $(document).ready(function () {

@@ -1,7 +1,12 @@
 <?php
 $logo = $db->oneRaw("SELECT * FROM images WHERE type = 'logo'")['image'];
 $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
-
+if ($f->isLogin())
+{
+  $id = $_SESSION['khach_hang_id'];
+  $taikhoan = $db->oneRaw("SELECT ten_khach_hang FROM khach_hang WHERE id = '$id'")['ten_khach_hang'];
+} else
+  $taikhoan = 'Đăng nhập';
 ?>
 
 <header class="header">
@@ -17,11 +22,11 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
         </div>
 
         <!-- Search -->
-        <form action="#" class="menu-search">
+        <form action="./san-pham" class="menu-search">
           <div class="menu-search-field">
             <div class="field-group">
               <div class="field-wrap">
-                <input class="field-control" name="search" placeholder="Tìm sản phẩm" required="required" />
+                <input class="field-control" name="tim-kiem" placeholder="Tìm sản phẩm" required="required" />
                 <span class="field-back"></span>
               </div>
             </div>
@@ -42,11 +47,11 @@ $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
             </li>
             <li>
               <a href="<?= $f->isLogin() ? 'thanh-vien' : 'dang-nhap' ?>"><i class="fas fa-user"></i>
-                <span class="xs-hidden menu-extra-text"><?= $f->isLogin() ? 'Tài khoản' : 'Đăng nhập' ?></span></a>
+                <span class="xs-hidden menu-extra-text"><?= $taikhoan ?></span></a>
             </li>
-            <li class="xs-hidden">
+            <!-- <li class="xs-hidden">
               <a href="#"><i class="fas fa-heart"></i></a>
-            </li>
+            </li> -->
             <li>
               <a href="#" data-show-block="cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span
                   class="item-label-sale item-label">3</span></a>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 04, 2025 lúc 06:21 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th6 11, 2025 lúc 08:15 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,7 +105,10 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (149, 1, '8ac12dd25d0c7c57ea724317b319a4060922294d', '2025-05-28 21:10:16'),
 (150, 1, '8a073eae5d675fd9926556da0e95fd266d239930', '2025-06-03 22:50:31'),
 (151, 1, 'd86e707b87e0b83b5b95c8de0444047cc5542c71', '2025-06-04 09:45:18'),
-(152, 1, '9d2991a70c8d406b79a89908770f5f51f67da857', '2025-06-04 10:50:20');
+(152, 1, '9d2991a70c8d406b79a89908770f5f51f67da857', '2025-06-04 10:50:20'),
+(153, 1, 'beae6a395af2173e2dfd6c5413ec7fe1787f4ba0', '2025-06-06 16:29:46'),
+(155, 1, '9eed1e6e4a88455c9a43bf6ad34a7cbb6204240c', '2025-06-10 16:23:54'),
+(156, 1, 'e4007aa060387136d20cf61875bb32255dcc7da6', '2025-06-11 23:34:32');
 
 -- --------------------------------------------------------
 
@@ -118,20 +121,8 @@ CREATE TABLE `chi_tiet_don_hang` (
   `don_hang_id` int(11) NOT NULL,
   `san_pham_id` int(11) NOT NULL,
   `so_luong` int(11) NOT NULL,
-  `don_gia` int(11) NOT NULL
+  `don_gia` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `custommer`
---
-
-CREATE TABLE `custommer` (
-  `id` int(11) NOT NULL,
-  `info` varchar(200) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -186,25 +177,15 @@ CREATE TABLE `don_hang` (
 CREATE TABLE `images` (
   `id` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `image` varchar(200) DEFAULT NULL,
-  `link` varchar(200) DEFAULT NULL
+  `image` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `images`
 --
 
-INSERT INTO `images` (`id`, `type`, `image`, `link`) VALUES
-(1, 'logo', '1724057889.png', NULL),
-(2, 'favicon', '1743168502.jpg', NULL),
-(29, 'gioi-thieu', '1724059494.png', NULL),
-(39, 'quang-cao', '1724137041.png', ''),
-(40, 'quang-cao', '1724137050.png', ''),
-(41, 'quang-cao', '1724137055.png', ''),
-(44, 'video', 'noimage.jpg', 'https://www.youtube.com/watch?v=CAxIidqrfs4'),
-(46, 'slide', '1724337216.png', ''),
-(47, 'slide', '1724338172.png', ''),
-(48, 'slide', '1724338828.png', '');
+INSERT INTO `images` (`id`, `type`, `image`) VALUES
+(2, 'favicon', '1749662398.png');
 
 -- --------------------------------------------------------
 
@@ -232,9 +213,9 @@ CREATE TABLE `khach_hang` (
 --
 
 INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(12, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, NULL, NULL, NULL, '$2y$10$1FHjfCOEn/tBsnHgKZUKNO3t9QUg06odhYqIjXS5bSfTnkBGH/hdm', NULL, '2025-04-19 13:56:15', NULL),
 (13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
-(14, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$KXViUn63d6X3VaKMXy2MmuOWmMsXWkQKHCoHrR8N7mKgDXRojBkX.', NULL, '2025-05-30 16:51:34', '2025-06-03 02:55:32');
+(14, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$KXViUn63d6X3VaKMXy2MmuOWmMsXWkQKHCoHrR8N7mKgDXRojBkX.', NULL, '2025-05-30 16:51:34', '2025-06-03 02:55:32'),
+(15, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', 'Ấp Hoà Bình', 26497, 742, 75, '$2y$10$8Tm6SzPoaYI1hUPX6xQbveTUlJmToFXvi2OkLTjGxKfp6z4KQjKp2', '1749202308.jpg', '2025-06-06 09:31:03', '2025-06-06 09:31:48');
 
 -- --------------------------------------------------------
 
@@ -265,210 +246,9 @@ INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALU
 (21, 13, 'ae0be63c680e7f9f22d5b67d41b40f700c2762c4', '2025-06-03 16:07:37'),
 (22, 13, '17291297e85506e068386e531dbd3efeb3e3389b', '2025-06-04 02:36:46'),
 (23, 13, '53163106d72dd688f9296ca92e2affcd88dbe81d', '2025-06-04 02:46:01'),
-(24, 13, '8be885cc50dfb1cf6556ea3455cd583b91ae116f', '2025-06-04 02:52:22');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `news`
---
-
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `type` varchar(200) DEFAULT NULL,
-  `slug` mediumtext DEFAULT NULL,
-  `title` mediumtext DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `content` mediumtext DEFAULT NULL,
-  `image` varchar(200) DEFAULT NULL,
-  `noibat` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `seo_title` varchar(200) DEFAULT NULL,
-  `seo_keywords` mediumtext DEFAULT NULL,
-  `seo_description` mediumtext DEFAULT NULL,
-  `create_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `update_at` timestamp NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `news`
---
-
-INSERT INTO `news` (`id`, `type`, `slug`, `title`, `description`, `content`, `image`, `noibat`, `status`, `seo_title`, `seo_keywords`, `seo_description`, `create_at`, `update_at`) VALUES
-(1, 'gioi-thieu', 'gioi-thieu', NULL, NULL, '<p><strong>Thiết bị vệ sinh Thịnh Phát</strong> đã và đang khẳng định vị thế của mình trên thị trường nhờ vào chất lượng sản phẩm cao, công nghệ hiện đại, và dịch vụ khách hàng tận tâm. Với đa dạng sản phẩm, từ bồn cầu, chậu rửa, vòi sen đến các phụ kiện, Thịnh Phát đáp ứng mọi nhu cầu của khách hàng từ nhà ở đến các dự án xây dựng lớn. So với các thương hiệu nổi tiếng khác như Toto, Inax và Caesar, Thịnh Phát không hề thua kém về chất lượng và công nghệ, trong khi giá cả lại hợp lý và cạnh tranh hơn.</p><h2>Dịch Vụ Khách Hàng</h2><p><strong>Thiết bị vệ sinh Thịnh Phát</strong> không chỉ chú trọng đến chất lượng sản phẩm mà còn đặc biệt quan tâm đến dịch vụ khách hàng. Công ty cung cấp dịch vụ tư vấn, thiết kế và lắp đặt thiết bị vệ sinh cho khách hàng, đảm bảo sự hài lòng tối đa. Đội ngũ nhân viên tư vấn của Thịnh Phát luôn sẵn sàng hỗ trợ khách hàng lựa chọn sản phẩm phù hợp với nhu cầu và ngân sách.</p>', NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-21 09:26:39', '0000-00-00 00:00:00'),
-(2, 'lien-he', 'lien-he', NULL, NULL, '<p><strong>CÔNG TY TNHH TM TBVS THỊNH PHÁT</strong><br>Địa chỉ: 374 Nguyễn Hữu Trí, TT.Tân Túc, Bình Chánh, Hồ Chí Minh<br>MST/ GPKD số: 0316487693 cấp ngày 23/05/2022<br>Hotline: 08 5673 78 78 &nbsp; - &nbsp; &nbsp;Tư vấn: 0939.209.092<br>Email: vinaphacothailand@gmail.com</p>', NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-21 09:28:09', '0000-00-00 00:00:00'),
-(3, 'footer', NULL, NULL, NULL, '<p><strong>CÔNG TY TNHH TM TBVS THỊNH PHÁT</strong><br>Địa chỉ: 374 Nguyễn Hữu Trí, TT.Tân Túc, Bình Chánh, Hồ Chí Minh<br>MST/ GPKD số: 0316487693 cấp ngày 23/05/2022<br>Hotline: 08 5673 78 78 &nbsp; - &nbsp; &nbsp;Tư vấn: 0939.209.092<br>Email: vinaphacothailand@gmail.com</p>', NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-21 09:28:16', '0000-00-00 00:00:00'),
-(18, 'gioi-thieu-index', NULL, NULL, NULL, '<p><strong>Thiết bị vệ sinh Thịnh Phát</strong> đã và đang khẳng định vị thế của mình trên thị trường nhờ vào chất lượng sản phẩm cao, công nghệ hiện đại, và dịch vụ khách hàng tận tâm. Với đa dạng sản phẩm, từ bồn cầu, chậu rửa, vòi sen đến các phụ kiện, Thịnh Phát đáp ứng mọi nhu cầu của khách hàng từ nhà ở đến các dự án xây dựng lớn. So với các thương hiệu nổi tiếng khác như Toto, Inax và Caesar, Thịnh Phát không hề thua kém về chất lượng và công nghệ, trong khi giá cả lại hợp lý và cạnh tranh hơn.</p>', NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-21 09:24:29', '0000-00-00 00:00:00'),
-(21, 'tieu-chi-1', NULL, 'CHÍNH HÃNG 100%', 'Đa dạng &#38; Uy tín!', NULL, '1724049962.png', NULL, NULL, NULL, NULL, NULL, '2024-08-19 06:46:02', '0000-00-00 00:00:00'),
-(22, 'tieu-chi-2', NULL, 'HỖ TRỢ 24/7', 'Hotline 08 5673 7878', NULL, '1724049966.png', NULL, NULL, NULL, NULL, NULL, '2024-08-19 06:46:06', '0000-00-00 00:00:00'),
-(23, 'tieu-chi-3', NULL, 'LẮP ĐẶT DỄ DÀNG!', 'Tận nơi &#38; Nhanh chóng', NULL, '1724049970.png', NULL, NULL, NULL, NULL, NULL, '2024-08-19 06:46:10', '0000-00-00 00:00:00'),
-(24, 'tieu-chi-4', NULL, 'HOÀN TIỀN 100%', 'Nếu phát hiện hàng nhái', NULL, '1724049974.png', NULL, NULL, NULL, NULL, NULL, '2024-08-19 06:46:14', '0000-00-00 00:00:00'),
-(25, 'gioi-thieu-index-bottom', NULL, NULL, NULL, '<p>AN TOÀN - Uy tín - Quy mô lớn</p><p>Tác phong - Phẩm chất tốt</p><p>Hỗ trợ nhiệt tình - Hotline: 08 5673 7878</p>', NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-21 09:25:10', '0000-00-00 00:00:00'),
-(31, 'chinh-sach', 'chinh-sach-bao-hanh', 'Chính sách bảo hành', '', '<p>Chính sách bảo hành</p><p><strong>1.&nbsp; Chính sách chung:</strong></p><ul><li>Khái niệm chung: Bảo hành khi lỗi sản phẩm do sản xuất trong thời hạn bảo hành. Bảo trì khi lỗi do lắp đặt &amp; vận hành trong suốt vòng đời sản phẩm.</li><li>Các sản phẩm do Thịnh Phát phân phối sẽ bảo hành bởi Thịnh Phát hoặc theo tiêu chuẩn chung của các nhà sản xuất và điều kiện bảo hành gốc là từ chính hãng. Các thông tin này sẽ được tham chiếu trên website chính hãng, hoặc trên tài liệu do chính hãng gửi trực tiếp cho&nbsp; và có đăng trên website</li><li>Tất cả các sản phẩm đều được bảo hành miễn phí&nbsp;trong thời hạn bảo hành, thời hạn&nbsp;kể từ ngày giao hàng.</li></ul><p><strong>2.&nbsp; Thời gian bảo hành:</strong></p><figure class=\"table\"><table><tbody><tr><td><strong>Sản phẩm</strong></td><td><strong>Thời hạn (tháng)</strong></td></tr><tr><td><a href=\"https://nangluongthanhphat.com/may-nuoc-nong-tam-phang/\">Máy nước nóng năng lượng mặt trời loại tấm phẳng</a></td><td>60</td></tr><tr><td><a href=\"https://nangluongthanhphat.com/may-nuoc-nong-nlmt/\">Máy nước nóng năng lượng mặt trời hiệu loại ống thủy tinh</a>&nbsp;<strong>(**)</strong></td><td>36</td></tr><tr><td>Bồn nhựa</td><td>12 năm</td></tr><tr><td>Phụ kiện trong hệ thống nước nóng năng lượng mặt trời</td><td>12</td></tr><tr><td>Máy bơm nước</td><td>12</td></tr><tr><td>Bồn nước inox</td><td>12 năm</td></tr><tr><td>Thiết bị vệ sinh</td><td>05 năm</td></tr></tbody></table></figure><p><strong>3.&nbsp; Đổi sản phẩm mới do bị lỗi:</strong></p><figure class=\"table\"><table><tbody><tr><td><strong>Sản phẩm</strong></td><td><strong>Điều kiện</strong></td></tr><tr><td>Máy nước nóng</td><td>Sản phẩm lỗi do sản xuất được đổi mới trong suốt thời hạn bảo hành theo chính sách</td></tr><tr><td>Tấm thu điện mặt trời</td><td>Sản phẩm lỗi do sản xuất trong vòng 07 ngày kể từ ngày giao hàng, không có dấu vết của bất kỳ tác động vật lý hay cơ khi nào, thỏa mãn các điều kiện bảo hành của chính hãng.</td></tr><tr><td>Inverter điện mặt trời</td><td>Sản phẩm lỗi do sản xuất trong vòng 07 ngày kể từ ngày giao hàng, còn giữ nguyên vỏ thùng và phụ kiện kèm theo, thỏa mãn các điều kiện bảo hành chính hãng.</td></tr></tbody></table></figure><p><strong>4.&nbsp; Qui trình bảo hành:</strong></p><ul><li>Tiếp nhận sản phẩm cần bảo hành , riêng máy nước nóng sẽ thẩm định qua video/ hình ảnh/ trực tiếp tại công trình.</li><li>Xác định điểm lỗi &amp; nguyên nhân.</li><li>Sữa chữa, thay mới phần lỗi. Đối với máy nước nóng hiệu sẽ áp dụng chế độ bảo hành riêng.</li><li>Kiểm tra vận hành thử tại kho.</li><li>Trả lại sản phẩm cho khách với phí vận chuyển khách trả. Khuyến cáo cách sử dụng và vận hành để tránh lặp lại lỗi.</li></ul><p>Thời gian hoàn tất việc bảo hành thông thường trong vòng 48-72h làm việc kể từ khi nhận hàng tại kho Thịnh Phátt, nếu công việc khó khăn hơn Thịnh Phát sẽ xin thêm thời gian với Quý khách.</p><p><strong>5.&nbsp; Điều kiện bảo hành:</strong></p><ul><li>Sản phẩm do lỗi sản xuất (nguyên vật liệu, dây chuyền công nghệ, tay nghề công nhân sản xuất).</li><li>Trong thời hạn bảo hành. Thời hạn được tính từ thời điểm giao hàng (có ghi trên hóa đơn, phiếu giao hàng).</li><li>Người mua đã thanh toán cho&nbsp; tất cả các khoản nợ đến hạn.</li><li>Sản phẩm được lắp đặt và vận hành đúng cách.</li><li>Sản phẩm không có dấu hiệu bị can thiệp vật lý, cơ khí, sửa chữa hay di dời sau khi lắp đặt bởi cá nhân hay tổ chức không được ủy quyền của Sunpo.</li><li>Sản phẩm được lắp đặt đúng kỹ thuật yêu cầu từ Sunpo hoặc từ chính hãng, thiết kế hệ thống phù hợp để không gây tác hại cho sản phẩm.</li><li>Số series và tem nhãn của sản phẩm còn nguyên vẹn, không bị cạo xóa/ sửa đổi.</li><li>Xem hướng dẫn lắp đặt, vận hành và giới hạn trách nhiệm bảo hành có tính đặc thù cho từng loại sản phẩm như sau:</li></ul><p><strong>6.&nbsp; Trường hợp sửa chữa&nbsp;bảo trì có tính phí:</strong></p><p>Ngoài phạm vi bảo hành miễn phí do lỗi sản phẩm trong thời hạn bảo hành, sản phẩm sẽ được sửa chữa bảo trì trong suốt vòng đời sản phẩm với mức phí hợp lý trên tinh thần hỗ trợ khách hàng.</p><ul><li>Phí thay mới linh kiện hay bộ phận trong hệ thống.</li><li>Phí dịch vụ thẩm định, sữa chữa, bảo trì, vận hành thử theo mức chung trên thị trường lao động của kỹ sư hoặc lao động có tay nghề.</li></ul><p><strong>7.&nbsp; Qui định đổi trả hàng:</strong></p><ul><li>Đổi trả hàng chỉ áp dụng cho sản phẩm do khách đặt hàng sai công suất, sai mục đích sử dụng hay sai sót mã hàng. Tuy nhiên các sản phẩm này không theo thiết kế riêng mà là sản phẩm xuất nhập thường xuyên&nbsp; cho nhu cầu chung của thị trường. Việc đổi trả hàng ngoài trường hợp trên, khách sẽ phải chịu phí phát sinh theo thực tế do hai bên thương lượng trên tinh thần hợp tác và hợp lý hợp tình.</li><li>Sản phẩm đổi trả phải còn nguyên vẹn mới từ vỏ thùng đến sản phẩm và phụ kiện đính kèm bên trong.</li></ul>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:31:26', '0000-00-00 00:00:00'),
-(32, 'chinh-sach', 'chinh-sach-bao-mat-thong-tin', 'Chính sách bảo mật thông tin', '', '<p><strong>Chính Sách Bảo Mật Thông Tin</strong></p><p><strong>1.&nbsp;Mục đích và phạm vi thu thập thông tin</strong></p><p><strong>Vinaphaco-thailand.com&nbsp;</strong>không bán, chia sẻ hay trao đổi thông tin cá nhân của khách hàng thu thập trên trang web cho một bên thứ ba nào khác.</p><p>Thông tin cá nhân thu thập được sẽ chỉ được sử dụng trong nội bộ công ty.</p><p>Khi bạn liên hệ đăng ký dịch vụ, thông tin cá nhân mà&nbsp;<strong>Vinaphaco-thailand.com&nbsp;</strong>thu thập bao gồm:</p><p>Họ và tên</p><p>Điện thoại</p><p>Email</p><p>Địa chỉ giao hàng</p><p>Ghi chú thêm</p><p><strong>2.&nbsp;Phạm vi sử dụng thông tin</strong></p><p>Thông tin cá nhân thu thập được sẽ chỉ được&nbsp;<strong>Vinaphaco-thailand.com&nbsp;</strong>sử dụng trong nội bộ công ty và cho một hoặc tất cả các mục đích sau đây:</p><p>– Hỗ trợ khách hàng</p><p>– Cung cấp thông tin liên quan đến dịch vụ</p><p>– Xử lý đơn đặt hàng và cung cấp dịch vụ và thông tin qua trang web của chúng tôi theo yêu cầu của bạn</p><p>– Chúng tôi có thể sẽ gửi thông tin sản phẩm, dịch vụ mới, thông tin về các sự kiện sắp tới hoặc thông tin tuyển dụng nếu quý khách đăng kí nhận email thông báo.</p><p>– Ngoài ra, chúng tôi sẽ sử dụng thông tin bạn cung cấp để hỗ trợ quản lý tài khoản khách hàng; xác nhận và thực hiện các giao dịch tài chính liên quan đến các khoản thanh toán trực tuyến của bạn;</p><p><strong>3. Thời gian lưu trữ thông tin</strong></p><p>Đối với thông tin cá nhân,&nbsp;<strong>Vinaphaco-thailand.com&nbsp;</strong>chỉ xóa đi dữ liệu này nếu khách hàng có yêu cầu, khách hàng yêu cầu gửi mail về&nbsp;<a href=\"https://vinaphaco-thailand.com/chinh-sach-bao-mat-thong-tin/vinaphacothailand@gmail.com\">vinaphacothailand@gmail.com</a></p><p><strong>4. Những người hoặc tổ chức có thể được tiếp cận với thông tin cá nhân</strong></p><p>Đối tượng được tiếp cận với thông tin cá nhân của khách hàng thuộc một trong những trường</p><p>hợp sau:</p><p>–&nbsp;CÔNG TY TNHH THƯƠNG MẠI TBVS THỊNH PHÁT</p><p>– Các đối tác có ký hợp đồng với CÔNG TY TNHH THƯƠNG MẠI TBVS THỊNH PHÁT&nbsp;sẽ nhận được những thông tin theo thỏa thuận hợp đồng (có thể 1 phần hoặc toàn bộ thông tin&nbsp;theo điều khoản hợp đồng) để tiến hành hỗ trợ người dùng sử dụng dịch vụ do Công ty cung cấp.</p><p><strong>5. Địa chỉ của đơn vị thu thập và quản lý thông tin cá nhân</strong></p><p><strong>CÔNG TY TNHH THƯƠNG MẠI TBVS THỊNH PHÁT</strong></p><p><strong>Địa&nbsp;chỉ:&nbsp;</strong><a href=\"https://maps.app.goo.gl/6Ah2MGNsCY2fuzt28\">374 Nguyễn Hữu Trí, TT.Tân Túc, Bình Chánh, Hồ Chí Minh</a></p><p><strong>Điện thoại:&nbsp;</strong><a href=\"tel:0913108940\">Hotline:&nbsp;0949.392.190&nbsp;Tư vấn:&nbsp;0939.209.092</a></p><p><strong>Website: Vinaphaco-thailand.com</strong></p><p><strong>Email:</strong> <a href=\"https://vinaphaco-thailand.com/chinh-sach-bao-mat-thong-tin/vinaphacothailand@gmail.com\">vinaphacothailand@gmail.com</a></p><p><strong>6. Phương tiện và công cụ để người dùng tiếp cận và chỉnh sửa dữ liệu cá nhân của mình</strong></p><p><strong>&nbsp;Vinaphaco-thailand.com&nbsp;</strong>không thu thập thông tin khách hàng qua trang web, thông tin cá nhân khách hàng được thực hiện thu thập qua email liên hệ đặt mua sản phẩm, dịch vụ gửi về hộp mail của chúng tôi: <a href=\"https://vinaphaco-thailand.com/chinh-sach-bao-mat-thong-tin/vinaphacothailand@gmail.com\">vinaphacothailand@gmail.com</a>&nbsp;&nbsp;hoặc số điện thoại liên hệ đặt mua sản phẩm gọi về&nbsp;<a href=\"tel:0913108940\">0949.392.190</a></p><p>Bạn có thể liên hệ địa chỉ email cùng số điện thoại trên để yêu cầu&nbsp;<strong>&nbsp;Vinaphaco-thailand.com&nbsp;</strong>chỉnh sửa dữ liệu cá nhân của mình.</p><p><strong>7. Cơ chế tiếp nhận và giải quyết khiếu nại của người tiêu dùng liên quan đến việc thông tin cá nhân bị sử dụng sai mục đích hoặc phạm vi đã thông báo.</strong></p><p>Tại&nbsp;<strong>&nbsp;Vinaphaco-thailand.com&nbsp;</strong>, việc bảo vệ thông tin cá nhân của bạn là rất quan trọng, bạn được đảm bảo rằng thông tin cung cấp cho chúng tôi sẽ được mật&nbsp;<strong>&nbsp;Vinaphaco-thailand.com&nbsp;</strong>cam kết không chia sẻ, bán hoặc cho thuê thông tin cá nhân của bạn cho bất kỳ người nào khác.<strong>&nbsp;Vinaphaco-thailand.com&nbsp;</strong>cam kết chỉ sử dụng các thông tin của bạn vào các trường hợp sau:</p><p>– Nâng cao chất lượng dịch vụ dành cho khách hàng</p><p>– Giải quyết các tranh chấp, khiếu nại</p><p>– Khi cơ quan pháp luật có yêu cầu.</p><p><strong>&nbsp;Vinaphaco-thailand.com&nbsp;</strong>hiểu rằng quyền lợi của bạn trong việc bảo vệ thông tin cá nhân cũng chính là trách nhiệm của chúng tôi nên trong bất kỳ trường hợp có thắc mắc, góp ý nào liên quan đến chính sách bảo mật của&nbsp;<strong>&nbsp;Vinaphaco-thailand.com</strong>, và liên quan đến việc thông tin cá nhân bị sử dụng sai mục đích hoặc phạm vi đã thông báo vui lòng liên hệ qua số hotline&nbsp;0949.392.190&nbsp;hoặc email:&nbsp;<a href=\"https://vinaphaco-thailand.com/chinh-sach-bao-mat-thong-tin/vinaphacothailand@gmail.com\">vinaphacothailand</a>@gmail.com</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:32:59', '0000-00-00 00:00:00'),
-(33, 'chinh-sach', 'huong-dan-mua-hang', 'Hướng dẫn mua hàng', '', '<p>Hướng dẫn mua hàng</p><p><a href=\"https://vitosa.com.vn/san-pham/\"><strong>Bước 1:</strong>&nbsp;Truy cập website và lựa chọn sản phẩm cần mua để mua hàng</a></p><p><strong>Bước 2:</strong>&nbsp;Click và sản phẩm muốn mua, màn hình hiển thị ra popup với các lựa chọn sau</p><p>Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần tiếp tục mua hàng để lựa chọn thêm sản phẩm vào giỏ hàng</p><p>Nếu bạn muốn xem giỏ hàng để cập nhật sản phẩm: Bấm vào xem giỏ hàng</p><p>Nếu bạn muốn đặt hàng và thanh toán cho sản phẩm này vui lòng bấm vào: Đặt hàng và thanh toán</p><p><a href=\"https://www.vitosa.vn/collections/all\"><strong>Bước 3:</strong>&nbsp;Lựa chọn thông tin tài khoản thanh toán</a></p><p>Nếu bạn đã có tài khoản vui lòng nhập thông tin tên đăng nhập là email và mật khẩu vào mục đã có tài khoản trên hệ thống</p><p>Nếu bạn chưa có tài khoản và muốn đăng ký tài khoản vui lòng điền các thông tin cá nhân để tiếp tục đăng ký tài khoản. Khi có tài khoản bạn sẽ dễ dàng theo dõi được đơn hàng của mình</p><p>Nếu bạn muốn mua hàng mà không cần tài khoản vui lòng nhấp chuột vào mục đặt hàng không cần tài khoản</p><p><strong>Bước 4:</strong>&nbsp;Điền các thông tin của bạn để nhận đơn hàng, lựa chọn hình thức thanh toán và vận chuyển cho đơn hàng của mình</p><p><strong>Bước 5:</strong>&nbsp;Xem lại thông tin đặt hàng, điền chú thích và gửi đơn hàng</p><p>Sau khi nhận được đơn hàng bạn gửi chúng tôi sẽ liên hệ bằng cách gọi điện lại để xác nhận lại đơn hàng và địa chỉ của bạn.</p><p>Trân trọng cảm ơn</p><p><br>&nbsp;</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:33:38', '0000-00-00 00:00:00'),
-(34, 'chinh-sach', 'dieu-khoan-su-dung', 'Điều khoản sử dụng', '', '<p>Điều khoản sử dụng</p><p>Khi quý khách truy cập vào trang web của chúng tôi có nghĩa là quý khách đồng ý với các điều khoản này. Trang web có quyền thay đổi, chỉnh sửa, thêm hoặc lược bỏ bất kỳ phần nào trong Quy định và Điều kiện sử dụng, vào bất cứ lúc nào. Các thay đổi có hiệu lực ngay khi được đăng trên trang web mà không cần thông báo trước. Và khi quý khách tiếp tục sử dụng trang web, sau khi các thay đổi về quy định và điều kiện được đăng tải, có nghĩa là quý khách chấp nhận với những thay đổi đó.</p><p>Quý khách vui lòng kiểm tra thường xuyên để cập nhật những thay đổi của chúng tôi.</p><p><strong>1. Hướng dẫn sử dụng web</strong></p><p>– Khi vào web của chúng tôi, người dùng tối thiểu phải 18 tuổi hoặc truy cập dưới sự giám sát của cha mẹ hay người giám hộ hợp pháp.</p><p>– Chúng tôi cấp giấy phép sử dụng để bạn có thể mua sắm trên web trong khuôn khổ điều khoản và điều kiện sử dụng đã đề ra.</p><p>– Nghiêm cấm sử dụng bất kỳ phần nào của trang web này với mục đích thương mại hoặc nhân danh bất kỳ đối tác thứ ba nào nếu không được chúng tôi cho phép bằng văn bản. Nếu vi phạm bất cứ điều nào trong đây, chúng tôi sẽ hủy giấy phép của bạn mà không cần báo trước.</p><p>– Trang web này chỉ dùng để cung cấp thông tin sản phẩm chứ chúng tôi không phải nhà sản xuất nên những nhận xét hiển thị trên web là ý kiến cá nhân của khách hàng, không phải của chúng tôi.</p><p>– Quý khách phải đăng ký tài khoản với thông tin xác thực về bản thân và phải cập nhật nếu có bất kỳ thay đổi nào. Mỗi người truy cập phải có trách nhiệm với mật khẩu, tài khoản và hoạt động của mình trên web. Hơn nữa, quý khách phải thông báo cho chúng tôi biết khi tài khoản bị truy cập trái phép. Chúng tôi không chịu bất kỳ trách nhiệm nào, dù trực tiếp hay gián tiếp, đối với những thiệt hại hoặc mất mát gây ra do quý khách không tuân thủ quy định.</p><p>– Trong suốt quá trình đăng ký, quý khách đồng ý nhận email quảng cáo từ website. Sau đó, nếu không muốn tiếp tục nhận mail, quý khách có thể từ chối bằng cách nhấp vào đường link ở dưới cùng trong mọi email quảng cáo.</p><p><strong>2. Chấp nhận đơn hàng và giá cả</strong></p><p>– Chúng tôi có quyền từ chối hoặc hủy đơn hàng của quý khách vì bất kỳ lý do gì vào bất kỳ lúc nào. Chúng tôi có thể hỏi thêm về số điện thoại và địa chỉ trước khi nhận đơn hàng.</p><p>– Chúng tôi cam kết sẽ cung cấp thông tin giá cả chính xác nhất cho người tiêu dùng. Tuy nhiên, đôi lúc vẫn có sai sót xảy ra, ví dụ như trường hợp giá sản phẩm không hiển thị chính xác trên trang web hoặc sai giá, tùy theo từng trường hợp chúng tôi sẽ liên hệ hướng dẫn hoặc thông báo hủy đơn hàng đó cho quý khách. Chúng tôi cũng có quyền từ chối hoặc hủy bỏ bất kỳ đơn hàng nào dù đơn hàng đó đã hay chưa được xác nhận hoặc đã bị thanh toán.</p><p><strong>3. Thương hiệu và bản quyền</strong></p><p>– Mọi quyền sở hữu trí tuệ (đã đăng ký hoặc chưa đăng ký), nội dung thông tin và tất cả các thiết kế, văn bản, đồ họa, phần mềm, hình ảnh, video, âm nhạc, âm thanh, biên dịch phần mềm, mã nguồn và phần mềm cơ bản đều là tài sản của chúng tôi. Toàn bộ nội dung của trang web được bảo vệ bởi luật bản quyền của Việt Nam và các công ước quốc tế. Bản quyền đã được bảo lưu.</p><p><strong>4. Quyền pháp lý</strong></p><p>– Các điều kiện, điều khoản và nội dung của trang web này được điều chỉnh bởi luật pháp Việt Nam và Tòa án có thẩm quyền tại Việt Nam sẽ giải quyết bất kỳ tranh chấp nào phát sinh từ việc sử dụng trái phép trang web này.</p><p><strong>5. Quy định về bảo mật</strong></p><p>– Trang web của chúng tôi coi trọng việc bảo mật thông tin và sử dụng các biện pháp tốt nhất bảo vệ thông tin và việc thanh toán của quý khách. Thông tin của quý khách trong quá trình thanh toán sẽ được mã hóa để đảm bảo an toàn. Sau khi quý khách hoàn thành quá trình đặt hàng, quý khách sẽ thoát khỏi chế độ an toàn.</p><p>– Quý khách không được sử dụng bất kỳ chương trình, công cụ hay hình thức nào khác để can thiệp vào hệ thống hay làm thay đổi cấu trúc dữ liệu. Trang web cũng nghiêm cấm việc phát tán, truyền bá hay cổ vũ cho bất kỳ hoạt động nào nhằm can thiệp, phá hoại hay xâm nhập vào dữ liệu của hệ thống. Cá nhân hay tổ chức vi phạm sẽ bị tước bỏ mọi quyền lợi cũng như sẽ bị truy tố trước pháp luật nếu cần thiết.</p><p>– Mọi thông tin giao dịch sẽ được bảo mật nhưng trong trường hợp cơ quan pháp luật yêu cầu, chúng tôi sẽ buộc phải cung cấp những thông tin này cho các cơ quan pháp luật.</p><p><strong>6. Thay đổi, hủy bỏ giao dịch tại website</strong></p><p>Trong mọi trường hợp, khách hàng đều có quyền chấm dứt giao dịch nếu đã thực hiện các biện pháp sau đây:</p><p>– Thông báo cho chúng tôi về việc hủy giao dịch qua đường dây nóng Hotline:&nbsp;<a href=\"tel:0949.392.190\"><strong>0949.392.190&nbsp;</strong></a>Tư vấn:&nbsp;<a href=\"tel:0939209092\"><strong>0939.209.092</strong></a></p><p>– Trả lại hàng hoá đã nhận nhưng chưa sử dụng hoặc hưởng bất kỳ lợi ích nào từ hàng hóa đó (theo quy định của chính sách đổi trả hàng).</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:34:07', '0000-00-00 00:00:00'),
-(35, 'chinh-sach', 'chinh-sach-doi-tra', 'Chính sách đổi trả', '', '<h2><strong>Chính Sách Đổi Trả</strong></h2><p><strong>1. Điều kiện đổi trả</strong></p><p>Quý Khách hàng cần kiểm tra tình trạng hàng hóa và có thể đổi hàng/ trả lại hàng&nbsp;ngay tại thời điểm giao/nhận hàng&nbsp;trong những trường hợp sau:</p><p>Hàng không đúng chủng loại, mẫu mã trong đơn hàng đã đặt hoặc như trên website tại thời điểm đặt hàng.</p><p>Không đủ số lượng, không đủ bộ như trong đơn hàng.</p><p>Tình trạng bên ngoài bị ảnh hưởng như rách bao bì, bong tróc, bể vỡ…</p><p>&nbsp;Khách hàng có trách nhiệm trình giấy tờ liên quan chứng minh sự thiếu sót trên để hoàn thành việc&nbsp;hoàn trả/đổi trả hàng hóa.&nbsp;</p><p><strong>2. Quy định về thời gian thông báo và gửi sản phẩm đổi trả</strong></p><p>Thời gian thông báo đổi trả:&nbsp;trong vòng 48h kể từ khi nhận sản phẩm đối với trường hợp sản phẩm thiếu phụ kiện, quà tặng hoặc bể vỡ.</p><p>Thời gian gửi chuyển trả sản phẩm: trong vòng 14 ngày kể từ khi nhận sản phẩm.</p><p>Địa điểm đổi trả sản phẩm: Khách hàng có thể mang hàng trực tiếp đến văn phòng/ cửa hàng của chúng tôi hoặc chuyển qua đường bưu điện.</p><p>Trong trường hợp Quý Khách hàng có ý kiến đóng góp/khiếu nại liên quan đến chất lượng sản phẩm, Quý Khách hàng vui lòng liên hệ đường dây chăm sóc khách hàng&nbsp;của chúng tôi.</p><p><strong>3. Hình thức đổi trả</strong></p><p>– Chúng tôi thực hiện đổi hàng hóa đúng loại sản phẩm mà khách hàng đặt đối với sản phẩm giao sai hàng/ sai số lượng hoặc khi phát sinh sản phẩm không đạt cam kết.</p><p>– Đổi sản phẩm khác có giá trị tương đương cho khách hàng trong trường hợp sản phẩm khách hàng đã đặt hết hàng nếu khách hàng đồng ý. Trường hợp khách hàng không còn nhu cầu nữa do lỗi hàng hóa hoặc không đồng ý với hàng hóa được đổi lại công ty sẽ hoàn phí cho khách hàng bằng hình thức chuyển khoản hoặc theo phương thức thỏa thuận với khách hàng trong vòng 07 ngày làm việc kể từ ngày nhận được yêu cầu.</p><p><br>&nbsp;</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:34:51', '0000-00-00 00:00:00'),
-(36, 'chinh-sach', 'chinh-sach-thanh-toan', 'Chính sách thanh toán', '', '<p>Hình Thức Thanh Toán</p><p><strong>Có 3 hình thức thanh toán</strong>, khách hàng có thể lựa chọn hình thức thuận tiện và phù hợp với mình nhất:</p><p><strong>Cách 1:</strong>&nbsp;Thanh toán tiền mặt trực tiếp địa chỉ của chúng tôi: Khách hàng mua hàng tại địa điểm kinh doanh của chúng tôi, tại đây KH có thể thanh toán trực tiếp.</p><p><strong>Cách 2:&nbsp;</strong>Thanh toán khi nhận hàng (COD): Với hình thức này khách hàng xem hàng tại nhà, thanh toán tiền mặt cho nhân viên giao nhận hàng</p><p><strong>Cách 3:&nbsp;</strong>Chuyển khoản trước: Quý khách chuyển khoản trước, sau đó chúng tôi tiến hành giao hàng theo thỏa thuận hoặc hợp đồng với Quý khách.</p><p>&nbsp;Chi tiết vui lòng liên hệ Hotline:&nbsp;<a href=\"tel:0949.392.190\"><strong>0949.392.190&nbsp;</strong></a>Tư vấn:&nbsp;<a href=\"tel:0939209092\"><strong>0939.209.092</strong></a></p><p><strong>Lưu ý</strong></p><p>Nội dung chuyển khoản : ghi rõ Số điện thoại hoặc Số đơn hàng<br>Sau khi chuyển khoản, chúng tôi sẽ liên hệ xác nhận và tiến hành giao hàng.</p><p>Nếu sau thời gian thỏa thuận mà chúng tôi không giao hàng hoặc không phản hồi lại, quý khách có thể gửi khiếu nại trực tiếp về địa chỉ trụ sở</p><p>Đối với khách hàng có nhu cầu mua số lượng lớn để kinh doanh hoặc buôn sỉ vui lòng liên hệ trực tiếp với chúng tôi để có chính sách giá cả hợp lý. Và việc thanh toán sẽ được thực hiện theo hợp đồng.</p><p>Chúng tôi cam kết kinh doanh minh bạch, hợp pháp, bán hàng chất lượng, có nguồn gốc</p><p>Chi tiết vui lòng liên hệ Hotline:&nbsp;<a href=\"tel:0949.392.190\"><strong>0949.392.190&nbsp;</strong></a>Tư vấn:&nbsp;<a href=\"tel:0939209092\"><strong>0939.209.092</strong></a></p><p><br>&nbsp;</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:35:22', '0000-00-00 00:00:00'),
-(37, 'chinh-sach', 'chinh-sach-van-chuyen', 'Chính sách vận chuyển', '', '<p><strong>Chính sách vận chuyển và giao nhận</strong></p><ol><li><strong>Các phương thức giao hàng</strong></li></ol><p>Chúng tôi sử dụng 02 phương thức giao hàng:</p><ul><li>Khách hàng mua trực tiếp hàng tại công ty, cửa hàng của chúng tôi</li><li>Ship hàng</li></ul><ol><li><strong>Thời hạn ước tính cho việc giao hàng</strong></li></ol><p>Thông thường sau khi nhận được thông tin đặt hàng chúng tôi sẽ xử lý đơn hàng trong vòng 24h và phản hồi lại thông tin cho khách hàng về việc thanh toán và giao nhận.</p><p>Thời gian giao hàng thường trong khoảng từ 3-5 ngày kể từ ngày chốt đơn hàng hoặc theo thỏa thuận với khách khi đặt hàng.</p><p>Tuy nhiên, cũng có trường hợp việc giao hàng kéo dài hơn nhưng chỉ xảy ra trong những tình huống bất khả kháng như sau:</p><p>– Nhân viên chúng tôi liên lạc với khách hàng qua điện thoại không được nên không thể giao hàng.</p><p>– Địa chỉ giao hàng bạn cung cấp không chính xác hoặc khó tìm.</p><p>– Số lượng đơn hàng tăng đột biến khiến việc xử lý đơn hàng bị chậm.</p><p>– Đối tác cung cấp hàng chậm hơn dự kiến khiến việc giao hàng bị chậm lại hoặc đối tác vận chuyển giao hàng bị chậm</p><p>Về phí vận chuyển, chúng tôi sử dụng dịch vụ vận chuyển ngoài nên cước phí vận chuyển sẽ được tính theo phí của các đơn vị vận chuyển tùy vào vị trí và khối lượng của đơn hàng, khi liên hệ lại xác nhận đơn hàng với khách sẽ báo mức phí cụ thể cho khách hàng.</p><ol><li><strong>Các giới hạn về mặt địa lý cho việc giao hàng</strong></li></ol><p>Riêng khách tỉnh có nhu cầu mua số lượng lớn hoặc khách buôn sỉ nếu có nhu cầu mua sản phẩm , chúng tôi sẽ nhờ dịch vụ giao nhận của các công ty vận chuyển và phí sẽ được tính theo phí của các đơn vị cung cấp dịch vụ vận chuyển hoặc theo thoản thuận hợp đồng giữa 2 bên.</p><ol><li><strong>Phân định trách nhiệm của thương nhân, tổ chức cung ứng dịch vụ logistics về cung cấp chứng từ hàng hóa trong quá trình giao nhận.</strong></li></ol><p>Tất cả các đơn hàng đều được đóng gói sẵn sàng trước khi vận chuyển, được niêm phong bởi thietbivesinhphuthinh.com</p><p>Đơn vị vận chuyển sẽ chỉ chịu trách nhiệm vận chuyển hàng hóa theo nguyên tắc “nguyên đai, nguyên kiện</p><p>Trên bao bì tất cả các đơn hàng đều có thông tin:</p><p>Thông tin Người nhận, bao gồm: Tên người nhận, số điện thoại và địa chỉ người nhận</p><p>Để đảm bảo an toàn cho hàng hóa, thietbivesinhphuthinh.com sẽ gửi kèm hóa đơn tài chính hoặc phiếu xuất kho hợp lệ của sản phẩm trong bưu kiện (nếu có).</p><p>&nbsp;Hóa đơn tài chính hoặc phiếu xuất kho là căn cứ hỗ trợ quá trình xử lý khiếu nại như: xác định giá trị thị trường của hàng hóa, đảm bảo hàng hóa lưu thông hợp lệ v.v..</p><ol><li><strong>Trách nhiệm về trường hợp hàng bị hư hỏng do quá trình vận chuyển</strong></li></ol><p>Về việc cung cấp chứng từ hàng hóa trong quá trình giao nhận.</p><p>Đối với hàng hóa bị hư hỏng do quá trình vận chuyển dù là đơn hàng do chính cửa hàng vận chuyển hay do bên thứ 3 vận chuyển thì&nbsp;chúng&nbsp;tôi&nbsp;sẽ là bên đứng ra chịu trách nhiệm giải quyết vấn đề cho khách hàng.</p><p>&nbsp;Khách hàng có quyền từ chối nhận sản phẩm và yêu cầu đổi trả theo quy định “&nbsp;<i><strong>đổi trả hoàn phí</strong></i>” còn mọi vấn đề phát sinh&nbsp;chúng&nbsp;tôi&nbsp;sẽ làm việc lại với đối tác vận chuyển để giải quyết đền bù cho đơn hàng theo thỏa thuận hợp tác giữa công&nbsp;ty&nbsp;với đối tác thứ 3 cung cấp dịch vụ vận chuyển.</p><p><strong>Lưu ý: Trường hợp phát sinh chậm trễ trong việc giao hàng chúng tôi sẽ thông tin kịp thời cho khách hàng và khách hàng có thể lựa chọn giữa việc Hủy hoặc tiếp tục chờ hàng.</strong></p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:35:56', '0000-00-00 00:00:00'),
-(38, 'chinh-sach', 'chinh-sach-kiem-hang', 'Chính sách kiểm hàng', '', '<p><strong>Chính sách kiểm hàng</strong></p><p>Trước khi nhận hàng và thanh toán, Quý Khách được quyền kiểm tra sản phẩm.&nbsp;<strong>Không hỗ trợ thử hàng.</strong></p><p>Quý Khách vui lòng mở gói hàng kiểm tra để đảm bảo đơn hàng được giao đúng mẫu mã, số lượng như đơn hàng đã đặt.&nbsp;<strong>Không thử hay dùng thử sản phẩm.</strong></p><p>Sau khi đồng ý với món hàng được giao đến, Quý Khách thanh toán với nhân viên giao hàng (trường hợp đơn hàng được ship COD) và nhận hàng.</p><p>Trường hợp Quý Khách không ưng ý với sản phẩm, Quý Khách có thể từ chối nhận hàng. Tại đây, chúng tôi&nbsp;sẽ thu thêm chi phí hoàn hàng, tương đương với phí ship của đơn hàng Quý khách đã đặt.</p><p><strong>Lưu ý:&nbsp;</strong></p><p>– Khi Quý Khách kiểm tra đơn hàng, nhân viên giao nhận buộc phải đợi Quý Khách kiểm tra hàng hóa bên trong gói hàng. Trường hợp nhân viên từ chối cho Quý Khách kiểm tra hàng hóa, Quý Khách vui lòng liên hệ với chúng tôi<strong>&nbsp;</strong>&nbsp;qua <a href=\"https://vinaphaco-thailand.com/chinh-sach-kiem-hang/%C2%A00939.209.092\">Hotline:&nbsp;</a><a href=\"tel:0949.392.190\"><strong>0949.392.190&nbsp;</strong></a>Tư vấn:&nbsp;<a href=\"tel:0939209092\"><strong>0939.209.092</strong></a>&nbsp;để được hỗ trợ.</p><p>– &nbsp;Chúng tôi&nbsp;sẽ không chịu trách nhiệm về số lượng, mẫu mã cũng như lỗi của sản phẩm, sau khi đơn hàng đã được giao hàng thành công.</p><p>– Quý Khách tránh dùng vật sắc nhọn để mở gói hàng để&nbsp;tránh gây hư hỏng cho sản phẩm bên trong. Đối với những trường hợp sản phẩm bị hư hỏng do lỗi từ phía Khách hàng, Chúng tôi&nbsp;rất tiếc không thể hỗ trợ Quý Khách đổi/trả/bảo hành sản phẩm.</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:36:30', '0000-00-00 00:00:00'),
-(39, 'chinh-sach', 'chinh-sach-xu-ly-khieu-nai', 'Chính sách xử lý khiếu nại', '', '<p>Chính sách xử lý khiếu nại</p><p>Tiếp nhận mọi khiếu nại của khách hàng liên quan đến việc sử dụng dịch vụ của công ty.</p><p>– Tất cả mọi trường hơp bảo hành, quý khách có thể liên hệ với chúng tôi&nbsp;để làm thủ tục bảo hành.</p><p>– Thời gian giải quyết khiếu nại trong thời hạn tối đa là 03&nbsp;(ba) ngày làm việc kể từ khi nhận được khiếu nại của của khách hàng. Trong trường hợp bất khả kháng 2 bên sẽ tự thương lượng.</p>', NULL, NULL, NULL, '', '', '', '2024-08-21 09:37:03', '0000-00-00 00:00:00'),
-(40, 'tin-tuc', 'toto-washlet-bo-giai-phap-ve-sinh-tich-hop-cong-nghe-da-chuc-nang', 'TOTO Washlet - bộ giải pháp vệ sinh tích hợp công nghệ, đa chức năng', 'Sử dụng công nghệ không chạm, với chức năng massage đa cấp độ, thiết kế ưu ái cho phái nữ... là những điểm nhấn khác biệt của bộ sản phẩm TOTO Washlet. ', '<p>TOTO Washlet là thiết bị lắp đặt trực tiếp lên bàn cầu và tích hợp nhiều công nghệ làm sạch tự động, được ra đời tại Nhật Bản từ những năm 80 của thế kỷ trước. Tính đến năm 2022, hãng có 60 triệu sản phẩm bán ra trên toàn cầu, thay đổi thói quen cũng như văn hóa vệ sinh của hàng triệu người trên thế giới.</p><p>Trong thời đại sức khỏe ngày càng được ưu tiên, người tiêu dùng có xu hướng tìm kiếm các sản phẩm hỗ trợ tích cực cho sức khỏe tổng thể của họ. \"Là sản phẩm đã có tuổi đời hơn 40 năm, được nghiên cứu trong từng chi tiết nhỏ nhất, TOTO Washlet trở thành tấm khiên vững chắc ngăn chặn việc tiếp xúc của người dùng với rất nhiều loại vi khuẩn luôn thường trực trong không gian nhà vệ sinh, đồng thời hỗ trợ cho các bệnh nhân trong giai đoạn điều trị bệnh lý liên quan đến hệ tiêu hóa...\", đại diện hãng nói.</p><p>Tại Việt Nam, thu nhập của người dân có xu hướng tăng, kéo theo tiêu chuẩn sống cũng thay đổi theo hướng quan tâm nhiều hơn đến trải nghiệm và sức khoẻ. Lĩnh vực thiết bị vệ sinh không nằm ngoài điều này. Đó cũng là lý do TOTO giới thiệu bộ giải pháp sống khỏe tích hợp công nghệ thông minh đến người dân Việt.</p>', '1724233198.jpg', NULL, NULL, '', '', '', '2024-08-21 09:39:58', '0000-00-00 00:00:00'),
-(41, 'tin-tuc', 'tan-trang-nha-ve-sinh-dip-cuoi-nam', 'Tân trang nhà vệ sinh dịp cuối năm', 'Mỗi dịp Tết đến xuân về, nhu cầu tân trang nhà cửa, trong đó có nhà vệ sinh tăng cao, các sản phẩm của Caesar được nhiều khách hàng quan tâm. ', '<p>Mỗi dịp Tết đến xuân về, nhu cầu tân trang nhà cửa, trong đó có nhà vệ sinh tăng cao, các sản phẩm của Caesar được nhiều khách hàng quan tâm.</p><p>Bên cạnh những không gian chính như phòng khách, phòng ngủ hay sân vườn, nhà vệ sinh cũng là không gian được chú trọng sửa sang, tân trang dịp cuối năm. Hiện, thị trường có sự xuất hiện của nhiều thương hiệu, sản phẩm thiết bị vệ sinh, với nhiều phân khúc và mức giá, mang tới nhiều lựa chọn cho người tiêu dùng.</p><p><picture><source srcset=\"https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-5040858-ExtractWord-0-Ou-4863-6161-1701158181.png?w=680&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=xxDsEs4iUXurrwmhMNSe-Q 1x, https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-5040858-ExtractWord-0-Ou-4863-6161-1701158181.png?w=1020&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=Cojd5nMWNEp4nduaLP9FOA 1.5x, https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-5040858-ExtractWord-0-Ou-4863-6161-1701158181.png?w=680&amp;h=0&amp;q=100&amp;dpr=2&amp;fit=crop&amp;s=D9UVYs08e5Gr8zEaWS9p2w 2x\"><img src=\"https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-5040858-ExtractWord-0-Ou-4863-6161-1701158181.png?w=680&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=xxDsEs4iUXurrwmhMNSe-Q\" alt=\"Không gian phòng vệ sinh được thiết kế sang trọng, bố trí thiết bị vệ sinh hài hòa. Ảnh: Caesar\" width=\"680\" height=\"453\"></picture></p><p>Không gian phòng vệ sinh được thiết kế sang trọng, bố trí thiết bị vệ sinh hài hòa. Ảnh: <i>Caesar</i></p><p>Một trong những thương hiệu thiết bị vệ sinh được nhiều người tiêu dùng tin chọn khi muốn nâng cấp nhà vệ sinh là Caesar. Các sản phẩm thuộc thương hiệu Caesar được đánh giá cao nhờ lợi thế công nghệ, thiết kế cùng mức giá hợp lý trong từng phân khúc.</p><p><strong>Thiết kế sang trọng, nhiều công năng</strong></p><p>Theo đại diện Caesar, với phương châm mang lại không gian vệ sinh cao cấp, sản phẩm của hãng sở hữu thiết kế sang trọng và tinh tế. Từng thiết bị vệ sinh được tạo ra với những đường cong linh hoạt, đem lại cảm giác thoải mái và trang nhã khi sử dụng.</p><p><picture><source srcset=\"https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-894888281-ExtractWord-2-2970-8749-1701158181.png?w=680&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=XojjFg1AjHYvJ92zoNKHgg 1x, https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-894888281-ExtractWord-2-2970-8749-1701158181.png?w=1020&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=FOrrFwOD0zr3oFV-cGwZaw 1.5x, https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-894888281-ExtractWord-2-2970-8749-1701158181.png?w=680&amp;h=0&amp;q=100&amp;dpr=2&amp;fit=crop&amp;s=4IrmBiYopNNlZscdbYwHDw 2x\"><img src=\"https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-894888281-ExtractWord-2-2970-8749-1701158181.png?w=680&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=XojjFg1AjHYvJ92zoNKHgg\" alt=\"Nét trang nhã tại một nhà vệ sinh sử dụng sản phẩm Caesar. Ảnh: Caesar\" width=\"680\" height=\"475\"></picture></p><p>Nét trang nhã tại một nhà vệ sinh sử dụng sản phẩm Caesar. Ảnh: <i>Caesar</i></p><p>Với thiết kế hòa lẫn hai yếu tố cổ điển và hiện đại, các thiết bị vệ sinh của hãng hài hòa với mọi căn nhà. Hơn nữa, từng sản phẩm được hoàn thiện chỉn chu, nhằm đáp ứng các điều kiện không lý tưởng như độ ẩm và nhiệt độ cao.</p><p>Đặc biệt, Caesar tập trung vào việc biến không gian nhà tắm trở nên đầy đủ tiện nghi và thư giãn. Các công nghệ hiện đại được tích hợp để biến không gian vệ sinh trở nên thông minh, tinh tế hơn.</p><p>Đơn cử, bồn vệ sinh Caesar không chỉ tiết kiệm nước mà còn có các tính năng thông minh như tự động xả và sấy khô, mang đến sự tiện lợi và sạch sẽ. Bên cạnh đó, vòi sen của hãng không chỉ cung cấp dòng nước mạnh mà còn được làm bằng chất liệu cao cấp, chống gỉ sét và bền bỉ. Một số mẫu đi kèm công nghệ tiết kiệm nước, giúp người dùng giảm lượng nước tiêu thụ nhưng vẫn đảm bảo trải nghiệm tốt, mang lại năng lượng tươi mới cho chủ sở hữu.</p><p><picture><source srcset=\"https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-506162907-ExtractWord-1-4164-2892-1701158183.png?w=680&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=yFwk_9kRG9wDFIvh-FnTcw 1x, https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-506162907-ExtractWord-1-4164-2892-1701158183.png?w=1020&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=G4VkEUr65WU5hMmNNZbiQg 1.5x, https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-506162907-ExtractWord-1-4164-2892-1701158183.png?w=680&amp;h=0&amp;q=100&amp;dpr=2&amp;fit=crop&amp;s=AbvZtXrKUWaKyuIcByXceg 2x\"><img src=\"https://i1-kinhdoanh.vnecdn.net/2023/11/28/Image-506162907-ExtractWord-1-4164-2892-1701158183.png?w=680&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=yFwk_9kRG9wDFIvh-FnTcw\" alt=\"Bồn tắm và thiết bị vệ sinh tạo vẻ trang nhã cho không gian phòng tắm. Ảnh: Caesar\" width=\"680\" height=\"453\"></picture></p><p>Bồn tắm và thiết bị vệ sinh tạo vẻ trang nhã cho không gian phòng tắm. Ảnh: <i>Caesar</i></p><p>Ngoài ra, các thiết bị của Caesar có mức giá phải chăng, giúp đông đảo khách hàng dễ tiếp cận. Cùng với đó, hãng chia bộ sưu tập theo từng phân khúc, giúp người dùng thuận lợi lựa chọn phù hợp với sở thích hay ngân sách.</p><p>Chế độ hậu mãi và chăm sóc khách hàng của Caesar cũng được đánh giá cao. Bên cạnh hỗ trợ mua hàng theo hình thức trực tuyến, hệ thống chăm sóc khách hàng của Caesar hoạt động 24/7 để sẵn sàng tiếp nhận, giải đáp và tư vấn mọi yêu cầu tìm hiểu thông tin và lắng nghe phản hồi từ khách hàng.</p><p>\"Các thiết bị của Caesar đã làm mới căn nhà vệ sinh kiểu cũ của gia đình tôi. Tính năng được tích hợp rất thông minh, đa dạng và hiện đại. Ngoài ra các nhân viên hỗ trợ cũng giúp đỡ rất nhiều trong quá trình lắp đặt\", anh Thành ở quận Ba Đình (Hà Nội) chia sẻ.</p>', '1724233292.png', NULL, NULL, '', '', '', '2024-08-21 09:41:32', '0000-00-00 00:00:00'),
-(42, 'du-an-tieu-bieu', 'may-nang-luong-mat-troi-dang-ong-voi-nhieu-dia-hinh-lap-dat', 'Máy Năng Lượng Mặt Trời Dạng Ống Với Nhiều Địa Hình Lắp Đặt', '', '', '1724252726.jpg', NULL, NULL, '', '', '', '2024-08-21 15:05:26', '0000-00-00 00:00:00'),
-(43, 'du-an-tieu-bieu', 'may-nang-luong-mat-troi-dang-tam-voi-nhieu-dia-hinh-lap-dat', 'Máy Năng Lượng Mặt Trời Dạng Tấm Với Nhiều Địa Hình Lắp Đặt', '', '', '1724252755.jpg', NULL, NULL, '', '', '', '2024-08-21 15:05:55', '0000-00-00 00:00:00'),
-(44, 'du-an-tieu-bieu', 'dien-nang-luong-mat-troi-he-doc-lap', 'Điện Năng Lượng Mặt Trời Hệ Độc Lập', '', '', '1724252915.jpg', NULL, NULL, '', '', '', '2024-08-21 15:08:35', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `orders`
---
-
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `code` varchar(10) NOT NULL,
-  `fullname` varchar(200) NOT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `phone_number` varchar(20) NOT NULL,
-  `address` mediumtext NOT NULL,
-  `total_price` double NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `order_details`
---
-
-CREATE TABLE `order_details` (
-  `id` int(11) NOT NULL,
-  `order_id` varchar(10) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `order_details`
---
-
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
-(1, '46UFV0F2', 44, 1, 2050000),
-(2, '46UFV0F2', 43, 1, 2550000),
-(3, '46UFV0F2', 47, 1, 4600000),
-(4, '46UFV0F2', 48, 1, 4500000),
-(5, '46UFV0F2', 49, 1, 3000000),
-(6, '5ZWHFCG6', 44, 1, 2050000),
-(7, '5ZWHFCG6', 43, 1, 2550000),
-(8, '5ZWHFCG6', 47, 1, 4600000),
-(9, '5ZWHFCG6', 48, 1, 4500000),
-(10, '5ZWHFCG6', 49, 1, 3000000),
-(11, 'K0N2EE3S', 47, 1, 4600000),
-(12, 'K0N2EE3S', 48, 1, 4500000),
-(13, 'K0N2EE3S', 49, 1, 3000000),
-(14, 'M6I3GSRY', 44, 2, 2050000),
-(15, 'M6I3GSRY', 45, 4, 1800000),
-(16, 'M6I3GSRY', 46, 4, 2000000),
-(17, '1MVJYEDH', 44, 1, 2050000),
-(18, '1MVJYEDH', 45, 1, 1800000),
-(19, '1MVJYEDH', 46, 1, 2000000),
-(20, '1MVJYEDH', 48, 1, 4500000),
-(21, '1MVJYEDH', 49, 1, 3000000),
-(22, '1MVJYEDH', 50, 1, 5000000),
-(23, '1MVJYEDH', 53, 1, 7950000);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `products`
---
-
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `stt` int(11) DEFAULT 0,
-  `product_type_id` int(11) DEFAULT NULL,
-  `slug` mediumtext DEFAULT NULL,
-  `title` varchar(200) DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `content` mediumtext DEFAULT NULL,
-  `image` varchar(200) DEFAULT NULL,
-  `original_price` double DEFAULT 0,
-  `price` double DEFAULT 0,
-  `noibat` int(11) DEFAULT 0,
-  `hienthi` int(11) DEFAULT 0,
-  `seo_title` varchar(200) DEFAULT NULL,
-  `seo_keywords` mediumtext DEFAULT NULL,
-  `seo_desc` mediumtext DEFAULT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `update_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `products`
---
-
-INSERT INTO `products` (`id`, `stt`, `product_type_id`, `slug`, `title`, `description`, `content`, `image`, `original_price`, `price`, `noibat`, `hienthi`, `seo_title`, `seo_keywords`, `seo_desc`, `create_at`, `update_at`) VALUES
-(43, 1, 9, 'lavabo-treo-tuong-khoi-vc-246', 'Lavabo Treo Tường Khối VC-246', '', '', '1724115728.png', 2550000, 2550000, 1, 1, 'Lavabo Treo Tường Khối VC-246', 'Lavabo Treo Tường Khối VC-246', 'Lavabo Treo Tường Khối VC-246', '2024-08-23 14:56:26', NULL),
-(44, 2, 9, 'lavabo-dat-ban-vc-509', 'Lavabo Đặt Bàn VC-509', '', '', '1724086638.png', 2050000, 2050000, 1, 1, 'Lavabo Đặt Bàn VC-509', 'Lavabo Đặt Bàn VC-509', 'Lavabo Đặt Bàn VC-509', '2024-08-23 14:56:28', NULL),
-(45, 3, 9, 'lavabo-treo-tuong-vc-301', 'Lavabo Treo Tường VC-301', '', '', '1724086707.png', 1830000, 1800000, 1, 1, 'Lavabo Treo Tường VC-301', 'Lavabo Treo Tường VC-301', 'Lavabo Treo Tường VC-301', '2024-08-23 14:56:29', NULL),
-(46, 4, 9, 'lavabo-dat-ban-vc-6044', 'Lavabo Đặt Bàn VC-6044', '', '', '1724086756.png', 2220000, 2000000, 1, 1, 'Lavabo Đặt Bàn VC-6044', 'Lavabo Đặt Bàn VC-6044', 'Lavabo Đặt Bàn VC-6044', '2024-08-23 14:56:31', NULL),
-(47, 5, 6, 'bon-cau-khoi-vc-2001', 'Bồn Cầu Khối VC-2001', '', '', '1724087172.png', 4696000, 4600000, 1, 1, 'Bồn Cầu Khối VC-2001', 'Bồn Cầu Khối VC-2001', 'Bồn Cầu Khối VC-2001', '2024-08-23 14:57:34', NULL),
-(48, 6, 6, 'bon-cau-khoi-vc-2005', 'Bồn Cầu Khối VC-2005', '', '', '1724087213.png', 5000000, 4500000, 1, 1, 'Bồn Cầu Khối VC-2005', 'Bồn Cầu Khối VC-2005', 'Bồn Cầu Khối VC-2005', '2024-08-23 14:57:39', NULL),
-(49, 7, 6, 'bon-cau-khoi-vc-2074', 'Bồn Cầu Khối VC-2074', '', '', '1724087243.png', 5000000, 3000000, 1, 1, 'Bồn Cầu Khối VC-2074', 'Bồn Cầu Khối VC-2074', 'Bồn Cầu Khối VC-2074', '2024-08-23 14:57:43', NULL),
-(50, 8, 6, 'bon-cau-khoi-vc-2110', 'Bồn Cầu Khối VC-2110', '', '', '1724087273.png', 6000000, 5000000, 1, 1, 'Bồn Cầu Khối VC-2110', 'Bồn Cầu Khối VC-2110', 'Bồn Cầu Khối VC-2110', '2024-08-23 14:57:51', NULL),
-(51, 9, 9, 'lavabo-dat-ban-vc-1021', 'Lavabo Đặt Bàn VC-1021', '', '<p><a href=\"https://vinaphaco-thailand.com/lavabo-vinaphaco/\"><strong>LAVABO VINAPHACO</strong></a><strong>:&nbsp;</strong>Là sản phẩm được nhà sản xuất cải tiến về kiểu dáng, thiết kế không chỉ tạo vẻ đẹp trẻ trung và chắc chắn cho sản phẩm mà còn giúp tiết kiệm thời gian cho công việc thi công lắp đặt.</p><p><a href=\"https://vinaphaco-thailand.com/lavabo-vinaphaco/\"><strong>LAVABO SỨ VINAPHACO</strong></a><strong>:</strong>&nbsp;được làm bằng chất liệu sứ cao cấp, bề mặt phủ lớp men đặc biệt, lớp men tuyết công nghệ <a href=\"https://vinaphaco-thailand.com/lavabo-vinaphaco/\">Nano</a> vừa có tác dụng tạo độ sáng bóng cho sản phẩm</p><p>Công nghệ NSA – <a href=\"https://vinaphaco-thailand.com/lavabo-vinaphaco/\">Nano</a> Shiny Antimicrobial không chỉ tăng tính thẩm mỹ cho&nbsp; thương hiệu <a href=\"https://vinaphaco-thailand.com/lavabo-vinaphaco/\"><strong>VINAPHACO</strong></a> mà còn tạo ra màng Nano khá bền bỉ, chịu được các tác động ăn mòn của axit, chất kiềm hay hóa chất tẩy rửa rất tốt.</p><p>Ngoài ra, lớp màn này có khả năng kháng khuẩn rất tốt, khi được kích thích bởi nguồn ánh sáng nhẹ; chẳng hạn như ánh sáng mặt trời, ánh đèn thì nó sẽ tự kích hoạt khả năng tiêu diệt và ngăn chặn sự phát triển của vi khuẩn.</p><p><a href=\"https://vinaphaco-thailand.com/lavabo-vinaphaco/\"><strong>LAVABO SỨ VINAPHACO</strong></a><strong>&nbsp;</strong>sẽ mang đến nét đẹp hoàn mỹ cho không gian của gia đình bạn</p><h4><strong>CÔNG TY TNHH TM TB VỆ SINH THỊNH PHÁT</strong></h4><p>Đc: 374 Nguyễn Hữu Trí, TT.Tân Túc, Bình Chánh<br>Hotline: <a href=\"tel:0949392190\">0949.392.190</a>&nbsp; &nbsp;|&nbsp; Tư vấn: <a href=\"tel:0939209092\">0939.209.092</a><br>Email: vinaphacothailand@gmail.com<br>Website: <a href=\"https://vinaphaco-thailand.com/\">https://vinaphaco-thailand.com</a></p><p><br>&nbsp;</p>', '1724340553.png', 1650000, 1650000, 1, 1, '', '', '', '2024-08-28 06:36:08', NULL),
-(52, 10, 9, 'lavabo-dat-ban-vc-619', 'Lavabo đặt bàn VC-619', '', '', '1724340650.png', 1850000, 1850000, 1, 1, '', '', '', '2024-08-28 06:36:30', NULL),
-(53, 11, 8, 'sen-cay-nong-lanh-am-tuong-vinaphaco-vc-1024', 'Sen cây nóng lạnh âm tường Vinaphaco VC-1024', '', '', '1724341622.jpg', 7950000, 7950000, 1, 1, '', '', '', '2024-08-28 06:37:14', NULL),
-(54, 12, 8, 'sen-cay-nong-lanh-am-tuong-vinaphaco-vc-1034', 'Sen cây nóng lạnh âm tường Vinaphaco VC-1034', '', '', '1724341650.jpg', 6890000, 6890000, 1, 1, '', '', '', '2024-08-28 06:37:44', NULL),
-(55, 13, 8, 'sen-cay-nong-lanh-vinaphaco-vc-115-6', 'Sen cây nóng lạnh Vinaphaco VC-115-6', '', '', '1724341677.jpg', 3890000, 3890000, 1, 1, '', '', '', '2024-08-28 06:38:09', NULL),
-(56, 14, 8, 'sen-cay-nong-lanh-vinaphaco-vc-1166-1', 'Sen cây nóng lạnh Vinaphaco VC-1166-1', '', '', '1724341706.jpg', 6490000, 6490000, 1, 1, '', '', '', '2024-08-28 06:38:35', NULL),
-(57, 15, 8, 'sen-cay-nong-lanh-vinaphaco-vc-11806', 'Sen cây nóng lạnh Vinaphaco VC-11806', '', '', '1724341745.jpg', 5890000, 5890000, 1, 1, '', '', '', '2024-08-28 06:48:46', NULL),
-(58, 16, 8, 'sen-cay-nong-lanh-vinaphaco-vc-123-6', 'Sen cây nóng lạnh Vinaphaco VC-123-6', '', '', '1724341779.jpg', 7250000, 7250000, 1, 1, '', '', '', '2024-08-28 06:49:51', NULL),
-(59, 17, 8, 'sen-cay-nong-lanh-vinaphaco-vc-1296a', 'Sen cây nóng lạnh Vinaphaco VC-1296A', '', '', '1724341815.jpg', 7680000, 7680000, 1, 1, '', '', '', '2024-08-28 06:50:28', NULL),
-(60, 18, 8, 'sen-cay-nong-lanh-vinaphaco-vc-6012', 'Sen cây nóng lạnh Vinaphaco VC-6012', '', '', '1724341846.jpg', 4690000, 4690000, 1, 1, '', '', '', '2024-08-28 06:50:52', NULL),
-(61, 19, 8, 'sen-cay-nong-lanh-vinaphaco-vc-808-6', 'Sen cây nóng lạnh Vinaphaco VC-808-6', '', '', '1724341877.jpg', 7280000, 7280000, 1, 1, '', '', '', '2024-08-28 06:51:43', NULL),
-(62, 20, 7, 'cu-sen-lanh-vinaphaco-zs-04', 'Củ sen lạnh Vinaphaco ZS-04', '', '', '1724342110.jpg', 960000, 960000, 1, 1, '', '', '', '2024-08-28 06:54:34', NULL),
-(63, 21, 7, 'cu-sen-nong-lanh-vinaphaco-vc-13404', 'Củ sen nóng lạnh Vinaphaco VC-13404', '', '', '1724342140.jpg', 3280000, 3280000, 1, 1, '', '', '', '2024-08-28 06:55:40', NULL),
-(64, 22, 7, 'cu-sen-nong-lanh-vinaphaco-vc-18604', 'Củ sen nóng lạnh Vinaphaco VC-18604', '', '', '1724342187.jpg', 2690000, 2690000, 1, 1, '', '', '', '2024-08-28 06:56:20', NULL),
-(65, 23, 10, 'voi-lavabo-lanh-vinaphaco-vc-13021', 'Vòi lavabo lạnh Vinaphaco VC-13021', '', '', '1724342385.jpg', 0, 0, 0, 0, '', '', '', '2024-08-28 06:58:24', NULL);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `product_types`
---
-
-CREATE TABLE `product_types` (
-  `id` int(11) NOT NULL,
-  `stt` int(11) DEFAULT 0,
-  `slug` varchar(200) DEFAULT NULL,
-  `title` varchar(200) NOT NULL,
-  `image` varchar(200) DEFAULT NULL,
-  `noibat` int(11) DEFAULT 0,
-  `danhmuc` int(11) DEFAULT 0,
-  `seo_title` varchar(200) DEFAULT NULL,
-  `seo_keywords` mediumtext DEFAULT NULL,
-  `seo_desc` mediumtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `product_types`
---
-
-INSERT INTO `product_types` (`id`, `stt`, `slug`, `title`, `image`, `noibat`, `danhmuc`, `seo_title`, `seo_keywords`, `seo_desc`) VALUES
-(6, 1, 'bon-cau-khoi', 'Bồn Cầu Khối', '1724084094.png', 1, 1, 'Bồn Cầu Khối VinaPhaco', 'Bồn Cầu Khối VinaPhaco', 'Bồn Cầu Khối VinaPhaco'),
-(7, 9, 'cu-sen-nong-lanh', 'Củ Sen Nóng Lạnh', '1724342010.jpg', 0, 1, 'Củ Sen Nóng Lạnh', 'Củ Sen Nóng Lạnh', 'Củ Sen Nóng Lạnh'),
-(8, 3, 'sen-cay-nong-lanh', 'Sen Cây Nóng Lạnh', '1724084434.png', 1, 1, 'Sen tắm', 'Sen tắm', 'Sen tắm'),
-(9, 4, 'lavabo-vinaphaco', 'Lavabo VinaPhaco', '1724084471.png', 1, 1, 'Lavabo', 'Lavabo', 'Lavabo'),
-(10, 5, 'voi-lavabo-nong-lanh', 'Vòi Lavabo Nóng Lạnh', '1724084495.png', 0, 1, 'Vòi lavabo', 'Vòi lavabo', 'Vòi lavabo'),
-(11, 6, 'voi-chau-nong-lanh', 'Vòi Chậu Nóng Lạnh', '1724343537.png', 0, 1, 'Vòi Chậu Nóng Lạnh', 'Vòi Chậu Nóng Lạnh', 'Vòi Chậu Nóng Lạnh'),
-(16, 10, 'phu-kien-khac', 'Phụ kiện khác', '1724085503.png', 0, 1, 'Phụ kiện khác', 'Phụ kiện khác', 'Phụ kiện khác'),
-(21, 2, 'dong-cao-cap', 'Dòng cao cấp', '1725293477.jpg', 1, 1, 'Dòng Cao Cấp', 'Dòng Cao Cấp', 'Dòng Cao Cấp'),
-(22, 7, 'chau-chen-vinaphaco', 'Chậu Chén VinaPhaco', '1725293693.png', 0, 1, 'Chậu Chén VinaPhaco', 'Chậu Chén VinaPhaco', 'Chậu Chén VinaPhaco'),
-(23, 8, 'tieu-nam-vinaphaco', 'Tiểu Nam VinaPhaco', '1725293740.png', 0, 1, 'Tiểu Nam VinaPhaco', 'Tiểu Nam VinaPhaco', 'Tiểu Nam VinaPhaco');
+(24, 13, '8be885cc50dfb1cf6556ea3455cd583b91ae116f', '2025-06-04 02:52:22'),
+(25, 15, '97fecb2de4ecdf772bb41c7e870b0f5148e6eb38', '2025-06-06 09:31:12'),
+(26, 15, '8b44d7fa8352bcba0d3b84ef9ec0a102587a583f', '2025-06-11 16:30:44');
 
 -- --------------------------------------------------------
 
@@ -1249,34 +1029,6 @@ INSERT INTO `san_pham` (`id`, `ma_san_pham`, `duong_dan`, `ten_san_pham`, `so_lu
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `seo`
---
-
-CREATE TABLE `seo` (
-  `id` int(11) NOT NULL,
-  `type` varchar(200) DEFAULT NULL,
-  `seo_title` varchar(200) NOT NULL,
-  `seo_keywords` mediumtext DEFAULT NULL,
-  `seo_description` mediumtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `seo`
---
-
-INSERT INTO `seo` (`id`, `type`, `seo_title`, `seo_keywords`, `seo_description`) VALUES
-(1, 'index', 'Thiết Bị Vệ Sinh Phú Thịnh', 'Thiết Bị Vệ Sinh Phú Thịnh', 'Chuyên cung cấp các sản phẩm thiết bị vệ sinh và máy năng lượng mặt trời tại tphcm và các tỉnh miền tây.'),
-(2, 'san-pham', 'Sản phẩm', 'Sản phẩm', 'Sản phẩm'),
-(3, 'tin-tuc', 'Tin tức', 'Tin tức', 'Tin tức'),
-(4, 'lien-he', 'Liên hệ', 'Liên hệ', 'Liên hệ'),
-(5, 'catalogue', 'Catalogue', 'Catalogue', 'Catalogue'),
-(6, 'du-an', 'Dự án', 'Dự án', 'Dự án'),
-(7, 'tuyen-dung', 'Tuyển dụng', 'Tuyển dụng', 'Tuyển dụng'),
-(8, 'gioi-thieu', 'CÔNG TY TNHH TM TBVS THỊNH PHÁT', 'CÔNG TY TNHH TM TBVS THỊNH PHÁT', 'CÔNG TY TNHH TM TBVS THỊNH PHÁT');
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `setting`
 --
 
@@ -1292,18 +1044,10 @@ CREATE TABLE `setting` (
 
 INSERT INTO `setting` (`id`, `setting_name`, `setting_value`) VALUES
 (1, 'company_name', 'Profix Laptop'),
-(2, 'email', 'vinaphacothailand@gmail.com'),
-(3, 'phone_number', '0856737878'),
+(2, 'email', '0306201257@caothang.edu.vn'),
+(3, 'phone_number', '0779767361'),
 (4, 'zalo', '0856737878'),
-(5, 'link_fanpage', ''),
-(6, 'link_messenger', ''),
-(7, 'address', '374 Nguyễn Hữu Trí, TT.Tân Túc, Bình Chánh, Hồ Chí Minh'),
-(8, 'link_google_map', ''),
-(9, 'iframe_google_map', ''),
-(10, 'google_analytic', ''),
-(11, 'google_webmaster_tool', ''),
-(12, 'head_js', ''),
-(13, 'body_js', '');
+(7, 'address', ' 65 Huỳnh Thúc Kháng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh');
 
 -- --------------------------------------------------------
 
@@ -12069,12 +11813,6 @@ ALTER TABLE `chi_tiet_don_hang`
   ADD KEY `san_pham_id` (`san_pham_id`);
 
 --
--- Chỉ mục cho bảng `custommer`
---
-ALTER TABLE `custommer`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `danh_muc_san_pham`
 --
 ALTER TABLE `danh_muc_san_pham`
@@ -12106,36 +11844,6 @@ ALTER TABLE `khach_hang_token`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `news`
---
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `order_details`
---
-ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `product_types`
---
-ALTER TABLE `product_types`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `quanhuyen`
 --
 ALTER TABLE `quanhuyen`
@@ -12149,12 +11857,6 @@ ALTER TABLE `san_pham`
   ADD PRIMARY KEY (`id`),
   ADD KEY `thuong_hieu_id` (`thuong_hieu_id`),
   ADD KEY `danh_muc_san_pham_id` (`danh_muc_san_pham_id`);
-
---
--- Chỉ mục cho bảng `seo`
---
-ALTER TABLE `seo`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `setting`
@@ -12195,19 +11897,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT cho bảng `custommer`
---
-ALTER TABLE `custommer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
@@ -12219,7 +11915,7 @@ ALTER TABLE `danh_muc_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -12231,55 +11927,19 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT cho bảng `news`
---
-ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
-
---
--- AUTO_INCREMENT cho bảng `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT cho bảng `order_details`
---
-ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT cho bảng `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
-
---
--- AUTO_INCREMENT cho bảng `product_types`
---
-ALTER TABLE `product_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT cho bảng `seo`
---
-ALTER TABLE `seo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `setting`

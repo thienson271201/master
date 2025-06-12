@@ -1,3 +1,22 @@
+<section class="with-bg solid-section">
+    <div class="fix-image-wrap" data-image-src="./assets/images/service/tools.jpg" data-parallax="scroll"></div>
+    <div class="theme-back"></div>
+    <div class="container page-info">
+        <div class="section-alt-head container-md">
+            <h1 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">CHI TIẾT TIN TỨC
+            </h1>
+        </div>
+    </div>
+    <div class="section-footer">
+        <div class="container" data-inview-showup="showup-translate-down">
+            <ul class="page-path">
+                <li><a href="index-2.html">Trang chủ</a></li>
+                <li class="path-separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></li>
+                <li><?= $title ?></li>
+            </ul>
+        </div>
+    </div>
+</section>
 <div class="clearfix page-sidebar-right container">
     <div class="page-content">
         <section class="content-section">
@@ -14,25 +33,37 @@
                 </div><img class="col-12 offs-md" data-inview-showup="showup-translate-up"
                     src="assets/images/outsource/article-1.jpg" alt="">
                 <div class="category" data-inview-showup="showup-translate-up">Danh mục: <a class="text-upper"
-                        href="blog.html">laptop</a>, <a class="text-upper"
-                        href="blog.html">công nghệ</a></div>
+                        href="blog.html">laptop</a>, <a class="text-upper" href="blog.html">công nghệ</a></div>
                 <div class="content-text clearfix" data-inview-showup="showup-translate-up">
-                    <p>Laptop là một loại máy tính cá nhân nhỏ gọn, được thiết kế để dễ dàng mang theo và sử dụng ở nhiều nơi khác nhau. Khác với máy tính để bàn (PC), laptop tích hợp đầy đủ màn hình, bàn phím, touchpad (chuột cảm ứng), pin và các linh kiện phần cứng cần thiết trong một thiết bị duy nhất.</p>
-                    <h5>Tại sao nên chọn laptop thay vì máy bàn?</h5><img class="pull-right" src="assets/images/outsource/article-inner-1.jpg" alt="">
-                    <p>Laptop phù hợp với học sinh, sinh viên, nhân viên văn phòng hay những người thường xuyên di chuyển. Với sự phát triển của công nghệ, các dòng laptop hiện nay có thể đáp ứng tốt nhu cầu học tập, làm việc, giải trí và thậm chí cả thiết kế đồ họa hoặc chơi game.
+                    <p>Laptop là một loại máy tính cá nhân nhỏ gọn, được thiết kế để dễ dàng mang theo và sử dụng ở
+                        nhiều nơi khác nhau. Khác với máy tính để bàn (PC), laptop tích hợp đầy đủ màn hình, bàn phím,
+                        touchpad (chuột cảm ứng), pin và các linh kiện phần cứng cần thiết trong một thiết bị duy nhất.
+                    </p>
+                    <h5>Tại sao nên chọn laptop thay vì máy bàn?</h5><img class="pull-right"
+                        src="assets/images/outsource/article-inner-1.jpg" alt="">
+                    <p>Laptop phù hợp với học sinh, sinh viên, nhân viên văn phòng hay những người thường xuyên di
+                        chuyển. Với sự phát triển của công nghệ, các dòng laptop hiện nay có thể đáp ứng tốt nhu cầu học
+                        tập, làm việc, giải trí và thậm chí cả thiết kế đồ họa hoặc chơi game.
                     </p>
                     </p>
                     <h5>Những yếu tố cần lưu ý trước khi mua laptop</h5>
                     <ul class="list">
-                        <li><span class="list-mark">1.</span><b>Mục đích sử dụng:</b> Học tập, văn phòng, đồ họa hay gaming sẽ cần cấu hình khác nhau.</li>
-                        <li><span class="list-mark">2.</span><b>Cấu hình:</b> CPU, RAM, ổ cứng (SSD hay HDD), card đồ họa sẽ quyết định hiệu năng máy.</li>
-                        <li><span class="list-mark">3.</span><b>Kích thước màn hình:</b> Tùy vào nhu cầu, có thể chọn từ 13 đến 17 inch.</li>
-                        <li><span class="list-mark">4.</span><b>Thời lượng pin:</b> Quan trọng nếu bạn cần làm việc di động nhiều.</li>
-                        <li><span class="list-mark">5.</span><b>Thương hiệu & dịch vụ hậu mãi:</b> Dell, HP, ASUS, Lenovo,... có nhiều dòng sản phẩm kèm bảo hành tốt.
+                        <li><span class="list-mark">1.</span><b>Mục đích sử dụng:</b> Học tập, văn phòng, đồ họa hay
+                            gaming sẽ cần cấu hình khác nhau.</li>
+                        <li><span class="list-mark">2.</span><b>Cấu hình:</b> CPU, RAM, ổ cứng (SSD hay HDD), card đồ
+                            họa sẽ quyết định hiệu năng máy.</li>
+                        <li><span class="list-mark">3.</span><b>Kích thước màn hình:</b> Tùy vào nhu cầu, có thể chọn từ
+                            13 đến 17 inch.</li>
+                        <li><span class="list-mark">4.</span><b>Thời lượng pin:</b> Quan trọng nếu bạn cần làm việc di
+                            động nhiều.</li>
+                        <li><span class="list-mark">5.</span><b>Thương hiệu & dịch vụ hậu mãi:</b> Dell, HP, ASUS,
+                            Lenovo,... có nhiều dòng sản phẩm kèm bảo hành tốt.
                         </li>
                     </ul><img class="image" src="assets/images/outsource/article-inner-2.jpg" alt="">
                     <h5>Kết luận</h5>
-                    <p>Việc chọn mua laptop phù hợp giúp bạn tiết kiệm chi phí và tối ưu hiệu quả sử dụng. Hãy xác định rõ nhu cầu, so sánh thông số kỹ thuật và chọn nhà cung cấp uy tín để có được sản phẩm chất lượng cùng chế độ bảo hành tốt nhất.
+                    <p>Việc chọn mua laptop phù hợp giúp bạn tiết kiệm chi phí và tối ưu hiệu quả sử dụng. Hãy xác định
+                        rõ nhu cầu, so sánh thông số kỹ thuật và chọn nhà cung cấp uy tín để có được sản phẩm chất lượng
+                        cùng chế độ bảo hành tốt nhất.
                     </p>
                     </p>
                 </div>
@@ -69,7 +100,8 @@
                     <div class="content">
                         <div class="offs-md"><b class="alt-color">Tường Vy</b> - <i>Sinh viên CNTT</i></div>
                         <div class="text-content">
-                            <p>Cảm ơn bài viết! Mình đang định mua laptop để học lập trình, giờ đã hiểu rõ hơn về CPU, RAM và card đồ họa. Mong ad có thêm bài so sánh các dòng laptop phổ biến hiện nay.</p>
+                            <p>Cảm ơn bài viết! Mình đang định mua laptop để học lập trình, giờ đã hiểu rõ hơn về CPU,
+                                RAM và card đồ họa. Mong ad có thêm bài so sánh các dòng laptop phổ biến hiện nay.</p>
                         </div>
                         <div class="text-right text-xs">05 Tháng 6, 2025</div>
                     </div>
@@ -79,7 +111,8 @@
                     <div class="content">
                         <div class="offs-md"><b class="alt-color">Thiên Sơn</b></div>
                         <div class="text-content">
-                            <p>Bài viết rất hữu ích cho người mới. Trước giờ mình cứ nghĩ laptop nào cũng giống nhau, giờ mới biết phải cân nhắc kỹ mục đích sử dụng và thông số kỹ thuật.</p>
+                            <p>Bài viết rất hữu ích cho người mới. Trước giờ mình cứ nghĩ laptop nào cũng giống nhau,
+                                giờ mới biết phải cân nhắc kỹ mục đích sử dụng và thông số kỹ thuật.</p>
                         </div>
                         <div class="text-right text-xs">05 Tháng 6, 2025</div>
                     </div>
