@@ -1,21 +1,22 @@
 <?php
 $list_san_pham = $db->getRaw('select * from san_pham ');
+$danh_sach_thuong_hieu = $db->getRaw('SELECT * FROM thuong_hieu');
 
 // echo '<pre>';
 // print_r ($list_san_pham);
 // echo '</pre>';
 
-if (isset($_GET['sortby']))
+if (isset($_GET['sap-xep']))
 {
-  $sortby = $_GET['sortby'];
+  $sortby = $_GET['sap-xep'];
 
-  if ($sortby == '1')
+  if ($sortby == 'tang-dan')
   {
     // Sắp xếp tăng dần theo giá sau khuyến mãi
     usort($list_san_pham, function ($a, $b) {
       return $a['gia_sau_khuyen_mai'] <=> $b['gia_sau_khuyen_mai'];
     });
-  } elseif ($sortby == '2')
+  } elseif ($sortby == 'giam-dan')
   {
     // Sắp xếp giảm dần theo giá sau khuyến mãi
     usort($list_san_pham, function ($a, $b) {
@@ -24,13 +25,36 @@ if (isset($_GET['sortby']))
   }
 }
 
-if (isset($_GET['show']) && $_GET['show'] !== '')
+if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'Chọn')
 {
-  $thuong_hieu = $_GET['show'];
-  $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($thuong_hieu) {
-    return $san_pham['thuong_hieu_id'] === $thuong_hieu;
+  $thuong_hieu = $_GET['thuong-hieu'];
+  $id_thuong_hieu = $db->oneRaw("SELECT id FROM thuong_hieu WHERE duong_dan = '$thuong_hieu'")['id'];
+  $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($id_thuong_hieu) {
+    return $san_pham['thuong_hieu_id'] == $id_thuong_hieu;
   });
+  if (empty($list_san_pham))
+  {
+    echo 'Không có sản phẩm nào của thương hiệu này';
+  } else
+  {
+    echo 'Sản phẩm của thương hiệu: ' . htmlspecialchars($thuong_hieu);
+  }
 }
+
+if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
+{
+  $tim_kiem = $_GET['tim-kiem'];
+  $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($tim_kiem) {
+    return stripos($san_pham['ten_san_pham'], $tim_kiem) !== false;
+  });
+  if (empty($list_san_pham))
+  {
+    echo  'Không tìm thấy sản phẩm nào';
+  } else
+  {
+    echo  'Kết quả tìm kiếm cho: ' . htmlspecialchars($tim_kiem);
+  }
+} 
 
 ?>
 <section class="with-bg solid-section">
@@ -54,7 +78,11 @@ if (isset($_GET['show']) && $_GET['show'] !== '')
 </section>
 <div class="clearfix page-sidebar-right container">
   <div class="page-content">
+    
     <section class="content-section">
+      <div class="alert alert-error">
+      abccc
+    </div>
       <form>
         <div class="row">
           <div class="sm-col-6 md-col-4">
@@ -62,10 +90,10 @@ if (isset($_GET['show']) && $_GET['show'] !== '')
               <label>Sắp xếp</label>
               <div class="field-wrap">
                 <form method="get">
-                  <select class="field-control" name="sortby" onchange="this.form.submit()">
-                    <option name="sortby">Giá</option>
-                    <option name="sortby" value="1" <?= isset($_GET['sortby']) && $_GET['sortby'] == '1' ? 'selected' : '' ?>>Tăng dần</option>
-                    <option name="sortby" value="2" <?= isset($_GET['sortby']) && $_GET['sortby'] == '2' ? 'selected' : '' ?>>Giảm dần</option>
+                  <select class="field-control" name="sap-xep" onchange="this.form.submit()">
+                    <option name="sap-xep">Giá</option>
+                    <option name="sap-xep" value="tang-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'tang-dan' ? 'selected' : '' ?>>Tăng dần</option>
+                    <option name="sap-xep" value="giam-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'giam-dan' ? 'selected' : '' ?>>Giảm dần</option>
                   </select>
                 </form>
                 <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
@@ -78,15 +106,19 @@ if (isset($_GET['show']) && $_GET['show'] !== '')
               <label>Thương hiệu</label>
               <div class="field-wrap">
                 <form method="get">
-                  <select class="field-control" name="show" selected="selected" onchange="this.form.submit()">
-                    <option name="show" selected="selected">Chọn</option>
-                    <option name="show" value="2" <?= isset($_GET['show']) && $_GET['show'] == 'Asus' ? 'selected' : '' ?>>
-                      Asus
-                    </option>
-                    <option name="show" value="5" <?= isset($_GET['show']) && $_GET['show'] == 'Dell' ? 'selected' : '' ?>>
-                      Dell</option>
-                    <option name="show" value="3" <?= isset($_GET['show']) && $_GET['show'] == 'Msi' ? 'selected' : '' ?>>
-                      Msi</option>
+                  <select class="field-control" name="thuong-hieu" selected="selected" onchange="this.form.submit()">
+                    <option selected="selected">Chọn</option>
+                    <?php 
+                      
+                      // echo '<pre>';
+                      // print_r ($danh_sach_thuong_hieu);
+                      // echo '</pre>';
+                      foreach ($danh_sach_thuong_hieu as $thuong_hieu):
+                    ?>
+                        <option value="<?= $thuong_hieu['duong_dan'] ?>" <?= isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] == $thuong_hieu['duong_dan'] ? 'selected' : '' ?>>
+                          <?= $thuong_hieu['ten_thuong_hieu'] ?>
+                        </option>
+                      <?php endforeach; ?>                  
                   </select>
                 </form>
                 <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>

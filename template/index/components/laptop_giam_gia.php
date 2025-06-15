@@ -1,5 +1,5 @@
 <?php
-$list_san_pham = $db->getRaw('select * from san_pham ');
+$list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < gia_goc");
 
 // echo '<pre>';
 // print_r ($list_san_pham);

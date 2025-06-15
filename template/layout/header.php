@@ -1,12 +1,14 @@
 <?php
-$logo = $db->oneRaw("SELECT * FROM images WHERE type = 'logo'")['image'];
-$phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
+// $logo = $db->oneRaw("SELECT * FROM images WHERE type = 'logo'")['image'];
+// $phone_number = $f->formatPhoneNumber($setting_info[2]['setting_value']);
 if ($f->isLogin())
 {
   $id = $_SESSION['khach_hang_id'];
   $taikhoan = $db->oneRaw("SELECT ten_khach_hang FROM khach_hang WHERE id = '$id'")['ten_khach_hang'];
 } else
   $taikhoan = 'Đăng nhập';
+
+
 ?>
 
 <header class="header">
