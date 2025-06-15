@@ -71,7 +71,7 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
     </div>
 </section>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         function filterProducts(category) {
             $('.product-box').hide();
@@ -96,7 +96,39 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
         // Mặc định hiển thị 4 sản phẩm đầu tiên
         filterProducts('all');
     });
+</script> -->
+
+<script>
+    $(document).ready(function() {
+        function filterProducts(category) {
+            // Ẩn hết sản phẩm trước khi hiển thị lại
+            $('.product-box').hide().removeClass('animate__fadeIn');
+
+            let matched;
+            if (category === 'all') {
+                matched = $('.product-box');
+            } else {
+                matched = $('.product-box[data-category="' + category + '"]');
+            }
+
+            // Hiển thị và thêm hiệu ứng mượt
+            matched.show().addClass('animate__animated animate__fadeIn');
+        }
+
+        $('#category-tabs .nav-link').on('click', function(e) {
+            e.preventDefault();
+            $('#category-tabs .nav-link').removeClass('active');
+            $(this).addClass('active');
+
+            const category = $(this).data('category');
+            filterProducts(category);
+        });
+
+        // Hiển thị mặc định tất cả sản phẩm khi trang tải
+        filterProducts('all');
+    });
 </script>
+
 
 <script>
   $(document).ready(function() {
