@@ -6,18 +6,15 @@ $danh_sach_thuong_hieu = $db->getRaw('SELECT * FROM thuong_hieu');
 // print_r ($list_san_pham);
 // echo '</pre>';
 
-if (isset($_GET['sap-xep']))
-{
+if (isset($_GET['sap-xep'])) {
   $sortby = $_GET['sap-xep'];
 
-  if ($sortby == 'tang-dan')
-  {
+  if ($sortby == 'tang-dan') {
     // Sắp xếp tăng dần theo giá sau khuyến mãi
     usort($list_san_pham, function ($a, $b) {
       return $a['gia_sau_khuyen_mai'] <=> $b['gia_sau_khuyen_mai'];
     });
-  } elseif ($sortby == 'giam-dan')
-  {
+  } elseif ($sortby == 'giam-dan') {
     // Sắp xếp giảm dần theo giá sau khuyến mãi
     usort($list_san_pham, function ($a, $b) {
       return $b['gia_sau_khuyen_mai'] <=> $a['gia_sau_khuyen_mai'];
@@ -25,36 +22,30 @@ if (isset($_GET['sap-xep']))
   }
 }
 
-if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'Chọn')
-{
+if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'Chọn') {
   $thuong_hieu = $_GET['thuong-hieu'];
   $id_thuong_hieu = $db->oneRaw("SELECT id FROM thuong_hieu WHERE duong_dan = '$thuong_hieu'")['id'];
   $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($id_thuong_hieu) {
     return $san_pham['thuong_hieu_id'] == $id_thuong_hieu;
   });
-  if (empty($list_san_pham))
-  {
+  if (empty($list_san_pham)) {
     echo 'Không có sản phẩm nào của thương hiệu này';
-  } else
-  {
+  } else {
     echo 'Sản phẩm của thương hiệu: ' . htmlspecialchars($thuong_hieu);
   }
 }
 
-if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
-{
+if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
   $tim_kiem = $_GET['tim-kiem'];
   $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($tim_kiem) {
     return stripos($san_pham['ten_san_pham'], $tim_kiem) !== false;
   });
-  if (empty($list_san_pham))
-  {
+  if (empty($list_san_pham)) {
     echo  'Không tìm thấy sản phẩm nào';
-  } else
-  {
+  } else {
     echo  'Kết quả tìm kiếm cho: ' . htmlspecialchars($tim_kiem);
   }
-} 
+}
 
 ?>
 <section class="with-bg solid-section">
@@ -76,16 +67,16 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
     </div>
   </div>
 </section>
-<div class="clearfix page-sidebar-right container">
-  <div class="page-content">
-    
+
+<section class="content-section">
+  <div class="container">
     <section class="content-section">
       <div class="alert alert-error">
-      abccc
-    </div>
+        abccc
+      </div>
       <form>
         <div class="row">
-          <div class="sm-col-6 md-col-4">
+          <!-- <div class="sm-col-6 md-col-4">
             <div class="field-group shop-line-field chosen-field">
               <label>Sắp xếp</label>
               <div class="field-wrap">
@@ -108,57 +99,118 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
                 <form method="get">
                   <select class="field-control" name="thuong-hieu" selected="selected" onchange="this.form.submit()">
                     <option selected="selected">Chọn</option>
-                    <?php 
-                      
-                      // echo '<pre>';
-                      // print_r ($danh_sach_thuong_hieu);
-                      // echo '</pre>';
-                      foreach ($danh_sach_thuong_hieu as $thuong_hieu):
+                    <?php
+
+                    // echo '<pre>';
+                    // print_r ($danh_sach_thuong_hieu);
+                    // echo '</pre>';
+                    foreach ($danh_sach_thuong_hieu as $thuong_hieu):
                     ?>
-                        <option value="<?= $thuong_hieu['duong_dan'] ?>" <?= isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] == $thuong_hieu['duong_dan'] ? 'selected' : '' ?>>
-                          <?= $thuong_hieu['ten_thuong_hieu'] ?>
-                        </option>
-                      <?php endforeach; ?>                  
+                      <option value="<?= $thuong_hieu['duong_dan'] ?>" <?= isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] == $thuong_hieu['duong_dan'] ? 'selected' : '' ?>>
+                        <?= $thuong_hieu['ten_thuong_hieu'] ?>
+                      </option>
+                    <?php endforeach; ?>
                   </select>
                 </form>
                 <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
                 <span class="field-back"></span>
               </div>
             </div>
+          </div> -->
+          <div class="sm-col-12">
+            <div class="row cols-md rows-md">
+              <div class="sm-col-6 md-col-3 lg-col-3">
+                <div class="field-group chosen-field">
+                  <div class="field-wrap"><select class="field-control" name="sortby">
+                      <option name="sortby">Sort by</option>
+                      <option name="sortby" value="1">Newest</option>
+                      <option name="sortby" value="2">Name</option>
+                      <option name="sortby" value="3">Best match</option>
+                    </select> <span class="select-arrow"><i
+                        class="fas fa-chevron-down"></i></span> <span
+                      class="field-back"></span></div>
+                </div>
+              </div>
+              <div class="sm-col-6 md-col-3 lg-col-3">
+                <div class="field-group chosen-field">
+                  <div class="field-wrap"><select class="field-control" name="date">
+                      <option name="date">Date</option>
+                      <option name="date" value="1">Today</option>
+                      <option name="date" value="2">Week</option>
+                      <option name="date" value="3">Month</option>
+                      <option name="date" value="4">Year</option>
+                    </select> <span class="select-arrow"><i
+                        class="fas fa-chevron-down"></i></span> <span
+                      class="field-back"></span></div>
+                </div>
+              </div>
+              <div class="sm-col-6 md-col-3 lg-col-3">
+                <div class="field-group chosen-field">
+                  <div class="field-wrap"><select class="field-control" name="section">
+                      <option name="section">Section</option>
+                      <option name="section" value="1">Services</option>
+                      <option name="section" value="2">Project</option>
+                      <option name="section" value="3">Blog</option>
+                      <option name="section" value="4">Shop</option>
+                    </select> <span class="select-arrow"><i
+                        class="fas fa-chevron-down"></i></span> <span
+                      class="field-back"></span></div>
+                </div>
+              </div>
+              <div class="sm-col-6 md-col-3 lg-col-3">
+                <div class="field-group chosen-field">
+                  <div class="field-wrap"><select class="field-control" name="section">
+                      <option name="section">Section</option>
+                      <option name="section" value="1">Services</option>
+                      <option name="section" value="2">Project</option>
+                      <option name="section" value="3">Blog</option>
+                      <option name="section" value="4">Shop</option>
+                    </select> <span class="select-arrow"><i
+                        class="fas fa-chevron-down"></i></span> <span
+                      class="field-back"></span></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
       </form>
       <div class="row rows-stuck-2 cols-stuck-2">
         <?php
-        foreach ($list_san_pham as $sanpham):
-          ?>
-          <div class="md-col-6">
-            <div class="item shop-item shop-item-short item-dash-border" data-inview-showup="showup-scale">
+        foreach ($list_san_pham as $san_pham):
+        ?>
+          <div class="col-12 sm-col-3 lg-col-3">
+            <div
+              class="item shop-item shop-item-short item-dash-border"
+              data-inview-showup="showup-scale">
               <div class="item-back"></div>
               <?php
-              $phan_tram = round((($sanpham['gia_goc'] - $sanpham['gia_sau_khuyen_mai']) / $sanpham['gia_goc']) * 100);
-              ?>
-              <div class="item-lables">
-                <a class="item-label-sale item-label" href="#">Giảm giá <?= $phan_tram ?>%</a>
-              </div>
-              <a href="<?= $sanpham['duong_dan'] ?>" class="item-image responsive-1by1">
-                <img src="upload/images/<?= $sanpham['hinh_anh'] ?>" />
+              $phan_tram = round((($san_pham['gia_goc'] - $san_pham['gia_sau_khuyen_mai']) / $san_pham['gia_goc']) * 100);
+              if ($phan_tram > 1): ?>
+                <div class="item-lables">
+                  <a class="item-label-sale item-label" href="#">-<?= $phan_tram ?>%</a>
+                </div>
+              <?php endif; ?>
+              <a href="<?= $san_pham['duong_dan'] ?>" class="item-image responsive-1by1">
+                <img
+                  src="upload/images/<?= $san_pham['hinh_anh'] ?>" />
               </a>
               <div class="item-content text-center">
                 <div class="item-title text-upper mb-0">
-                  <a href="shop-item.html" class="content-link"><?= $sanpham['ten_san_pham'] ?></a>
+                  <a href="<?= $san_pham['duong_dan'] ?>" class="content-link"><?= $san_pham['ten_san_pham'] ?></a>
                 </div>
                 <div class="item-specs">
-                  <?= $sanpham['thong_so_kich_thuoc'] ?>
+                  <?= $san_pham['thong_so_kich_thuoc'] ?>
                 </div>
                 <div class="item-prices">
-                  <div class="item-price"><?= number_format($sanpham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
-                  <?php if ($phan_tram > 1): ?>
-                    <div class="item-old-price"><?= number_format($sanpham["gia_goc"], 0, ',', '.') ?> ₫</div>
+                  <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
+                  <?php if ($phan_tram > 1) : ?>
+                    <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
                   <?php endif; ?>
                 </div>
                 <div class="item-links">
-                  <a href="#" data-id="<?= $sanpham['id'] ?>" class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered">
+                  <a href="#" data-id="<?= $san_pham['id'] ?>"
+                    class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered">
                     <i class="fas fa-shopping-cart"></i>
                   </a>
                   <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
@@ -180,180 +232,11 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
       </div>
     </section>
   </div>
-  <aside class="page-sidebar content-section">
-    <section class="side-content-section" data-inview-showup="showup-translate-up">
-      <form>
-        <div class="field-group">
-          <label>Khoảng giá</label>
-          <div class="slider-wrap" data-ui-range-slider data-min="10" data-max="1000">
-            <input type="hidden" name="priceFrom" value="40" data-slider-from />
-            <input type="hidden" name="priceTo" value="160" data-slider-to />
-            <div class="slider-container theme-slider">
-              <div class="ui-slider-handle">
-                <div class="slider-handle-block"></div>
-              </div>
-              <div class="ui-slider-handle">
-                <div class="slider-handle-block"></div>
-              </div>
-              <div class="slider-back"></div>
-            </div>
-            <div class="slider-text text-right">
-              Khoảng giá: <span data-slider-from></span>đ - <span data-slider-to></span>đ
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Series model</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">ASUS
-                  ExpertBook</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span class="choice-text text-upper">Acer
-                  Aspire</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span class="choice-text text-upper">Dell
-                  Inspiron</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Series CPU</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span
-                  class="choice-text text-upper">Apple M</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span class="choice-text text-upper">Core
-                  5</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span class="choice-text text-upper">Core
-                  7</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Thế hệ CPU</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">
-                  AMD Ryzen AI 300</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span
-                  class="choice-text text-upper">Intel Core thế hệ thứ 11</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span
-                  class="choice-text text-upper">Snapdragon X</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Nhu cầu</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">
-                  Gaming</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span class="choice-text text-upper">Học
-                  sinh - Sinh viên</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span class="choice-text text-upper">Văn
-                  phòng</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Chuẩn laptop</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">
-                  AMD</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span class="choice-text text-upper">AMD
-                  AI</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span class="choice-text text-upper">Intel
-                  AI</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Chip đồ họa rời</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">
-                  GeForce GTX 1650</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span class="choice-text text-upper">RTX
-                  A500</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span class="choice-text text-upper">RTX
-                  A1000</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Kích thước màn hình</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">
-                  Trên 17"</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span class="choice-text text-upper">Từ
-                  11" - 13.9"</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span class="choice-text text-upper">Từ 14"
-                  - 14.9"</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="line-sides main-bg out-lg" data-inview-showup="showup-translate-up"></div>
-        <div class="field-group">
-          <label>Dung lượng RAM</label>
-          <div class="multi-choice" data-ui-range-slider data-min="10" data-max="1000">
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Acer" /><span class="choice-text text-upper">
-                  32GB</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="Asus" /><span
-                  class="choice-text text-upper">64GB</span></label>
-            </div>
-            <div class="choice">
-              <label><input type="checkbox" name="manufacturer" value="HP" /><span
-                  class="choice-text text-upper">128GB</span></label>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
-  </aside>
-</div>
+</section>
 
 <script>
-  $(document).ready(function () {
-    $('.btn-add-to-cart').off('click').on('click', function (e) {
+  $(document).ready(function() {
+    $('.btn-add-to-cart').off('click').on('click', function(e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
@@ -364,7 +247,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
         data: {
           id: productId
         },
-        success: function (response) {
+        success: function(response) {
           // Xử lý sau khi thêm thành công
           alert('Đã thêm sản phẩm vào giỏ hàng!');
           console.log(response.html);
@@ -380,7 +263,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
 
         },
-        error: function () {
+        error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });

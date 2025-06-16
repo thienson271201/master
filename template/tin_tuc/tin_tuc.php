@@ -17,7 +17,7 @@
         </div>
     </div>
 </section>
-<div class="clearfix page-sidebar-right container">
+<div class="page-sidebar-left clearfix container">
     <div class="page-content">
         <section class="content-section">
             <div class="articles">
