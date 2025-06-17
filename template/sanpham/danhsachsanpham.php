@@ -1,5 +1,19 @@
 <?php
-$list_san_pham = $db->getRaw('select * from san_pham ');
+$limit = 16; // Số lượng sản phẩm hiển thị trên mỗi trang
+$trang = isset($_GET['trang']) ? (int)$_GET['trang'] : 1; // Trang hiện tại
+if ($trang < 1) {
+  $trang = 1; // Đảm bảo trang không nhỏ hơn 1
+}
+$offset = ($trang - 1) * $limit; // Tính toán vị trí bắt đầu
+// Lấy tổng số sản phẩm
+$total_san_pham = $db->oneRaw('SELECT COUNT(*) as count FROM san_pham')['count'];
+// Tính toán tổng số trang  
+$total_trang = ceil($total_san_pham / $limit);
+// Lấy danh sách sản phẩm với phân trang
+$list_san_pham = $db->getRaw('select * from san_pham limit ' . $offset . ', ' . $limit);
+
+
+
 $danh_sach_thuong_hieu = $db->getRaw('SELECT * FROM thuong_hieu');
 
 // echo '<pre>';
@@ -22,7 +36,7 @@ if (isset($_GET['sap-xep'])) {
   }
 }
 
-if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'Chọn') {
+if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'tat-ca') {
   $thuong_hieu = $_GET['thuong-hieu'];
   $id_thuong_hieu = $db->oneRaw("SELECT id FROM thuong_hieu WHERE duong_dan = '$thuong_hieu'")['id'];
   $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($id_thuong_hieu) {
@@ -41,11 +55,19 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
     return stripos($san_pham['ten_san_pham'], $tim_kiem) !== false;
   });
   if (empty($list_san_pham)) {
-    echo  'Không tìm thấy sản phẩm nào';
+    setFlashData('tim_kiem', '<div class="alert alert-error">
+        Không tìm thấy kết quả cho: <strong>'. $tim_kiem .'</strong>
+        <br>Vui lòng thử lại với từ khóa khác.
+      </div>');
   } else {
-    echo  'Kết quả tìm kiếm cho: ' . htmlspecialchars($tim_kiem);
+    // Hiển thị thông báo tìm thấy kết quả
+    setFlashData('tim_kiem', '<div class="alert alert-valid">
+        Tìm thấy <strong>' . count($list_san_pham) . '</strong> kết quả cho: <strong>' . htmlspecialchars($tim_kiem) . '</strong>
+      </div>');
   }
 }
+
+
 
 ?>
 <section class="with-bg solid-section">
@@ -70,11 +92,16 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
 
 <section class="content-section">
   <div class="container">
+      
+    
     <section class="content-section">
-      <div class="alert alert-error">
-        abccc
-      </div>
-      <form>
+      <?php
+      $ket_qua_tim_kiem = getFlashData('tim_kiem');
+      if ($ket_qua_tim_kiem) {
+        echo $ket_qua_tim_kiem;
+      }
+      ?>
+      <form method="get">
         <div class="row">
           <!-- <div class="sm-col-6 md-col-4">
             <div class="field-group shop-line-field chosen-field">
@@ -122,23 +149,32 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
               <div class="sm-col-6 md-col-3 lg-col-3">
                 <div class="field-group chosen-field" style="margin-bottom: 20px;">
                   <div class="field-wrap">
-                    <select class="field-control"  name="sap-xep" onchange="this.form.submit()">
-                      <option name="sap-xep">Sắp xếp</option>
+                    <select class="field-control" name="sap-xep">
+                      <option name="sap-xep" value="mac-dinh">Sắp xếp</option>
                       <option name="sap-xep" value="tang-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'tang-dan' ? 'selected' : '' ?>>Giá tăng dần</option>
                       <option name="sap-xep" value="giam-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'giam-dan' ? 'selected' : '' ?>>Giá giảm dần</option>
                     </select> <span class="select-arrow"><i
                         class="fas fa-chevron-down"></i></span> <span
-                      class="field-back"></span></div>
+                      class="field-back"></span>
+                  </div>
                 </div>
               </div>
               <div class="sm-col-6 md-col-3 lg-col-3">
                 <div class="field-group chosen-field" style="margin-bottom: 20px;">
-                  <div class="field-wrap"><select class="field-control" name="date">
-                      <option name="date">Date</option>
-                      <option name="date" value="1">Today</option>
-                      <option name="date" value="2">Week</option>
-                      <option name="date" value="3">Month</option>
-                      <option name="date" value="4">Year</option>
+                  <div class="field-wrap">
+                    <select class="field-control" name="thuong-hieu" >
+                      <option value="tat-ca">Thương hiệu</option>
+                      <?php
+
+                      // echo '<pre>';
+                      // print_r ($danh_sach_thuong_hieu);
+                      // echo '</pre>';
+                      foreach ($danh_sach_thuong_hieu as $thuong_hieu):
+                      ?>
+                        <option value="<?= $thuong_hieu['duong_dan'] ?>" <?= isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] == $thuong_hieu['duong_dan'] ? 'selected' : '' ?>>
+                          <?= $thuong_hieu['ten_thuong_hieu'] ?>
+                        </option>
+                      <?php endforeach; ?>
                     </select> <span class="select-arrow"><i
                         class="fas fa-chevron-down"></i></span> <span
                       class="field-back"></span></div>
@@ -172,7 +208,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
               </div>
             </div>
           </div>
-           <div class="sm-col-12"><button class="btn text-upper" style="margin-bottom: 20px;" type="submit">New Search</button></div>
+          <div class="sm-col-12"><button class="btn text-upper" style="margin-bottom: 20px;" type="submit">Áp dụng</button></div>
         </div>
 
       </form>
@@ -225,10 +261,24 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
       </div>
       <div class="text-center shift-lg" data-inview-showup="showup-translate-up">
         <div class="paginator">
-          <a href="#" class="previous"><i class="fas fa-angle-left" aria-hidden="true"></i></a>
-          <span class="active">2</span> <a href="#">3</a> <span>...</span>
+          <a <?= $trang == 1 ? 'onclick="return false"' : '' ?> href="?trang=<?= $trang - 1 ?>" class="previous"><i class="fas fa-angle-left" aria-hidden="true"></i></a>
+          <?php
+          // Hiển thị các trang
+          for ($i = 1; $i <= $total_trang; $i++):
+            if ($i == 1 || $i == $total_trang || ($i >= $trang - 1 && $i <= $trang + 1)):
+          ?>
+              <a href="?trang=<?= $i ?>" class="<?= $i == $trang ? 'active' : '' ?>"><?= $i ?></a>
+            <?php else: ?>
+              <?php if ($i == 2 || $i == $total_trang - 1): ?>
+                <span>...</span>
+              <?php endif; ?>
+          <?php endif;
+          endfor; ?>
+          <a <?= $trang == $total_trang ? 'onclick="return false"' : '' ?> href="?trang=<?= $trang + 1 ?>" class="next"><i class="fas fa-angle-right" aria-hidden="true"></i></a>
+          <!-- <span class="active">2</span> 
+          <a href="#">3</a> <span>...</span>
           <a href="#">12</a>
-          <a href="#" class="next"><i class="fas fa-angle-right" aria-hidden="true"></i></a>
+          <a href="?trang=<?= $trang + 1 ?>" class="next"><i class="fas fa-angle-right" aria-hidden="true"></i></a> -->
         </div>
       </div>
     </section>

@@ -8,13 +8,13 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
 <section class="content-section">
     <div class="container">
         <div class="section-head text-left container-md">
-      <h2 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
-        Laptop theo phong cách của bạn
-      </h2>
-      <!-- <p data-inview-showup="showup-translate-left">
+            <h2 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
+                Laptop theo phong cách của bạn
+            </h2>
+            <!-- <p data-inview-showup="showup-translate-left">
         Một số sản phẩm tốt nhất của chúng tôi
       </p> -->
-    </div>
+        </div>
         <ul class="tabs-danh-muc nav nav-tabs mb-4" id="category-tabs">
             <li class="nav-item"><a class="nav-link active" href="#" data-category="all">Tất cả</a></li>
             <li class="nav-item"><a class="nav-link" href="#" data-category="2">Laptop Văn Phòng</a></li>
@@ -67,6 +67,9 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-sm btn-success">Xem thêm</a>
         </div>
     </div>
 </section>
@@ -131,38 +134,38 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
 
 
 <script>
-  $(document).ready(function() {
-    $('.btn-add-to-cart').off('click').on('click', function(e) {
-      e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
-      let productId = $(this).data('id');
+    $(document).ready(function() {
+        $('.btn-add-to-cart').off('click').on('click', function(e) {
+            e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
+            let productId = $(this).data('id');
 
-      $.ajax({
-        url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
-        method: 'POST',
-        dataType: 'json',
-        data: {
-          id: productId
-        },
-        success: function(response) {
-          // Xử lý sau khi thêm thành công
-          alert('Đã thêm sản phẩm vào giỏ hàng!');
-          console.log(response.html);
-          const htmlString = response.html;
+            $.ajax({
+                url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id: productId
+                },
+                success: function(response) {
+                    // Xử lý sau khi thêm thành công
+                    alert('Đã thêm sản phẩm vào giỏ hàng!');
+                    console.log(response.html);
+                    const htmlString = response.html;
 
-          // Tạo DOM tạm
-          const $temp = $('<div>').html(htmlString);
+                    // Tạo DOM tạm
+                    const $temp = $('<div>').html(htmlString);
 
-          // Lấy phần nội dung bên trong .items
-          const newItemsContent = $temp.find('.cart-inner-inner').html();
+                    // Lấy phần nội dung bên trong .items
+                    const newItemsContent = $temp.find('.cart-inner-inner').html();
 
-          // Cập nhật vào DOM thật
-          $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
+                    // Cập nhật vào DOM thật
+                    $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
 
-        },
-        error: function() {
-          alert('Đã xảy ra lỗi, vui lòng thử lại.');
-        }
-      });
+                },
+                error: function() {
+                    alert('Đã xảy ra lỗi, vui lòng thử lại.');
+                }
+            });
+        });
     });
-  });
 </script>
