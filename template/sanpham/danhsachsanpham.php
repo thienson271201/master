@@ -121,11 +121,11 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
             <div class="row cols-md rows-md">
               <div class="sm-col-6 md-col-3 lg-col-3">
                 <div class="field-group chosen-field">
-                  <div class="field-wrap"><select class="field-control" name="sortby">
-                      <option name="sortby">Sort by</option>
-                      <option name="sortby" value="1">Newest</option>
-                      <option name="sortby" value="2">Name</option>
-                      <option name="sortby" value="3">Best match</option>
+                  <div class="field-wrap">
+                    <select class="field-control" name="sap-xep" onchange="this.form.submit()">
+                      <option name="sap-xep">Sắp xếp</option>
+                      <option name="sap-xep" value="tang-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'tang-dan' ? 'selected' : '' ?>>Giá tăng dần</option>
+                      <option name="sap-xep" value="giam-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'giam-dan' ? 'selected' : '' ?>>Giá giảm dần</option>
                     </select> <span class="select-arrow"><i
                         class="fas fa-chevron-down"></i></span> <span
                       class="field-back"></span></div>
@@ -172,6 +172,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
               </div>
             </div>
           </div>
+           <div class="sm-col-12"><button class="btn-them btn text-upper" type="submit">New Search</button></div>
         </div>
 
       </form>

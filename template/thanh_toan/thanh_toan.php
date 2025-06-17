@@ -202,8 +202,8 @@ if ($f->isLogin()) {
                         <div class="checkout-total-line text-semibold">
                             <div class="title text-upper">Phí vận chuyển</div>
                             <div class="value">
-                                <div class="value-line">Phí cố định: 0₫</div>
-                                <div class="value-line">Miễn phí vận chuyển</div>
+                                <div class="value-line">0₫</div>
+                                <!-- <div class="value-line">Miễn phí vận chuyển</div> -->
                             </div>
                         </div>
                         <div class="checkout-total-line text-semibold">
