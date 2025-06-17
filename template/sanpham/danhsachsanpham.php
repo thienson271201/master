@@ -120,9 +120,9 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
           <div class="sm-col-12">
             <div class="row cols-md rows-md">
               <div class="sm-col-6 md-col-3 lg-col-3">
-                <div class="field-group chosen-field">
+                <div class="field-group chosen-field" style="margin-bottom: 20px;">
                   <div class="field-wrap">
-                    <select class="field-control" name="sap-xep" onchange="this.form.submit()">
+                    <select class="field-control"  name="sap-xep" onchange="this.form.submit()">
                       <option name="sap-xep">Sắp xếp</option>
                       <option name="sap-xep" value="tang-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'tang-dan' ? 'selected' : '' ?>>Giá tăng dần</option>
                       <option name="sap-xep" value="giam-dan" <?= isset($_GET['sap-xep']) && $_GET['sap-xep'] == 'giam-dan' ? 'selected' : '' ?>>Giá giảm dần</option>
@@ -132,7 +132,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
                 </div>
               </div>
               <div class="sm-col-6 md-col-3 lg-col-3">
-                <div class="field-group chosen-field">
+                <div class="field-group chosen-field" style="margin-bottom: 20px;">
                   <div class="field-wrap"><select class="field-control" name="date">
                       <option name="date">Date</option>
                       <option name="date" value="1">Today</option>
@@ -144,7 +144,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
                       class="field-back"></span></div>
                 </div>
               </div>
-              <div class="sm-col-6 md-col-3 lg-col-3">
+              <div class="sm-col-6 md-col-3 lg-col-3" style="margin-bottom: 20px;">
                 <div class="field-group chosen-field">
                   <div class="field-wrap"><select class="field-control" name="section">
                       <option name="section">Section</option>
@@ -158,7 +158,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
                 </div>
               </div>
               <div class="sm-col-6 md-col-3 lg-col-3">
-                <div class="field-group chosen-field">
+                <div class="field-group chosen-field" style="margin-bottom: 20px;">
                   <div class="field-wrap"><select class="field-control" name="section">
                       <option name="section">Section</option>
                       <option name="section" value="1">Services</option>
@@ -172,7 +172,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
               </div>
             </div>
           </div>
-           <div class="sm-col-12"><button class="btn-them btn text-upper" type="submit">New Search</button></div>
+           <div class="sm-col-12"><button class="btn text-upper" style="margin-bottom: 20px;" type="submit">New Search</button></div>
         </div>
 
       </form>
