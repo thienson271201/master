@@ -17,10 +17,10 @@ if ($f->isPOST()) {
         $data_insert['khach_hang_id'] = getSession('khach_hang_id');
     }
     if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay') {
-        setFlashData('data_vnpay',$data_insert);
+        setFlashData('data_vnpay', $data_insert);
         require_once 'vnpay/vnpay_create_payment.php';
     }
-   require_once 'cod/cod.php';
+    require_once 'cod/cod.php';
 }
 if ($f->isLogin()) {
     $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id='" . getSession('khach_hang_id') . "'");
@@ -59,7 +59,7 @@ if ($f->isLogin()) {
 </section>
 <section class="content-section">
     <div class="container">
-        <form method="post">
+        <form id="form-thanh-toan" method="post">
             <div class="row cols-lg rows-lg">
                 <div class="sm-col-6" data-inview-showup="showup-translate-right">
                     <h4 class="text-upper">Chi tiết thanh toán</h4>
@@ -266,6 +266,10 @@ if ($f->isLogin()) {
         </form>
     </div>
 </section>
+
+<!-- Nơi hiển thị mã QR -->
+<div id="qr-code"></div>
+
 <script>
     $(document).ready(function() {
         $('#tinh_thanhpho').on('change', function() {
@@ -305,6 +309,54 @@ if ($f->isLogin()) {
             },
             error: function() {
                 alert('Có lỗi khi tải danh sách xã/phường');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#form-thanh-toan').on('submit', function(e) {
+            e.preventDefault(); // Ngăn form gửi đi mặc định
+
+            // Lấy giá trị phương thức thanh toán
+            const paymentMethod = $('input[name="phuong_thuc_thanh_toan"]:checked').val();
+            const formData = $(this).serializeArray(); // mảng object chứa dữ liệu form
+
+
+            if (paymentMethod === 'transfer') {
+                // Gửi AJAX lấy mã đơn hàng từ chuyen_khoan.php
+                $.ajax({
+                    url: 'template/thanh_toan/chuyen_khoan/chuyen_khoan.php',
+                    type: 'POST',
+                    data: formData, // gửi dữ liệu form
+                    success: function(orderCode) {
+                        const tongTien = formData.find(item => item.name === 'tong_tien')?.value || '0';
+                        // Gọi tiếp qr_code.php, truyền mã đơn hàng để lấy mã QR
+                        $.ajax({
+                            url: 'template/thanh_toan/chuyen_khoan/qr_code.php',
+                            type: 'POST',
+                            data: {
+                                ma_don_hang: orderCode,
+                                tong_tien: tongTien, // truyền tổng tiền để hiển thị trong QR
+
+                            },
+                            success: function(qrHtml) {
+                                $('#qr-code').html(qrHtml); // Hiển thị mã QR
+                            },
+                            error: function() {
+                                alert('Không thể tạo mã QR.');
+                            }
+                        });
+                    },
+                    error: function() {
+                        alert('Không thể lấy mã đơn hàng.');
+                    }
+                });
+
+            } else {
+                // Nếu không phải chuyển khoản, bạn có thể cho phép submit form như bình thường:
+                this.submit();
             }
         });
     });
