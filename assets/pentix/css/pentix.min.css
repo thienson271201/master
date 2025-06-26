@@ -528,7 +528,7 @@ label.required:after {
 }
 
 .field-wrap .field-control {
-    width: 100%
+    width: 100%;
 }
 
 .field-wrap .field-addon-btn {

@@ -1,28 +1,40 @@
 <?php
-if ($f->isPOST())
-{
+
+$error_ho_ten = '';
+
+if ($f->isPOST()) {
   $filterAll = $f->filter();
 
-  // Kiểm tra số điện thoại: bắt đầu bằng 0 và đúng 10 chữ số
-  if (!preg_match('/^0\d{9}$/', $filterAll['so_dien_thoai']))
-  {
-    echo '<script>alert("Số điện thoại không hợp lệ. Phải bắt đầu bằng số 0 và có đúng 10 chữ số.");</script>';
-  } elseif ($filterAll['mat_khau'] !== $filterAll['nhap_lai_mat_khau'])
-  {
-    echo '<script>alert("Mật khẩu và nhập lại mật khẩu không khớp.");</script>';
-  } else
-  {
-    $khach_hang = [
-      'ten_khach_hang' => $filterAll['ten_khach_hang'],
-      'email' => $filterAll['email'],
-      'mat_khau' => password_hash($filterAll['mat_khau'], PASSWORD_DEFAULT),
-      'so_dien_thoai' => $filterAll['so_dien_thoai'],
-      'ngay_tao' => date('Y-m-d H:i:s')
-    ];
+  // Kiểm tra họ tên
+  if ($filterAll['ten_khach_hang'] === '') {
+    $error_ho_ten = 'Vui lòng nhập họ và tên';
+  } elseif (str_word_count($filterAll['ten_khach_hang']) < 2) {
+    $error_ho_ten = 'Vui lòng nhập đầy đủ họ và tên';
+  } elseif (!preg_match('/^[\p{L}\s]+$/u', $filterAll['ten_khach_hang'])) {
+    $error_ho_ten = 'Họ và tên chỉ được chứa chữ cái và khoảng trắng';
+  }
 
-    $insertStatus = $db->insert('khach_hang', $khach_hang);
-    if ($insertStatus)
-      $f->redirect('dang-nhap');
+
+  // Kiểm tra số điện thoại: bắt đầu bằng 0 và đúng 10 chữ số
+  if (!preg_match('/^0\d{9}$/', $filterAll['so_dien_thoai'])) {
+    echo '<script>alert("Số điện thoại không hợp lệ. Phải bắt đầu bằng số 0 và có đúng 10 chữ số.");</script>';
+  } elseif ($filterAll['mat_khau'] !== $filterAll['nhap_lai_mat_khau']) {
+    echo '<script>alert("Mật khẩu và nhập lại mật khẩu không khớp.");</script>';
+  } else {
+    if (!$error_ho_ten) {
+      $khach_hang = [
+        'ten_khach_hang' => $filterAll['ten_khach_hang'],
+        'email' => $filterAll['email'],
+        'mat_khau' => password_hash($filterAll['mat_khau'], PASSWORD_DEFAULT),
+        'so_dien_thoai' => $filterAll['so_dien_thoai'],
+        'ngay_tao' => date('Y-m-d H:i:s')
+      ];
+
+      $insertStatus = $db->insert('khach_hang', $khach_hang);
+      if ($insertStatus) {
+        $f->redirect('dang-nhap');
+      }
+    }
   }
 }
 ?>
@@ -60,11 +72,24 @@ if ($f->isPOST())
       align-items: center;">
         <div class="sm-col-8" data-inview-showup="showup-translate-left">
           <div class="field-group">
-            <div class="field-wrap">
+            <!-- <div class="field-wrap">
               <input class="field-control width:100%" name="ten_khach_hang" placeholder="Họ và tên"
                 required="required" />
               <span class="field-back"></span>
-            </div>
+            </div> -->
+            <div class="field-wrap has-icon">
+                    <input class="field-control"
+                      name="ten_khach_hang" 
+                      type="text" 
+                      placeholder="Họ và tên" 
+                    required>
+                    <span class="field-icon">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <span class="field-back"></span>
+                  </div>
+                  <span class="field-sub-text <?= $error_ho_ten ? 'text-danger' : 'd-none' ?>"><i
+                      class="fas fa-times error-text"></i> <?= $error_ho_ten ?></span>
           </div>
         </div>
         <div class="sm-col-8" data-inview-showup="showup-translate-right">
@@ -126,7 +151,7 @@ if ($f->isPOST())
     const icon = document.getElementById(iconId);
     const input = document.getElementById(inputId);
 
-    icon.addEventListener('click', function () {
+    icon.addEventListener('click', function() {
       const isPassword = input.type === 'password';
       input.type = isPassword ? 'text' : 'password';
 
@@ -136,7 +161,7 @@ if ($f->isPOST())
   }
 
   // Gắn cho từng cặp input + icon
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     setupToggle('togglePassword1', 'password1');
     setupToggle('togglePassword2', 'password2');
   });

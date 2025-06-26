@@ -180,32 +180,6 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
                       class="field-back"></span></div>
                 </div>
               </div>
-              <div class="sm-col-6 md-col-3 lg-col-3" style="margin-bottom: 20px;">
-                <div class="field-group chosen-field">
-                  <div class="field-wrap"><select class="field-control" name="section">
-                      <option name="section">Section</option>
-                      <option name="section" value="1">Services</option>
-                      <option name="section" value="2">Project</option>
-                      <option name="section" value="3">Blog</option>
-                      <option name="section" value="4">Shop</option>
-                    </select> <span class="select-arrow"><i
-                        class="fas fa-chevron-down"></i></span> <span
-                      class="field-back"></span></div>
-                </div>
-              </div>
-              <div class="sm-col-6 md-col-3 lg-col-3">
-                <div class="field-group chosen-field" style="margin-bottom: 20px;">
-                  <div class="field-wrap"><select class="field-control" name="section">
-                      <option name="section">Section</option>
-                      <option name="section" value="1">Services</option>
-                      <option name="section" value="2">Project</option>
-                      <option name="section" value="3">Blog</option>
-                      <option name="section" value="4">Shop</option>
-                    </select> <span class="select-arrow"><i
-                        class="fas fa-chevron-down"></i></span> <span
-                      class="field-back"></span></div>
-                </div>
-              </div>
             </div>
           </div>
           <div class="sm-col-12"><button class="btn text-upper" style="margin-bottom: 20px;" type="submit">Áp dụng</button></div>
