@@ -32,15 +32,15 @@ body .raleway-black {
 }
 .item-specs {
   background: #f8f9fa;
-  padding: 5px 8px; /* Giảm padding để bảng nhỏ hơn */
+  padding: 5px; /* Giảm padding để bảng nhỏ hơn */
   border-radius: 6px; /* Bo góc nhẹ hơn */
   font-size: 14px; /* Giảm kích thước chữ */
-  font-family:'Roboto';
+  font-family: "Roboto";
   color: #333;
   margin: 6px 10px; /* Giảm khoảng cách giữa bảng và các phần khác */
   text-align: left;
   border: 1px solid #ddd;
-   /* Giảm chiều rộng để không chiếm quá nhiều không gian */
+  /* Giảm chiều rộng để không chiếm quá nhiều không gian */
   border-left: 4px solid #007bff;
 }
 
