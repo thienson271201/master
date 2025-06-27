@@ -4,9 +4,9 @@ if ($func->isPOST())
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
-        'status' => $filterAll['status']
+        'trang_thai' => $filterAll['status']
     ];
-    $db->update('orders', $data_update, "id = '$id'");
+    $db->update('don_hang', $data_update, "id = '$id'");
     setFlashData('smg', 'Đã cập nhật đơn hàng');
 }
 $trangthaidonhang = [
@@ -33,9 +33,22 @@ $trangthaidonhang = [
 ];
 $id = $func->filter()['id'];
 $order = $db->oneRaw("SELECT * FROM don_hang WHERE id = '$id'");
-$code = $order['ma_don_hang'];
+$code = $order['id'];
 $order_detail = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$code'");
 $smg = getFlashData('smg');
+if ($order['khach_hang_id'] != "")
+{
+    $id = $order['khach_hang_id'];
+    $thong_tin_khach_hang = $db->oneRaw("SELECT * FROM khach_hang WHERE id = $id");
+    $diachi = $thong_tin_khach_hang['dia_chi'];
+    $xaid = $thong_tin_khach_hang['xa_phuong'];
+    $xa_phuong = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
+    $maqh = $thong_tin_khach_hang['quan_huyen'];
+    $quan_huyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
+    $matp = $thong_tin_khach_hang['tinh_thanhpho'];
+    $tinh = $db->oneRaw("SELECT * FROM tinhthanhpho WHERE matp = $matp")['name'];
+    $thong_tin_khach_hang['dia_chi_day_du'] = $diachi . ', ' . $xa_phuong . ', ' . $quan_huyen . ', ' . $tinh;
+}
 ?>
 <!--begin::App Main-->
 <main class="app-main">
@@ -71,6 +84,9 @@ $smg = getFlashData('smg');
             {
                 $func->getSmg($smg);
             }
+            // echo '<pre>';
+            // print_r($thong_tin_khach_hang);
+            // echo '</pre>';
             ?>
             <div class="card card-primary card-outline mb-4">
                 <!--begin::Header-->
@@ -79,18 +95,23 @@ $smg = getFlashData('smg');
                 </div>
                 <!--end::Header-->
                 <div class="card-body">
-                    <p>Mã đơn hàng: <span class="fw-bold"><?= $order['ma_don_hang'] ?></span></p>
-                    <p>Họ tên: <span class="fw-bold"><?= $order['ten_khach_hang'] ?></span></p>
+                    <p>Mã đơn hàng: <span class="fw-bold text-danger"><?= $order['ma_don_hang'] ?></span></p>
+                    <p>Họ tên: <span
+                            class="fw-bold"><?= $order['khach_hang_id'] == '' ? $order['ten_khach_hang'] : $thong_tin_khach_hang['ten_khach_hang'] ?></span>
+                    </p>
                     <p>Số điện thoại: <span
-                            class="fw-bold"><?= $func->formatPhoneNumber($order['so_dien_thoai']) ?></span></p>
-                    <p>Địa chỉ: <span class="fw-bold"><?= $order['dia_chi'] ?></span></p>
+                            class="fw-bold"><?= $func->formatPhoneNumber($order['khach_hang_id'] == '' ? $order['so_dien_thoai'] : $thong_tin_khach_hang['so_dien_thoai']) ?></span>
+                    </p>
+                    <p>Địa chỉ: <span
+                            class="fw-bold"><?= $order['khach_hang_id'] == '' ? $order['dia_chi'] : $thong_tin_khach_hang['dia_chi_day_du'] ?></span>
+                    </p>
                     <p>Trạng thái: <span class="fw-bold"><?= $func->status_order($order['trang_thai']) ?></span></p>
                     <form class="row" method="post">
                         <div class="col-md-6">
                             <label for="status" class="fw-bold form-label">Cập nhật trạng thái: </label>
                             <select name="status" class="form-select mb-3">
                                 <?php foreach ($trangthaidonhang as $trangthai): ?>
-                                    <option value="<?= $trangthai['id'] ?>" <?= $order['status'] == $trangthai['id'] ? 'selected' : '' ?>><?= $trangthai['status'] ?>
+                                    <option value="<?= $trangthai['id'] ?>" <?= $order['trang_thai'] == $trangthai['id'] ? 'selected' : '' ?>><?= $trangthai['status'] ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -124,6 +145,7 @@ $smg = getFlashData('smg');
                         <tbody>
                             <?php
                             $dem = 0;
+
                             foreach ($order_detail as $item):
                                 $item_id = $item['san_pham_id'];
                                 $item_db = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$item_id'");
@@ -132,11 +154,11 @@ $smg = getFlashData('smg');
                                     <tr>
                                         <td><?= ++$dem ?></td>
                                         <td>
-                                            <img class="w-100" src="../assets/images/upload/<?= $item_db['hinh_anh'] ?>"
-                                                onerror="this.src='../assets/images/noimage/noimage.png'">
+                                            <img class="w-100" src="../upload/images/<?= $item_db['hinh_anh'] ?>"
+                                                onerror="this.src='../assets/images/noimage/noimage.jpg'">
                                         </td>
                                         <td><?= $item_db['ten_san_pham'] ?></td>
-                                        <td class="text-end"><?= $func->format_tiente($item['gia_sau_khuyen_mai']) ?>đ</td>
+                                        <td class="text-end"><?= $func->format_tiente($item['don_gia']) ?>đ</td>
                                         <td class="text-center"><?= $item['so_luong'] ?></td>
                                         <td class="text-end"><?= $func->format_tiente($item['so_luong'] * $item['don_gia']) ?>đ
                                         </td>
@@ -148,9 +170,9 @@ $smg = getFlashData('smg');
                                             <img class="w-100" src="" onerror="this.src='../assets/images/noimage/noimage.png'">
                                         </td>
                                         <td>Sản phẩm đã bị xoá</td>
-                                        <td class="text-end"><?= $func->format_tiente($item['price']) ?>đ</td>
-                                        <td class="text-center"><?= $item['quantity'] ?></td>
-                                        <td class="text-end"><?= $func->format_tiente($item['quantity'] * $item['price']) ?>đ
+                                        <td class="text-end"><?= $func->format_tiente($item['don_gia']) ?>đ</td>
+                                        <td class="text-center"><?= $item['so_luong'] ?></td>
+                                        <td class="text-end"><?= $func->format_tiente($item['so_luong'] * $item['don_gia']) ?>đ
                                         </td>
                                     </tr>
                                 <?php endif; ?>
@@ -158,7 +180,7 @@ $smg = getFlashData('smg');
                             <tr>
                                 <td colspan="5" class="fw-bold">Tổng cộng:</td>
                                 <td class="text-end fw-bold text-danger">
-                                    <?= $func->format_tiente($order['total_price']) ?>đ
+                                    <?= $func->format_tiente($order['tong_tien']) ?>đ
                                 </td>
                             </tr>
                         </tbody>

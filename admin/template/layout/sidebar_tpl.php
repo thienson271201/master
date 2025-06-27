@@ -74,6 +74,14 @@
                         <p>Quản lý nhập hàng</p>
                     </a>
                 </li>
+                <li class="nav-header">Quản lý khách hàng</li>
+                <li class="nav-item">
+                    <a href="?com=khach_hang&act=danh_sach"
+                        class="nav-link <?= $com == 'khach_hang' ? 'active' : '' ?>">
+                        <i class="nav-icon fa-solid fa-right-to-bracket fa-rotate-90"></i>
+                        <p>Quản lý khách hàng</p>
+                    </a>
+                </li>
                 <li class="nav-header">Đa phương tiện</li>
                 <li class="nav-item <?= $com == 'photo' ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link <?= $com == 'photo' ? 'active' : '' ?>">

@@ -1,5 +1,6 @@
 <?php
-if ($f->isPOST()) {
+if ($f->isPOST())
+{
     $filterAll = $f->filter();
     // echo '<pre>';
     // print_r($filterAll);
@@ -13,30 +14,29 @@ if ($f->isPOST()) {
         'trang_thai' => 1,
         'ngay_tao' => date('Y-m-d H:i:s'),
     ];
-    if ($f->isLogin()) {
+    // Nếu khách có đăng nhập thì lưu id vào mảng
+    if ($f->isLogin())
+    {
         $data_insert['khach_hang_id'] = getSession('khach_hang_id');
     }
-    if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay') {
+    if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay')
+    {
         setFlashData('data_vnpay', $data_insert);
         require_once 'vnpay/vnpay_create_payment.php';
     }
     require_once 'cod/cod.php';
 }
-if ($f->isLogin()) {
+if ($f->isLogin())
+{
     $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id='" . getSession('khach_hang_id') . "'");
 }
 ?>
 <section class="with-bg solid-section">
-    <div
-        class="fix-image-wrap"
-        data-image-src="./assets/images/service/tools.jpg"
-        data-parallax="scroll"></div>
+    <div class="fix-image-wrap" data-image-src="./assets/images/service/tools.jpg" data-parallax="scroll"></div>
     <div class="theme-back"></div>
     <div class="container page-info">
         <div class="section-alt-head container-md">
-            <h1
-                class="section-title text-upper text-lg"
-                data-inview-showup="showup-translate-right">
+            <h1 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
                 THANH TOÁN
             </h1>
         </div>
@@ -57,6 +57,11 @@ if ($f->isLogin()) {
         </div>
     </div>
 </section>
+<?php
+echo '<pre>';
+print_r($_SESSION['gio_hang']);
+echo '</pre>';
+?>
 <section class="content-section">
     <div class="container">
         <form id="form-thanh-toan" method="post">
@@ -65,10 +70,7 @@ if ($f->isLogin()) {
                     <h4 class="text-upper">Chi tiết thanh toán</h4>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input
-                                class="field-control"
-                                name="ten_khach_hang"
-                                placeholder="Họ và tên"
+                            <input class="field-control" name="ten_khach_hang" placeholder="Họ và tên"
                                 value="<?php echo isset($user_profile['ten_khach_hang']) ? $user_profile['ten_khach_hang'] : ''; ?>"
                                 required="required" />
                             <span class="field-back"></span>
@@ -76,11 +78,7 @@ if ($f->isLogin()) {
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input
-                                class="field-control"
-                                name="email"
-                                type="email"
-                                placeholder="Email"
+                            <input class="field-control" name="email" type="email" placeholder="Email"
                                 value="<?php echo isset($user_profile['email']) ? $user_profile['email'] : ''; ?>"
                                 required="required" />
                             <span class="field-back"></span>
@@ -88,10 +86,7 @@ if ($f->isLogin()) {
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input
-                                class="field-control"
-                                name="so_dien_thoai"
-                                placeholder="Số điện thoại"
+                            <input class="field-control" name="so_dien_thoai" placeholder="Số điện thoại"
                                 value="<?php echo isset($user_profile['so_dien_thoai']) ? $user_profile['so_dien_thoai'] : ''; ?>"
                                 required="required" />
                             <span class="field-back"></span>
@@ -104,9 +99,9 @@ if ($f->isLogin()) {
                                 <?php
                                 $dstinh = $db->getRaw('SELECT * FROM tinhthanhpho');
                                 foreach ($dstinh as $tinh):
-                                ?>
-                                    <option
-                                        <?php if (isset($user_profile['tinh_thanhpho']) && $user_profile['tinh_thanhpho'] == $tinh['matp']) echo 'selected'; ?>
+                                    ?>
+                                    <option <?php if (isset($user_profile['tinh_thanhpho']) && $user_profile['tinh_thanhpho'] == $tinh['matp'])
+                                        echo 'selected'; ?>
                                         value="<?= $tinh['matp'] ?>"><?= $tinh['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -122,11 +117,11 @@ if ($f->isLogin()) {
                                     $tinh = $user_profile['tinh_thanhpho'];
                                     $dshuyen = $db->getRaw("SELECT * FROM quanhuyen where matp=$tinh");
                                     foreach ($dshuyen as $huyen):
-                                ?>
-                                        <option
-                                            <?php if (isset($user_profile['quan_huyen']) && $user_profile['quan_huyen'] == $huyen['maqh']) echo 'selected'; ?>
+                                        ?>
+                                        <option <?php if (isset($user_profile['quan_huyen']) && $user_profile['quan_huyen'] == $huyen['maqh'])
+                                            echo 'selected'; ?>
                                             value="<?= $huyen['maqh'] ?>"><?= $huyen['name'] ?></option>
-                                <?php endforeach;
+                                    <?php endforeach;
                                 endif; ?>
                                 <!-- thêm option khác tùy bạn -->
                             </select>
@@ -142,11 +137,11 @@ if ($f->isLogin()) {
                                     $huyen = $user_profile['quan_huyen'];
                                     $dsxa = $db->getRaw("SELECT * FROM xaphuongthitran where maqh=$huyen");
                                     foreach ($dsxa as $xa):
-                                ?>
-                                        <option
-                                            <?php if (isset($user_profile['xa_phuong']) && $user_profile['xa_phuong'] == $xa['xaid']) echo 'selected'; ?>
+                                        ?>
+                                        <option <?php if (isset($user_profile['xa_phuong']) && $user_profile['xa_phuong'] == $xa['xaid'])
+                                            echo 'selected'; ?>
                                             value="<?= $xa['xaid'] ?>"><?= $xa['name'] ?></option>
-                                <?php endforeach;
+                                    <?php endforeach;
                                 endif; ?>
                             </select>
                             <span class="field-back"></span>
@@ -154,10 +149,7 @@ if ($f->isLogin()) {
                     </div>
                     <div class="field-group">
                         <div class="field-wrap">
-                            <input
-                                class="field-control"
-                                name="dia_chi"
-                                placeholder="Địa chỉ cụ thể"
+                            <input class="field-control" name="dia_chi" placeholder="Địa chỉ cụ thể"
                                 value="<?php echo isset($user_profile['dia_chi']) ? $user_profile['dia_chi'] : ''; ?>"
                                 required="required" />
                             <span class="field-back"></span>
@@ -165,9 +157,7 @@ if ($f->isLogin()) {
                     </div>
                     <div class="field-group shift-md">
                         <div class="field-wrap">
-                            <textarea
-                                class="field-control"
-                                name="ghi_chu"
+                            <textarea class="field-control" name="ghi_chu"
                                 placeholder="Ghi chú đơn hàng (nếu có)"></textarea>
                             <span class="field-back"></span>
                         </div>
@@ -186,11 +176,13 @@ if ($f->isLogin()) {
                             $id = $item['id'];
                             $sanphamthanhtoan = $db->oneRaw("SELECT * FROM san_pham WHERE id = $id");
                             $tong_tien += $sanphamthanhtoan['gia_sau_khuyen_mai'] * $item['quantity'];
-                        ?>
+                            ?>
 
                             <div class="checkout-total-line">
                                 <div class="title"><?= $sanphamthanhtoan['ten_san_pham'] ?> x <?= $item['quantity'] ?></div>
-                                <div class="value"><?= $f->format_tiente($sanphamthanhtoan['gia_sau_khuyen_mai'] * $item['quantity']) ?>₫</div>
+                                <div class="value">
+                                    <?= $f->format_tiente($sanphamthanhtoan['gia_sau_khuyen_mai'] * $item['quantity']) ?>₫
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -227,33 +219,26 @@ if ($f->isLogin()) {
                     <div class="field-groups offs-lg">
                         <div class="field-group alt-color text-semibold">
                             <div class="radio">
-                                <label><input
-                                        class="field-control"
-                                        name="phuong_thuc_thanh_toan"
-                                        value="vnpay"
+                                <label><input class="field-control" name="phuong_thuc_thanh_toan" value="vnpay"
                                         type="radio" />
-                                    <span class="check-icon"><span class="check-block"><span class="check-pin"></span> </span></span><span class="label">VNPay</span></label>
+                                    <span class="check-icon"><span class="check-block"><span class="check-pin"></span>
+                                        </span></span><span class="label">VNPay</span></label>
                             </div>
                         </div>
                         <div class="field-group alt-color text-semibold">
                             <div class="radio">
-                                <label><input
-                                        class="field-control"
-                                        name="phuong_thuc_thanh_toan"
-                                        value="transfer"
+                                <label><input class="field-control" name="phuong_thuc_thanh_toan" value="transfer"
                                         type="radio" />
-                                    <span class="check-icon"><span class="check-block"><span class="check-pin"></span> </span></span><span class="label">Chuyển khoản</span></label>
+                                    <span class="check-icon"><span class="check-block"><span class="check-pin"></span>
+                                        </span></span><span class="label">Chuyển khoản</span></label>
                             </div>
                         </div>
                         <div class="field-group alt-color text-semibold">
                             <div class="radio">
-                                <label><input
-                                        class="field-control"
-                                        name="phuong_thuc_thanh_toan"
-                                        value="cod"
-                                        type="radio"
-                                        checked />
-                                    <span class="check-icon"><span class="check-block"><span class="check-pin"></span> </span></span><span class="label">Tiền mặt (COD)</span></label>
+                                <label><input class="field-control" name="phuong_thuc_thanh_toan" value="cod"
+                                        type="radio" checked />
+                                    <span class="check-icon"><span class="check-block"><span class="check-pin"></span>
+                                        </span></span><span class="label">Tiền mặt (COD)</span></label>
                             </div>
                         </div>
                     </div>
@@ -271,8 +256,8 @@ if ($f->isLogin()) {
 <div id="qr-code"></div>
 
 <script>
-    $(document).ready(function() {
-        $('#tinh_thanhpho').on('change', function() {
+    $(document).ready(function () {
+        $('#tinh_thanhpho').on('change', function () {
             var matp = $(this).val();
             // Reset quận và xã trước khi load lại
             $('#quan_huyen').html('<option value="">Chọn Quận / Huyện</option>');
@@ -284,16 +269,16 @@ if ($f->isLogin()) {
                     key: 'quanhuyen',
                     matp: matp
                 },
-                success: function(data) {
+                success: function (data) {
                     $('#quan_huyen').html(data);
                 },
-                error: function() {
+                error: function () {
                     alert('Có lỗi khi tải danh sách quận/huyện');
                 }
             });
         });
     });
-    $('#quan_huyen').on('change', function() {
+    $('#quan_huyen').on('change', function () {
         var maqh = $(this).val();
         // Reset xã trước khi load lại
         $('#xa_phuong').html('<option value="">Chọn Phường / Xã</option>');
@@ -304,10 +289,10 @@ if ($f->isLogin()) {
                 key: 'xaphuong',
                 maqh: maqh
             },
-            success: function(data) {
+            success: function (data) {
                 $('#xa_phuong').html(data);
             },
-            error: function() {
+            error: function () {
                 alert('Có lỗi khi tải danh sách xã/phường');
             }
         });
@@ -315,8 +300,8 @@ if ($f->isLogin()) {
 </script>
 
 <script>
-    $(document).ready(function() {
-        $('#form-thanh-toan').on('submit', function(e) {
+    $(document).ready(function () {
+        $('#form-thanh-toan').on('submit', function (e) {
             e.preventDefault(); // Ngăn form gửi đi mặc định
 
             // Lấy giá trị phương thức thanh toán
@@ -330,7 +315,7 @@ if ($f->isLogin()) {
                     url: 'template/thanh_toan/chuyen_khoan/chuyen_khoan.php',
                     type: 'POST',
                     data: formData, // gửi dữ liệu form
-                    success: function(orderCode) {
+                    success: function (orderCode) {
                         const tongTien = formData.find(item => item.name === 'tong_tien')?.value || '0';
                         // Gọi tiếp qr_code.php, truyền mã đơn hàng để lấy mã QR
                         $.ajax({
@@ -341,15 +326,15 @@ if ($f->isLogin()) {
                                 tong_tien: tongTien, // truyền tổng tiền để hiển thị trong QR
 
                             },
-                            success: function(qrHtml) {
+                            success: function (qrHtml) {
                                 $('#qr-code').html(qrHtml); // Hiển thị mã QR
                             },
-                            error: function() {
+                            error: function () {
                                 alert('Không thể tạo mã QR.');
                             }
                         });
                     },
-                    error: function() {
+                    error: function () {
                         alert('Không thể lấy mã đơn hàng.');
                     }
                 });

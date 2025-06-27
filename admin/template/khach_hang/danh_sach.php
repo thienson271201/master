@@ -12,13 +12,13 @@ $smg = getFlashData('smg');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Quản lý đơn hàng</h3>
+                    <h3 class="mb-0">Quản lý khách hàng</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="index.php">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Quản lý đơn hàng
+                            Quản lý khách hàng
                         </li>
                     </ol>
                 </div>
@@ -41,20 +41,20 @@ $smg = getFlashData('smg');
             <div class="card card-primary card-outline mb-4">
                 <!--begin::Header-->
                 <div class="card-header">
-                    <div class="card-title">Danh Sách Đơn Hàng</div>
+                    <div class="card-title">Danh Sách Khách Hàng</div>
                 </div>
                 <!--end::Header-->
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th width="10%" class="text-center">Mã đơn hàng</th>
-                                <th>Họ tên</th>
-                                <th width="150px" class="text-center">Ngày đặt</th>
-                                <th width="10%" class="text-center">Tổng giá</th>
-                                <th width="10%" class="text-center">Hình thức</th>
-                                <th width="10%" class="text-center">Tình trạng</th>
-                                <th width=" 10%" class="text-center">Thao tác</th>
+                                <th class="text-center">Mã hoá đơn</th>
+                                <th class="text-center">Nhân viên nhập</th>
+                                <th class="text-center">Ngày nhập</th>
+                                <th class="text-center">Hình thức</th>
+                                <th class="text-center">Tổng giá</th>
+                                <th class="text-center">Tình trạng</th>
+                                <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,8 +89,7 @@ $smg = getFlashData('smg');
                                             class="btn btn-warning btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="?com=don_hang&act=xoa&id=<?= $item['id'] ?>"
-                                            class="btn btn-danger btn-sm <?= $item['trang_thai'] != '1' ? 'd-none' : '' ?>">
+                                        <a href="?com=don_hang&act=xoa&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>
