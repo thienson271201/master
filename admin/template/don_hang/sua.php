@@ -32,9 +32,9 @@ $trangthaidonhang = [
     ]
 ];
 $id = $func->filter()['id'];
-$order = $db->oneRaw("SELECT * FROM orders WHERE id = '$id'");
-$code = $order['code'];
-$order_detail = $db->getRaw("SELECT * FROM order_details WHERE order_id = '$code'");
+$order = $db->oneRaw("SELECT * FROM don_hang WHERE id = '$id'");
+$code = $order['ma_don_hang'];
+$order_detail = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$code'");
 $smg = getFlashData('smg');
 ?>
 <!--begin::App Main-->
@@ -79,12 +79,12 @@ $smg = getFlashData('smg');
                 </div>
                 <!--end::Header-->
                 <div class="card-body">
-                    <p>Mã đơn hàng: <span class="fw-bold"><?= $order['code'] ?></span></p>
-                    <p>Họ tên: <span class="fw-bold"><?= $order['fullname'] ?></span></p>
+                    <p>Mã đơn hàng: <span class="fw-bold"><?= $order['ma_don_hang'] ?></span></p>
+                    <p>Họ tên: <span class="fw-bold"><?= $order['ten_khach_hang'] ?></span></p>
                     <p>Số điện thoại: <span
-                            class="fw-bold"><?= $func->formatPhoneNumber($order['phone_number']) ?></span></p>
-                    <p>Địa chỉ: <span class="fw-bold"><?= $order['address'] ?></span></p>
-                    <p>Trạng thái: <span class="fw-bold"><?= $func->status_order($order['status']) ?></span></p>
+                            class="fw-bold"><?= $func->formatPhoneNumber($order['so_dien_thoai']) ?></span></p>
+                    <p>Địa chỉ: <span class="fw-bold"><?= $order['dia_chi'] ?></span></p>
+                    <p>Trạng thái: <span class="fw-bold"><?= $func->status_order($order['trang_thai']) ?></span></p>
                     <form class="row" method="post">
                         <div class="col-md-6">
                             <label for="status" class="fw-bold form-label">Cập nhật trạng thái: </label>
@@ -125,20 +125,20 @@ $smg = getFlashData('smg');
                             <?php
                             $dem = 0;
                             foreach ($order_detail as $item):
-                                $item_id = $item['product_id'];
-                                $item_db = $db->oneRaw("SELECT * FROM products WHERE id = '$item_id'");
+                                $item_id = $item['san_pham_id'];
+                                $item_db = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$item_id'");
                                 ?>
                                 <?php if ($item_db): ?>
                                     <tr>
                                         <td><?= ++$dem ?></td>
                                         <td>
-                                            <img class="w-100" src="../assets/images/upload/<?= $item_db['image'] ?>"
+                                            <img class="w-100" src="../assets/images/upload/<?= $item_db['hinh_anh'] ?>"
                                                 onerror="this.src='../assets/images/noimage/noimage.png'">
                                         </td>
-                                        <td><?= $item_db['title'] ?></td>
-                                        <td class="text-end"><?= $func->format_tiente($item['price']) ?>đ</td>
-                                        <td class="text-center"><?= $item['quantity'] ?></td>
-                                        <td class="text-end"><?= $func->format_tiente($item['quantity'] * $item['price']) ?>đ
+                                        <td><?= $item_db['ten_san_pham'] ?></td>
+                                        <td class="text-end"><?= $func->format_tiente($item['gia_sau_khuyen_mai']) ?>đ</td>
+                                        <td class="text-center"><?= $item['so_luong'] ?></td>
+                                        <td class="text-end"><?= $func->format_tiente($item['so_luong'] * $item['don_gia']) ?>đ
                                         </td>
                                     </tr>
                                 <?php else: ?>
