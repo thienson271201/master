@@ -57,14 +57,14 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
   });
   if (empty($list_san_pham))
   {
-    setFlashData('tim_kiem', '<div class="alert alert-error">
+    setFlashData('tim_kiem', '<div class="alert alert-warning">
         Không tìm thấy kết quả cho: <strong>' . $tim_kiem . '</strong>
         <br>Vui lòng thử lại với từ khóa khác.
       </div>');
   } else
   {
     // Hiển thị thông báo tìm thấy kết quả
-    setFlashData('tim_kiem', '<div class="alert alert-valid">
+    setFlashData('tim_kiem', '<div class="alert alert-success">
         Tìm thấy <strong>' . count($list_san_pham) . '</strong> kết quả cho: <strong>' . htmlspecialchars($tim_kiem) . '</strong>
       </div>');
   }
