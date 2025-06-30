@@ -1,5 +1,5 @@
 <?php
-$list_order = $db->getRaw("SELECT * FROM don_hang");
+$list_order = $db->getRaw("SELECT * FROM khach_hang ");
 $smg = getFlashData('smg');
 ?>
 
@@ -48,42 +48,31 @@ $smg = getFlashData('smg');
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="text-center">Mã hoá đơn</th>
-                                <th class="text-center">Nhân viên nhập</th>
-                                <th class="text-center">Ngày nhập</th>
-                                <th class="text-center">Hình thức</th>
-                                <th class="text-center">Tổng giá</th>
-                                <th class="text-center">Tình trạng</th>
-                                <th class="text-center">Thao tác</th>
+                                <th class="text-center" style="width: 5%;">STT</th>
+                                <th >Tên khách hàng</th>
+                                <th class="text-center">Số điện thoại</th>
+                                
+                                <th class="text-center" style="width: 10%;">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
+                            $dem = 1;
                             foreach ($list_order as $item):
-                                if ($item['khach_hang_id'] != "")
-                                {
-                                    $id = $item['khach_hang_id'];
-                                    $khach_hang_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id=$id");
-                                    $ten_khach_hang = $khach_hang_profile['ten_khach_hang'];
-                                } else
-                                {
-                                    $ten_khach_hang = $item['ten_khach_hang'];
-                                }
+                                
                                 ?>
                                 <tr>
-                                    <td class="text-center"><?= $item['ma_don_hang'] ?></td>
+                                    <td class="text-center"><?= $dem++ ?></td>
                                     <td>
                                         <a class="text-decoration-none fw-bold text-black"
-                                            href="?com=don_hang&act=sua&id=<?= $item['id'] ?>">
-                                            <?= $ten_khach_hang ?>
+                                            href="?com=khach_hang&act=sua&id=<?= $item['id'] ?>">
+                                            <?= $item['ten_khach_hang'] ?>
                                         </a>
                                     </td>
-                                    <td><?= date('d-m-Y H:i:s', strtotime($item['ngay_tao'])) ?></td>
-                                    <td class="fw-bold text-center"><?= $func->format_tiente($item['tong_tien']) ?>đ</td>
-                                    <td style="text-transform: uppercase;" class="text-center fw-bold text-end">
-                                        <?= $item['hinh_thuc_thanh_toan'] ?>
-                                    </td>
-                                    <td class="fw-bold text-center"><?= $func->status_order($item['trang_thai']) ?></td>
+                        
+                                    
+                                    
+                                    <td class="text-center"><?= $item['so_dien_thoai'] ?></td>
                                     <td class="text-center">
                                         <a href="?com=don_hang&act=sua&id=<?= $item['id'] ?>"
                                             class="btn btn-warning btn-sm">

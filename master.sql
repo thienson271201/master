@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 24, 2025 lúc 05:39 PM
+-- Thời gian đã tạo: Th6 30, 2025 lúc 07:16 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -114,7 +114,10 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (159, 1, 'd8e1677a6acf934b964ec22ff846232323160425', '2025-06-18 09:09:54'),
 (160, 1, 'c108e8bb660544a367cd86691a753d34c8a52106', '2025-06-18 16:23:53'),
 (161, 1, 'bfdb703d05e8a580c09bf09883375dda0a829195', '2025-06-18 17:36:14'),
-(162, 1, '9d883dd159d3b1b002a725c965304496ab2cfc89', '2025-06-24 10:18:51');
+(162, 1, '9d883dd159d3b1b002a725c965304496ab2cfc89', '2025-06-24 10:18:51'),
+(163, 1, 'c08b48e1dee432438e9a53a41ea522bb5e522fe4', '2025-06-25 07:14:19'),
+(164, 1, '188a738917fb0ef5a0eb5d3eefc1338449b19d3f', '2025-06-27 23:17:28'),
+(165, 1, '5eeac3b06a362f75b540a93484b5214a0109621e', '2025-06-30 23:13:44');
 
 -- --------------------------------------------------------
 
@@ -127,15 +130,19 @@ CREATE TABLE `chi_tiet_don_hang` (
   `don_hang_id` int(11) NOT NULL,
   `san_pham_id` int(11) NOT NULL,
   `so_luong` int(11) NOT NULL,
-  `don_gia` double DEFAULT NULL
+  `don_gia` double DEFAULT NULL,
+  `tong_tien` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
 --
 
-INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`, `don_gia`) VALUES
-(35, 33, 5, 1, NULL);
+INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`, `don_gia`, `tong_tien`) VALUES
+(35, 33, 5, 1, 1000000, NULL),
+(36, 34, 6, 1, 1000000, NULL),
+(37, 38, 14, 1, 27790000, 27790000),
+(38, 39, 3, 1, 5000, 5000);
 
 -- --------------------------------------------------------
 
@@ -186,7 +193,13 @@ CREATE TABLE `don_hang` (
 --
 
 INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, `email`, `so_dien_thoai`, `dia_chi`, `ghi_chu`, `tong_tien`, `hinh_thuc_thanh_toan`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(33, '38U4SVNX', 13, NULL, NULL, NULL, NULL, '', 22990000, 'cod', 1, '2025-06-24 05:50:25', NULL);
+(33, '38U4SVNX', 13, NULL, NULL, NULL, NULL, '', 22990000, 'cod', 1, '2025-06-24 05:50:25', NULL),
+(34, 'NEGR6MUE', 14, NULL, NULL, NULL, NULL, '', 22000000, 'cod', 1, '2025-06-24 17:26:58', NULL),
+(35, 'I9KG9RKT', 14, NULL, NULL, NULL, NULL, '', 5000, 'transfer', 1, '2025-06-30 16:43:58', NULL),
+(36, 'K052UZ9Z', 14, NULL, NULL, NULL, NULL, '', 18000000, 'cod', 1, '2025-06-30 16:45:01', NULL),
+(37, 'PMWHM66Y', 14, NULL, NULL, NULL, NULL, '', 23490000, 'cod', 1, '2025-06-30 16:57:46', NULL),
+(38, '74YF26BT', 14, NULL, NULL, NULL, NULL, '', 27790000, 'cod', 1, '2025-06-30 17:00:03', NULL),
+(39, 'ZSEQU72C', 14, NULL, NULL, NULL, NULL, '', 5000, 'transfer', 1, '2025-06-30 17:02:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -274,7 +287,10 @@ INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALU
 (29, 13, '402323f2b9887d258dac92cf7082cb89ccffce52', '2025-06-18 02:09:45'),
 (30, 13, '53d728a5e8a02039baf33dd013e4fd99c9997a5b', '2025-06-23 15:37:06'),
 (31, 13, 'd29228f55be1e2cf2505ea73afca401211244df8', '2025-06-23 15:37:39'),
-(32, 13, '48088104d60f8a82b33c49bdda9279b21c469688', '2025-06-24 05:45:06');
+(32, 13, '48088104d60f8a82b33c49bdda9279b21c469688', '2025-06-24 05:45:06'),
+(33, 14, 'a4ec69ba12f4a7124a33e8946f795f69d21b16ac', '2025-06-24 17:23:59'),
+(34, 14, '12365c02df344558f42f8b93ce61f9613bd0464d', '2025-06-25 00:15:07'),
+(35, 14, '16212410510365ef08bee3ba967265753473024c', '2025-06-30 16:14:59');
 
 -- --------------------------------------------------------
 
@@ -1032,7 +1048,7 @@ CREATE TABLE `san_pham` (
 --
 
 INSERT INTO `san_pham` (`id`, `ma_san_pham`, `duong_dan`, `ten_san_pham`, `so_luong_ton_kho`, `hinh_anh`, `gia_goc`, `gia_sau_khuyen_mai`, `thuong_hieu_id`, `danh_muc_san_pham_id`, `mo_ta`, `mo_ta_dai`, `thong_so_kich_thuoc`, `ngay_ra_mat`, `noi_bat`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(3, 'Dell_Vostro1539_01', 'dell-vostro-1539', 'Dell Vostro 1539', 10, '1743611166.jpg', 18000000, 18000000, 5, 2, 'Dell Vostro 15 3530 là mẫu laptop văn phòng tầm trung, phù hợp cho doanh nghiệp nhỏ và người dùng cá nhân cần một thiết bị hiệu suất ổn định. Máy được trang bị bộ vi xử lý Intel Core i5-1235U thế hệ thứ 12, RAM 8GB DDR4 và ổ cứng SSD 512GB NVMe, đáp ứng tốt các tác vụ văn phòng, học tập và giải trí cơ bản. Màn hình 15.6 inch Full HD với tần số quét 120Hz mang đến trải nghiệm hình ảnh mượt mà. Thiết kế đơn giản, bền bỉ và trọng lượng khoảng 1.9 kg, thuận tiện cho việc di chuyển.', '<p><strong>CPU:</strong> Intel Core i5-1235U (10 nhân, 12 luồng, xung nhịp cơ bản 1.3GHz, tối đa 4.4GHz)</p><p><strong>RAM:</strong> 8GB DDR4 3200MHz (1 khe, hỗ trợ nâng cấp tối đa 16GB)</p><p><strong>Ổ cứng:</strong> SSD 512GB M.2 PCIe NVMe</p><p><strong>VGA:</strong> Đồ họa tích hợp Intel Iris Xe Graphics</p><p><strong>Màn hình:</strong> 15.6 inch Full HD (1920 x 1080), tấm nền WVA, tần số quét 120Hz, độ sáng 250 nits, chống chói</p><p><strong>Cổng kết nối:</strong></p><p>1 x USB 3.2 Gen 1 Type-C</p><p>2 x USB 3.2 Gen 1 Type-A</p><p>1 x HDMI 1.4</p><p>1 x Jack tai nghe 3.5mm</p><p>1 x Cổng mạng RJ-45</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6, Bluetooth 5.2</p><p><strong>Pin:</strong> 3-cell, 41Wh</p><p><strong>Trọng lượng:</strong> Khoảng 1.9 kg</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen</p>', '<p><strong>CPU:</strong> Intel Core i5-1235U 1.3GHz</p><p><strong>RAM:</strong> 8GB DDR4 3200MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA: </strong>Intel Iris Xe Graphics</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 120Hz</p>', NULL, 0, 1, '2025-03-29 15:33:44', NULL),
+(3, 'Dell_Vostro1539_01', 'dell-vostro-1539', 'Dell Vostro 1539', 10, '1743611166.jpg', 5000, 5000, 5, 2, 'Dell Vostro 15 3530 là mẫu laptop văn phòng tầm trung, phù hợp cho doanh nghiệp nhỏ và người dùng cá nhân cần một thiết bị hiệu suất ổn định. Máy được trang bị bộ vi xử lý Intel Core i5-1235U thế hệ thứ 12, RAM 8GB DDR4 và ổ cứng SSD 512GB NVMe, đáp ứng tốt các tác vụ văn phòng, học tập và giải trí cơ bản. Màn hình 15.6 inch Full HD với tần số quét 120Hz mang đến trải nghiệm hình ảnh mượt mà. Thiết kế đơn giản, bền bỉ và trọng lượng khoảng 1.9 kg, thuận tiện cho việc di chuyển.', '<p><strong>CPU:</strong> Intel Core i5-1235U (10 nhân, 12 luồng, xung nhịp cơ bản 1.3GHz, tối đa 4.4GHz)</p><p><strong>RAM:</strong> 8GB DDR4 3200MHz (1 khe, hỗ trợ nâng cấp tối đa 16GB)</p><p><strong>Ổ cứng:</strong> SSD 512GB M.2 PCIe NVMe</p><p><strong>VGA:</strong> Đồ họa tích hợp Intel Iris Xe Graphics</p><p><strong>Màn hình:</strong> 15.6 inch Full HD (1920 x 1080), tấm nền WVA, tần số quét 120Hz, độ sáng 250 nits, chống chói</p><p><strong>Cổng kết nối:</strong></p><p>1 x USB 3.2 Gen 1 Type-C</p><p>2 x USB 3.2 Gen 1 Type-A</p><p>1 x HDMI 1.4</p><p>1 x Jack tai nghe 3.5mm</p><p>1 x Cổng mạng RJ-45</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6, Bluetooth 5.2</p><p><strong>Pin:</strong> 3-cell, 41Wh</p><p><strong>Trọng lượng:</strong> Khoảng 1.9 kg</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen</p>', '<p><strong>CPU:</strong> Intel Core i5-1235U 1.3GHz</p><p><strong>RAM:</strong> 8GB DDR4 3200MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA: </strong>Intel Iris Xe Graphics</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 120Hz</p>', NULL, 0, 1, '2025-03-29 15:33:44', NULL),
 (4, 'Gigabyte_G5_GD_01', 'gigabyte-g5-gd', 'Gigabyte G5 GD', 10, '1743611117.jpg', 22000000, 18000000, 3, 3, 'Gigabyte G5 GD là dòng laptop gaming tầm trung được trang bị bộ vi xử lý Intel Core i5-11400H thế hệ thứ 11 và card đồ họa rời NVIDIA GeForce RTX 3050, mang đến hiệu năng mạnh mẽ cho các tác vụ chơi game và đồ họa. Máy sở hữu màn hình 15.6 inch độ phân giải Full HD với tần số quét 144Hz, giúp hình ảnh mượt mà trong các game tốc độ cao. Với thiết kế hiện đại, trọng lượng khoảng 2.1 kg, G5 GD là lựa chọn phù hợp cho game thủ và người dùng cần hiệu năng cao với mức giá hợp lý.', '<p><strong>CPU:</strong> Intel Core i5-11400H (2.7GHz, tối đa 4.5GHz, 6 nhân, 12 luồng)</p><p><strong>RAM:</strong> 16GB DDR4 3200MHz (2x8GB)</p><p><strong>Ổ cứng:</strong> SSD NVMe PCIe Gen4 512GB</p><p><strong>VGA:</strong> NVIDIA GeForce RTX 3050 4GB GDDR6</p><p><strong>Màn hình:</strong> 15.6\" Full HD (1920x1080), IPS, 144Hz, chống chói</p><p><strong>Webcam:</strong> 720p HD</p><p><strong>Cổng kết nối:</strong></p><p>2x USB 3.2 Gen1 Type-A</p><p>1x USB 3.2 Gen2 Type-C</p><p>1x HDMI 2.1</p><p>1x RJ-45 (Ethernet)</p><p>1x Jack tai nghe 3.5mm</p><p>1x SD Card Reader</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6 (802.11ax), Bluetooth 5.2</p><p><strong>Pin:</strong> 51Wh, thời gian sử dụng lên đến 6 giờ (tùy vào tác vụ)</p><p><strong>Trọng lượng:</strong> Khoảng 2.1 kg</p><p><strong>Hệ điều hành:</strong> Windows 10 Home</p><p><strong>Màu sắc:</strong> Đen</p>', '<p><strong>CPU:</strong> Core i5-11400H 2.7GHz</p><p><strong>RAM:</strong> 16GB DDR4 3200MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA:</strong> RTX 3050 4GB GDDR6</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 144Hz</p>', NULL, 1, 1, '2025-03-29 16:00:16', NULL),
 (5, 'Lenovo_Legion_5_01', 'lenovo-legion-5', 'Lenovo Legion 5', 10, '1743611133.jpg', 24000000, 22990000, 6, 3, 'Lenovo Legion 5 (2024) là mẫu laptop gaming tầm trung được trang bị bộ vi xử lý mạnh mẽ và card đồ họa rời, mang đến hiệu năng ấn tượng cho các tác vụ chơi game và đồ họa. Máy sở hữu màn hình 15.6 inch độ phân giải Full HD với tần số quét 144Hz, giúp hình ảnh mượt mà trong các game tốc độ cao. Với thiết kế hiện đại, trọng lượng khoảng 2.4 kg, Legion 5 (2024) là lựa chọn phù hợp cho game thủ và người dùng cần hiệu năng cao với mức giá hợp lý.', '<p><strong>CPU:</strong> AMD Ryzen 7 8745H (8 nhân, 16 luồng, xung nhịp cơ bản 3.6GHz, tối đa 5.1GHz)</p><p><strong>RAM:</strong> 16GB DDR5 5600MHz (2x8GB)</p><p><strong>Ổ cứng:</strong> SSD NVMe PCIe Gen4 512GB</p><p><strong>VGA:</strong> NVIDIA GeForce RTX 4060 8GB GDDR6</p><p><strong>Màn hình:</strong> 15.6\" Full HD (1920x1080), IPS, 144Hz, chống chói</p><p><strong>Webcam:</strong> 720p HD</p><p><strong>Cổng kết nối:</strong></p><p>2x USB 3.2 Gen1 Type-A</p><p>1x USB 3.2 Gen2 Type-C</p><p>1x HDMI 2.1</p><p>1x RJ-45 (Ethernet)</p><p>1x Jack tai nghe 3.5mm</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6E, Bluetooth 5.2</p><p><strong>Pin:</strong> 80Wh, thời gian sử dụng lên đến 6 giờ (tùy vào tác vụ)</p><p><strong>Trọng lượng:</strong> Khoảng 2.4 kg</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen</p>', '<p><strong>CPU:</strong> Ryzen 7 8745H 3.6GHz</p><p><strong>RAM:</strong> 16GB DDR5 5600MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA:</strong> RTX 4060 8GB GDDR6</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 144Hz</p>', NULL, 1, 1, '2025-03-30 02:54:40', NULL),
 (6, 'MSI_Cyborg_15_01', 'msi-cyborg-15', 'MSI Cyborg 15', 10, '1743611144.jpg', 25000000, 22000000, 7, 3, 'MSI Cyborg 15 là dòng laptop gaming tầm trung, nổi bật với thiết kế hiện đại, phần khung bán trong suốt và các phím WASD nổi bật, mang đến phong cách cyberpunk độc đáo. Máy được trang bị bộ vi xử lý Intel Core i7-12650H và card đồ họa NVIDIA GeForce RTX 4050, cung cấp hiệu năng mạnh mẽ cho các tác vụ chơi game và đồ họa. Màn hình 15.6 inch Full HD với tần số quét 144Hz giúp hiển thị hình ảnh mượt mà, phù hợp cho các game thủ yêu cầu cao về trải nghiệm hình ảnh.', '<p><strong>CPU:</strong> Intel Core i7-12650H (10 nhân, 16 luồng, xung nhịp tối đa 4.7GHz)</p><p><strong>RAM:</strong> 16GB DDR5 4800MHz (2x8GB)</p><p><strong>Ổ cứng:</strong> SSD NVMe PCIe Gen4 512GB</p><p><strong>VGA:</strong> NVIDIA GeForce RTX 4050 6GB GDDR6</p><p><strong>Màn hình:</strong> 15.6\" Full HD (1920x1080), IPS-Level, 144Hz, độ sáng 250 nits, 45% NTSC</p><p><strong>Cổng kết nối:</strong></p><p>1x USB 3.2 Gen1 Type-C (hỗ trợ DisplayPort)</p><p>2x USB 3.2 Gen1 Type-A</p><p>1x HDMI 2.1</p><p>1x Jack tai nghe 3.5mm</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6, Bluetooth 5.2</p><p><strong>Pin:</strong> 3-cell, 53.5Wh</p><p><strong>Trọng lượng:</strong> Khoảng 1.98 kg</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen bán trong suốt (Translucent Black)</p>', '<p><strong>CPU: </strong>Core i7-12650H 2.3GHz</p><p><strong>RAM:</strong> 16GB DDR5 4800MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA: </strong>RTX 4050 6GB GDDR6</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 144Hz</p>', NULL, 1, 1, '2025-03-30 02:56:46', NULL),
@@ -11938,13 +11954,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
@@ -11956,7 +11972,7 @@ ALTER TABLE `danh_muc_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -11974,7 +11990,7 @@ ALTER TABLE `khach_hang`
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`

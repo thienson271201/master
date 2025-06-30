@@ -302,32 +302,49 @@ echo '</pre>';
 <script>
     $(document).ready(function () {
         $('#form-thanh-toan').on('submit', function (e) {
-            e.preventDefault(); // Ngăn form gửi đi mặc định
+            e.preventDefault();
 
-            // Lấy giá trị phương thức thanh toán
             const paymentMethod = $('input[name="phuong_thuc_thanh_toan"]:checked').val();
-            const formData = $(this).serializeArray(); // mảng object chứa dữ liệu form
-
+            const formData = $(this).serializeArray();
+            const form = this;
 
             if (paymentMethod === 'transfer') {
-                // Gửi AJAX lấy mã đơn hàng từ chuyen_khoan.php
                 $.ajax({
                     url: 'template/thanh_toan/chuyen_khoan/chuyen_khoan.php',
                     type: 'POST',
-                    data: formData, // gửi dữ liệu form
+                    data: formData,
                     success: function (orderCode) {
-                        const tongTien = formData.find(item => item.name === 'tong_tien')?.value || '0';
-                        // Gọi tiếp qr_code.php, truyền mã đơn hàng để lấy mã QR
+                        const tongTien = parseInt(formData.find(item => item.name === 'tong_tien')?.value || '0');
+
+                        // Gọi API tạo mã QR
                         $.ajax({
                             url: 'template/thanh_toan/chuyen_khoan/qr_code.php',
                             type: 'POST',
                             data: {
                                 ma_don_hang: orderCode,
-                                tong_tien: tongTien, // truyền tổng tiền để hiển thị trong QR
-
+                                tong_tien: tongTien,
                             },
                             success: function (qrHtml) {
-                                $('#qr-code').html(qrHtml); // Hiển thị mã QR
+                                $('#qr-code').html(qrHtml);
+
+                                // Bắt đầu kiểm tra giao dịch
+                                const intervalId = setInterval(function () {
+                                    $.getJSON('https://script.google.com/macros/s/AKfycbySQc880OdC46ZTGSe8-HwWbv7-6_cT-jK3GVF4do-ccraA_mB_snjgR-q7AeXAxrIa/exec', function (response) {
+                                        if (response.error || !response.data) return;
+
+                                        const giaoDichHopLe = response.data.find(gd => {
+                                            const moTa = (gd["Mô tả"] || '').toLowerCase();
+                                            const giaTri = parseInt(gd["Giá trị"]);
+                                            return giaTri === tongTien && moTa.includes(orderCode.toString().toLowerCase());
+                                        });
+
+                                        if (giaoDichHopLe) {
+                                            clearInterval(intervalId);
+                                            alert("Giao dịch đã được ghi nhận. Đang hoàn tất thanh toán...");
+                                            form.submit();
+                                        }
+                                    });
+                                }, 3000); // mỗi 3 giây
                             },
                             error: function () {
                                 alert('Không thể tạo mã QR.');
@@ -338,11 +355,10 @@ echo '</pre>';
                         alert('Không thể lấy mã đơn hàng.');
                     }
                 });
-
             } else {
-                // Nếu không phải chuyển khoản, bạn có thể cho phép submit form như bình thường:
-                this.submit();
+                form.submit();
             }
         });
     });
 </script>
+

@@ -1,8 +1,9 @@
 <?php
 $db->insert('don_hang', $data_insert);
+
 $don_hang_id = $db->getLastInsertId();
-foreach ($_SESSION['gio_hang'] as $value)
-{
+
+foreach ($_SESSION['gio_hang'] as $value) {
     $id = $value['id'];
     $don_gia = $db->oneRaw("SELECT * FROM san_pham WHERE id = $id")['gia_sau_khuyen_mai'];
     $data_insert = [
@@ -14,5 +15,6 @@ foreach ($_SESSION['gio_hang'] as $value)
     ];
     $db->insert('chi_tiet_don_hang', $data_insert);
 }
+
 unset($_SESSION['gio_hang']);
 $f->redirect('?hinh_thuc=COD&trang_thai=thanh_cong');
