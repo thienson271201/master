@@ -86,7 +86,8 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
 
           // Cập nhật vào DOM thật
           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
-
+          // Cập nhật số lượng giỏ hàng
+          $('#number-cart').text(response.number_cart);
         },
         error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');

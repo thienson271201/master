@@ -90,7 +90,7 @@ $smg = getFlashData('smg');
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a href="?com=don_hang&act=xoa&id=<?= $item['id'] ?>"
-                                            class="btn btn-danger btn-sm <?= $item['trang_thai'] != '1' ? 'd-none' : '' ?>">
+                                            class="btn btn-danger btn-sm <?= $item['trang_thai'] != '1' || $item['hinh_thuc_thanh_toan'] != 'cod'  ? 'd-none' : '' ?>">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>

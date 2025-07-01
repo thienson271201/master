@@ -26,8 +26,8 @@ if (isset($_POST['id'])) {
     ob_start();
     include '../template/layout/giohang.php';
     $html = ob_get_clean();
-
-    echo json_encode(['success' => true,'html'=>$html]);
+    $number_cart = $f->tinhTongSanPhamTrongGioHang();
+    echo json_encode(['success' => true,'html'=>$html, 'number_cart' => $number_cart]);
 } else {
     echo json_encode(['success' => false]);
 }

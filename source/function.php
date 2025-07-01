@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -18,14 +19,12 @@ class func
         $filterArr = [];
 
         // Lọc các tham số từ phương thức GET
-        if ($this->isGET())
-        {
+        if ($this->isGET()) {
             $filterArr += filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
         // Lọc các tham số từ phương thức POST
-        if ($this->isPOST())
-        {
+        if ($this->isPOST()) {
             $filterArr += filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
@@ -34,16 +33,13 @@ class func
 
     public function redirect($path = 'index.php')
     {
-        if (!headers_sent())
-        {
+        if (!headers_sent()) {
             header("location: $path");
             exit;
-        } else
-        {
+        } else {
             echo "<script>window.location.href='$path';</script>";
             exit;
         }
-
     }
 
     public function getSmg($smg, $type = 'success', $class = '')
@@ -61,11 +57,9 @@ class func
         $target_dir = _PATH_UPLOAD . trim($path, '/') . '/';
 
         // Kiểm tra và thay đổi quyền nếu cần thiết
-        if (!is_writable($target_dir))
-        {
+        if (!is_writable($target_dir)) {
             // Cố gắng thay đổi quyền thư mục thành writable (0775)
-            if (!chmod($target_dir, 0775))
-            {
+            if (!chmod($target_dir, 0775)) {
                 // $this->getSmg('Không thể thay đổi quyền thư mục. Vui lòng kiểm tra lại.', 'danger');
                 return "noimage.jpg";
             }
@@ -77,37 +71,32 @@ class func
         $allow_file_upload = ["jpg", "jpeg", "png", "gif", "jfif", "webp"];
 
         // Kiểm tra nếu không có file được chọn
-        if (!isset($_FILES[$filenameupload]) || $_FILES[$filenameupload]['error'] == UPLOAD_ERR_NO_FILE)
-        {
+        if (!isset($_FILES[$filenameupload]) || $_FILES[$filenameupload]['error'] == UPLOAD_ERR_NO_FILE) {
             // $this->getSmg('Không có file nào được chọn.', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra nếu file có phải là hình ảnh thật hay không
         $checkImage = getimagesize($_FILES[$filenameupload]["tmp_name"]);
-        if ($checkImage === false)
-        {
+        if ($checkImage === false) {
             // $this->getSmg('File upload không phải là hình ảnh!', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra định dạng file
-        if (!in_array($imageFileType, $allow_file_upload))
-        {
+        if (!in_array($imageFileType, $allow_file_upload)) {
             // $this->getSmg('Định dạng file không hợp lệ! Chỉ chấp nhận JPG, JPEG, PNG, GIF, JFIF.', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra kích thước file (ví dụ: giới hạn 5MB)
-        if ($_FILES[$filenameupload]["size"] > 5000000)
-        {
+        if ($_FILES[$filenameupload]["size"] > 5000000) {
             // $this->getSmg('File upload quá lớn! Giới hạn 5MB.', 'danger');
             return "noimage.jpg";
         }
 
         // Kiểm tra nếu file đã tồn tại (tránh ghi đè file)
-        if (file_exists($target_dir . $new_filename))
-        {
+        if (file_exists($target_dir . $new_filename)) {
             // $this->getSmg('File đã tồn tại.', 'danger');
             return "noimage.jpg";
         }
@@ -117,11 +106,9 @@ class func
         // echo "Đường dẫn đích: " . $target_dir . $new_filename . "<br>";
 
         // Thực hiện upload file
-        if (move_uploaded_file($_FILES[$filenameupload]["tmp_name"], $target_dir . $new_filename))
-        {
+        if (move_uploaded_file($_FILES[$filenameupload]["tmp_name"], $target_dir . $new_filename)) {
             return $new_filename;
-        } else
-        {
+        } else {
             // In ra lỗi cụ thể nếu có
             $error = error_get_last();
             echo "Error: " . $error['message'] . "<br>";
@@ -136,8 +123,7 @@ class func
         $cleaned = preg_replace('/[^0-9]/', '', $phoneNumber);
 
         // Kiểm tra độ dài của số điện thoại
-        if (strlen($cleaned) != 10)
-        {
+        if (strlen($cleaned) != 10) {
             return "Invalid phone number";
         }
 
@@ -152,8 +138,7 @@ class func
     }
     public function status_order($status = 1)
     {
-        switch ($status)
-        {
+        switch ($status) {
             case 1:
                 $vietsub = 'Mới đặt';
                 break;
@@ -177,8 +162,7 @@ class func
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < $length; $i++)
-        {
+        for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
@@ -187,21 +171,34 @@ class func
     public function isLogin()
     {
         $checkLogin = false;
-        if (getSession('userLoginToken'))
-        {
+        if (getSession('userLoginToken')) {
             $userLoginToken = getSession('userLoginToken');
             $khach_hang_id = getSession('khach_hang_id');
             $db = new Database();
             //Kiểm tra token có giống trong database không
             $queryToken = $db->oneRaw("SELECT * FROM khach_hang_token WHERE token = '$userLoginToken' AND khach_hang_id = '$khach_hang_id'");
-            if (!empty($queryToken))
-            {
+            if (!empty($queryToken)) {
                 $checkLogin = true;
-            } else
-            {
+            } else {
                 removeSession("userLoginToken");
             }
         }
         return $checkLogin;
     }
+    public function tinhTongSanPhamTrongGioHang() {
+    if (!isset($_SESSION['gio_hang']) || empty($_SESSION['gio_hang'])) {
+        return 0;
+    }
+
+    $tongSoLuong = 0;
+    foreach ($_SESSION['gio_hang'] as $sanPham) {
+        if (isset($sanPham['quantity'])) {
+            $tongSoLuong += 1;
+        }
+    }
+
+    return $tongSoLuong;
+}
+
+
 }

@@ -8,7 +8,7 @@ if ($f->isLogin())
 } else
   $taikhoan = 'Đăng nhập';
 
-
+$number_cart = $f->tinhTongSanPhamTrongGioHang();
 ?>
 
 <header class="header">
@@ -56,7 +56,7 @@ if ($f->isLogin())
             </li> -->
             <li>
               <a href="#" data-show-block="cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span
-                  class="item-label-sale item-label">3</span></a>
+                  class="item-label-sale item-label" id="number-cart"><?= $number_cart ?></span></a>
             </li>
           </ul>
         </div>

@@ -33,8 +33,7 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg))
-            {
+            if (!empty($smg)) {
                 $func->getSmg($smg);
             }
             ?>
@@ -49,9 +48,9 @@ $smg = getFlashData('smg');
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 5%;">STT</th>
-                                <th >Tên khách hàng</th>
+                                <th>Tên khách hàng</th>
                                 <th class="text-center">Số điện thoại</th>
-                                
+
                                 <th class="text-center" style="width: 10%;">Thao tác</th>
                             </tr>
                         </thead>
@@ -59,8 +58,8 @@ $smg = getFlashData('smg');
                             <?php
                             $dem = 1;
                             foreach ($list_order as $item):
-                                
-                                ?>
+
+                            ?>
                                 <tr>
                                     <td class="text-center"><?= $dem++ ?></td>
                                     <td>
@@ -69,9 +68,9 @@ $smg = getFlashData('smg');
                                             <?= $item['ten_khach_hang'] ?>
                                         </a>
                                     </td>
-                        
-                                    
-                                    
+
+
+
                                     <td class="text-center"><?= $item['so_dien_thoai'] ?></td>
                                     <td class="text-center">
                                         <a href="?com=don_hang&act=sua&id=<?= $item['id'] ?>"

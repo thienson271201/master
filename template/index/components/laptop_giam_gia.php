@@ -96,7 +96,8 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
 
           // Cập nhật vào DOM thật
           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
-
+          // Cập nhật số lượng giỏ hàng
+          $('#number-cart').text(response.number_cart);
         },
         error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
