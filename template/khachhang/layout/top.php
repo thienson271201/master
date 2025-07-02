@@ -12,7 +12,17 @@ switch ($duongdan) {
         break;
 }
 
-
+$khach_hang_id = getSession('khach_hang_id');
+$user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id = '$khach_hang_id'");
+$danh_sach_don_hang = $db->getRaw("SELECT * FROM don_hang WHERE khach_hang_id = '$khach_hang_id' ORDER BY id DESC");
+if (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']) && !empty($user_profile['xa_phuong']) && !empty($user_profile['dia_chi'])) {
+  $matp = $user_profile['tinh_thanhpho'];
+  $tentinh = $db->oneRaw("SELECT * FROM tinhthanhpho WHERE matp = $matp")['name'];
+  $maqh = $user_profile['quan_huyen'];
+  $tenhuyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
+  $xaid = $user_profile['xa_phuong'];
+  $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
+}
 ?>
 <section class="with-bg solid-section">
     <div class="fix-image-wrap" data-image-src="./assets/images/service/tools.jpg" data-parallax="scroll"></div>

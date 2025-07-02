@@ -1,916 +1,134 @@
 <section class="offs-xxl">
     <div class="container">
         <div class="user-orders">
-            <div class="user-order active" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#972523776a</div>
-                    <div class="user-order-title">Laptop Gaming ASUS ROG</div>
-                    <div class="user-order-date">17.05.2025</div>
-                    <div class="user-order-price">
-                        35.990.000₫
-                    </div>
-                    <div class="pending user-order-status">Đang chờ xử lý</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Sản phẩm</div>
-                            <div class="user-order-items-head-price">Giá</div>
-                            <div class="user-order-items-head-quantity">Số lượng</div>
-                            <div class="user-order-items-head-total">Tổng tiền</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/mouse.jpg" alt="" />
+            <?php foreach ($danh_sach_don_hang as $don_hang) :
+                $chi_tiet_don_hang = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$don_hang[id]'");
+                 ?>
+                    <div class="user-order" data-inview-showup="showup-translate-up">
+                        <div class="item-header text-upper">
+                            <div class="user-order-show-more">
+                                <div class="user-order-show-more-icon">
+                                    <i class="fas fa-angle-double-down"></i>
                                 </div>
                             </div>
-                            <div class="user-order-item-title text-upper">
-                                Laptop Gaming ASUS ROG
+                            <div class="user-order-number"><?= $don_hang['ma_don_hang'] ?></div>
+                            <div class="user-order-title">Laptop Gaming ASUS ROG</div>
+                            <div class="user-order-date"><?= date("d-m-Y",  strtotime($don_hang['ngay_tao'])) ?></div>
+                            <div class="user-order-price">
+                                <?= $f->format_tiente($don_hang['tong_tien']) ?>₫
                             </div>
-                            <div class="user-order-item-price">
-                                35.990.000₫
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                35.990.000₫
-                            </div>
+                            <div class="pending user-order-status"><?= $f->status_order($don_hang['trang_thai']) ?></div>
                         </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Thông tin đơn hàng</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Người nhận:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">Hoàng Minh</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Địa chỉ:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1
-                                                </div>
-                                            </div>
+                        <div class="item-content">
+                            <div class="user-order-items">
+                                <div class="user-order-items-head text-upper">
+                                    <div class="user-order-items-head-title">Sản phẩm</div>
+                                    <div class="user-order-items-head-price">Giá</div>
+                                    <div class="user-order-items-head-quantity">Số lượng</div>
+                                    <div class="user-order-items-head-total">Tổng tiền</div>
+                                </div>
+                                <?php foreach ($chi_tiet_don_hang as $ctdh) :
+                                    $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
+                                    ?>
+                                <div class="user-order-item">
+                                    <div class="user-order-item-image">
+                                        <div class="responsive-1by1">
+                                            <img src="upload/images/<?= $san_pham['hinh_anh'] ?>" alt="" />
                                         </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Mã vận đơn:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
-                                                </div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Đơn vị vận chuyển:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Ngày gửi hàng:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">20.05.2018</div>
-                                            </div>
-                                        </div>
+                                    </div>
+                                    <div class="user-order-item-title text-upper">
+                                        <?= $san_pham['ten_san_pham'] ?>
+                                    </div>
+                                    <div class="user-order-item-price">
+                                        <?= $f->format_tiente($ctdh['don_gia']) ?>₫
+                                    </div>
+                                    <div class="user-order-item-quantity"><?= $ctdh['so_luong'] ?></div>
+                                    <div class="user-order-item-total">
+                                        <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
                                     </div>
                                 </div>
+                                <?php endforeach; ?>
                             </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Tạm tính
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            35.990.000₫
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Phí giao hàng
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            100.000₫
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            Tổng cộng
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            36.090.000₫
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-order" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#93254776ab</div>
-                    <div class="user-order-title">Laptop Gaming ASUS ROG</div>
-                    <div class="user-order-date">17.05.2025</div>
-                    <div class="user-order-price">
-                        35.990.000₫
-                    </div>
-                    <div class="failed user-order-status">Thất bại</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Sản phẩm</div>
-                            <div class="user-order-items-head-price">Giá</div>
-                            <div class="user-order-items-head-quantity">Số lượng</div>
-                            <div class="user-order-items-head-total">Tổng tiền</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/mouse.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                Laptop Gaming ASUS ROG
-                            </div>
-                            <div class="user-order-item-price">
-                                35.990.000₫
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                35.990.000₫
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Thông tin đơn hàng</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Người nhận:&nbsp;
+                            <div class="user-order-summary">
+                                <div class="row">
+                                    <div class="sm-col-8">
+                                        <h5 class="offs-sm text-upper">Thông tin đơn hàng</h5>
+                                        <div class="cols-md">
+                                            <div class="rows-sm table">
+                                                <div class="sm-col-6">
+                                                    <div class="user-order-info-line">
+                                                        <div class="user-order-info-title text-upper">
+                                                            Người nhận:&nbsp;
+                                                        </div>
+                                                        <div class="user-order-info-value"><?= $user_profile['ten_khach_hang'] ?></div>
+                                                    </div>
+                                                    <div class="user-order-info-line">
+                                                        <div class="user-order-info-title text-upper">
+                                                            Địa chỉ:&nbsp;
+                                                        </div>
+                                                        <div class="user-order-info-value">
+                                                            <?= (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']) && !empty($user_profile['xa_phuong']) && !empty($user_profile['dia_chi'])) ? $user_profile['dia_chi'] . ', ' . $tenxa . ', ' . $tenhuyen . ', ' . $tentinh : 'Chưa cập nhật địa chỉ' ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="user-order-info-value">Hoàng Minh</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Địa chỉ:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1
+                                                <div class="sm-col-6">
+                                                    <div class="user-order-info-line">
+                                                        <div class="user-order-info-title text-upper">
+                                                            Mã vận đơn:&nbsp;
+                                                        </div>
+                                                        <div class="user-order-info-value">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="user-order-info-line">
+                                                        <div class="user-order-info-title text-upper">
+                                                            Đơn vị vận chuyển:&nbsp;
+                                                        </div>
+                                                        <div class="user-order-info-value">ProFix</div>
+                                                    </div>
+                                                    <div class="user-order-info-line">
+                                                        <div class="user-order-info-title text-upper">
+                                                            Ngày gửi hàng:&nbsp;
+                                                        </div>
+                                                        <div class="user-order-info-value"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Mã vận đơn:&nbsp;
+                                    </div>
+                                    <div class="sm-col-4">
+                                        <div class="user-order-totals">
+                                            <div class="user-order-cost-line">
+                                                <div class="user-order-cost-title text-upper">
+                                                    Tạm tính
                                                 </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
+                                                <div class="user-order-cost-value">
+                                                    <?= $f->format_tiente($don_hang['tong_tien']) ?>₫
                                                 </div>
                                             </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Đơn vị vận chuyển:&nbsp;
+                                            <div class="user-order-cost-line">
+                                                <div class="user-order-cost-title text-upper">
+                                                    Phí giao hàng
                                                 </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Ngày gửi hàng:&nbsp;
+                                                <div class="user-order-cost-value">
+                                                    0₫
                                                 </div>
-                                                <div class="user-order-info-value">20.05.2018</div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Tạm tính
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            35.990.000₫
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Phí giao hàng
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            100.000₫
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            Tổng cộng
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            36.090.000₫
+                                            <div class="user-order-cost-line user-order-total">
+                                                <div class="user-order-cost-title text-upper">
+                                                    Tổng cộng
+                                                </div>
+                                                <div class="user-order-cost-value">
+                                                    <?= $f->format_tiente($don_hang['tong_tien']) ?>₫
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="user-order" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#972523776a</div>
-                    <div class="user-order-title">Laptop Gaming ASUS ROG</div>
-                    <div class="user-order-date">17.05.2025</div>
-                    <div class="user-order-price">
-                        35.990.000₫
-                    </div>
-                    <div class="processing user-order-status">processing</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Item</div>
-                            <div class="user-order-items-head-price">Price</div>
-                            <div class="user-order-items-head-quantity">Quantity</div>
-                            <div class="user-order-items-head-total">Total</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/mouse.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                Gamers Mouse
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>45.05
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>45.05
-                            </div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/usb-hub.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                USB 3.0 HUB
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>67.05
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>67.05
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Order information</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Receiver:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">Andy Smith</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Address:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Lonestreet 20, Sydney, Australia
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Tracking number:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
-                                                </div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Logistics company:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Shipment date:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">20.05.2018</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Sub total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>112.1
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Delivery
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>10.35
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>122.45
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-order" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#972523776a</div>
-                    <div class="user-order-title">
-                        Laptop Power Adapter, Wi-Fi Router repieter, 128GB SSD M.2
-                    </div>
-                    <div class="user-order-date">11.04.2018</div>
-                    <div class="user-order-price">
-                        <span class="currency">$</span>312.8
-                    </div>
-                    <div class="completed user-order-status">completed</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Item</div>
-                            <div class="user-order-items-head-price">Price</div>
-                            <div class="user-order-items-head-quantity">Quantity</div>
-                            <div class="user-order-items-head-total">Total</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/laptop-ac-power-adapter.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                Laptop Power Adapter
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>45.05
-                            </div>
-                            <div class="user-order-item-quantity">2</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>90.1
-                            </div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/wifi-router.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                Wi-Fi Router repieter
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>32.15
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>32.15
-                            </div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/126gb-ssd.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                128GB SSD M.2
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>45.05
-                            </div>
-                            <div class="user-order-item-quantity">4</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>180.2
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Order information</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Receiver:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">Andy Smith</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Address:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Lonestreet 20, Sydney, Australia
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Tracking number:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
-                                                </div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Logistics company:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Shipment date:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">13.04.2018</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Sub total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>302.45
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Delivery
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>10.35
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>312.8
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-order" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#972523776a</div>
-                    <div class="user-order-title">Gamers Mouse, USB 3.0 HUB</div>
-                    <div class="user-order-date">01.01.2018</div>
-                    <div class="user-order-price">
-                        <span class="currency">$</span>122.45
-                    </div>
-                    <div class="on-hold user-order-status">on-hold</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Item</div>
-                            <div class="user-order-items-head-price">Price</div>
-                            <div class="user-order-items-head-quantity">Quantity</div>
-                            <div class="user-order-items-head-total">Total</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/mouse.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                Gamers Mouse
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>45.05
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>45.05
-                            </div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/usb-hub.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                USB 3.0 HUB
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>67.05
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>67.05
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Order information</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Receiver:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">Andy Smith</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Address:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Lonestreet 20, Sydney, Australia
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Tracking number:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
-                                                </div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Logistics company:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Shipment date:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">05.01.2018</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Sub total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>112.1
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Delivery
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>10.35
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>122.45
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-order" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#972523776a</div>
-                    <div class="user-order-title">Cable Organizer</div>
-                    <div class="user-order-date">08.07.2017</div>
-                    <div class="user-order-price">
-                        <span class="currency">$</span>162.85
-                    </div>
-                    <div class="cancelled user-order-status">cancelled</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Item</div>
-                            <div class="user-order-items-head-price">Price</div>
-                            <div class="user-order-items-head-quantity">Quantity</div>
-                            <div class="user-order-items-head-total">Total</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/cable-organizer.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                Cable Organizer
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>15.25
-                            </div>
-                            <div class="user-order-item-quantity">10</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>152.5
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Order information</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Receiver:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">Andy Smith</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Address:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Lonestreet 20, Sydney, Australia
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Tracking number:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
-                                                </div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Logistics company:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Shipment date:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">12.07.2017</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Sub total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>152.5
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Delivery
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>10.35
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>162.85
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-order" data-inview-showup="showup-translate-up">
-                <div class="item-header text-upper">
-                    <div class="user-order-show-more">
-                        <div class="user-order-show-more-icon">
-                            <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </div>
-                    <div class="user-order-number">#972523776a</div>
-                    <div class="user-order-title">External HDD Drive</div>
-                    <div class="user-order-date">16.11.2016</div>
-                    <div class="user-order-price">
-                        <span class="currency">$</span>112.4
-                    </div>
-                    <div class="refunded user-order-status">refunded</div>
-                </div>
-                <div class="item-content">
-                    <div class="user-order-items">
-                        <div class="user-order-items-head text-upper">
-                            <div class="user-order-items-head-title">Item</div>
-                            <div class="user-order-items-head-price">Price</div>
-                            <div class="user-order-items-head-quantity">Quantity</div>
-                            <div class="user-order-items-head-total">Total</div>
-                        </div>
-                        <div class="user-order-item">
-                            <div class="user-order-item-image">
-                                <div class="responsive-1by1">
-                                    <img src="assets/images/shop/hdd.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="user-order-item-title text-upper">
-                                External HDD Drive
-                            </div>
-                            <div class="user-order-item-price">
-                                <span class="currency">$</span>102.05
-                            </div>
-                            <div class="user-order-item-quantity">1</div>
-                            <div class="user-order-item-total">
-                                <span class="currency">$</span>102.05
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-order-summary">
-                        <div class="row">
-                            <div class="sm-col-8">
-                                <h5 class="offs-sm text-upper">Order information</h5>
-                                <div class="cols-md">
-                                    <div class="rows-sm table">
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Receiver:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">Andy Smith</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Address:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    Lonestreet 20, Sydney, Australia
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sm-col-6">
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Tracking number:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">
-                                                    LZ251526618CN
-                                                </div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Logistics company:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">ePacket</div>
-                                            </div>
-                                            <div class="user-order-info-line">
-                                                <div class="user-order-info-title text-upper">
-                                                    Shipment date:&nbsp;
-                                                </div>
-                                                <div class="user-order-info-value">18.11.2016</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sm-col-4">
-                                <div class="user-order-totals">
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Sub total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>102.05
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line">
-                                        <div class="user-order-cost-title text-upper">
-                                            Delivery
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>10.35
-                                        </div>
-                                    </div>
-                                    <div class="user-order-cost-line user-order-total">
-                                        <div class="user-order-cost-title text-upper">
-                                            total
-                                        </div>
-                                        <div class="user-order-cost-value">
-                                            <span class="currency">$</span>112.4
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
         </div>
         <div class="text-center shift-lg" data-inview-showup="showup-translate-up">
             <div class="paginator">

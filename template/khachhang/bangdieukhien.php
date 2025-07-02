@@ -1,17 +1,4 @@
-<?php
-$khach_hang_id = getSession('khach_hang_id');
-$user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id = '$khach_hang_id'");
-if (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']) && !empty($user_profile['xa_phuong']) && !empty($user_profile['dia_chi']))
-{
-  $matp = $user_profile['tinh_thanhpho'];
-  $tentinh = $db->oneRaw("SELECT * FROM tinhthanhpho WHERE matp = $matp")['name'];
-  $maqh = $user_profile['quan_huyen'];
-  $tenhuyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
-  $xaid = $user_profile['xa_phuong'];
-  $tenxa = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
-}
 
-?>
 <section class="shift-lg offs-lg">
   <div class="container">
     <div class="user-dashboard-personal-info">
@@ -71,36 +58,26 @@ if (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']
   <div class="container">
     <div class="user-dashboard-list user-dashboard-orders-list">
       <h4 class="reset-offs text-upper">Đơn hàng của tôi</h4>
-      <div class="user-dashboard-item text-upper">
-        <div class="user-dashboard-item-number">#972523776a</div>
-        <div class="user-dashboard-item-title">Laptop Gaming ASUS ROG</div>
-        <div class="user-dashboard-item-date">17.04.2025</div>
-        <div class="user-dashboard-item-price">
-          <!-- <span class="currency">$</span>55.4 -->
-          35.990.000₫
-        </div>
-        <div class="user-dashboard-item-status pending">Hoàn thành</div>
-      </div>
-      <div class="user-dashboard-item text-upper">
-        <div class="user-dashboard-item-number">#972523776a</div>
-        <div class="user-dashboard-item-title">Laptop Gaming ASUS ROG</div>
-        <div class="user-dashboard-item-date">17.04.2025</div>
-        <div class="user-dashboard-item-price">
-          <!-- <span class="currency">$</span>55.4 -->
-          35.990.000₫
-        </div>
-        <div class="user-dashboard-item-status failed">Thất bại</div>
-      </div>
-      <div class="user-dashboard-item text-upper">
-        <div class="user-dashboard-item-number">#972523776a</div>
-        <div class="user-dashboard-item-title">Laptop Gaming ASUS ROG</div>
-        <div class="user-dashboard-item-date">17.04.2025</div>
-        <div class="user-dashboard-item-price">
-          <!-- <span class="currency">$</span>55.4 -->
-          35.990.000₫
-        </div>
-        <div class="user-dashboard-item-status processing">Đang xử lý</div>
-      </div>
+      <?php foreach ($danh_sach_don_hang as $don_hang) :
+        $chi_tiet_don_hang = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = " . $don_hang['id']);
+        // echo '<pre>';
+        // print_r($chi_tiet_don_hang);
+        // echo '</pre>';
+        foreach ($chi_tiet_don_hang as $ctdh) :
+          $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
+      ?>
+          <div class="user-dashboard-item text-upper">
+            <div class="user-dashboard-item-number"><?= $don_hang['ma_don_hang'] ?></div>
+            <div class="user-dashboard-item-title"><?= $san_pham['ten_san_pham'] ?></div>
+            <div class="user-dashboard-item-date"><?= date("d-m-Y",  strtotime($don_hang['ngay_tao'])) ?></div>
+            <div class="user-dashboard-item-price">
+              <!-- <span class="currency">$</span>55.4 -->
+              <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
+            </div>
+            <div class="user-dashboard-item-status pending"><?= $f->status_order($don_hang['trang_thai']) ?></div>
+          </div>
+      <?php endforeach;
+      endforeach; ?>
       <div class="user-dashboard-list-btns">
         <a class="btns-bordered btn text-upper" href="?page=don-hang">Xem chi tiết</a>
       </div>

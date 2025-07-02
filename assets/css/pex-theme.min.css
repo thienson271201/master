@@ -6592,7 +6592,7 @@ a.item-label:hover {
     width: 120px;
   }
   .user-order .user-order-date {
-    width: 95px;
+    width: 110px;
     text-align: center;
   }
   .user-order .user-order-price {
@@ -6951,8 +6951,8 @@ a.item-label:hover {
     text-align: center;
   }
   .user-dashboard-item-price {
-    width: 90px;
-    text-align: center;
+    width: 110px;
+    text-align: right;
   }
   .user-dashboard-item-status {
     width: 120px;

@@ -87,7 +87,7 @@ $smg = getFlashData('smg');
                                     style=" width: 230px; height: 230px;">
                                     <img onerror="this.src='../assets/images/noimage/noimage.jpg'" id="previewImage"
                                         src="../upload/images/<?= $image ?>" alt="Ảnh xem trước"
-                                        style="width: 200px object-fit: cover; max-width: 200px;">
+                                        style="width: 200px object-fit cover; max-width: 200px;">
                                 </div>
                             </div>
                         </div>
