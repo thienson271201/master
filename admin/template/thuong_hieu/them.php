@@ -18,7 +18,7 @@ if ($func->isPOST())
     // exit;
     $db->insert('thuong_hieu', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
-    $func->redirect('?com=brand&act=list');
+    $func->redirect('?com=thuong_hieu&act=danh_sach');
 }
 
 $smg = getFlashData('smg');
