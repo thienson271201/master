@@ -1,21 +1,14 @@
 <?php
-
-if ($func->isPOST())
-{
+if ($func->isPOST()) {
     $filterAll = $func->filter();
     $data_insert = [
         'duong_dan' => $filterAll['slug'],
         'ten_thuong_hieu' => $filterAll['title'],
     ];
     $image = $func->upload('imageUpload', 'images');
-    if ($image != 'noimage.jpg')
-    {
+    if ($image != 'noimage.jpg') {
         $data_insert['hinh_anh'] = $image;
     }
-    //  echo '<pre>';
-    // print_r($data_insert);
-    // echo '</pre>';
-    // exit;
     $db->insert('thuong_hieu', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=thuong_hieu&act=danh_sach');
@@ -54,8 +47,7 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg))
-            {
+            if (!empty($smg)) {
                 $func->getSmg($smg);
             }
             ?>
@@ -81,9 +73,8 @@ $smg = getFlashData('smg');
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
                     <div class="card-header">
-                        <div class="card-title">Nội dung Thương Hiệu <span class="text-danger text-sm">(vui
-                                lòng
-                                không nhập trùng tiêu đề)</span></div>
+                        <div class="card-title">Nội dung Thương Hiệu <span class="text-danger text-sm">
+                                (vui lòng không nhập trùng tiêu đề)</span></div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Form-->
@@ -101,7 +92,6 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                 </div>
-                
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">
                     Lưu

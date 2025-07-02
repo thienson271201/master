@@ -1,17 +1,13 @@
 <?php
-
-if ($func->isPOST())
-{
+if ($func->isPOST()) {
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
         'duong_dan' => $filterAll['slug'],
         'ten_thuong_hieu' => $filterAll['title'],
-
     ];
     $image = $func->upload('imageUpload', 'images');
-    if ($image != 'noimage.jpg')
-    {
+    if ($image != 'noimage.jpg') {
         $data_update['hinh_anh'] = $image;
     }
     $db->update('thuong_hieu', $data_update, "id='$id'");
@@ -53,8 +49,7 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg))
-            {
+            if (!empty($smg)) {
                 $func->getSmg($smg);
             }
             ?>
@@ -101,7 +96,6 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                 </div>
-
                 <input type="hidden" name="id" value="<?= $cap1['id'] ?>">
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">
