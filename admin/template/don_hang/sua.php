@@ -71,7 +71,7 @@ $smg = getFlashData('smg');
                         <div class="col-md-6">
                             <label for="status" class="fw-bold form-label">Cập nhật trạng thái: </label>
                             <select name="status" class="form-select mb-3">
-                                <?php for ((int) $i = 1; $i <= 5; $i++): ?>
+                                <?php for ((int) $i = $order['trang_thai']; $i <= 5; $i++): ?>
                                     <option value="<?= $i ?>" <?= $order['trang_thai'] == $i ? 'selected' : '' ?>>
                                         <?= $func->status_order($i) ?>
                                     </option>

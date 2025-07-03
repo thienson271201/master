@@ -76,7 +76,7 @@
                 <!-- <span class="currency">$</span>55.4 -->
                 <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
               </div>
-              <div class="user-dashboard-item-status pending"><?= $f->status_order($don_hang['trang_thai']) ?></div>
+              <div class="user-dashboard-item-status pending" style="color: <?= $f->color_order_2($don_hang['trang_thai']) ?>;"><?= $f->status_order($don_hang['trang_thai']) ?></div>
             </div>
             <?php
           endforeach;

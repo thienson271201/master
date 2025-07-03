@@ -55,7 +55,7 @@ $number_cart = $f->tinhTongSanPhamTrongGioHang();
               <a href="#"><i class="fas fa-heart"></i></a>
             </li> -->
             <li>
-              <a href="#" data-show-block="cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span
+              <a href="gio-hang" ><i class="fas fa-shopping-cart" aria-hidden="true"></i><span
                   class="item-label-sale item-label" id="number-cart"><?= $number_cart ?></span></a>
             </li>
           </ul>

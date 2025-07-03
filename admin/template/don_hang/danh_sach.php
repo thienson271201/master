@@ -1,5 +1,5 @@
 <?php
-$list_order = $db->getRaw("SELECT * FROM don_hang");
+$list_order = $db->getRaw("SELECT * FROM don_hang ORDER BY ngay_tao DESC");
 $smg = getFlashData('smg');
 ?>
 
@@ -48,24 +48,28 @@ $smg = getFlashData('smg');
                     <table class="table">
                         <thead>
                             <tr>
-                                <th width="10%" class="text-center">Mã đơn hàng</th>
+                                <th width="9%" class="text-center">Mã đơn hàng</th>
                                 <th>Họ tên</th>
+                                <th width="8%" class="text-center">Thành viên</th>
                                 <th width="150px" class="text-center">Ngày đặt</th>
                                 <th width="10%" class="text-center">Tổng giá</th>
-                                <th width="10%" class="text-center">Hình thức</th>
+                                <th width="8%" class="text-center">Hình thức</th>
                                 <th width="10%" class="text-center">Tình trạng</th>
                                 <th width=" 10%" class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($list_order as $item): ?>
-                                <tr>
+                                <tr class="<?= $func->color_order($item['trang_thai']) ?>">
                                     <td class="text-center"><?= $item['ma_don_hang'] ?></td>
                                     <td>
                                         <a class="text-decoration-none fw-bold text-black"
                                             href="?com=don_hang&act=sua&id=<?= $item['id'] ?>">
                                             <?= $item['ten_khach_hang'] ?>
                                         </a>
+                                    </td>
+                                    <td class="text-center ">
+                                        <?= $item['khach_hang_id'] ? "Thành viên" : "Vãng lai" ?>
                                     </td>
                                     <td><?= date('d-m-Y H:i:s', strtotime($item['ngay_tao'])) ?></td>
                                     <td class="fw-bold text-center"><?= $func->format_tiente($item['tong_tien']) ?>đ</td>

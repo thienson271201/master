@@ -15,12 +15,23 @@
                                 </div>
                             </div>
                             <div class="user-order-number"><?= $don_hang['ma_don_hang'] ?></div>
-                            <div class="user-order-title">Laptop Gaming ASUS ROG</div>
+                            <?php 
+                                $ten_san_pham = '';
+                                foreach ($chi_tiet_don_hang as $ctdh) {
+                                    $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
+                                    if ($ten_san_pham == '') {
+                                        $ten_san_pham = $san_pham['ten_san_pham'];
+                                    } else {
+                                        $ten_san_pham .= ', ' . $san_pham['ten_san_pham'];
+                                    }
+                                }
+                            ?>
+                            <div class="user-order-title"><?= $ten_san_pham ?></div>
                             <div class="user-order-date"><?= date("d-m-Y", strtotime($don_hang['ngay_tao'])) ?></div>
                             <div class="user-order-price">
                                 <?= $f->format_tiente($don_hang['tong_tien']) ?>₫
                             </div>
-                            <div class="pending user-order-status"><?= $f->status_order($don_hang['trang_thai']) ?></div>
+                            <div class="pending user-order-status" style="color: <?= $f->color_order_2($don_hang['trang_thai']) ?>;"><?= $f->status_order($don_hang['trang_thai']) ?></div>
                         </div>
                         <div class="item-content">
                             <div class="user-order-items">
@@ -72,17 +83,17 @@
                                                             Địa chỉ:&nbsp;
                                                         </div>
                                                         <div class="user-order-info-value">
-                                                            <?= (!empty($user_profile['tinh_thanhpho']) && !empty($user_profile['quan_huyen']) && !empty($user_profile['xa_phuong']) && !empty($user_profile['dia_chi'])) ? $user_profile['dia_chi'] . ', ' . $tenxa . ', ' . $tenhuyen . ', ' . $tentinh : 'Chưa cập nhật địa chỉ' ?>
+                                                            <?= $f->laydiachi($don_hang['dia_chi'], $don_hang['xa_phuong'], $don_hang['quan_huyen'], $don_hang['tinh_thanhpho']) ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="sm-col-6">
                                                     <div class="user-order-info-line">
                                                         <div class="user-order-info-title text-upper">
-                                                            Mã vận đơn:&nbsp;
+                                                            Hình thức thanh toán:&nbsp;
                                                         </div>
-                                                        <div class="user-order-info-value">
-
+                                                        <div class="user-order-info-value" style="text-transform: uppercase;">
+                                                            <?= $don_hang['hinh_thuc_thanh_toan'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="user-order-info-line">

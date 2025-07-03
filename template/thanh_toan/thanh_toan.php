@@ -35,7 +35,7 @@ if ($f->isPOST())
     }
     // Ngược lại không phải vnpay thì xử lý như bth
     require_once 'tao_don_hang.php';
-    $f->redirect('./');
+    $f->redirect('./thanh-vien?page=don-hang');
 }
 // Xử lý khi vnpay trả kết quả về
 if (isset($_GET['vnp_ResponseCode']))
@@ -44,6 +44,7 @@ if (isset($_GET['vnp_ResponseCode']))
     {
         $data_insert = getFlashData('data_vnpay');
         require_once 'tao_don_hang.php';
+        $f->redirect('./thanh-vien?page=don-hang');
     }
 }
 $title = "Thanh toán";

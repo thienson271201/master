@@ -19,7 +19,8 @@
     <?= $noidung ?>
 
     <!-- Giỏ hàng hover -->
-    <?php require_once TEMPLATE . LAYOUT . "giohanghover.php" ?>
+    <?php 
+    // require_once TEMPLATE . LAYOUT . "giohanghover.php" ?>
 
     <!-- Nút cuộn lên -->
     <a href="#" class="scroll-top disabled"><i class="fas fa-angle-up" aria-hidden="true"></i></a>

@@ -171,6 +171,52 @@ class func
         }
         return $vietsub;
     }
+    public function color_order($status = 1)
+    {
+        switch ($status)
+        {
+            case 1:
+                $vietsub = 'table-warning';
+                break;
+            case 2:
+                $vietsub = 'table-secondary';
+                break;
+            case 3:
+                $vietsub = 'table-secondary';
+                break;
+            case 4:
+                $vietsub = 'table-success';
+                break;
+            case 5:
+                $vietsub = 'table-danger';
+                break;
+        }
+        return $vietsub;
+    }
+
+    public function color_order_2($status = 1)
+    {
+        switch ($status)
+        {
+            case 1:
+                $vietsub = '#29abe2';
+                break;
+            case 2:
+                $vietsub = '#999';
+                break;
+            case 3:
+                $vietsub = '#999';
+                break;
+            case 4:
+                $vietsub = '#3fbf7b';
+                break;
+            case 5:
+                $vietsub = '#d33232';
+                break;
+        }
+        return $vietsub;
+    }
+
     public function generateOrderCode($length = 8)
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -182,6 +228,8 @@ class func
         }
         return $randomString;
     }
+
+
 
     public function isLogin()
     {
