@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 02, 2025 lúc 05:37 AM
+-- Thời gian đã tạo: Th7 03, 2025 lúc 04:23 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -118,8 +118,10 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (163, 1, 'c08b48e1dee432438e9a53a41ea522bb5e522fe4', '2025-06-25 07:14:19'),
 (164, 1, '188a738917fb0ef5a0eb5d3eefc1338449b19d3f', '2025-06-27 23:17:28'),
 (165, 1, '5eeac3b06a362f75b540a93484b5214a0109621e', '2025-06-30 23:13:44'),
-(166, 1, '2ad04f44753c9b635bca46cd1f30358f1c05e276', '2025-07-02 00:15:59'),
-(167, 1, '3e280ad0e8d0c7800f8dd442a7b09874ff5762eb', '2025-07-02 10:11:54');
+(166, 1, 'b046314d6298477787e40d04ffdcf41cc952ea5a', '2025-07-01 23:56:09'),
+(167, 1, '83eda86f027515a42e9c563d352c1f168d19a1b6', '2025-07-02 10:03:47'),
+(168, 1, '7edff72bcab88a7a69f9c90c0195d36427c71369', '2025-07-02 23:13:02'),
+(169, 1, '3337c12578822611bc19cb31fa4a7bca84f03c79', '2025-07-03 09:04:21');
 
 -- --------------------------------------------------------
 
@@ -141,10 +143,11 @@ CREATE TABLE `chi_tiet_don_hang` (
 --
 
 INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`, `don_gia`, `tong_tien`) VALUES
-(35, 33, 5, 1, 1000000, NULL),
-(36, 34, 6, 1, 1000000, NULL),
-(37, 38, 14, 1, 27790000, 27790000),
-(38, 39, 3, 1, 5000, 5000);
+(39, 40, 9, 1, 23490000, 23490000),
+(40, 41, 4, 1, 18000000, 18000000),
+(41, 41, 14, 1, 27790000, 27790000),
+(42, 42, 5, 2, 22990000, 45980000),
+(43, 43, 6, 1, 22000000, 22000000);
 
 -- --------------------------------------------------------
 
@@ -195,13 +198,10 @@ CREATE TABLE `don_hang` (
 --
 
 INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, `email`, `so_dien_thoai`, `dia_chi`, `ghi_chu`, `tong_tien`, `hinh_thuc_thanh_toan`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(33, '38U4SVNX', 13, NULL, NULL, NULL, NULL, '', 22990000, 'cod', 1, '2025-06-24 05:50:25', NULL),
-(34, 'NEGR6MUE', 14, NULL, NULL, NULL, NULL, '', 22000000, 'cod', 1, '2025-06-24 17:26:58', NULL),
-(35, 'I9KG9RKT', 14, NULL, NULL, NULL, NULL, '', 5000, 'transfer', 1, '2025-06-30 16:43:58', NULL),
-(36, 'K052UZ9Z', 14, NULL, NULL, NULL, NULL, '', 18000000, 'cod', 1, '2025-06-30 16:45:01', NULL),
-(37, 'PMWHM66Y', 14, NULL, NULL, NULL, NULL, '', 23490000, 'cod', 1, '2025-06-30 16:57:46', NULL),
-(38, '74YF26BT', 14, NULL, NULL, NULL, NULL, '', 27790000, 'cod', 1, '2025-06-30 17:00:03', NULL),
-(39, 'ZSEQU72C', 14, NULL, NULL, NULL, NULL, '', 5000, 'transfer', 2, '2025-06-30 17:02:56', NULL);
+(40, 'E8P6TQ4P', 14, NULL, NULL, NULL, NULL, '', 23490000, 'cod', 1, '2025-07-02 16:47:25', NULL),
+(41, '9CTMM4QG', 14, NULL, NULL, NULL, NULL, '', 45790000, 'cod', 2, '2025-07-02 16:47:37', NULL),
+(42, 'O4I4X96T', 14, NULL, NULL, NULL, NULL, '', 45980000, 'cod', 1, '2025-07-02 17:22:28', NULL),
+(43, 'VW093PMN', 14, NULL, NULL, NULL, NULL, '', 22000000, 'cod', 2, '2025-07-03 02:06:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -293,7 +293,9 @@ INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALU
 (33, 14, 'a4ec69ba12f4a7124a33e8946f795f69d21b16ac', '2025-06-24 17:23:59'),
 (34, 14, '12365c02df344558f42f8b93ce61f9613bd0464d', '2025-06-25 00:15:07'),
 (35, 14, '16212410510365ef08bee3ba967265753473024c', '2025-06-30 16:14:59'),
-(36, 13, '07b8a30b77db9427eaefcf277283ef2a4e88cc59', '2025-07-02 03:10:47');
+(36, 14, 'a0f52ee32c12f608e66c3cb46c4771598268f0bb', '2025-07-01 16:35:28'),
+(37, 14, '651d7911a91e2e113ec24138bbedd5e341500076', '2025-07-02 16:08:03'),
+(38, 14, '3bf38eab1a4f30e8aff82de4d2b78c20be4b8ab3', '2025-07-03 02:05:11');
 
 -- --------------------------------------------------------
 
@@ -1082,8 +1084,8 @@ INSERT INTO `san_pham` (`id`, `ma_san_pham`, `duong_dan`, `ten_san_pham`, `so_lu
 (38, 'Laptop_Lenovo_XiaoXin_Pro_14C_01', 'laptop-lenovo-xiaoxin-pro-14c', 'Laptop Lenovo XiaoXin Pro 14C ', NULL, '1750241893.webp', 19500000, 19500000, 6, 2, 'Lenovo XiaoXin Pro 14C là mẫu ultrabook mỏng nhẹ hướng tới người dùng sáng tạo nội dung, học tập và làm việc chuyên sâu. Phiên bản này được trang bị vi xử lý AMD Ryzen AI 7 H 350 (8 nhân/16 luồng), RAM 32 GB DDR5, SSD 1 TB và màn hình OLED 2.8K 120 Hz. Thiết kế kim loại, cân nặng chỉ ~1.39 kg và pin 60 Wh, sản phẩm đáp ứng tốt cả nhu cầu xử lý hình ảnh, video, AI và giải trí chất lượng cao.', '<p><strong>CPU:</strong> AMD Ryzen AI 7 H 350 (8 nhân/16 luồng, xung nhịp cơ bản ~2.0 GHz, tối đa ~5.0 GHz; tích hợp NPU AI)</p><p><strong>RAM:</strong> 32 GB DDR5‑5600 MHz (2 khe, hỗ trợ nâng cấp tối đa 96 GB)</p><p><strong>Ổ cứng:</strong> SSD 1 TB PCIe 4.0×4 NVMe (có khe mở rộng)</p><p><strong>Đồ họa:</strong> AMD Radeon 860M tích hợp</p><p><strong>Màn hình:</strong> 14″ OLED 2.8K (2880 × 1800), 120 Hz, độ sáng lên đến 1100 nits, độ phủ 99–100 % DCI‑P3, HDR True Black 1000, tỷ lệ 16:10, kính chống chói</p><p><strong>Cổng kết nối:</strong></p><p>2 × USB‑A (USB 3.2 Gen 1)</p><p>2 × USB‑C (USB 3.2 Gen 2, hỗ trợ PD 100 W &amp; DisplayPort 1.4)</p><p>1 × HDMI 2.1</p><p>1 × khe microSD</p><p>1 × jack tai nghe 3.5 mm</p><p><strong>Kết nối không dây:</strong> Wi‑Fi 7, Bluetooth 5.4</p><p><strong>Webcam:</strong> FHD 1080p (phiên bản cao cấp có camera IR, hỗ trợ Face ID)</p><p><strong>Bàn phím:</strong> LED trắng, layout gõ thoải mái</p><p><strong>Pin &amp; sạc:</strong> Pin 60 Wh, sạc nhanh USB‑C 100 W</p><p><strong>Trọng lượng:</strong> ~1.39 kg</p><p><strong>Kích thước:</strong> ~312 × 221 × 15.5–17 mm</p><p><strong>Vỏ:</strong> Nhôm nguyên khối, màu xám Artic Grey</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Bảo hành:</strong> 12 tháng chính hãng</p>', '<p><strong>CPU:</strong>Ryzen AI 7 H 350</p><p><strong>RAM:</strong> 32 GB DDR5 5600 MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 1 TB</p><p><strong>VGA:</strong> AMD Radeon 860M</p><p><strong>Màn hình:</strong> 14″ 2.8K 120 Hz</p>', NULL, NULL, 1, '2025-06-18 10:18:13', NULL),
 (39, 'Laptop_Gaming_Lenovo_Legion_5_Y7000P_01', 'laptop-gaming-lenovo-legion-5-y7000p', 'Laptop Gaming Lenovo Legion 5 Y7000P', NULL, '1750242063.webp', 31900000, 31900000, 6, 3, 'Lenovo Legion 5 Y7000P (2024) là mẫu laptop gaming tầm trung cao cấp, thiết kế hiện đại, hiệu năng mạnh mẽ với CPU Intel Core i7-14650HX và GPU NVIDIA GeForce RTX 4060, thích hợp cho game thủ và người làm sáng tạo nội dung. Màn hình 16 inch WQXGA 165 Hz, RAM 16 GB DDR5 và SSD 1 TB mang lại trải nghiệm mượt mà và không gian lưu trữ rộng. Vỏ kim loại kết hợp nhựa cứng, trọng lượng khoảng 2.35 kg và hệ thống tản nhiệt cao cấp giúp máy duy trì hiệu suất ổn định dưới tải.', '<p><strong>CPU:</strong> Intel Core i7-14650HX (16 nhân, 24 luồng, Turbo tối đa 5.2 GHz, cache 30 MB)</p><p><strong>RAM:</strong> 16 GB DDR5 5600 MHz (2 khe SO-DIMM, nâng cấp tối đa 64 GB)</p><p><strong>Ổ cứng:</strong> 1 TB PCIe Gen 4 NVMe SSD (có khe thứ hai để mở rộng)</p><p><strong>GPU:</strong> NVIDIA GeForce RTX 4060 8 GB GDDR6, hỗ trợ Ray Tracing và DLSS</p><p><strong>Màn hình:</strong> 16″ WQXGA (2560 × 1600) IPS, 165 Hz, 100 % sRGB, Dolby Vision, G‑SYNC, độ sáng 500 nits</p><p><strong>Cổng kết nối:</strong></p><p>2 x USB-C (có 1 x PD 140 W + DisplayPort, 1 x DP 1.4)</p><p>3 x USB-A 3.2 Gen 1 (1 cổng Always‑On)</p><p>HDMI 2.1, Ethernet RJ‑45, jack tai nghe 3.5 mm, khe microSD, nút e‑Shutter</p><p><strong>Kết nối không dây:</strong> Wi‑Fi 6E, Bluetooth 5.3</p><p><strong>Webcam:</strong> HD 720p với e‑Shutter</p><p><strong>Âm thanh:</strong> Loa stereo tích hợp, hỗ trợ Dolby Atmos/Nahimic</p><p><strong>Bàn phím:</strong> Full‑size, LED RGB TrueStrike, hành trình phím sâu</p><p><strong>Tản nhiệt:</strong> Hệ thống 2 quạt + 6 ống đồng, công nghệ Qiankun 4.0</p><p><strong>Pin:</strong> 4‑cell 80 Wh, hỗ trợ sạc nhanh Super Rapid Charge (140 W PD hoặc 230 W AC)</p><p><strong>Trọng lượng:</strong> ~2.35 kg</p><p><strong>Kích thước:</strong> khoảng 360 × 267 × 19.9 – 22.8 mm</p><p><strong>Hệ điều hành:</strong> Windows 11 Home/Pro</p>', '<p><strong>CPU:</strong> Core i7‑14650HX</p><p><strong>RAM:</strong> 16 GB DDR5 5600 MHz</p><p><strong>Ổ cứng:</strong> 1 TB NVMe SSD</p><p><strong>GPU:</strong> RTX 4060 8 GB</p><p><strong>Màn hình:</strong> 16″ IPS 165 Hz</p>', NULL, 1, 1, '2025-06-18 10:21:03', NULL),
 (40, 'Laptop_Gaming_Lenovo_Legion_Y9000P_IAX10_01', 'laptop-gaming-lenovo-legion-y9000p-iax10', 'Laptop Gaming Lenovo Legion Y9000P IAX10', NULL, '1750242224.webp', 46900000, 46900000, 6, 3, 'Lenovo Legion Y9000P IAX10 là mẫu laptop gaming cao cấp thuộc dòng Legion mới nhất, trang bị cấu hình cực mạnh với vi xử lý Intel Core Ultra 9 185H, card đồ họa NVIDIA GeForce RTX 4070 và màn hình 16 inch 2.5K siêu mượt. Sản phẩm được thiết kế dành riêng cho game thủ và người dùng chuyên nghiệp cần hiệu suất cao và hệ thống tản nhiệt hiệu quả. Vỏ máy cứng cáp, bàn phím RGB nổi bật, pin lớn, đáp ứng tốt cả chơi game lẫn làm việc đa nhiệm.', '<p><strong>CPU:</strong> Intel Core Ultra 9 185H (16 nhân, 22 luồng, Turbo boost tối đa 5.1GHz, 24MB cache)</p><p><strong>RAM:</strong> 32GB LPDDR5x 7467MHz (onboard)</p><p><strong>Ổ cứng:</strong> 1TB SSD M.2 PCIe Gen 4 NVMe</p><p><strong>VGA:</strong> NVIDIA GeForce RTX 4070 8GB GDDR6, hỗ trợ DLSS 3 và Ray Tracing</p><p><strong>Màn hình:</strong> 16 inch 2.5K (2560 x 1600), IPS, tần số quét 240Hz, độ sáng 500 nits, 100% sRGB, Dolby Vision, G-SYNC, chống chói</p><p><strong>Cổng kết nối:</strong></p><p>2 x USB-A 3.2 Gen 1</p><p>2 x USB-C (1 hỗ trợ Thunderbolt 4, 1 hỗ trợ PD 140W + DisplayPort)</p><p>1 x HDMI 2.1</p><p>1 x RJ-45 Ethernet</p><p>1 x Jack tai nghe 3.5mm</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6E, Bluetooth 5.3</p><p><strong>Bàn phím:</strong> Fullsize RGB 4 vùng, hành trình phím sâu</p><p><strong>Tản nhiệt:</strong> Hệ thống ColdFront 5.0 với 2 quạt lớn và nhiều ống đồng</p><p><strong>Pin:</strong> 99.9Wh, hỗ trợ sạc nhanh</p><p><strong>Trọng lượng:</strong> Khoảng 2.55kg</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen Onyx Gray</p>', '<p><strong>CPU:</strong> Core Ultra 9 185H</p><p><strong>RAM:</strong> 32GB DDR5</p><p><strong>Ổ cứng:</strong> 1TB SSD NVMe&nbsp;</p><p><strong>VGA:</strong> RTX 4070 8GB</p><p><strong>Màn hình:</strong> 16\" 2.5K IPS 240Hz</p>', NULL, 1, 1, '2025-06-18 10:23:44', NULL),
-(42, 'Apple_MacBook_Air_M4_01', 'apple-macbook-air-m4', 'Apple MacBook Air M4', NULL, '1750242646.webp', 27890000, 26490000, 14, 2, 'MacBook Air M4 13‑inch (2025) là mẫu ultrabook mỏng nhẹ và hiệu năng cao, thiết kế không quạt, phù hợp cho sinh viên, người làm sáng tạo nội dung và người dùng văn phòng. Sản phẩm nổi bật nhờ chip Apple M4, RAM tối thiểu 16 GB, màn hình True Tone sắc nét và thời lượng pin lên tới 18 giờ—lựa chọn đáng giá cho người cần chiếc laptop nhẹ, mạnh mẽ và thời thượng.', '<p><strong>SoC:</strong> Apple M4 (10 core CPU – 4 hiệu năng + 6 tiết kiệm năng lượng; 8 core GPU; 16 core Neural Engine; hỗ trợ ray tracing và mesh shading)</p><p><strong>RAM:</strong> 16 GB unified LPDDR5X (vanishing memory không thể nâng cấp)</p><p><strong>Ổ cứng:</strong> 512 GB PCIe NVMe SSD (tùy chọn 256 GB / 1 TB / 2 TB)</p><p><strong>Màn hình:</strong> 13.6″ Liquid Retina (2560 × 1664, ~228 ppi), P3, 500 nits Brightness, True Tone, hỗ trợ HDR và Dolby Vision</p><p><strong>Cổng kết nối:</strong> 2 x Thunderbolt 4 (USB‑C), 1 x MagSafe 3, jack tai nghe 3.5mm</p><p><strong>Webcam:</strong> 12 MP, hỗ trợ Center Stage</p><p><strong>Âm thanh:</strong> Hệ thống loa stereo, hỗ trợ Spatial Audio</p><p><strong>Bàn phím:</strong> Magic Keyboard, có đèn nền, Touch ID</p><p><strong>Pin:</strong> 53.8 Wh, hỗ trợ video 18 giờ, wifi 15 giờ, sạc nhanh 70 W USB-C</p><p><strong>Trọng lượng:</strong> Khoảng 1.24 kg</p><p><strong>Hệ điều hành:</strong> macOS Sequoia với tính năng Apple Intelligence</p>', '<p><strong>CPU:</strong> Apple M4&nbsp;</p><p><strong>RAM:</strong> 16 GB&nbsp;</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA: </strong>Apple M4</p><p><strong>Màn hình:</strong> 13.6″ HDR 500 nit</p>', NULL, 1, 1, '2025-06-18 10:30:46', NULL),
-(43, 'Laptop_Gaming_MSI_Katana_15_01', 'laptop-gaming-msi-katana-15', 'Laptop Gaming MSI Katana 15', NULL, '1751426677.webp', 26900000, 26900000, 7, 3, 'MSI Katana 15 B13VFK là mẫu laptop gaming tầm trung hướng đến game thủ cần hiệu năng mạnh mẽ với mức giá hợp lý. Phiên bản mình chọn trang bị chip Intel Core i7‑13620H, card màn hình NVIDIA GeForce RTX 4060 8 GB, RAM 16 GB DDR5 và SSD 1 TB, đủ sức chơi hầu hết các game AAA ở thiết lập cao. Màn hình 15.6″ Full HD 144 Hz mang lại trải nghiệm mượt mà, thiết kế mạnh mẽ với bàn phím SteelSeries RGB 4 vùng đáp ứng tốt về hiệu năng và trải nghiệm chơi game.', '<p><strong>CPU:</strong> Intel Core i7-13620H (10 nhân, 16 luồng, xung nhịp tối đa 4.9GHz, 24MB cache)</p><p><strong>RAM:</strong> 16GB DDR5 5200MHz (2 khe, nâng cấp tối đa 64GB)</p><p><strong>Ổ cứng:</strong> 1TB SSD M.2 PCIe Gen 4 NVMe</p><p><strong>VGA:</strong> NVIDIA GeForce RTX 4060 8GB GDDR6</p><p><strong>Màn hình:</strong> 15.6 inch Full HD (1920 x 1080), IPS-level, tần số quét 144Hz, chống chói</p><p><strong>Cổng kết nối:</strong></p><p>1 x USB-C 3.2 Gen 1</p><p>2 x USB-A 3.2 Gen 1</p><p>1 x USB-A 2.0</p><p>1 x HDMI 2.1</p><p>1 x RJ-45</p><p>1 x Jack tai nghe 3.5mm</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6, Bluetooth 5.2</p><p><strong>Bàn phím:</strong> RGB 4 vùng, thiết kế đặc trưng gaming</p><p><strong>Tản nhiệt:</strong> Hệ thống Cooler Boost 5 với 2 quạt và 6 ống đồng</p><p><strong>Pin:</strong> 3-cell 53.5Wh</p><p><strong>Trọng lượng:</strong> Khoảng 2.25 kg</p><p><strong>Kích thước:</strong> 359 x 259 x 24.9 mm</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen</p>', '<p><strong>CPU:</strong> Core i7-13620H</p><p><strong>RAM:</strong> 16GB DDR5 5200MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 1TB&nbsp;</p><p><strong>VGA:</strong> RTX 4060 8GB</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 144Hz</p>', NULL, 1, 1, '2025-07-02 03:24:37', NULL);
+(41, 'Laptop_Gaming_MSI_Katana_15_01', 'laptop-gaming-msi-katana-15', 'Laptop Gaming MSI Katana 15', NULL, '1750242386.webp', 23590000, 23590000, 7, 3, 'MSI Katana 15 B13VFK là mẫu laptop gaming tầm trung hướng đến game thủ cần hiệu năng mạnh mẽ với mức giá hợp lý. Phiên bản mình chọn trang bị chip Intel Core i7‑13620H, card màn hình NVIDIA GeForce RTX 4060 8 GB, RAM 16 GB DDR5 và SSD 1 TB, đủ sức chơi hầu hết các game AAA ở thiết lập cao. Màn hình 15.6″ Full HD 144 Hz mang lại trải nghiệm mượt mà, thiết kế mạnh mẽ với bàn phím SteelSeries RGB 4 vùng đáp ứng tốt về hiệu năng và trải nghiệm chơi game.', '<p><strong>CPU:</strong> Intel Core i7-13620H (10 nhân, 16 luồng, xung nhịp tối đa 4.9GHz, 24MB cache)</p><p><strong>RAM:</strong> 16GB DDR5 5200MHz (2 khe, nâng cấp tối đa 64GB)</p><p><strong>Ổ cứng:</strong> 1TB SSD M.2 PCIe Gen 4 NVMe</p><p><strong>VGA:</strong> NVIDIA GeForce RTX 4060 8GB GDDR6</p><p><strong>Màn hình:</strong> 15.6 inch Full HD (1920 x 1080), IPS-level, tần số quét 144Hz, chống chói</p><p><strong>Cổng kết nối:</strong></p><p>1 x USB-C 3.2 Gen 1</p><p>2 x USB-A 3.2 Gen 1</p><p>1 x USB-A 2.0</p><p>1 x HDMI 2.1</p><p>1 x RJ-45</p><p>1 x Jack tai nghe 3.5mm</p><p><strong>Kết nối không dây:</strong> Wi-Fi 6, Bluetooth 5.2</p><p><strong>Bàn phím:</strong> RGB 4 vùng, thiết kế đặc trưng gaming</p><p><strong>Tản nhiệt:</strong> Hệ thống Cooler Boost 5 với 2 quạt và 6 ống đồng</p><p><strong>Pin:</strong> 3-cell 53.5Wh</p><p><strong>Trọng lượng:</strong> Khoảng 2.25 kg</p><p><strong>Kích thước:</strong> 359 x 259 x 24.9 mm</p><p><strong>Hệ điều hành:</strong> Windows 11 Home</p><p><strong>Màu sắc:</strong> Đen</p>', '<p><strong>CPU:</strong> Intel Core i7 13620H</p><p><strong>RAM:</strong> 16GB DDR5 5200MHz</p><p><strong>Ổ cứng:</strong> SSD NVMe 1TB&nbsp;</p><p><strong>VGA:</strong> RTX 4060 8GB</p><p><strong>Màn hình:</strong> 15.6\" FHD IPS 144Hz</p>', NULL, 1, 1, '2025-06-18 10:26:26', NULL),
+(42, 'Apple_MacBook_Air_M4_01', 'apple-macbook-air-m4', 'Apple MacBook Air M4', NULL, '1750242646.webp', 27890000, 26490000, 14, 2, 'MacBook Air M4 13‑inch (2025) là mẫu ultrabook mỏng nhẹ và hiệu năng cao, thiết kế không quạt, phù hợp cho sinh viên, người làm sáng tạo nội dung và người dùng văn phòng. Sản phẩm nổi bật nhờ chip Apple M4, RAM tối thiểu 16 GB, màn hình True Tone sắc nét và thời lượng pin lên tới 18 giờ—lựa chọn đáng giá cho người cần chiếc laptop nhẹ, mạnh mẽ và thời thượng.', '<p><strong>SoC:</strong> Apple M4 (10 core CPU – 4 hiệu năng + 6 tiết kiệm năng lượng; 8 core GPU; 16 core Neural Engine; hỗ trợ ray tracing và mesh shading)</p><p><strong>RAM:</strong> 16 GB unified LPDDR5X (vanishing memory không thể nâng cấp)</p><p><strong>Ổ cứng:</strong> 512 GB PCIe NVMe SSD (tùy chọn 256 GB / 1 TB / 2 TB)</p><p><strong>Màn hình:</strong> 13.6″ Liquid Retina (2560 × 1664, ~228 ppi), P3, 500 nits Brightness, True Tone, hỗ trợ HDR và Dolby Vision</p><p><strong>Cổng kết nối:</strong> 2 x Thunderbolt 4 (USB‑C), 1 x MagSafe 3, jack tai nghe 3.5mm</p><p><strong>Webcam:</strong> 12 MP, hỗ trợ Center Stage</p><p><strong>Âm thanh:</strong> Hệ thống loa stereo, hỗ trợ Spatial Audio</p><p><strong>Bàn phím:</strong> Magic Keyboard, có đèn nền, Touch ID</p><p><strong>Pin:</strong> 53.8 Wh, hỗ trợ video 18 giờ, wifi 15 giờ, sạc nhanh 70 W USB-C</p><p><strong>Trọng lượng:</strong> Khoảng 1.24 kg</p><p><strong>Hệ điều hành:</strong> macOS Sequoia với tính năng Apple Intelligence</p>', '<p><strong>CPU:</strong> Apple M4&nbsp;</p><p><strong>RAM:</strong> 16 GB&nbsp;</p><p><strong>Ổ cứng:</strong> SSD NVMe 512GB</p><p><strong>VGA: </strong>Apple M4</p><p><strong>Màn hình:</strong> 13.6″ HDR 500 nit</p>', NULL, 1, 1, '2025-06-18 10:30:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -11957,25 +11959,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
 --
 ALTER TABLE `danh_muc_san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -11993,13 +11995,13 @@ ALTER TABLE `khach_hang`
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `setting`
@@ -12011,7 +12013,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT cho bảng `thuong_hieu`
 --
 ALTER TABLE `thuong_hieu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
