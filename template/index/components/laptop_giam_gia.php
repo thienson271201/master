@@ -9,9 +9,7 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
 <section class="content-section">
   <div class="container">
     <div class="section-head text-left container-md">
-      <h2
-        class="section-title text-upper text-lg"
-        data-inview-showup="showup-translate-right">
+      <h2 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
         Deal Laptop cực sốc
       </h2>
       <!-- <p data-inview-showup="showup-translate-left">
@@ -21,11 +19,9 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
     <div class="row rows-stuck-2 cols-stuck-2">
       <?php
       foreach ($list_san_pham as $san_pham):
-      ?>
+        ?>
         <div class="col-12 sm-col-3 lg-col-3">
-          <div
-            class="item shop-item shop-item-short item-dash-border"
-            data-inview-showup="showup-scale">
+          <div class="item shop-item shop-item-short item-dash-border" data-inview-showup="showup-scale">
             <div class="item-back"></div>
             <?php
             $phan_tram = round((($san_pham['gia_goc'] - $san_pham['gia_sau_khuyen_mai']) / $san_pham['gia_goc']) * 100);
@@ -35,8 +31,7 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
               </div>
             <?php endif; ?>
             <a href="<?= $san_pham['duong_dan'] ?>" class="item-image responsive-1by1">
-              <img
-                src="upload/images/<?= $san_pham['hinh_anh'] ?>" />
+              <img src="upload/images/<?= $san_pham['hinh_anh'] ?>" />
             </a>
             <div class="item-content text-center">
               <div class="item-title text-upper mb-0">
@@ -47,13 +42,12 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
               </div>
               <div class="item-prices">
                 <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
-                <?php if ($phan_tram > 1) : ?>
+                <?php if ($phan_tram > 1): ?>
                   <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
                 <?php endif; ?>
               </div>
               <div class="item-links">
-                <a href="#" data-id="<?= $san_pham['id'] ?>"
-                  class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered">
+                <a href="#" data-id="<?= $san_pham['id'] ?>" class="btn-add-to-cart btn btn-sm px-2 mx-2 btns-bordered">
                   <i class="fas fa-shopping-cart"></i>
                 </a>
                 <a href="#" class="btn btn-sm px-2 mx-2 btns-bordered">
@@ -69,7 +63,7 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
 
 
 
-<script>
+<!-- <script>
   $(document).ready(function() {
     $('.btn-add-to-cart').off('click').on('click', function(e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
@@ -105,4 +99,4 @@ $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE gia_sau_khuyen_mai < 
       });
     });
   });
-</script>
+</script> -->

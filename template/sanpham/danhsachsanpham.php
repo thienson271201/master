@@ -276,7 +276,14 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
         },
         success: function (response) {
           // Xử lý sau khi thêm thành công
-          alert('Đã thêm sản phẩm vào giỏ hàng!');
+          // alert('Đã thêm sản phẩm vào giỏ hàng!');
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Đã thêm sản phẩm vào giỏ hàng",
+            showConfirmButton: false,
+            timer: 1500
+          });
           console.log(response.html);
           const htmlString = response.html;
 

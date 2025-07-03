@@ -1,9 +1,12 @@
 <section class="offs-xxl">
     <div class="container">
         <div class="user-orders">
-            <?php foreach ($danh_sach_don_hang as $don_hang) :
-                $chi_tiet_don_hang = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$don_hang[id]'");
-                 ?>
+            <?php if (empty($danh_sach_don_hang)): ?>
+                <div class="alert alert-warning mt-3">Bạn chưa có đơn hàng nào</div>
+            <?php else: ?>
+                <?php foreach ($danh_sach_don_hang as $don_hang):
+                    $chi_tiet_don_hang = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$don_hang[id]'");
+                    ?>
                     <div class="user-order" data-inview-showup="showup-translate-up">
                         <div class="item-header text-upper">
                             <div class="user-order-show-more">
@@ -13,7 +16,7 @@
                             </div>
                             <div class="user-order-number"><?= $don_hang['ma_don_hang'] ?></div>
                             <div class="user-order-title">Laptop Gaming ASUS ROG</div>
-                            <div class="user-order-date"><?= date("d-m-Y",  strtotime($don_hang['ngay_tao'])) ?></div>
+                            <div class="user-order-date"><?= date("d-m-Y", strtotime($don_hang['ngay_tao'])) ?></div>
                             <div class="user-order-price">
                                 <?= $f->format_tiente($don_hang['tong_tien']) ?>₫
                             </div>
@@ -27,26 +30,26 @@
                                     <div class="user-order-items-head-quantity">Số lượng</div>
                                     <div class="user-order-items-head-total">Tổng tiền</div>
                                 </div>
-                                <?php foreach ($chi_tiet_don_hang as $ctdh) :
+                                <?php foreach ($chi_tiet_don_hang as $ctdh):
                                     $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
                                     ?>
-                                <div class="user-order-item">
-                                    <div class="user-order-item-image">
-                                        <div class="responsive-1by1">
-                                            <img src="upload/images/<?= $san_pham['hinh_anh'] ?>" alt="" />
+                                    <div class="user-order-item">
+                                        <div class="user-order-item-image">
+                                            <div class="responsive-1by1">
+                                                <img src="upload/images/<?= $san_pham['hinh_anh'] ?>" alt="" />
+                                            </div>
+                                        </div>
+                                        <div class="user-order-item-title text-upper">
+                                            <?= $san_pham['ten_san_pham'] ?>
+                                        </div>
+                                        <div class="user-order-item-price">
+                                            <?= $f->format_tiente($ctdh['don_gia']) ?>₫
+                                        </div>
+                                        <div class="user-order-item-quantity"><?= $ctdh['so_luong'] ?></div>
+                                        <div class="user-order-item-total">
+                                            <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
                                         </div>
                                     </div>
-                                    <div class="user-order-item-title text-upper">
-                                        <?= $san_pham['ten_san_pham'] ?>
-                                    </div>
-                                    <div class="user-order-item-price">
-                                        <?= $f->format_tiente($ctdh['don_gia']) ?>₫
-                                    </div>
-                                    <div class="user-order-item-quantity"><?= $ctdh['so_luong'] ?></div>
-                                    <div class="user-order-item-total">
-                                        <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
-                                    </div>
-                                </div>
                                 <?php endforeach; ?>
                             </div>
                             <div class="user-order-summary">
@@ -60,7 +63,9 @@
                                                         <div class="user-order-info-title text-upper">
                                                             Người nhận:&nbsp;
                                                         </div>
-                                                        <div class="user-order-info-value"><?= $user_profile['ten_khach_hang'] ?></div>
+                                                        <div class="user-order-info-value">
+                                                            <?= $user_profile['ten_khach_hang'] ?>
+                                                        </div>
                                                     </div>
                                                     <div class="user-order-info-line">
                                                         <div class="user-order-info-title text-upper">
@@ -77,7 +82,7 @@
                                                             Mã vận đơn:&nbsp;
                                                         </div>
                                                         <div class="user-order-info-value">
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div class="user-order-info-line">
@@ -128,16 +133,18 @@
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                    <?php
+                endforeach;
+            endif; ?>
         </div>
-        <div class="text-center shift-lg" data-inview-showup="showup-translate-up">
+        <!-- <div class="text-center shift-lg" data-inview-showup="showup-translate-up">
             <div class="paginator">
                 <a href="#" class="previous"><i class="fas fa-angle-left" aria-hidden="true"></i></a>
                 <span class="active">2</span> <a href="#">3</a> <span>...</span>
                 <a href="#">12</a>
                 <a href="#" class="next"><i class="fas fa-angle-right" aria-hidden="true"></i></a>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 <div class="block-cart collapse" data-block="cart" data-show-block-class="animation-scale-top-right"

@@ -10,9 +10,11 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 
 /* Cấu hình http */
-if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+{
     $http = 'https://';
-} else {
+} else
+{
     $http = 'http://';
 }
 
@@ -55,3 +57,15 @@ $vnp_Returnurl = "http://localhost/master/thanh-toan";
 //Expire
 $startTime = date("YmdHis");
 $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
+
+// thông tin chuyển khoản
+// Chủ tài khoản Nguyễn Hoàng Minh
+define('_SO_TAI_KHOAN', 'CASS101010');
+define('_NGAN_HANG', 'OCB');
+define('_API_THANH_TOAN', 'https://script.google.com/macros/s/AKfycbySQc880OdC46ZTGSe8-HwWbv7-6_cT-jK3GVF4do-ccraA_mB_snjgR-q7AeXAxrIa/exec');
+
+
+// Chủ tài khoản Huỳnh Minh Tâm
+// define('_SO_TAI_KHOAN', 'CASS101010');
+// define('_NGAN_HANG', 'OCB');
+// define('_API_THANH_TOAN', 'https://script.google.com/macros/s/AKfycbySQc880OdC46ZTGSe8-HwWbv7-6_cT-jK3GVF4do-ccraA_mB_snjgR-q7AeXAxrIa/exec');

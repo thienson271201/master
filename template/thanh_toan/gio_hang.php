@@ -154,23 +154,50 @@ else:
     <?php
 endif;
 ?>
+<!-- Xoá giỏ hàng tổng -->
 <script>
     $('#btn-xoa-gio-hang').on('click', function () {
-        if (confirm('Bạn chắc chắn muốn xóa giỏ hàng?')) {
-            $.ajax({
-                url: 'api/xoa_gio_hang.php',
-                type: 'POST',
-                success: function (response) {
-                    alert('Đã xóa giỏ hàng.');
-                    location.reload();
-                },
-                error: function () {
-                    alert('Đã xảy ra lỗi khi xóa giỏ hàng.');
-                }
-            });
-        }
+        Swal.fire({
+            title: "Xác nhận xoá?",
+            text: "Bạn sẽ xoá tất cả sản phẩm trong giỏ hàng!",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonText: 'Không',
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Có, xoá tất cả?"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'api/xoa_gio_hang.php',
+                    type: 'POST',
+                    success: function (response) {
+                        Swal.fire({
+                            title: "Thông báo!",
+                            text: "Đã xoá thành công",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: "Lỗi!",
+                            text: "Có lỗi xảy ra khi xoá giỏ hàng.",
+                            icon: "error"
+
+                        });
+                    }
+                });
+
+            }
+        });
+
     });
 </script>
+
+<!-- Tăng giảm số lượng sản phẩm -->
 <script>
     $(document).ready(function () {
         // Lắng nghe khi bấm nút + hoặc -

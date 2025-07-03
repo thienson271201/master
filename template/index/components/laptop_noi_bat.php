@@ -59,9 +59,9 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
 </section>
 
 
-<script>
-  $(document).ready(function() {
-    $('.btn-add-to-cart').off('click').on('click', function(e) {
+<!-- <script>
+  $(document).ready(function () {
+    $('.btn-add-to-cart').off('click').on('click', function (e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
@@ -72,7 +72,7 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
         data: {
           id: productId
         },
-        success: function(response) {
+        success: function (response) {
           // Xử lý sau khi thêm thành công
           alert('Đã thêm sản phẩm vào giỏ hàng!');
           console.log(response.html);
@@ -89,10 +89,10 @@ $list_noi_bat = $db->getRaw('select * from san_pham where noi_bat = 1');
           // Cập nhật số lượng giỏ hàng
           $('#number-cart').text(response.number_cart);
         },
-        error: function() {
+        error: function () {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });
     });
   });
-</script>
+</script> -->

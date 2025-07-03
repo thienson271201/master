@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 03, 2025 lúc 04:48 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th7 03, 2025 lúc 05:28 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -122,7 +122,8 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (167, 1, '83eda86f027515a42e9c563d352c1f168d19a1b6', '2025-07-02 10:03:47'),
 (168, 1, '7edff72bcab88a7a69f9c90c0195d36427c71369', '2025-07-02 23:13:02'),
 (169, 1, '3337c12578822611bc19cb31fa4a7bca84f03c79', '2025-07-03 09:04:21'),
-(170, 1, 'e7389b1492e7ae61438928747e0163cfae1d2036', '2025-07-03 09:27:37');
+(170, 1, 'e7389b1492e7ae61438928747e0163cfae1d2036', '2025-07-03 09:27:37'),
+(171, 1, '142fdec7c6c33def525acc033d83895cd69e3cee', '2025-07-03 10:47:38');
 
 -- --------------------------------------------------------
 
@@ -144,11 +145,8 @@ CREATE TABLE `chi_tiet_don_hang` (
 --
 
 INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`, `don_gia`, `tong_tien`) VALUES
-(39, 40, 9, 1, 23490000, 23490000),
-(40, 41, 4, 1, 18000000, 18000000),
-(41, 41, 14, 1, 27790000, 27790000),
-(42, 42, 5, 2, 22990000, 45980000),
-(43, 43, 6, 1, 22000000, 22000000);
+(45, 45, 6, 1, 22000000, 22000000),
+(46, 46, 5, 1, 22990000, 22990000);
 
 -- --------------------------------------------------------
 
@@ -186,6 +184,9 @@ CREATE TABLE `don_hang` (
   `email` varchar(200) DEFAULT NULL,
   `so_dien_thoai` varchar(10) DEFAULT NULL,
   `dia_chi` varchar(200) DEFAULT NULL,
+  `xa_phuong` int(11) DEFAULT NULL,
+  `quan_huyen` int(11) DEFAULT NULL,
+  `tinh_thanhpho` int(11) DEFAULT NULL,
   `ghi_chu` mediumtext DEFAULT NULL,
   `tong_tien` double DEFAULT NULL,
   `hinh_thuc_thanh_toan` varchar(10) DEFAULT NULL,
@@ -198,11 +199,9 @@ CREATE TABLE `don_hang` (
 -- Đang đổ dữ liệu cho bảng `don_hang`
 --
 
-INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, `email`, `so_dien_thoai`, `dia_chi`, `ghi_chu`, `tong_tien`, `hinh_thuc_thanh_toan`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(40, 'E8P6TQ4P', 14, NULL, NULL, NULL, NULL, '', 23490000, 'cod', 1, '2025-07-02 16:47:25', NULL),
-(41, '9CTMM4QG', 14, NULL, NULL, NULL, NULL, '', 45790000, 'cod', 2, '2025-07-02 16:47:37', NULL),
-(42, 'O4I4X96T', 14, NULL, NULL, NULL, NULL, '', 45980000, 'cod', 1, '2025-07-02 17:22:28', NULL),
-(43, 'VW093PMN', 14, NULL, NULL, NULL, NULL, '', 22000000, 'cod', 2, '2025-07-03 02:06:03', NULL);
+INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, `email`, `so_dien_thoai`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `ghi_chu`, `tong_tien`, `hinh_thuc_thanh_toan`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
+(45, 'GYWVHK4O', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22000000, 'cod', 1, '2025-07-03 07:18:52', NULL),
+(46, 'VIFLYC9J', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22990000, 'cod', 1, '2025-07-03 09:23:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +220,7 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `type`, `image`) VALUES
-(2, 'favicon', '1749662398.png');
+(2, 'favicon', '1751514468.png');
 
 -- --------------------------------------------------------
 
@@ -271,32 +270,7 @@ CREATE TABLE `khach_hang_token` (
 --
 
 INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
-(13, 12, 'e184cd0744fcfac1c089de2a00c2193a6cff90b9', '2025-04-19 14:34:20'),
-(14, 12, 'ea47b77be2fde055f94765e0e865e55da07069dd', '2025-04-19 14:36:13'),
-(15, 12, '11995c4426299992ecd547bc9c77676812f8c43d', '2025-04-19 14:44:01'),
-(16, 12, '2b8453e2304c1454ca580cde85a3288277b41302', '2025-04-19 15:22:39'),
-(17, 13, 'ed09c268ea801bd414f227dd755da30186c1a9e4', '2025-05-25 01:49:45'),
-(18, 14, 'f079e2446ee9179ddc5d08cd78034ded861dab4c', '2025-05-30 16:51:42'),
-(19, 14, 'dd372378663a3bf55267086130027ef1224c6498', '2025-06-01 05:08:47'),
-(20, 14, '66d72358687090845e272a0ea7b0b5ccbb73617e', '2025-06-03 02:52:09'),
-(21, 13, 'ae0be63c680e7f9f22d5b67d41b40f700c2762c4', '2025-06-03 16:07:37'),
-(22, 13, '17291297e85506e068386e531dbd3efeb3e3389b', '2025-06-04 02:36:46'),
-(23, 13, '53163106d72dd688f9296ca92e2affcd88dbe81d', '2025-06-04 02:46:01'),
-(24, 13, '8be885cc50dfb1cf6556ea3455cd583b91ae116f', '2025-06-04 02:52:22'),
-(25, 15, '97fecb2de4ecdf772bb41c7e870b0f5148e6eb38', '2025-06-06 09:31:12'),
-(26, 15, '8b44d7fa8352bcba0d3b84ef9ec0a102587a583f', '2025-06-11 16:30:44'),
-(27, 13, '8389b47df6fa562d5f8193e50e143dd6360f49c8', '2025-06-12 00:20:09'),
-(28, 13, '55893595b2423f1392a40da3c2d424be49e65412', '2025-06-17 15:21:15'),
-(29, 13, '402323f2b9887d258dac92cf7082cb89ccffce52', '2025-06-18 02:09:45'),
-(30, 13, '53d728a5e8a02039baf33dd013e4fd99c9997a5b', '2025-06-23 15:37:06'),
-(31, 13, 'd29228f55be1e2cf2505ea73afca401211244df8', '2025-06-23 15:37:39'),
-(32, 13, '48088104d60f8a82b33c49bdda9279b21c469688', '2025-06-24 05:45:06'),
-(33, 14, 'a4ec69ba12f4a7124a33e8946f795f69d21b16ac', '2025-06-24 17:23:59'),
-(34, 14, '12365c02df344558f42f8b93ce61f9613bd0464d', '2025-06-25 00:15:07'),
-(35, 14, '16212410510365ef08bee3ba967265753473024c', '2025-06-30 16:14:59'),
-(36, 14, 'a0f52ee32c12f608e66c3cb46c4771598268f0bb', '2025-07-01 16:35:28'),
-(37, 14, '651d7911a91e2e113ec24138bbedd5e341500076', '2025-07-02 16:08:03'),
-(38, 14, '3bf38eab1a4f30e8aff82de4d2b78c20be4b8ab3', '2025-07-03 02:05:11');
+(40, 15, '71ee5134e37ce52e33b59e966f7cb0a7060449d5', '2025-07-03 07:09:56');
 
 -- --------------------------------------------------------
 
@@ -11905,7 +11879,8 @@ ALTER TABLE `khach_hang`
 -- Chỉ mục cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `khach_hang_id` (`khach_hang_id`);
 
 --
 -- Chỉ mục cho bảng `quanhuyen`
@@ -11961,13 +11936,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
@@ -11979,7 +11954,7 @@ ALTER TABLE `danh_muc_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -11997,7 +11972,7 @@ ALTER TABLE `khach_hang`
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
@@ -12039,6 +12014,12 @@ ALTER TABLE `chi_tiet_don_hang`
 --
 ALTER TABLE `don_hang`
   ADD CONSTRAINT `don_hang_ibfk_1` FOREIGN KEY (`khach_hang_id`) REFERENCES `khach_hang` (`id`);
+
+--
+-- Các ràng buộc cho bảng `khach_hang_token`
+--
+ALTER TABLE `khach_hang_token`
+  ADD CONSTRAINT `khach_hang_token_ibfk_1` FOREIGN KEY (`khach_hang_id`) REFERENCES `khach_hang` (`id`);
 
 --
 -- Các ràng buộc cho bảng `san_pham`

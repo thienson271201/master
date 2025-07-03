@@ -1,16 +1,22 @@
 <?php
+// Xử lý khi form submit
 if ($f->isPOST())
 {
+    $title = 'Kết quả thanh toán';
     $filterAll = $f->filter();
-    // echo '<pre>';
-    // print_r($filterAll);
-    // echo '</pre>';
     $madonhang = $f->generateOrderCode();
     $data_insert = [
         'ma_don_hang' => $madonhang,
-        'hinh_thuc_thanh_toan' => $filterAll['phuong_thuc_thanh_toan'],
+        'ten_khach_hang' => $filterAll['ten_khach_hang'],
+        'email' => $filterAll['email'],
+        'so_dien_thoai' => $filterAll['so_dien_thoai'],
+        'dia_chi' => $filterAll['dia_chi'],
+        'xa_phuong' => $filterAll['xa_phuong'],
+        'quan_huyen' => $filterAll['quan_huyen'],
+        'tinh_thanhpho' => $filterAll['tinh_thanhpho'],
         'ghi_chu' => $filterAll['ghi_chu'],
         'tong_tien' => $filterAll['tong_tien'],
+        'hinh_thuc_thanh_toan' => $filterAll['phuong_thuc_thanh_toan'],
         'trang_thai' => 1,
         'ngay_tao' => date('Y-m-d H:i:s'),
     ];
@@ -19,13 +25,29 @@ if ($f->isPOST())
     {
         $data_insert['khach_hang_id'] = getSession('khach_hang_id');
     }
+
+    // Nếu thanh toán vnpay thì để vnpay xử lý
     if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay')
     {
         setFlashData('data_vnpay', $data_insert);
         require_once 'vnpay/vnpay_create_payment.php';
+        exit;
     }
-    require_once 'cod/cod.php';
+    // Ngược lại không phải vnpay thì xử lý như bth
+    require_once 'tao_don_hang.php';
+    $f->redirect('./');
 }
+// Xử lý khi vnpay trả kết quả về
+if (isset($_GET['vnp_ResponseCode']))
+{
+    if ($_GET['vnp_ResponseCode'] == '00')
+    {
+        $data_insert = getFlashData('data_vnpay');
+        require_once 'tao_don_hang.php';
+    }
+}
+$title = "Thanh toán";
+// Sử dụng id khách hàng truy vấn dữ liệu
 if ($f->isLogin())
 {
     $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id='" . getSession('khach_hang_id') . "'");
@@ -57,11 +79,6 @@ if ($f->isLogin())
         </div>
     </div>
 </section>
-<?php
-echo '<pre>';
-print_r($_SESSION['gio_hang']);
-echo '</pre>';
-?>
 <section class="content-section">
     <div class="container">
         <form id="form-thanh-toan" method="post">
@@ -252,9 +269,10 @@ echo '</pre>';
     </div>
 </section>
 
-<!-- Nơi hiển thị mã QR -->
+<!-- Nơi hiển thị mã QR thanh toán chuyển khoản -->
 <div id="qr-code"></div>
 
+<!-- Xử lý ajax của xã phường -->
 <script>
     $(document).ready(function () {
         $('#tinh_thanhpho').on('change', function () {
@@ -299,18 +317,19 @@ echo '</pre>';
     });
 </script>
 
+<!-- Xử lý thanh toán chuyển khoản -->
 <script>
     $(document).ready(function () {
         $('#form-thanh-toan').on('submit', function (e) {
             e.preventDefault();
-
+            // Chặn submit
             const paymentMethod = $('input[name="phuong_thuc_thanh_toan"]:checked').val();
             const formData = $(this).serializeArray();
             const form = this;
 
             if (paymentMethod === 'transfer') {
                 $.ajax({
-                    url: 'template/thanh_toan/chuyen_khoan/chuyen_khoan.php',
+                    url: 'api/tao_ma_don_hang.php',
                     type: 'POST',
                     data: formData,
                     success: function (orderCode) {
@@ -329,7 +348,7 @@ echo '</pre>';
 
                                 // Bắt đầu kiểm tra giao dịch
                                 const intervalId = setInterval(function () {
-                                    $.getJSON('https://script.google.com/macros/s/AKfycbySQc880OdC46ZTGSe8-HwWbv7-6_cT-jK3GVF4do-ccraA_mB_snjgR-q7AeXAxrIa/exec', function (response) {
+                                    $.getJSON('<?= _API_THANH_TOAN ?>', function (response) {
                                         if (response.error || !response.data) return;
 
                                         const giaoDichHopLe = response.data.find(gd => {
@@ -340,7 +359,12 @@ echo '</pre>';
 
                                         if (giaoDichHopLe) {
                                             clearInterval(intervalId);
-                                            alert("Giao dịch đã được ghi nhận. Đang hoàn tất thanh toán...");
+                                            Swal.fire({
+                                                title: "Thanh toán thành công!",
+                                                icon: "success",
+                                                draggable: true,
+                                                timer: 950
+                                            });
                                             form.submit();
                                         }
                                     });
@@ -361,4 +385,3 @@ echo '</pre>';
         });
     });
 </script>
-

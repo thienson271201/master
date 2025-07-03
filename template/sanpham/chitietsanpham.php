@@ -3,16 +3,11 @@ $id = $product['danh_muc_san_pham_id'];
 $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
 ?>
 <section class="with-bg solid-section">
-  <div
-    class="fix-image-wrap"
-    data-image-src="./assets/images/service/tools.jpg"
-    data-parallax="scroll"></div>
+  <div class="fix-image-wrap" data-image-src="./assets/images/service/tools.jpg" data-parallax="scroll"></div>
   <div class="theme-back"></div>
   <div class="container page-info">
     <div class="section-alt-head container-md">
-      <h1
-        class="section-title text-upper text-lg"
-        data-inview-showup="showup-translate-right">
+      <h1 class="section-title text-upper text-lg" data-inview-showup="showup-translate-right">
         Chi Tiết Sản Phẩm
       </h1>
     </div>
@@ -37,24 +32,14 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
   <div class="page-content">
     <section class="content-section">
       <div class="product">
-        <div
-          class="row offs-lg cols-md rows-lg offs-lg"
-          data-inview-showup="showup-translate-up">
+        <div class="row offs-lg cols-md rows-lg offs-lg" data-inview-showup="showup-translate-up">
           <div class="md-col-5">
-            <div
-              class="responsive-1by1 offs-md"
-              data-preview-image="product-preview"></div>
-            <div
-              class="owl-carousel"
-              data-autoplay="false"
-              data-owl-loop="false"
-              data-owl-responsive="3;3;3;3">
+            <div class="responsive-1by1 offs-md" data-preview-image="product-preview"></div>
+            <div class="owl-carousel" data-autoplay="false" data-owl-loop="false" data-owl-responsive="3;3;3;3">
               <div class="item">
-                <a
-                  class="responsive-1by1"
-                  target="_blank"
-                  href="assets/images/shop/usb-hub.jpg"
-                  data-preview-image-source="product-preview"><img src="upload/images/<?= $product['hinh_anh'] ?>" alt="" /></a>
+                <a class="responsive-1by1" target="_blank" href="assets/images/shop/usb-hub.jpg"
+                  data-preview-image-source="product-preview"><img src="upload/images/<?= $product['hinh_anh'] ?>"
+                    alt="" /></a>
               </div>
 
             </div>
@@ -67,17 +52,12 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                 <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
                 <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
                 <span class="rating-star"><i class="fas fa-star" aria-hidden="true"></i></span>
-                <span class="rating-star fa-stack"><i class="far fa-star fa-stack-1x"></i><i class="fas fa-star-half fa-stack-1x"></i></span>
+                <span class="rating-star fa-stack"><i class="far fa-star fa-stack-1x"></i><i
+                    class="fas fa-star-half fa-stack-1x"></i></span>
               </div>
               <div class="user-reviews">
-                <a
-                  href="#"
-                  class="content-link"
-                  data-action-role="show-tab"
-                  data-tab-name="reviews">2 Đánh giá</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
-                  href="#"
-                  class="content-link"
-                  data-action-role="show-tab"
+                <a href="#" class="content-link" data-action-role="show-tab" data-tab-name="reviews">2 Đánh
+                  giá</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" class="content-link" data-action-role="show-tab"
                   data-tab-name="reviews">Viết đánh giá</a>
               </div>
             </div>
@@ -130,15 +110,13 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
 
               <div class="description-line">
                 <span class="text-upper description-title">Danh mục:</span>
-                <span class="description-value colorful-text"><a href="<?= $danhmuc['duong_dan'] ?>"><?= $danhmuc['ten_danh_muc'] ?></a></span>
+                <span class="description-value colorful-text"><a
+                    href="<?= $danhmuc['duong_dan'] ?>"><?= $danhmuc['ten_danh_muc'] ?></a></span>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="tabs-lined"
-          data-action-role="tabs"
-          data-inview-showup="showup-translate-up">
+        <div class="tabs-lined" data-action-role="tabs" data-inview-showup="showup-translate-up">
           <ul class="tabs-head">
             <li><a href="#" data-tab="description">Thông Số Sản Phẩm</a></li>
             <li><a href="#" data-tab="reviews">Đánh Giá</a></li>
@@ -149,9 +127,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                 </li> -->
           </ul>
           <div class="tabs-line">
-            <div
-              class="tab-active-line"
-              data-action-role="active-tab-line"></div>
+            <div class="tab-active-line" data-action-role="active-tab-line"></div>
           </div>
           <div class="tabs-content">
             <div class="tab-content" data-tab-content="description">
@@ -163,9 +139,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
             </div>
             <div class="tab-content" data-tab-content="reviews">
               <div class="comments">
-                <div
-                  class="comment"
-                  data-inview-showup="showup-translate-up">
+                <div class="comment" data-inview-showup="showup-translate-up">
                   <div class="icon">
                     <i class="fas fa-user" aria-hidden="true"></i>
                   </div>
@@ -191,14 +165,9 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                     <div class="text-right text-xs">Jul 15, 2017</div>
                   </div>
                 </div>
-                <div
-                  class="comment"
-                  data-inview-showup="showup-translate-up">
+                <div class="comment" data-inview-showup="showup-translate-up">
                   <div class="icon">
-                    <img
-                      class="image"
-                      src="assets/images/outsource/user-image.jpg"
-                      alt="" />
+                    <img class="image" src="assets/images/outsource/user-image.jpg" alt="" />
                   </div>
                   <div class="content">
                     <div class="title">
@@ -224,9 +193,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                   </div>
                 </div>
               </div>
-              <div
-                class="top-separator out-lg"
-                data-inview-showup="showup-translate-up"></div>
+              <div class="top-separator out-lg" data-inview-showup="showup-translate-up"></div>
               <form data-inview-showup="showup-translate-up">
                 <h4 class="text-upper">Add a review</h4>
                 <p>
@@ -237,37 +204,26 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                   <label class="default-color">Your Rating</label>
                   <div class="rating-field">
                     <div class="pull-left">
-                      <input
-                        type="radio"
-                        id="user-rating-5"
-                        name="rating"
-                        value="5"
-                        checked="checked" />
-                      <label for="user-rating-5"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
-                      <input
-                        type="radio"
-                        id="user-rating-4"
-                        name="rating"
-                        value="4" />
-                      <label for="user-rating-4"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
-                      <input
-                        type="radio"
-                        id="user-rating-3"
-                        name="rating"
-                        value="3" />
-                      <label for="user-rating-3"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
-                      <input
-                        type="radio"
-                        id="user-rating-2"
-                        name="rating"
-                        value="2" />
-                      <label for="user-rating-2"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
-                      <input
-                        type="radio"
-                        id="user-rating-1"
-                        name="rating"
-                        value="1" />
-                      <label for="user-rating-1"><span class="rating-active-icon"><i class="fas fa-star"></i></span><span class="rating-icon"><i class="far fa-star"></i></span></label>
+                      <input type="radio" id="user-rating-5" name="rating" value="5" checked="checked" />
+                      <label for="user-rating-5"><span class="rating-active-icon"><i
+                            class="fas fa-star"></i></span><span class="rating-icon"><i
+                            class="far fa-star"></i></span></label>
+                      <input type="radio" id="user-rating-4" name="rating" value="4" />
+                      <label for="user-rating-4"><span class="rating-active-icon"><i
+                            class="fas fa-star"></i></span><span class="rating-icon"><i
+                            class="far fa-star"></i></span></label>
+                      <input type="radio" id="user-rating-3" name="rating" value="3" />
+                      <label for="user-rating-3"><span class="rating-active-icon"><i
+                            class="fas fa-star"></i></span><span class="rating-icon"><i
+                            class="far fa-star"></i></span></label>
+                      <input type="radio" id="user-rating-2" name="rating" value="2" />
+                      <label for="user-rating-2"><span class="rating-active-icon"><i
+                            class="fas fa-star"></i></span><span class="rating-icon"><i
+                            class="far fa-star"></i></span></label>
+                      <input type="radio" id="user-rating-1" name="rating" value="1" />
+                      <label for="user-rating-1"><span class="rating-active-icon"><i
+                            class="fas fa-star"></i></span><span class="rating-icon"><i
+                            class="far fa-star"></i></span></label>
                     </div>
                   </div>
                 </div>
@@ -275,11 +231,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                   <div class="sm-col-6">
                     <div class="field-group">
                       <div class="field-wrap">
-                        <input
-                          class="field-control"
-                          name="name"
-                          placeholder="Name"
-                          required="required" />
+                        <input class="field-control" name="name" placeholder="Name" required="required" />
                         <span class="field-back"></span>
                       </div>
                     </div>
@@ -287,11 +239,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                   <div class="sm-col-6">
                     <div class="field-group">
                       <div class="field-wrap">
-                        <input
-                          class="field-control"
-                          name="email"
-                          type="email"
-                          placeholder="Email"
+                        <input class="field-control" name="email" type="email" placeholder="Email"
                           required="required" />
                         <span class="field-back"></span>
                       </div>
@@ -300,11 +248,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                 </div>
                 <div class="field-group">
                   <div class="field-wrap">
-                    <textarea
-                      class="field-control"
-                      name="message"
-                      placeholder="Message"
-                      required="required"></textarea>
+                    <textarea class="field-control" name="message" placeholder="Message" required="required"></textarea>
                     <span class="field-back"></span>
                   </div>
                 </div>
@@ -315,26 +259,19 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                 </div>
               </form>
             </div>
-            <div
-              class="tab-content"
-              data-tab-content="additionalInformation">
+            <div class="tab-content" data-tab-content="additionalInformation">
 
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="top-separator out-lg"
-        data-inview-showup="showup-translate-up"></div>
+      <div class="top-separator out-lg" data-inview-showup="showup-translate-up"></div>
 
     </section>
   </div>
 </div>
 
-<div
-  class="singlepage-block collapse alt-bg"
-  data-block="search"
-  data-show-block-class="animation-scale-top-right"
+<div class="singlepage-block collapse alt-bg" data-block="search" data-show-block-class="animation-scale-top-right"
   data-hide-block-class="animation-unscale-top-right">
   <a href="#" class="close-link" data-close-block><i class="fas fa-times" aria-hidden="true"></i></a>
   <div class="pos-v-center col-12">
@@ -344,19 +281,13 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
           <div class="lg-col-9 md-col-8 sm-col-12">
             <div class="field-group">
               <div class="field-wrap">
-                <input
-                  class="field-control"
-                  name="search"
-                  placeholder="Search Tags"
-                  required="required" />
+                <input class="field-control" name="search" placeholder="Search Tags" required="required" />
                 <span class="field-back"></span>
               </div>
             </div>
           </div>
           <div class="lg-col-3 md-col-4 sm-col-6">
-            <button
-              class="btn btns-white-bordered text-upper"
-              type="submit">
+            <button class="btn btns-white-bordered text-upper" type="submit">
               search
             </button>
           </div>
@@ -375,8 +306,8 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
 
 
 <script>
-  $(document).ready(function() {
-    $('.btn-add-to-cart').off('click').on('click', function(e) {
+  $(document).ready(function () {
+    $('.btn-add-to-cart').off('click').on('click', function (e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
@@ -387,9 +318,16 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
         data: {
           id: productId
         },
-        success: function(response) {
+        success: function (response) {
           // Xử lý sau khi thêm thành công
-          alert('Đã thêm sản phẩm vào giỏ hàng!');
+          // alert('Đã thêm sản phẩm vào giỏ hàng!');
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Đã thêm sản phẩm vào giỏ hàng",
+            showConfirmButton: false,
+            timer: 1500
+          });
           // Hoặc bạn có thể cập nhật số lượng giỏ hàng ở header, etc.
           const htmlString = response.html;
 
@@ -404,7 +342,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
           // Cập nhật số lượng giỏ hàng
           $('#number-cart').text(response.number_cart);
         },
-        error: function() {
+        error: function () {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });

@@ -24,11 +24,9 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
         <div class="row" id="product-list">
             <?php
             foreach ($list_san_pham as $san_pham):
-            ?>
+                ?>
                 <div class="col-3 product-box" data-category="<?= $san_pham['danh_muc_san_pham_id'] ?>">
-                    <div
-                        class="item shop-item shop-item-short item-dash-border"
-                        data-inview-showup="showup-scale">
+                    <div class="item shop-item shop-item-short item-dash-border" data-inview-showup="showup-scale">
                         <div class="item-back"></div>
                         <?php
                         $phan_tram = round((($san_pham['gia_goc'] - $san_pham['gia_sau_khuyen_mai']) / $san_pham['gia_goc']) * 100);
@@ -38,19 +36,20 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
                             </div>
                         <?php endif; ?>
                         <a href="<?= $san_pham['duong_dan'] ?>" class="item-image responsive-1by1">
-                            <img
-                                src="upload/images/<?= $san_pham['hinh_anh'] ?>" />
+                            <img src="upload/images/<?= $san_pham['hinh_anh'] ?>" />
                         </a>
                         <div class="item-content text-center">
                             <div class="item-title text-upper mb-0">
-                                <a href="<?= $san_pham['duong_dan'] ?>" class="content-link"><?= $san_pham['ten_san_pham'] ?></a>
+                                <a href="<?= $san_pham['duong_dan'] ?>"
+                                    class="content-link"><?= $san_pham['ten_san_pham'] ?></a>
                             </div>
                             <div class="item-specs">
                                 <?= $san_pham['thong_so_kich_thuoc'] ?>
                             </div>
                             <div class="item-prices">
-                                <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫</div>
-                                <?php if ($phan_tram > 1) : ?>
+                                <div class="item-price"><?= number_format($san_pham["gia_sau_khuyen_mai"], 0, ',', '.') ?> ₫
+                                </div>
+                                <?php if ($phan_tram > 1): ?>
                                     <div class="item-old-price"><?= number_format($san_pham["gia_goc"], 0, ',', '.') ?> ₫</div>
                                 <?php endif; ?>
                             </div>
@@ -102,7 +101,7 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
 </script> -->
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         function filterProducts(category) {
             // Ẩn hết sản phẩm trước khi hiển thị lại
             $('.product-box').hide().removeClass('animate__fadeIn');
@@ -118,7 +117,7 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
             matched.show().addClass('animate__animated animate__fadeIn');
         }
 
-        $('#category-tabs .nav-link').on('click', function(e) {
+        $('#category-tabs .nav-link').on('click', function (e) {
             e.preventDefault();
             $('#category-tabs .nav-link').removeClass('active');
             $(this).addClass('active');
@@ -134,8 +133,8 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
 
 
 <script>
-    $(document).ready(function() {
-        $('.btn-add-to-cart').off('click').on('click', function(e) {
+    $(document).ready(function () {
+        $('.btn-add-to-cart').off('click').on('click', function (e) {
             e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
             let productId = $(this).data('id');
 
@@ -146,9 +145,16 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
                 data: {
                     id: productId
                 },
-                success: function(response) {
+                success: function (response) {
                     // Xử lý sau khi thêm thành công
-                    alert('Đã thêm sản phẩm vào giỏ hàng!');
+                    // alert('Đã thêm sản phẩm vào giỏ hàng!');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Đã thêm sản phẩm vào giỏ hàng",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     console.log(response.html);
                     const htmlString = response.html;
 
@@ -161,9 +167,9 @@ $list_san_pham = $db->getRaw('select * from san_pham ');
                     // Cập nhật vào DOM thật
                     $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
                     // Cập nhật số lượng giỏ hàng
-          $('#number-cart').text(response.number_cart);
+                    $('#number-cart').text(response.number_cart);
                 },
-                error: function() {
+                error: function () {
                     alert('Đã xảy ra lỗi, vui lòng thử lại.');
                 }
             });

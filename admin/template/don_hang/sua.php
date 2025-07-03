@@ -9,46 +9,12 @@ if ($func->isPOST())
     $db->update('don_hang', $data_update, "id = '$id'");
     setFlashData('smg', 'Đã cập nhật đơn hàng');
 }
-$trangthaidonhang = [
-    1 => [
-        'id' => 1,
-        'status' => 'Mới đặt'
-    ],
-    2 => [
-        'id' => 2,
-        'status' => 'Đã duyệt'
-    ],
-    3 => [
-        'id' => 3,
-        'status' => 'Đã vận chuyển'
-    ],
-    4 => [
-        'id' => 4,
-        'status' => 'Thành công'
-    ],
-    5 => [
-        'id' => 5,
-        'status' => 'Đã huỷ'
-    ]
-];
 $id = $func->filter()['id'];
 $order = $db->oneRaw("SELECT * FROM don_hang WHERE id = '$id'");
 $code = $order['id'];
 $order_detail = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$code'");
+$diachidaydu = $func->laydiachi($order['dia_chi'], $order['xa_phuong'], $order['quan_huyen'], $order['tinh_thanhpho'], );
 $smg = getFlashData('smg');
-if ($order['khach_hang_id'] != "")
-{
-    $id = $order['khach_hang_id'];
-    $thong_tin_khach_hang = $db->oneRaw("SELECT * FROM khach_hang WHERE id = $id");
-    $diachi = $thong_tin_khach_hang['dia_chi'];
-    $xaid = $thong_tin_khach_hang['xa_phuong'];
-    $xa_phuong = $db->oneRaw("SELECT * FROM xaphuongthitran WHERE xaid = $xaid")['name'];
-    $maqh = $thong_tin_khach_hang['quan_huyen'];
-    $quan_huyen = $db->oneRaw("SELECT * FROM quanhuyen WHERE maqh = $maqh")['name'];
-    $matp = $thong_tin_khach_hang['tinh_thanhpho'];
-    $tinh = $db->oneRaw("SELECT * FROM tinhthanhpho WHERE matp = $matp")['name'];
-    $thong_tin_khach_hang['dia_chi_day_du'] = $diachi . ', ' . $xa_phuong . ', ' . $quan_huyen . ', ' . $tinh;
-}
 ?>
 <!--begin::App Main-->
 <main class="app-main">
@@ -84,9 +50,6 @@ if ($order['khach_hang_id'] != "")
             {
                 $func->getSmg($smg);
             }
-            // echo '<pre>';
-            // print_r($thong_tin_khach_hang);
-            // echo '</pre>';
             ?>
             <div class="card card-primary card-outline mb-4">
                 <!--begin::Header-->
@@ -96,24 +59,23 @@ if ($order['khach_hang_id'] != "")
                 <!--end::Header-->
                 <div class="card-body">
                     <p>Mã đơn hàng: <span class="fw-bold text-danger"><?= $order['ma_don_hang'] ?></span></p>
-                    <p>Họ tên: <span
-                            class="fw-bold"><?= $order['khach_hang_id'] == '' ? $order['ten_khach_hang'] : $thong_tin_khach_hang['ten_khach_hang'] ?></span>
+                    <p>Họ tên: <span class="fw-bold"><?= $order['ten_khach_hang'] ?></span>
                     </p>
                     <p>Số điện thoại: <span
-                            class="fw-bold"><?= $func->formatPhoneNumber($order['khach_hang_id'] == '' ? $order['so_dien_thoai'] : $thong_tin_khach_hang['so_dien_thoai']) ?></span>
+                            class="fw-bold"><?= $func->formatPhoneNumber($order['so_dien_thoai']) ?></span>
                     </p>
-                    <p>Địa chỉ: <span
-                            class="fw-bold"><?= $order['khach_hang_id'] == '' ? $order['dia_chi'] : $thong_tin_khach_hang['dia_chi_day_du'] ?></span>
+                    <p>Địa chỉ: <span class="fw-bold"><?= $diachidaydu ?></span>
                     </p>
                     <p>Trạng thái: <span class="fw-bold"><?= $func->status_order($order['trang_thai']) ?></span></p>
                     <form class="row" method="post">
                         <div class="col-md-6">
                             <label for="status" class="fw-bold form-label">Cập nhật trạng thái: </label>
                             <select name="status" class="form-select mb-3">
-                                <?php foreach ($trangthaidonhang as $trangthai): ?>
-                                    <option value="<?= $trangthai['id'] ?>" <?= $order['trang_thai'] == $trangthai['id'] ? 'selected' : '' ?>><?= $trangthai['status'] ?>
+                                <?php for ((int) $i = 1; $i <= 5; $i++): ?>
+                                    <option value="<?= $i ?>" <?= $order['trang_thai'] == $i ? 'selected' : '' ?>>
+                                        <?= $func->status_order($i) ?>
                                     </option>
-                                <?php endforeach; ?>
+                                <?php endfor; ?>
                             </select>
                             <input type="hidden" name="id" value="<?= $order['id'] ?>">
                             <button class="btn btn-success" type="submit">Cập nhật</button>

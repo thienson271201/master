@@ -58,24 +58,13 @@ $smg = getFlashData('smg');
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach ($list_order as $item):
-                                if ($item['khach_hang_id'] != "")
-                                {
-                                    $id = $item['khach_hang_id'];
-                                    $khach_hang_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id=$id");
-                                    $ten_khach_hang = $khach_hang_profile['ten_khach_hang'];
-                                } else
-                                {
-                                    $ten_khach_hang = $item['ten_khach_hang'];
-                                }
-                                ?>
+                            <?php foreach ($list_order as $item): ?>
                                 <tr>
                                     <td class="text-center"><?= $item['ma_don_hang'] ?></td>
                                     <td>
                                         <a class="text-decoration-none fw-bold text-black"
                                             href="?com=don_hang&act=sua&id=<?= $item['id'] ?>">
-                                            <?= $ten_khach_hang ?>
+                                            <?= $item['ten_khach_hang'] ?>
                                         </a>
                                     </td>
                                     <td><?= date('d-m-Y H:i:s', strtotime($item['ngay_tao'])) ?></td>
@@ -90,7 +79,7 @@ $smg = getFlashData('smg');
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a href="?com=don_hang&act=xoa&id=<?= $item['id'] ?>"
-                                            class="btn btn-danger btn-sm <?= $item['trang_thai'] != '1' || $item['hinh_thuc_thanh_toan'] != 'cod'  ? 'd-none' : '' ?>">
+                                            class="btn btn-danger btn-sm <?= $item['trang_thai'] != '1' || $item['hinh_thuc_thanh_toan'] != 'cod' ? 'd-none' : '' ?>">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>

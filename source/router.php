@@ -20,182 +20,131 @@ $url = ltrim($url, '/');
 
 ob_start();
 
-$get_status = false;
-if (isset($_GET['timkiem']))
+
+switch ($url)
 {
-    $get_status = true;
-    $search_keyword = $_GET['timkiem'];
-    $list_result = $db->getRaw("SELECT * FROM products WHERE title LIKE '%$search_keyword%'");
-    $title = "Tìm kiếm: $search_keyword";
-    $search_status = true;
-    require_once TEMPLATE . 'product/product_list_tpl.php';
-    $noidung = ob_get_clean();
-}
-if (isset($_GET['order_status']))
-{
-    $get_status = true;
-    $title = "Đặt hàng thành công";
-    require_once TEMPLATE . 'thanhtoan/status.php';
-    $noidung = ob_get_clean();
-}
-if (!$get_status)
-{
+    // Trang chủ
+    case '':
+        require_once TEMPLATE . 'index/index_tpl.php';
+        $title = $setting_info[0]['setting_value'];
+        $active = 'trang-chu';
+        $noidung = ob_get_clean();
+        break;
+    // Tin tức
+    case 'tin-tuc':
+        $title = 'Tin tức';
+        require_once TEMPLATE . 'tin_tuc/tin_tuc.php';
+        $noidung = ob_get_clean();
+        break;
+    // Chi tiết tin tức gán cứng
+    case 'laptop-la-gi-nhung-dieu-can-biet-truoc-khi-mua':
+        $title = 'Laptop là gì? Những điều cần biết trước khi mua';
+        require_once TEMPLATE . 'tin_tuc/chi_tiet_tin_tuc.php';
+        $noidung = ob_get_clean();
+        break;
+    // Liên hệ
+    case 'lien-he':
+        $title = 'Liên hệ';
+        require_once TEMPLATE . 'lien_he/lien_he.php';
+        $noidung = ob_get_clean();
+        break;
+    // Đăng ký
+    case 'dang-ky':
+        $title = 'Đăng Ký';
+        require_once TEMPLATE . 'khachhang/dangky.php';
+        $noidung = ob_get_clean();
+        break;
+    // Đăng nhập
+    case 'dang-nhap':
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
+        } else
+        {
+            $title = 'Đăng Nhập';
+            require_once TEMPLATE . 'khachhang/dangnhap.php';
+            $noidung = ob_get_clean();
+            break;
+        }
+    // Thông tin khách hàng
+    case 'thanh-vien':
+        // Gán mặc định
+        if (!empty($_GET['page']))
+        {
+            $duongdan = $_GET['page'];
+        } else
+        {
+            $duongdan = 'bang-dieu-khien';
+        }
+        // Xử lý đăng xuất
+        if ($duongdan == 'dang_xuat')
+        {
+            removeSession('userLoginToken');
+        }
+        if ($f->isLogin())
+        {
+            require_once TEMPLATE . 'khachhang/layout/top.php';
 
-    switch ($url)
-    {
-        // Trang chủ
-        case '':
-            require_once TEMPLATE . 'index/index_tpl.php';
-            $title = $setting_info[0]['setting_value'];
-            $active = 'trang-chu';
-            $noidung = ob_get_clean();
-            break;
-        case 'tin-tuc':
-            $title = 'Tin tức';
-            require_once TEMPLATE . 'tin_tuc/tin_tuc.php';
-            $noidung = ob_get_clean();
-            break;
-        case 'laptop-la-gi-nhung-dieu-can-biet-truoc-khi-mua':
-            $title = 'Laptop là gì? Những điều cần biết trước khi mua';
-            require_once TEMPLATE . 'tin_tuc/chi_tiet_tin_tuc.php';
-            $noidung = ob_get_clean();
-            break;
-        case 'lien-he':
-            $title = 'Liên hệ';
-            require_once TEMPLATE . 'lien_he/lien_he.php';
-            $noidung = ob_get_clean();
-            break;
-        // Đăng ký
-        case 'dang-ky':
-            $title = 'Đăng Ký';
-            require_once TEMPLATE . 'khachhang/dangky.php';
-            $noidung = ob_get_clean();
-            break;
-        // Đăng nhập
-        case 'dang-nhap':
-            if ($f->isLogin())
+            if ($duongdan == 'bang-dieu-khien')
             {
-                $f->redirect('thanh-vien?page=thong_tin_khach_hang');
-            } else
-            {
-                $title = 'Đăng Nhập';
-                require_once TEMPLATE . 'khachhang/dangnhap.php';
+                $title = 'Bảng điều khiển';
+                require_once TEMPLATE . 'khachhang/bangdieukhien.php';
                 $noidung = ob_get_clean();
                 break;
             }
-        // Thông tin khách hàng
-        case 'thanh-vien':
-            if (!empty($_GET['page']))
+            if ($duongdan == 'ho-so')
             {
-                $duongdan = $_GET['page'];
-            } else
-            {
-                $duongdan = 'bang-dieu-khien';
-            }
-            // Xử lý đăng xuất
-            if ($duongdan == 'dang_xuat')
-            {
-                removeSession('userLoginToken');
-            }
-            if ($f->isLogin())
-            {
-                require_once TEMPLATE . 'khachhang/layout/top.php';
-
-                if ($duongdan == 'bang-dieu-khien')
-                {
-                    $title = 'Bảng điều khiển';
-                    require_once TEMPLATE . 'khachhang/bangdieukhien.php';
-                    $noidung = ob_get_clean();
-                    break;
-                }
-                if ($duongdan == 'ho-so')
-                {
-                    $title = 'Hồ sơ';
-                    require_once TEMPLATE . 'khachhang/hoso.php';
-                    $noidung = ob_get_clean();
-                    break;
-                }
-                if ($duongdan == 'don-hang')
-                {
-                    $title = 'Đơn hàng';
-                    require_once TEMPLATE . 'khachhang/donhang.php';
-                    $noidung = ob_get_clean();
-                    break;
-                }
-            } else
-            {
-                $f->redirect('dang-nhap');
-            }
-        // Danh sách sản phẩm
-        case 'san-pham':
-            $title = 'Sản phẩm';
-            require_once TEMPLATE . 'sanpham/danhsachsanpham.php';
-            $noidung = ob_get_clean();
-            break;
-        // Giỏ hàng
-        case 'gio-hang':
-            $title = 'Giỏ hàng';
-            require_once TEMPLATE . 'thanh_toan/gio_hang.php';
-            $noidung = ob_get_clean();
-            break;
-        // Thanh toán
-        case 'thanh-toan':
-            if (!isset($_SESSION['gio_hang']))
-                $f->redirect('./');
-            if (!isset($_GET['vnp_ResponseCode']))
-            {
-                $title = 'Thanh toán';
-                require_once TEMPLATE . 'thanh_toan/thanh_toan.php';
-                $noidung = ob_get_clean();
-            } else
-            {
-                if ($_GET['vnp_ResponseCode'] == '00')
-                    $title = 'Thanh toán thành công';
-                else
-                    $title = 'Thanh toán thất bại';
-                require_once TEMPLATE . 'thanh_toan/vnpay/vnpay_return.php';
-                $noidung = ob_get_clean();
-            }
-            if (isset($_GET['hinh_thuc']) && $_GET['hinh_thuc'] == 'COD')
-            {
-                $title = 'Thanh toán thành công';
-                require_once TEMPLATE . 'thanh_toan/cod/cod_return.php';
-                $noidung = ob_get_clean();
-            }
-            break;
-        default:
-            $slug = ltrim($url, '/');
-
-            // Tra cứu tin tức
-            $new = $db->oneRaw("SELECT * FROM news WHERE slug = '$slug'");
-            if (!empty($new))
-            {
-                $title = $new['title'];
-                require_once TEMPLATE . 'new/new_item_tpl.php';
+                $title = 'Hồ sơ';
+                require_once TEMPLATE . 'khachhang/hoso.php';
                 $noidung = ob_get_clean();
                 break;
             }
-            // Tìm kiếm loại sản phẩm
-            $product_type = $db->oneRaw("SELECT * FROM product_types WHERE slug = '$url'");
-            if (!empty($product_type))
+            if ($duongdan == 'don-hang')
             {
-                $title = $product_type['title'];
-                $type_id = $product_type['id'];
-                require_once TEMPLATE . 'product/product_list_tpl.php';
+                $title = 'Đơn hàng';
+                require_once TEMPLATE . 'khachhang/donhang.php';
                 $noidung = ob_get_clean();
                 break;
             }
-            // Tra cứu sản phẩm
-            $product = $db->oneRaw("SELECT * FROM san_pham WHERE duong_dan = '$url'");
-            if (!empty($product))
-            {
-                $title = $product['ten_san_pham'];
-                require_once TEMPLATE . 'sanpham/chitietsanpham.php';
-                $noidung = ob_get_clean();
-                break;
-            }
-
-            // Nếu đường dẫn không có quay về lại trang chủ
+        } else
+        {
+            $f->redirect('dang-nhap');
+        }
+    // Danh sách sản phẩm
+    case 'san-pham':
+        $title = 'Sản phẩm';
+        require_once TEMPLATE . 'sanpham/danhsachsanpham.php';
+        $noidung = ob_get_clean();
+        break;
+    // Giỏ hàng
+    case 'gio-hang':
+        $title = 'Giỏ hàng';
+        require_once TEMPLATE . 'thanh_toan/gio_hang.php';
+        $noidung = ob_get_clean();
+        break;
+    // Thanh toán
+    case 'thanh-toan':
+        if (!isset($_SESSION['gio_hang']))
             $f->redirect('./');
-    }
+        else
+        {
+            require_once TEMPLATE . 'thanh_toan/thanh_toan.php';
+            $noidung = ob_get_clean();
+        }
+        break;
+    default:
+        $slug = ltrim($url, '/');
+
+        // // Tra cứu sản phẩm
+        $product = $db->oneRaw("SELECT * FROM san_pham WHERE duong_dan = '$url'");
+        if (!empty($product))
+        {
+            $title = $product['ten_san_pham'];
+            require_once TEMPLATE . 'sanpham/chitietsanpham.php';
+            $noidung = ob_get_clean();
+            break;
+        }
+
+        // Nếu đường dẫn không có quay về lại trang chủ
+        $f->redirect('./');
 }
