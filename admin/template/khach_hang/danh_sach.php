@@ -1,6 +1,8 @@
 <?php
 $list_order = $db->getRaw("SELECT * FROM khach_hang ");
 $smg = getFlashData('smg');
+$smg_type = getFlashData('smg_type');
+
 ?>
 
 <!--begin::App Main-->
@@ -34,7 +36,7 @@ $smg = getFlashData('smg');
         <div class="container-fluid">
             <?php
             if (!empty($smg)) {
-                $func->getSmg($smg);
+                $func->getSmg($smg,$smg_type);
             }
             ?>
             <div class="card card-primary card-outline mb-4">
@@ -50,6 +52,8 @@ $smg = getFlashData('smg');
                                 <th class="text-center" style="width: 5%;">STT</th>
                                 <th>Tên khách hàng</th>
                                 <th class="text-center">Số điện thoại</th>
+                                <th>Email</th>
+                                <th class="text-end">Chi tiêu</th>
 
                                 <th class="text-center" style="width: 10%;">Thao tác</th>
                             </tr>
@@ -64,7 +68,7 @@ $smg = getFlashData('smg');
                                     <td class="text-center"><?= $dem++ ?></td>
                                     <td>
                                         <a class="text-decoration-none fw-bold text-black"
-                                            href="?com=khach_hang&act=sua&id=<?= $item['id'] ?>">
+                                            href="?com=khach_hang&act=xem&id=<?= $item['id'] ?>">
                                             <?= $item['ten_khach_hang'] ?>
                                         </a>
                                     </td>
@@ -72,12 +76,14 @@ $smg = getFlashData('smg');
 
 
                                     <td class="text-center"><?= $item['so_dien_thoai'] ?></td>
+                                    <td><?= $item['email'] ?></td>
+                                    <td class="text-end"><?= $func->format_tiente($item['chi_tieu']) ?> đ</td>
                                     <td class="text-center">
-                                        <a href="?com=don_hang&act=sua&id=<?= $item['id'] ?>"
+                                        <a href="?com=khach_hang&act=xem&id=<?= $item['id'] ?>"
                                             class="btn btn-warning btn-sm">
-                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            <i class="fa-solid fa-eye"></i>
                                         </a>
-                                        <a href="?com=don_hang&act=xoa&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">
+                                        <a href="?com=khach_hang&act=xoa&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>

@@ -1,7 +1,6 @@
 <?php
 // Xử lý khi form submit
-if ($f->isPOST())
-{
+if ($f->isPOST()) {
     $title = 'Kết quả thanh toán';
     $filterAll = $f->filter();
     $madonhang = $f->generateOrderCode();
@@ -21,14 +20,19 @@ if ($f->isPOST())
         'ngay_tao' => date('Y-m-d H:i:s'),
     ];
     // Nếu khách có đăng nhập thì lưu id vào mảng
-    if ($f->isLogin())
-    {
-        $data_insert['khach_hang_id'] = getSession('khach_hang_id');
+    if ($f->isLogin()) {
+        $khach_hang_id = getSession('khach_hang_id');
+        $chi_tieu = (int)$filterAll['chi_tieu'] + (int)$filterAll['tong_tien'];
+        $data_update = ['chi_tieu' => $chi_tieu];
+        $db->update('khach_hang', $data_update, "id=$khach_hang_id");
+        $data_insert['khach_hang_id'] = $khach_hang_id;
     }
-
+    // echo'<pre>';
+    // print_r($data_insert);
+    // echo'</pre>';
+    // exit;
     // Nếu thanh toán vnpay thì để vnpay xử lý
-    if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay')
-    {
+    if ($filterAll['phuong_thuc_thanh_toan'] == 'vnpay') {
         setFlashData('data_vnpay', $data_insert);
         require_once 'vnpay/vnpay_create_payment.php';
         exit;
@@ -38,10 +42,8 @@ if ($f->isPOST())
     $f->redirect('./thanh-vien?page=don-hang');
 }
 // Xử lý khi vnpay trả kết quả về
-if (isset($_GET['vnp_ResponseCode']))
-{
-    if ($_GET['vnp_ResponseCode'] == '00')
-    {
+if (isset($_GET['vnp_ResponseCode'])) {
+    if ($_GET['vnp_ResponseCode'] == '00') {
         $data_insert = getFlashData('data_vnpay');
         require_once 'tao_don_hang.php';
         $f->redirect('./thanh-vien?page=don-hang');
@@ -49,8 +51,7 @@ if (isset($_GET['vnp_ResponseCode']))
 }
 $title = "Thanh toán";
 // Sử dụng id khách hàng truy vấn dữ liệu
-if ($f->isLogin())
-{
+if ($f->isLogin()) {
     $user_profile = $db->oneRaw("SELECT * FROM khach_hang WHERE id='" . getSession('khach_hang_id') . "'");
 }
 ?>
@@ -117,9 +118,9 @@ if ($f->isLogin())
                                 <?php
                                 $dstinh = $db->getRaw('SELECT * FROM tinhthanhpho');
                                 foreach ($dstinh as $tinh):
-                                    ?>
+                                ?>
                                     <option <?php if (isset($user_profile['tinh_thanhpho']) && $user_profile['tinh_thanhpho'] == $tinh['matp'])
-                                        echo 'selected'; ?>
+                                                echo 'selected'; ?>
                                         value="<?= $tinh['matp'] ?>"><?= $tinh['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -135,11 +136,11 @@ if ($f->isLogin())
                                     $tinh = $user_profile['tinh_thanhpho'];
                                     $dshuyen = $db->getRaw("SELECT * FROM quanhuyen where matp=$tinh");
                                     foreach ($dshuyen as $huyen):
-                                        ?>
+                                ?>
                                         <option <?php if (isset($user_profile['quan_huyen']) && $user_profile['quan_huyen'] == $huyen['maqh'])
-                                            echo 'selected'; ?>
+                                                    echo 'selected'; ?>
                                             value="<?= $huyen['maqh'] ?>"><?= $huyen['name'] ?></option>
-                                    <?php endforeach;
+                                <?php endforeach;
                                 endif; ?>
                                 <!-- thêm option khác tùy bạn -->
                             </select>
@@ -155,11 +156,11 @@ if ($f->isLogin())
                                     $huyen = $user_profile['quan_huyen'];
                                     $dsxa = $db->getRaw("SELECT * FROM xaphuongthitran where maqh=$huyen");
                                     foreach ($dsxa as $xa):
-                                        ?>
+                                ?>
                                         <option <?php if (isset($user_profile['xa_phuong']) && $user_profile['xa_phuong'] == $xa['xaid'])
-                                            echo 'selected'; ?>
+                                                    echo 'selected'; ?>
                                             value="<?= $xa['xaid'] ?>"><?= $xa['name'] ?></option>
-                                    <?php endforeach;
+                                <?php endforeach;
                                 endif; ?>
                             </select>
                             <span class="field-back"></span>
@@ -194,7 +195,7 @@ if ($f->isLogin())
                             $id = $item['id'];
                             $sanphamthanhtoan = $db->oneRaw("SELECT * FROM san_pham WHERE id = $id");
                             $tong_tien += $sanphamthanhtoan['gia_sau_khuyen_mai'] * $item['quantity'];
-                            ?>
+                        ?>
 
                             <div class="checkout-total-line">
                                 <div class="title"><?= $sanphamthanhtoan['ten_san_pham'] ?> x <?= $item['quantity'] ?></div>
@@ -261,6 +262,7 @@ if ($f->isLogin())
                         </div>
                     </div>
                     <input type="hidden" name="tong_tien" value="<?= $tong_tien ?>">
+                    <input type="hidden" name="chi_tieu" value="<?= $user_profile['chi_tieu'] ?>">
                     <button class="btn text-upper shift-md col-12 md-col-8 lg-col-6" type="submit">
                         Thanh toán
                     </button>
@@ -275,8 +277,8 @@ if ($f->isLogin())
 
 <!-- Xử lý ajax của xã phường -->
 <script>
-    $(document).ready(function () {
-        $('#tinh_thanhpho').on('change', function () {
+    $(document).ready(function() {
+        $('#tinh_thanhpho').on('change', function() {
             var matp = $(this).val();
             // Reset quận và xã trước khi load lại
             $('#quan_huyen').html('<option value="">Chọn Quận / Huyện</option>');
@@ -288,16 +290,16 @@ if ($f->isLogin())
                     key: 'quanhuyen',
                     matp: matp
                 },
-                success: function (data) {
+                success: function(data) {
                     $('#quan_huyen').html(data);
                 },
-                error: function () {
+                error: function() {
                     alert('Có lỗi khi tải danh sách quận/huyện');
                 }
             });
         });
     });
-    $('#quan_huyen').on('change', function () {
+    $('#quan_huyen').on('change', function() {
         var maqh = $(this).val();
         // Reset xã trước khi load lại
         $('#xa_phuong').html('<option value="">Chọn Phường / Xã</option>');
@@ -308,10 +310,10 @@ if ($f->isLogin())
                 key: 'xaphuong',
                 maqh: maqh
             },
-            success: function (data) {
+            success: function(data) {
                 $('#xa_phuong').html(data);
             },
-            error: function () {
+            error: function() {
                 alert('Có lỗi khi tải danh sách xã/phường');
             }
         });
@@ -320,8 +322,8 @@ if ($f->isLogin())
 
 <!-- Xử lý thanh toán chuyển khoản -->
 <script>
-    $(document).ready(function () {
-        $('#form-thanh-toan').on('submit', function (e) {
+    $(document).ready(function() {
+        $('#form-thanh-toan').on('submit', function(e) {
             e.preventDefault();
             // Chặn submit
             const paymentMethod = $('input[name="phuong_thuc_thanh_toan"]:checked').val();
@@ -333,7 +335,7 @@ if ($f->isLogin())
                     url: 'api/tao_ma_don_hang.php',
                     type: 'POST',
                     data: formData,
-                    success: function (orderCode) {
+                    success: function(orderCode) {
                         const tongTien = parseInt(formData.find(item => item.name === 'tong_tien')?.value || '0');
 
                         // Gọi API tạo mã QR
@@ -344,12 +346,12 @@ if ($f->isLogin())
                                 ma_don_hang: orderCode,
                                 tong_tien: tongTien,
                             },
-                            success: function (qrHtml) {
+                            success: function(qrHtml) {
                                 $('#qr-code').html(qrHtml);
 
                                 // Bắt đầu kiểm tra giao dịch
-                                const intervalId = setInterval(function () {
-                                    $.getJSON('<?= _API_THANH_TOAN ?>', function (response) {
+                                const intervalId = setInterval(function() {
+                                    $.getJSON('<?= _API_THANH_TOAN ?>', function(response) {
                                         if (response.error || !response.data) return;
 
                                         const giaoDichHopLe = response.data.find(gd => {
@@ -371,12 +373,12 @@ if ($f->isLogin())
                                     });
                                 }, 3000); // mỗi 3 giây
                             },
-                            error: function () {
+                            error: function() {
                                 alert('Không thể tạo mã QR.');
                             }
                         });
                     },
-                    error: function () {
+                    error: function() {
                         alert('Không thể lấy mã đơn hàng.');
                     }
                 });
