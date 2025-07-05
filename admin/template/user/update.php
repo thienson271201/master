@@ -2,6 +2,9 @@
 if ($func->isPOST())
 {
     $filterAll = $func->filter();
+    // echo "<pre>";
+    // print_r ($filterAll);
+    // echo "</pre>";
     $data_update = [
         'fullname' => $filterAll['fullname'],
         'email' => $filterAll['email']
@@ -22,7 +25,7 @@ if ($func->isPOST())
         }
     } else
     {
-        if ($db->update('admin', $data_update))
+        if ($db->update('admin', $data_update, "id = " . (int)$filterAll['id']))
         {
             setFlashData('msg', 'Cập nhật thành công');
             setFlashData('msg_type', 'success');
@@ -33,7 +36,7 @@ if ($func->isPOST())
 $msg = getFlashData('msg');
 $msg_type = getFlashData('msg_type');
 
-$admin_info = $db->oneRaw('SELECT * FROM admin');
+$admin_info = $db->oneRaw('SELECT * FROM admin where id = ' . getSession('admin_id'));
 ?>
 
 

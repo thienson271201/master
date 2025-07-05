@@ -14,6 +14,14 @@
         <ul class="navbar-nav ms-auto">
             <!-- begin::xem website -->
             <li class="nav-item">
+                <a href="?com=user&act=update" class="nav-link" target="_blank">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <?= getSession('adminName') ?>
+                </a>
+            </li>
+            <!-- end::xem website -->
+            <!-- begin::xem website -->
+            <li class="nav-item">
                 <a href="../" class="nav-link" target="_blank">
                     Xem website
                     <i data-lte-icon="maximize" class="bi bi-box-arrow-up-right ms-2"></i>

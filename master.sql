@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 04, 2025 lúc 07:26 PM
+-- Thời gian đã tạo: Th7 05, 2025 lúc 07:33 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -32,7 +32,9 @@ CREATE TABLE `admin` (
   `username` varchar(50) NOT NULL,
   `email` varchar(200) NOT NULL,
   `fullname` varchar(50) NOT NULL,
+  `phone` varchar(11) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `is_admin` int(11) DEFAULT 0,
   `create_at` datetime NOT NULL,
   `update_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -41,8 +43,9 @@ CREATE TABLE `admin` (
 -- Đang đổ dữ liệu cho bảng `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `email`, `fullname`, `password`, `create_at`, `update_at`) VALUES
-(1, 'admin', 'huynhminhtamm2002@gmail.com', 'Huỳnh Minh Tâm', '$2y$10$QSatZ3QGErN6S4lajDLL7ud46177rNym6gyGroQKVos8e7ftyUKx.', '2024-07-18 11:11:51', '2024-07-18 11:11:51');
+INSERT INTO `admin` (`id`, `username`, `email`, `fullname`, `phone`, `password`, `is_admin`, `create_at`, `update_at`) VALUES
+(1, 'admin', '', 'Admin', NULL, '$2y$10$CSchL2JIuSwZLxQ81/1BHuk9Isc.JNtAdcaYS8fcwmDTAIThna1gC', 1, '2024-07-18 11:11:51', '2024-07-18 11:11:51'),
+(3, 'hoangminh', '', 'Admin', '0779767361', '$2y$10$CSchL2JIuSwZLxQ81/1BHuk9Isc.JNtAdcaYS8fcwmDTAIThna1gC', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -62,69 +65,7 @@ CREATE TABLE `admin_token` (
 --
 
 INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
-(109, 1, '9d46dbdd06c130e4b0bc6cbf54215f0ab0acc57f', '2024-08-18 18:31:56'),
-(110, 1, '1c17468763a4fcbcc153cb46ca9637cd80aed6c5', '2024-08-19 10:23:49'),
-(111, 1, '7fe64e7eb5a70a0ef068d3cb649d7a9537e1563d', '2024-08-19 10:26:52'),
-(112, 1, '221fda7e39d873096b5cb4c9abe6e3004496dbef', '2024-08-19 13:22:43'),
-(113, 1, 'a1bba14345880028897895d11fbfe2008f902f2c', '2024-08-21 15:04:57'),
-(114, 1, 'ea974216747190d15127b19f53f7927b808f5763', '2024-08-21 16:11:15'),
-(115, 1, 'f1c97b6372629f05219abf46c0194748351b3634', '2024-08-21 16:30:24'),
-(116, 1, 'bc860792f280da36b778aa28be6934ca00bb9278', '2024-08-21 16:44:37'),
-(117, 1, '4b0edb6c7d2792f70b80281d3c11989648c62a6c', '2024-08-21 22:03:12'),
-(118, 1, 'bb16332896a6a675b2cf3869ec2d222440413daf', '2024-08-21 22:23:54'),
-(119, 1, 'cd8e9ad6c455374b5cced43f63eeae94e18354d7', '2024-08-21 23:00:42'),
-(120, 1, 'a0e47bb87211572f81a2bb6b7fe3d906955854a2', '2024-08-22 10:21:10'),
-(121, 1, 'ac971d204fa6a936278ef35265d2029e2241e875', '2024-08-22 14:32:39'),
-(122, 1, 'a8335eae33393559afa0e5d35cb87896b7768773', '2024-08-22 20:29:57'),
-(123, 1, '2f28e891d57ed75ded59d2e2d53925d1bf99fdc5', '2024-08-22 23:03:01'),
-(124, 1, '2362d6804873fef5f245db63ec0c933fb8c9f457', '2024-08-23 00:22:41'),
-(125, 1, 'f9ba1a57e9cde0173a8f4abd16a658525dffc034', '2024-08-23 14:17:13'),
-(126, 1, '000ad575c0da2310a782c6d4c1a84add7dfa69ea', '2024-08-23 14:22:38'),
-(127, 1, '796d53b7f8abafa628b4e96fca412896b79c41ff', '2024-08-23 14:43:54'),
-(128, 1, 'ebb2b0abbabd27bcf5fa57f78ccecb86798f05a4', '2024-08-23 21:14:25'),
-(129, 1, 'f493d6ccba9dbb6ecb74b40197145c3e0009e223', '2024-08-23 21:38:44'),
-(130, 1, '95e9da5d440e1d2020881c96d6eb4133caae164c', '2024-08-25 18:09:22'),
-(131, 1, 'b0f89e4807992f8521d1d8ea33b2785b0d8d9cc6', '2024-08-27 22:15:13'),
-(132, 1, 'a5653bc20a324491181c2785e945d516d5a0aec5', '2024-09-02 00:38:35'),
-(133, 1, 'a1baabb24436a55302913ffa2704fe980c4e8468', '2024-09-02 20:45:39'),
-(134, 1, '7a6419231135295d201b4c2f5dbae1e843683c4d', '2025-03-28 20:13:25'),
-(135, 1, 'd71bd39d5ace800ea2e608376536c7aa10e3d885', '2025-03-29 21:33:42'),
-(136, 1, '3fea8148621db336728463ce256d9d296156b1f4', '2025-03-30 09:36:08'),
-(137, 1, 'cd6aa8eba62b1e883abc737cadf1efc6f407a8e8', '2025-04-02 21:45:20'),
-(138, 1, '3b663872699dc48fbd5b10f4d2c792f7e006257c', '2025-04-04 21:56:30'),
-(139, 1, '7e654c460114b9f93f9cf4f924354f5466557fe1', '2025-04-06 09:08:57'),
-(140, 1, '9b4301d3a2a1fa2d000349a993fde875cd3fa41a', '2025-04-09 21:41:58'),
-(141, 1, '704009eb0eb1ac7bbe4fc6c6551e7cfb239dfa83', '2025-04-10 12:01:41'),
-(142, 1, 'b804d27cfab963f1a67e3055277a5616b7e3c289', '2025-04-12 22:16:19'),
-(143, 1, 'ef1d2e6a07be21998146a1c4715a054275bad824', '2025-04-15 22:43:29'),
-(144, 1, '25aa3526ce9cdf87b4711f903c3d7981839a2954', '2025-04-17 21:29:13'),
-(145, 1, '062c931110f36ec7df2ee099fec1d6bd544575bc', '2025-04-18 11:00:17'),
-(146, 1, '804574aae6e9aeab32df67fc3f829c537421c20f', '2025-05-24 00:25:41'),
-(147, 1, '6223f6b1929891865bf8c4a61b59770b4eb1bdc9', '2025-05-24 00:36:33'),
-(148, 1, 'a441ada805afe451e944f12bf5b29fc29eefbd90', '2025-05-25 08:45:29'),
-(149, 1, '8ac12dd25d0c7c57ea724317b319a4060922294d', '2025-05-28 21:10:16'),
-(150, 1, '8a073eae5d675fd9926556da0e95fd266d239930', '2025-06-03 22:50:31'),
-(151, 1, 'd86e707b87e0b83b5b95c8de0444047cc5542c71', '2025-06-04 09:45:18'),
-(152, 1, '9d2991a70c8d406b79a89908770f5f51f67da857', '2025-06-04 10:50:20'),
-(153, 1, 'beae6a395af2173e2dfd6c5413ec7fe1787f4ba0', '2025-06-06 16:29:46'),
-(155, 1, '9eed1e6e4a88455c9a43bf6ad34a7cbb6204240c', '2025-06-10 16:23:54'),
-(156, 1, 'e4007aa060387136d20cf61875bb32255dcc7da6', '2025-06-11 23:34:32'),
-(157, 1, '6b44a24a73dffbddd16b08b6f51f814de2a411b8', '2025-06-12 07:17:25'),
-(158, 1, 'b5a2846011df1c0b1d9985dd834dad346b08ea29', '2025-06-16 14:45:23'),
-(159, 1, 'd8e1677a6acf934b964ec22ff846232323160425', '2025-06-18 09:09:54'),
-(160, 1, 'c108e8bb660544a367cd86691a753d34c8a52106', '2025-06-18 16:23:53'),
-(161, 1, 'bfdb703d05e8a580c09bf09883375dda0a829195', '2025-06-18 17:36:14'),
-(162, 1, '9d883dd159d3b1b002a725c965304496ab2cfc89', '2025-06-24 10:18:51'),
-(163, 1, 'c08b48e1dee432438e9a53a41ea522bb5e522fe4', '2025-06-25 07:14:19'),
-(164, 1, '188a738917fb0ef5a0eb5d3eefc1338449b19d3f', '2025-06-27 23:17:28'),
-(165, 1, '5eeac3b06a362f75b540a93484b5214a0109621e', '2025-06-30 23:13:44'),
-(166, 1, 'b046314d6298477787e40d04ffdcf41cc952ea5a', '2025-07-01 23:56:09'),
-(167, 1, '83eda86f027515a42e9c563d352c1f168d19a1b6', '2025-07-02 10:03:47'),
-(168, 1, '7edff72bcab88a7a69f9c90c0195d36427c71369', '2025-07-02 23:13:02'),
-(169, 1, '3337c12578822611bc19cb31fa4a7bca84f03c79', '2025-07-03 09:04:21'),
-(170, 1, 'e7389b1492e7ae61438928747e0163cfae1d2036', '2025-07-03 09:27:37'),
-(171, 1, '142fdec7c6c33def525acc033d83895cd69e3cee', '2025-07-03 10:47:38'),
-(172, 1, 'f16015561e7538699f939b7a5fcaec351d8a3e18', '2025-07-04 23:01:07');
+(181, 1, '26abbbd6de677a9e4c628a8141cb832c3d887a84', '2025-07-06 00:32:33');
 
 -- --------------------------------------------------------
 
@@ -258,7 +199,6 @@ CREATE TABLE `khach_hang` (
 
 INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `chi_tieu`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
 (13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 159420000, '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
-(14, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', NULL, 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$KXViUn63d6X3VaKMXy2MmuOWmMsXWkQKHCoHrR8N7mKgDXRojBkX.', NULL, '2025-05-30 16:51:34', '2025-06-03 02:55:32'),
 (15, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, 'Ấp Hoà Bình', 26497, 742, 75, '$2y$10$8Tm6SzPoaYI1hUPX6xQbveTUlJmToFXvi2OkLTjGxKfp6z4KQjKp2', '1749202308.jpg', '2025-06-06 09:31:03', '2025-06-06 09:31:48');
 
 -- --------------------------------------------------------
@@ -273,13 +213,6 @@ CREATE TABLE `khach_hang_token` (
   `token` varchar(255) NOT NULL,
   `ngay_tao` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `khach_hang_token`
---
-
-INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
-(41, 13, 'e0d587abdd233f9ef74cfbced4f98e3f45d269eb', '2025-07-04 16:00:49');
 
 -- --------------------------------------------------------
 
@@ -11939,13 +11872,13 @@ ALTER TABLE `xaphuongthitran`
 -- AUTO_INCREMENT cho bảng `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
@@ -11975,13 +11908,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`

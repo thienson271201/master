@@ -78,8 +78,18 @@
                 <li class="nav-item">
                     <a href="?com=khach_hang&act=danh_sach"
                         class="nav-link <?= $com == 'khach_hang' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-right-to-bracket fa-rotate-90"></i>
+                        <!-- <i class="nav-icon fa-solid fa-right-to-bracket fa-rotate-90"></i> -->
+                        <i class="nav-icon fa-solid fa-users"></i>
                         <p>Quản lý khách hàng</p>
+                    </a>
+                </li>
+                <li class="nav-header">Quản lý tài khoản</li>
+                <li class="nav-item">
+                    <a href="?com=tai_khoan&act=danh_sach"
+                        class="nav-link <?= $com == 'tai_khoan' ? 'active' : '' ?>">
+                        <!-- <i class="nav-icon fa-solid fa-right-to-bracket fa-rotate-90"></i> -->
+                        <i class="nav-icon fa-solid fa-users-gear"></i>
+                        <p>Quản lý tài khoản</p>
                     </a>
                 </li>
                 <li class="nav-header">Đa phương tiện</li>

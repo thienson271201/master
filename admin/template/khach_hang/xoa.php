@@ -7,6 +7,7 @@ $status= $db->delete('khach_hang', "id = '$id'");
 if($status)
 {
 setFlashData('smg', 'Đã xoá thành công khách hàng');
+setFlashData('smg_type', 'success');
 }
 else
 {
