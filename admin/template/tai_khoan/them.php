@@ -1,14 +1,18 @@
 <?php
-if ($func->isPOST()) {
+if ($func->isPOST())
+{
     $filterAll = $func->filter();
     $data_insert = [
         'username' => $filterAll['username'],
         'fullname' => $filterAll['fullname'],
         'email' => $filterAll['email'],
         'phone' => $filterAll['phone'],
-        'password' => password_hash($filterAll['password'], PASSWORD_DEFAULT)
+        'password' => password_hash($filterAll['password'], PASSWORD_DEFAULT),
+        'create_at' => date('Y-m-d H:i:s')
     ];
-   
+    // echo '<pre>';
+    // print_r($data_insert);
+    // echo '</pre>';
     $db->insert('admin', $data_insert);
     setFlashData('smg', 'Thêm mục thành công');
     $func->redirect('?com=tai_khoan&act=danh_sach');
@@ -48,7 +52,8 @@ $smg_type = getFlashData('smg_type');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg)) {
+            if (!empty($smg))
+            {
                 $func->getSmg($smg, $smg_type);
             }
             ?>
@@ -65,28 +70,25 @@ $smg_type = getFlashData('smg_type');
                         <div class="row">
                             <div class="mb-3 col-12 col-lg-4">
                                 <label for="company_name" class="form-label fw-bold">Username:</label>
-                                <input type="text" name="username" class="form-control"
-                                    >
+                                <input type="text" name="username" class="form-control">
                             </div>
                             <div class="mb-3 col-12 col-lg-4">
                                 <label for="company_name" class="form-label fw-bold">Password:</label>
-                                <input type="text" name="password" class="form-control"
-                                    >
+                                <input type="text" name="password" class="form-control">
                             </div>
                             <div class="mb-3 col-12 col-lg-4">
                                 <label for="phone_number" class="form-label fw-bold">Điện thoại:</label>
-                                <input type="text" name="phone" class="form-control"
-                                   >
+                                <input type="text" name="phone" class="form-control">
                             </div>
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="address" class="form-label fw-bold">Họ tên:</label>
-                                <input type="text" name="fullname" class="form-control" >
+                                <input type="text" name="fullname" class="form-control">
                             </div>
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="email" class="form-label fw-bold">Email:</label>
-                                <input type="email" name="email" class="form-control" >
+                                <input type="email" name="email" class="form-control">
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

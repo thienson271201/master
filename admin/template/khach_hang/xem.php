@@ -1,5 +1,6 @@
 <?php
-if ($func->isPOST()) {
+if ($func->isPOST())
+{
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
@@ -9,10 +10,10 @@ if ($func->isPOST()) {
     setFlashData('smg', 'Đã cập nhật đơn hàng');
 }
 $id = $func->filter()['id'];
-$order = $db->getRaw("SELECT * FROM don_hang WHERE khach_hang_id = '$id'");
+$order = $db->getRaw("SELECT * FROM don_hang WHERE khach_hang_id = '$id' ORDER BY ngay_tao DESC");
 
 $khach_hang = $db->oneRaw("select * from khach_hang where id=$id");
-$diachidaydu = $func->laydiachi($khach_hang['dia_chi'], $khach_hang['xa_phuong'], $khach_hang['quan_huyen'], $khach_hang['tinh_thanhpho'],);
+$diachidaydu = $func->laydiachi($khach_hang['dia_chi'], $khach_hang['xa_phuong'], $khach_hang['quan_huyen'], $khach_hang['tinh_thanhpho'], );
 $smg = getFlashData('smg');
 ?>
 <!--begin::App Main-->
@@ -45,7 +46,8 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg)) {
+            if (!empty($smg))
+            {
                 $func->getSmg($smg);
             }
             ?>
@@ -66,18 +68,17 @@ $smg = getFlashData('smg');
                     </p>
                     <p>Địa chỉ: <span class="fw-bold"><?= $diachidaydu ?></span>
                     </p>
-                    <p>Chi tiêu: <span
-                            class="fw-bold"><?= $func->format_tiente($khach_hang['chi_tieu']) ?> đ</span>
+                    <p>Chi tiêu: <span class="fw-bold"><?= $func->format_tiente($khach_hang['chi_tieu']) ?> đ</span>
                     </p>
 
                 </div>
             </div>
             <?php
             foreach ($order as $order_item):
-            ?>
+                ?>
                 <div class="card card-primary card-outline mb-4">
                     <div class="card-header">
-                        <div class="card-title"><?=$order_item['ngay_tao'] ?></div>
+                        <div class="card-title"><?= $order_item['ngay_tao'] ?></div>
                     </div>
                     <div class="card-body">
                         <?php
@@ -103,7 +104,7 @@ $smg = getFlashData('smg');
                                 foreach ($order_detail as $item):
                                     $item_id = $item['san_pham_id'];
                                     $item_db = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$item_id'");
-                                ?>
+                                    ?>
                                     <?php if ($item_db): ?>
                                         <tr>
                                             <td><?= ++$dem ?></td>

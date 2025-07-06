@@ -1,35 +1,3 @@
-<?php
-session_start();
-
-define('ASSET', 'assets/');
-define('SOURCE', 'source/');
-define('TEMPLATE', 'template/');
-define('LAYOUT', 'layout/');
-
-// config
-require_once 'config.php';
-
-// thư viện php mailler
-require_once 'source/phpmailer/Exception.php';
-require_once 'source/phpmailer/PHPMailer.php';
-require_once 'source/phpmailer/SMTP.php';
-
-// Session
-require_once SOURCE . "session.php";
-
-// Database
-require_once SOURCE . "database.php";
-
-// Function
-require_once SOURCE . "function.php";
-
-// Khởi tạo
-$f = new func();
-$db = new Database();
-
-$otp = '1234565';
-$subject = 'Đặt hàng thành công';
-$contentmail = '
 <div
   style="
     max-width: 600px;
@@ -81,12 +49,3 @@ $contentmail = '
     &copy; ' . date("Y") . ' Công ty của bạn. All rights reserved.
   </div>
 </div>
-';
-$f->sendMail('huynhminhtamm2002@gmail.com', $subject, $contentmail);
-
-
-require_once SOURCE . 'router.php';
-
-require_once TEMPLATE . 'index.php';
-
-

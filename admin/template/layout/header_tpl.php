@@ -14,7 +14,7 @@
         <ul class="navbar-nav ms-auto">
             <!-- begin::xem website -->
             <li class="nav-item">
-                <a href="?com=user&act=update" class="nav-link" target="_blank">
+                <a href="?com=user&act=update" class="nav-link">
                     <i class="fa-solid fa-user me-2"></i>
                     <?= getSession('adminName') ?>
                 </a>

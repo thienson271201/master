@@ -29,8 +29,11 @@ define('_PATH_ASSETS', _PATH . '/assets');
 define('_PATH_UPLOAD', _PATH . '/upload/');
 
 // Thiết lập mailer
-define('_username', '');
-define('_password', '');
+define('_username', 'thevyshop.contact@gmail.com');
+define('_password', 'tlan nljd syxr nkrg');
+// Thiết lập mailer
+// define('_username', '');
+// define('_password', '');
 
 
 // Thông tin kết nối

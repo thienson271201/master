@@ -2,9 +2,7 @@
 if ($func->isPOST())
 {
     $filterAll = $func->filter();
-    // echo "<pre>";
-    // print_r ($filterAll);
-    // echo "</pre>";
+    $id = $filterAll['id'];
     $data_update = [
         'fullname' => $filterAll['fullname'],
         'email' => $filterAll['email']
@@ -17,22 +15,17 @@ if ($func->isPOST())
         } else
         {
             $data_update['password'] = password_hash($filterAll['password'], PASSWORD_DEFAULT);
-            if ($db->update('admin', $data_update))
-            {
-                setFlashData('msg', 'Cập nhật thành công');
-                setFlashData('msg_type', 'success');
-            }
         }
-    } else
+    }
+    if (!isset($error) || $error == '')
     {
-        if ($db->update('admin', $data_update, "id = " . (int)$filterAll['id']))
+        if ($db->update('admin', $data_update, "id = $id"))
         {
             setFlashData('msg', 'Cập nhật thành công');
             setFlashData('msg_type', 'success');
         }
     }
 }
-
 $msg = getFlashData('msg');
 $msg_type = getFlashData('msg_type');
 
