@@ -117,7 +117,7 @@ if ($f->isPOST()) {
               </div>
               <div class="row cols-md offs-md">
                 <div class="col-12 text-right shift-xs">
-                  <a href="forgot-password.html">Quên mật khẩu?</a>
+                  <a href="./quen-mat-khau">Quên mật khẩu?</a>
                 </div>
               </div>
               <div class="text-right">

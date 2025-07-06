@@ -132,6 +132,18 @@ switch ($url)
             $noidung = ob_get_clean();
         }
         break;
+    // Quên mật khẩu
+    case 'quen-mat-khau':
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
+        } else
+        {
+            $title = 'Quên mật khẩu';
+            require_once TEMPLATE . 'khachhang/quen_mat_khau/quen_mat_khau.php';
+            $noidung = ob_get_clean();
+            break;
+        }
     default:
         $slug = ltrim($url, '/');
 
