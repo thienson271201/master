@@ -139,11 +139,46 @@ switch ($url)
             $f->redirect('thanh-vien?page=thong_tin_khach_hang');
         } else
         {
+            // nếu có opt thì vô không thì trở ra trang cũ
             $title = 'Quên mật khẩu';
             require_once TEMPLATE . 'khachhang/quen_mat_khau/quen_mat_khau.php';
             $noidung = ob_get_clean();
             break;
         }
+    case 'tao_mat_khau':
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
+        } else
+        {
+            // nếu có opt thì vô không thì trở ra trang cũ
+            $title = 'Nhập mật khẩu mới';
+            require_once TEMPLATE . 'khachhang/quen_mat_khau/tao_mat_khau.php';
+            $noidung = ob_get_clean();
+            break;
+        }
+    case 'nhap-opt':
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
+        } else
+        {
+            $otp = getSession('otp');
+            if ($otp)
+            {
+                $title = 'Nhập OPT';
+                require_once TEMPLATE . 'khachhang/quen_mat_khau/nhap_opt.php';
+                $noidung = ob_get_clean();
+                break;
+            } else
+                $f->redirect('./quen-mat-khau');
+
+        }
+    case 404:
+        $title = 'Trang không tồn tại';
+        require_once '404.php';
+        $noidung = ob_get_clean();
+        break;
     default:
         $slug = ltrim($url, '/');
 
@@ -156,7 +191,6 @@ switch ($url)
             $noidung = ob_get_clean();
             break;
         }
-
         // Nếu đường dẫn không có quay về lại trang chủ
-        $f->redirect('./');
+        $f->redirect('./404');
 }

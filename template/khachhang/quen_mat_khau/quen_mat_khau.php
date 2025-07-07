@@ -1,18 +1,23 @@
 <?php
 $error_email = '';
 $error_password = '';
-if ($f->isPOST()) {
+if ($f->isPOST())
+{
   // Lấy email và mật khẩu người dùng nhập
   $filterAll = $f->filter();
   $email = trim($filterAll['email'] ?? '');
- 
+
   // Kiểm tra email có hợp lệ không
   // 2 khách hàng khác nhau không được trùng email
-  if($db->oneRaw("SELECT * FROM khach_hang WHERE email = '$email'") == null) {
+  if ($db->oneRaw("SELECT * FROM khach_hang WHERE email = '$email'") == null)
+  {
     $error_email = 'Email không tồn tại trong hệ thống';
-  } else {
-    $f->gui_otp($email, '123456');
-    $error_email = 'Đã gửi mã OTP đến email của bạn. Vui lòng kiểm tra email để tiếp tục.';
+  } else
+  {
+    $otp = random_int(100000, 999999);
+    setSession('otp', $otp);
+    $f->gui_otp($email, $otp);
+    $f->redirect('./nhap-opt');
   }
 }
 ?>
@@ -54,8 +59,8 @@ if ($f->isPOST()) {
               <div class="offs-lg">
                 <div class="field-group">
                   <div class="field-wrap has-icon">
-                    <input class="field-control"
-                      name="email" type="text" placeholder="Nhập email để khôi phục mật khẩu" required>
+                    <input class="field-control" name="email" type="email"
+                      placeholder="Nhập email để khôi phục mật khẩu" required>
                     <span class="field-icon">
                       <i class="far fa-envelope"></i>
                     </span>
@@ -66,9 +71,9 @@ if ($f->isPOST()) {
                 </div>
               </div>
               <div class="text-right">
-                
+
                 <button class="btn text-upper">
-                  TIẾP THEO 
+                  TIẾP THEO
                 </button>
               </div>
             </div>
