@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 05, 2025 lúc 07:33 PM
+-- Thời gian đã tạo: Th7 07, 2025 lúc 06:52 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -92,7 +92,11 @@ INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`,
 (49, 47, 5, 1, 22990000, 22990000),
 (50, 48, 9, 1, 23490000, 23490000),
 (51, 49, 42, 2, 26490000, 52980000),
-(52, 49, 36, 4, 14990000, 59960000);
+(52, 49, 36, 4, 14990000, 59960000),
+(53, 50, 4, 1, 18000000, 18000000),
+(54, 50, 6, 1, 22000000, 22000000),
+(55, 51, 14, 1, 27790000, 27790000),
+(56, 51, 22, 1, 99900000, 99900000);
 
 -- --------------------------------------------------------
 
@@ -150,7 +154,9 @@ INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, 
 (46, 'VIFLYC9J', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22990000, 'cod', 1, '2025-07-03 09:23:29', NULL),
 (47, 'VUKJ8HE1', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 22990000, 'cod', 1, '2025-07-04 16:36:54', NULL),
 (48, 'Z8OUVJZV', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 23490000, 'cod', 1, '2025-07-04 16:37:20', NULL),
-(49, 'KDF2K7BS', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 112940000, 'cod', 2, '2025-07-04 17:03:41', NULL);
+(49, 'KDF2K7BS', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 112940000, 'cod', 2, '2025-07-04 17:03:41', NULL),
+(50, 'FBXVKTSS', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 40000000, 'cod', 1, '2025-07-07 16:50:49', NULL),
+(51, 'XWNEXT7D', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 127690000, 'cod', 1, '2025-07-07 16:51:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -199,7 +205,8 @@ CREATE TABLE `khach_hang` (
 
 INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `chi_tieu`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
 (13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 159420000, '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
-(15, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, 'Ấp Hoà Bình', 26497, 742, 75, '$2y$10$8Tm6SzPoaYI1hUPX6xQbveTUlJmToFXvi2OkLTjGxKfp6z4KQjKp2', '1749202308.jpg', '2025-06-06 09:31:03', '2025-06-06 09:31:48');
+(15, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, 'Ấp Hoà Bình', 26497, 742, 75, '$2y$10$8Tm6SzPoaYI1hUPX6xQbveTUlJmToFXvi2OkLTjGxKfp6z4KQjKp2', '1749202308.jpg', '2025-06-06 09:31:03', '2025-06-06 09:31:48'),
+(18, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 167690000, 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$5Uq9SwScMMVu0M8u4lF4vOmmV0eT2Vg6OqVU21r6Bce4Czalxd/lO', NULL, '2025-07-06 16:57:47', '2025-07-07 16:50:37');
 
 -- --------------------------------------------------------
 
@@ -213,6 +220,13 @@ CREATE TABLE `khach_hang_token` (
   `token` varchar(255) NOT NULL,
   `ngay_tao` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khach_hang_token`
+--
+
+INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
+(44, 18, '06bb7ba80b5d63845d8d9ec4975ac30da40e3522', '2025-07-07 16:49:51');
 
 -- --------------------------------------------------------
 
@@ -11884,7 +11898,7 @@ ALTER TABLE `admin_token`
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
@@ -11896,7 +11910,7 @@ ALTER TABLE `danh_muc_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -11908,13 +11922,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
