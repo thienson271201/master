@@ -1,8 +1,7 @@
 <?php
 $limit = 16; // Số lượng sản phẩm hiển thị trên mỗi trang
 $trang = isset($_GET['trang']) ? (int) $_GET['trang'] : 1; // Trang hiện tại
-if ($trang < 1)
-{
+if ($trang < 1) {
   $trang = 1; // Đảm bảo trang không nhỏ hơn 1
 }
 $offset = ($trang - 1) * $limit; // Tính toán vị trí bắt đầu
@@ -21,18 +20,15 @@ $danh_sach_thuong_hieu = $db->getRaw('SELECT * FROM thuong_hieu');
 // print_r ($list_san_pham);
 // echo '</pre>';
 
-if (isset($_GET['sap-xep']))
-{
+if (isset($_GET['sap-xep'])) {
   $sortby = $_GET['sap-xep'];
 
-  if ($sortby == 'tang-dan')
-  {
+  if ($sortby == 'tang-dan') {
     // Sắp xếp tăng dần theo giá sau khuyến mãi
     usort($list_san_pham, function ($a, $b) {
       return $a['gia_sau_khuyen_mai'] <=> $b['gia_sau_khuyen_mai'];
     });
-  } elseif ($sortby == 'giam-dan')
-  {
+  } elseif ($sortby == 'giam-dan') {
     // Sắp xếp giảm dần theo giá sau khuyến mãi
     usort($list_san_pham, function ($a, $b) {
       return $b['gia_sau_khuyen_mai'] <=> $a['gia_sau_khuyen_mai'];
@@ -40,29 +36,21 @@ if (isset($_GET['sap-xep']))
   }
 }
 
-if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'tat-ca')
-{
+if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'tat-ca') {
   $thuong_hieu = $_GET['thuong-hieu'];
   $id_thuong_hieu = $db->oneRaw("SELECT id FROM thuong_hieu WHERE duong_dan = '$thuong_hieu'")['id'];
-  $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($id_thuong_hieu) {
-    return $san_pham['thuong_hieu_id'] == $id_thuong_hieu;
-  });
+  $list_san_pham = $db->getRaw("select *from san_pham where thuong_hieu_id=$id_thuong_hieu");
 }
 
-if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
-{
+if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '') {
   $tim_kiem = $_GET['tim-kiem'];
-  $list_san_pham = array_filter($list_san_pham, function ($san_pham) use ($tim_kiem) {
-    return stripos($san_pham['ten_san_pham'], $tim_kiem) !== false;
-  });
-  if (empty($list_san_pham))
-  {
+  $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE ten_san_pham LIKE '%$tim_kiem%'");
+  if (empty($list_san_pham)) {
     setFlashData('tim_kiem', '<div class="alert alert-warning">
         Không tìm thấy kết quả cho: <strong>' . $tim_kiem . '</strong>
         <br>Vui lòng thử lại với từ khóa khác.
       </div>');
-  } else
-  {
+  } else {
     // Hiển thị thông báo tìm thấy kết quả
     setFlashData('tim_kiem', '<div class="alert alert-success">
         Tìm thấy <strong>' . count($list_san_pham) . '</strong> kết quả cho: <strong>' . htmlspecialchars($tim_kiem) . '</strong>
@@ -100,8 +88,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
     <section class="content-section">
       <?php
       $ket_qua_tim_kiem = getFlashData('tim_kiem');
-      if ($ket_qua_tim_kiem)
-      {
+      if ($ket_qua_tim_kiem) {
         echo $ket_qua_tim_kiem;
       }
       ?>
@@ -136,7 +123,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
                     // print_r ($danh_sach_thuong_hieu);
                     // echo '</pre>';
                     foreach ($danh_sach_thuong_hieu as $thuong_hieu):
-                      ?>
+                    ?>
                       <option value="<?= $thuong_hieu['duong_dan'] ?>" <?= isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] == $thuong_hieu['duong_dan'] ? 'selected' : '' ?>>
                         <?= $thuong_hieu['ten_thuong_hieu'] ?>
                       </option>
@@ -173,7 +160,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
                       // print_r ($danh_sach_thuong_hieu);
                       // echo '</pre>';
                       foreach ($danh_sach_thuong_hieu as $thuong_hieu):
-                        ?>
+                      ?>
                         <option value="<?= $thuong_hieu['duong_dan'] ?>" <?= isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] == $thuong_hieu['duong_dan'] ? 'selected' : '' ?>>
                           <?= $thuong_hieu['ten_thuong_hieu'] ?>
                         </option>
@@ -193,7 +180,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
       <div class="row rows-stuck-2 cols-stuck-2">
         <?php
         foreach ($list_san_pham as $san_pham):
-          ?>
+        ?>
           <div class="col-12 sm-col-3 lg-col-3">
             <div class="item shop-item shop-item-short item-dash-border" data-inview-showup="showup-scale">
               <div class="item-back"></div>
@@ -241,13 +228,13 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
           // Hiển thị các trang
           for ($i = 1; $i <= $total_trang; $i++):
             if ($i == 1 || $i == $total_trang || ($i >= $trang - 1 && $i <= $trang + 1)):
-              ?>
+          ?>
               <a href="?trang=<?= $i ?>" class="<?= $i == $trang ? 'active' : '' ?>"><?= $i ?></a>
             <?php else: ?>
               <?php if ($i == 2 || $i == $total_trang - 1): ?>
                 <span>...</span>
               <?php endif; ?>
-            <?php endif;
+          <?php endif;
           endfor; ?>
           <a <?= $trang == $total_trang ? 'onclick="return false"' : '' ?> href="?trang=<?= $trang + 1 ?>" class="next"><i
               class="fas fa-angle-right" aria-hidden="true"></i></a>
@@ -262,8 +249,8 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
 </section>
 
 <script>
-  $(document).ready(function () {
-    $('.btn-add-to-cart').off('click').on('click', function (e) {
+  $(document).ready(function() {
+    $('.btn-add-to-cart').off('click').on('click', function(e) {
       e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
       let productId = $(this).data('id');
 
@@ -274,7 +261,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
         data: {
           id: productId
         },
-        success: function (response) {
+        success: function(response) {
           // Xử lý sau khi thêm thành công
           // alert('Đã thêm sản phẩm vào giỏ hàng!');
           Swal.fire({
@@ -298,7 +285,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
           // Cập nhật số lượng giỏ hàng
           $('#number-cart').text(response.number_cart);
         },
-        error: function () {
+        error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });

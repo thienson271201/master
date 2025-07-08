@@ -386,5 +386,10 @@ if ($f->isLogin()) {
                 form.submit();
             }
         });
+        $(document).on('click', '.btn-close-qr', function() {
+           $('.overlay').fadeOut();
+
+        });
+
     });
 </script>

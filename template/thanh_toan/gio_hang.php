@@ -11,7 +11,7 @@
     <div class="section-footer">
         <div class="container" data-inview-showup="showup-translate-down">
             <ul class="page-path">
-                <li><a href="index-2.html">Trang chủ</a></li>
+                <li><a href="./">Trang chủ</a></li>
                 <li class="path-separator">
                     <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </li>
@@ -25,8 +25,11 @@
     </div>
 </section>
 <?php
+// echo '<pre>';
+// print_r($_SESSION['gio_hang']);
+// echo '</pre>';
 if (isset($_SESSION['gio_hang'])):
-    ?>
+?>
     <section class="content-section">
         <div class="container">
             <form method="POST">
@@ -47,7 +50,7 @@ if (isset($_SESSION['gio_hang'])):
                             $id = $item['id'];
                             $sanphamgiohang = $db->oneRaw("select * from san_pham where id = $id");
                             $tong += $sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']
-                                ?>
+                        ?>
                             <div class="item cart-item-line" data-inview-showup="showup-translate-up">
                                 <div class="item-image">
                                     <div class="responsive-1by1">
@@ -63,7 +66,7 @@ if (isset($_SESSION['gio_hang'])):
                                         <div class="field-wrap">
                                             <input
                                                 class="field-control montserrat-bold alt-color text-sm soluonginput text-center"
-                                                type="text" name="quantity" value="<?= $item['quantity'] ?>" min="0" max="100"
+                                                type="text" name="quantity" value="<?= $item['quantity'] ?>" min="1" max="10"
                                                 data-id="<?= $item['id'] ?>"
                                                 data-action-role="field-wheel-spin field-arrows-spin" autocomplete="off" />
                                             <span class="field-back"></span>
@@ -79,10 +82,11 @@ if (isset($_SESSION['gio_hang'])):
                                     <?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']) ?>₫
                                 </div>
                                 <div class="item-remove">
-                                    <a href="#" class="remove"><i class="fas fa-times"></i></a>
+                                    <a href="#" class="remove" data-id="<?= $item['id'] ?>"><i class="fas fa-times"></i></a>
+
                                 </div>
                             </div>
-                            <?php
+                        <?php
                         endforeach;
                         ?>
                     </div>
@@ -137,9 +141,9 @@ if (isset($_SESSION['gio_hang'])):
             </div>
         </div>
     </section>
-    <?php
+<?php
 else:
-    ?>
+?>
     <section class="text-center content-section">
         <div class="container">
             <!-- <img class="image offs-md" src="assets/images/error/404.png" alt="" data-inview-showup="showup-scale" /> -->
@@ -151,12 +155,12 @@ else:
             <a class="btn text-upper" href="./" data-inview-showup="showup-translate-up">Quay về trang chủ</a>
         </div>
     </section>
-    <?php
+<?php
 endif;
 ?>
 <!-- Xoá giỏ hàng tổng -->
 <script>
-    $('#btn-xoa-gio-hang').on('click', function () {
+    $('#btn-xoa-gio-hang').on('click', function() {
         Swal.fire({
             title: "Xác nhận xoá?",
             text: "Bạn sẽ xoá tất cả sản phẩm trong giỏ hàng!",
@@ -171,7 +175,7 @@ endif;
                 $.ajax({
                     url: 'api/xoa_gio_hang.php',
                     type: 'POST',
-                    success: function (response) {
+                    success: function(response) {
                         Swal.fire({
                             title: "Thông báo!",
                             text: "Đã xoá thành công",
@@ -181,7 +185,7 @@ endif;
                             location.reload();
                         });
                     },
-                    error: function () {
+                    error: function() {
                         Swal.fire({
                             title: "Lỗi!",
                             text: "Có lỗi xảy ra khi xoá giỏ hàng.",
@@ -199,15 +203,15 @@ endif;
 
 <!-- Tăng giảm số lượng sản phẩm -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Lắng nghe khi bấm nút + hoặc -
-        $('.field-increment, .field-decrement').on('click', function () {
+        $('.field-increment, .field-decrement').on('click', function() {
             // Tìm ô input số lượng gần nhất
             const $wrap = $(this).closest('.field-wrap');
             const $input = $wrap.find('input[name="quantity"]');
 
             // Chờ 100ms để template cập nhật giá trị xong
-            setTimeout(function () {
+            setTimeout(function() {
                 const productId = $input.data('id');
                 const quantity = parseInt($input.val());
 
@@ -220,7 +224,7 @@ endif;
                 $.post('api/cap_nhat_so_luong.php', {
                     id: productId,
                     quantity: quantity
-                }, function (response) {
+                }, function(response) {
                     console.log('Server response:', response);
                     if (response.success) {
                         $wrap.closest('.cart-item-line').find('.item-total').text(response.item_total + '₫');
@@ -232,4 +236,22 @@ endif;
             }, 100);
         });
     });
+</script>
+<script>
+$(document).ready(function () {
+    $('.remove').on('click', function (e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+
+        $.ajax({
+            url: 'api/xoa_san_pham_gio_hang.php',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                // Có thể reload lại trang hoặc xóa DOM phần tử tương ứng
+               button.closest('.cart-item-line').remove();
+            }
+        });
+    });
+});
 </script>
