@@ -74,7 +74,7 @@ if ($f->isLogin())
     <div class="section-footer">
         <div class="container" data-inview-showup="showup-translate-down">
             <ul class="page-path">
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="path-separator">
                     <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </li>

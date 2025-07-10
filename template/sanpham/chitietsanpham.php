@@ -15,7 +15,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
   <div class="section-footer">
     <div class="container" data-inview-showup="showup-translate-down">
       <ul class="page-path">
-        <li><a href="index-2.html">Trang chủ</a></li>
+        <li><a href="./">Trang chủ</a></li>
         <li class="path-separator">
           <i class="fas fa-chevron-right" aria-hidden="true"></i>
         </li>

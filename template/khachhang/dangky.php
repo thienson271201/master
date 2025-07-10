@@ -2,26 +2,34 @@
 
 $error_ho_ten = '';
 
-if ($f->isPOST()) {
+if ($f->isPOST())
+{
   $filterAll = $f->filter();
 
   // Kiểm tra họ tên
-  if ($filterAll['ten_khach_hang'] === '') {
+  if ($filterAll['ten_khach_hang'] === '')
+  {
     $error_ho_ten = 'Vui lòng nhập họ và tên';
-  } elseif (str_word_count($filterAll['ten_khach_hang']) < 2) {
+  } elseif (str_word_count($filterAll['ten_khach_hang']) < 2)
+  {
     $error_ho_ten = 'Vui lòng nhập đầy đủ họ và tên';
-  } elseif (!preg_match('/^[\p{L}\s]+$/u', $filterAll['ten_khach_hang'])) {
+  } elseif (!preg_match('/^[\p{L}\s]+$/u', $filterAll['ten_khach_hang']))
+  {
     $error_ho_ten = 'Họ và tên chỉ được chứa chữ cái và khoảng trắng';
   }
 
 
   // Kiểm tra số điện thoại: bắt đầu bằng 0 và đúng 10 chữ số
-  if (!preg_match('/^0\d{9}$/', $filterAll['so_dien_thoai'])) {
+  if (!preg_match('/^0\d{9}$/', $filterAll['so_dien_thoai']))
+  {
     echo '<script>alert("Số điện thoại không hợp lệ. Phải bắt đầu bằng số 0 và có đúng 10 chữ số.");</script>';
-  } elseif ($filterAll['mat_khau'] !== $filterAll['nhap_lai_mat_khau']) {
+  } elseif ($filterAll['mat_khau'] !== $filterAll['nhap_lai_mat_khau'])
+  {
     echo '<script>alert("Mật khẩu và nhập lại mật khẩu không khớp.");</script>';
-  } else {
-    if (!$error_ho_ten) {
+  } else
+  {
+    if (!$error_ho_ten)
+    {
       $khach_hang = [
         'ten_khach_hang' => $filterAll['ten_khach_hang'],
         'email' => $filterAll['email'],
@@ -31,7 +39,8 @@ if ($f->isPOST()) {
       ];
 
       $insertStatus = $db->insert('khach_hang', $khach_hang);
-      if ($insertStatus) {
+      if ($insertStatus)
+      {
         $f->redirect('dang-nhap');
       }
     }
@@ -51,7 +60,7 @@ if ($f->isPOST()) {
   <div class="section-footer">
     <div class="container" data-inview-showup="showup-translate-down">
       <ul class="page-path">
-        <li><a href="index-2.html">Trang chủ</a></li>
+        <li><a href="./">Trang chủ</a></li>
         <li class="path-separator">
           <i class="fas fa-chevron-right" aria-hidden="true"></i>
         </li>
@@ -78,18 +87,14 @@ if ($f->isPOST()) {
               <span class="field-back"></span>
             </div> -->
             <div class="field-wrap has-icon">
-                    <input class="field-control"
-                      name="ten_khach_hang" 
-                      type="text" 
-                      placeholder="Họ và tên" 
-                    required>
-                    <span class="field-icon">
-                      <i class="fas fa-user"></i>
-                    </span>
-                    <span class="field-back"></span>
-                  </div>
-                  <span class="field-sub-text <?= $error_ho_ten ? 'text-danger' : 'd-none' ?>"><i
-                      class="fas fa-times error-text"></i> <?= $error_ho_ten ?></span>
+              <input class="field-control" name="ten_khach_hang" type="text" placeholder="Họ và tên" required>
+              <span class="field-icon">
+                <i class="fas fa-user"></i>
+              </span>
+              <span class="field-back"></span>
+            </div>
+            <span class="field-sub-text <?= $error_ho_ten ? 'text-danger' : 'd-none' ?>"><i
+                class="fas fa-times error-text"></i> <?= $error_ho_ten ?></span>
           </div>
         </div>
         <div class="sm-col-8" data-inview-showup="showup-translate-right">
@@ -151,7 +156,7 @@ if ($f->isPOST()) {
     const icon = document.getElementById(iconId);
     const input = document.getElementById(inputId);
 
-    icon.addEventListener('click', function() {
+    icon.addEventListener('click', function () {
       const isPassword = input.type === 'password';
       input.type = isPassword ? 'text' : 'password';
 
@@ -161,7 +166,7 @@ if ($f->isPOST()) {
   }
 
   // Gắn cho từng cặp input + icon
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     setupToggle('togglePassword1', 'password1');
     setupToggle('togglePassword2', 'password2');
   });
