@@ -7,9 +7,9 @@
 <link href="assets/chosen/chosen.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/jquery-ui-custom/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/pentix/css/pentix.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/css/pex-theme.min.css?v=3" rel="stylesheet" type="text/css" />
+<link href="assets/css/pex-theme.min.css?v=4" rel="stylesheet" type="text/css" />
 
 <!-- <link rel="stylesheet" href="assets/css/style.css?v=<?= rand(10, 99) ?>"> -->
-<link rel="stylesheet" href="assets/css/style.css?=23">
+<link rel="stylesheet" href="assets/css/style.css?=24">
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

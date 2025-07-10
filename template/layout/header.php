@@ -55,8 +55,9 @@ $number_cart = $f->tinhTongSanPhamTrongGioHang();
               <a href="#"><i class="fas fa-heart"></i></a>
             </li> -->
             <li>
-              <a href="gio-hang" ><i class="fas fa-shopping-cart" aria-hidden="true"></i><span
-                  class="item-label-sale item-label" id="number-cart"><?= $number_cart ?></span></a>
+              <a href="gio-hang"><i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                <span class="item-label-sale item-label" id="number-cart"><?= $number_cart ?></span>
+              </a>
             </li>
           </ul>
         </div>
@@ -82,9 +83,26 @@ $number_cart = $f->tinhTongSanPhamTrongGioHang();
             <li>
               <a href="lien-he">Liên hệ</a>
             </li>
+            <li class="cart-icon-on-scroll hidden">
+              <a href="gio-hang"><i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                <span class="item-label-sale item-label" id="number-cart"><?= $number_cart ?></span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
 </header>
+<script>
+  window.addEventListener('scroll', function () {
+    const cartIcon = document.querySelector('.cart-icon-on-scroll');
+    if (window.scrollY > 100) {
+      cartIcon.classList.remove('hidden');
+      cartIcon.classList.add('visible');
+    } else {
+      cartIcon.classList.add('hidden');
+      cartIcon.classList.remove('visible');
+    }
+  });
+</script>

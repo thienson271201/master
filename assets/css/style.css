@@ -156,3 +156,11 @@
 .alert {
   border-radius: 0.25rem;
 }
+
+.cart-icon-on-scroll.hidden {
+  display: none !important;
+}
+
+.cart-icon-on-scroll.visible {
+  display: inline-block !important;
+}
