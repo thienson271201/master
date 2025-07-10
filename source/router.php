@@ -128,8 +128,21 @@ switch ($url)
             $f->redirect('./');
         else
         {
-            require_once TEMPLATE . 'thanh_toan/thanh_toan.php';
-            $noidung = ob_get_clean();
+            if (isset($_GET['vnp_ResponseCode']))
+            {
+                if ($_GET['vnp_ResponseCode'] == '00')
+                {
+                    $data_insert = getFlashData('data_vnpay');
+                    require_once TEMPLATE . 'thanh_toan/tao_don_hang.php';
+                    $title = "Kết quả thanh toán đơn hàng";
+                    require_once TEMPLATE . 'thanh_toan/vnpay/vnpay_return.php';
+                    $noidung = ob_get_clean();
+                }
+            } else
+            {
+                require_once TEMPLATE . 'thanh_toan/thanh_toan.php';
+                $noidung = ob_get_clean();
+            }
         }
         break;
     // Quên mật khẩu

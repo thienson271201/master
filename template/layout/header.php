@@ -85,7 +85,7 @@ $number_cart = $f->tinhTongSanPhamTrongGioHang();
             </li>
             <li class="cart-icon-on-scroll hidden">
               <a href="gio-hang"><i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                <span class="item-label-sale item-label" id="number-cart"><?= $number_cart ?></span>
+                <span class="item-label-sale item-label" id="number-cart2"><?= $number_cart ?></span>
               </a>
             </li>
           </ul>

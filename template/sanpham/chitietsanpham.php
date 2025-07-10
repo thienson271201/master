@@ -341,6 +341,7 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
           // Cập nhật số lượng giỏ hàng
           $('#number-cart').text(response.number_cart);
+          $('#number-cart2').text(response.number_cart);
         },
         error: function () {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');

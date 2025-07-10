@@ -45,15 +45,7 @@ if ($f->isPOST())
     $f->redirect('./thanh-vien?page=don-hang');
 }
 // Xử lý khi vnpay trả kết quả về
-if (isset($_GET['vnp_ResponseCode']))
-{
-    if ($_GET['vnp_ResponseCode'] == '00')
-    {
-        $data_insert = getFlashData('data_vnpay');
-        require_once 'tao_don_hang.php';
-        $f->redirect('./thanh-vien?page=don-hang');
-    }
-}
+
 $title = "Thanh toán";
 // Sử dụng id khách hàng truy vấn dữ liệu
 if ($f->isLogin())
@@ -394,15 +386,18 @@ if ($f->isLogin())
                     }
                 });
             } else {
-                Swal.fire({
-                    title: "Đặt hàng thành công!",
-                    icon: "success",
-                    timer: 3000,
-                    showConfirmButton: false,
-                    didClose: () => {
-                        form.submit();
-                    }
-                });
+                if (paymentMethod === 'cod') {
+                    Swal.fire({
+                        title: "Đặt hàng thành công!",
+                        icon: "success",
+                        timer: 3000,
+                        showConfirmButton: false,
+                        didClose: () => {
+                            form.submit();
+                        }
+                    });
+                }
+                form.submit();
             }
         });
         $(document).on('click', '.btn-close-qr', function () {

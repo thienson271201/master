@@ -292,6 +292,7 @@ if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
           // Cập nhật vào DOM thật
           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
           // Cập nhật số lượng giỏ hàng
+          $('#number-cart2').text(response.number_cart);
           $('#number-cart').text(response.number_cart);
         },
         error: function () {
