@@ -337,6 +337,7 @@ if ($f->isLogin())
             const form = this;
 
             if (paymentMethod === 'transfer') {
+                let daThanhToan = false;
                 $.ajax({
                     url: 'api/tao_ma_don_hang.php',
                     type: 'POST',
@@ -344,7 +345,6 @@ if ($f->isLogin())
                     success: function (orderCode) {
                         const tongTien = parseInt(formData.find(item => item.name === 'tong_tien')?.value || '0');
 
-                        // Gọi API tạo mã QR
                         $.ajax({
                             url: 'template/thanh_toan/chuyen_khoan/qr_code.php',
                             type: 'POST',
@@ -355,10 +355,11 @@ if ($f->isLogin())
                             success: function (qrHtml) {
                                 $('#qr-code').html(qrHtml);
 
-                                // Bắt đầu kiểm tra giao dịch
                                 const intervalId = setInterval(function () {
+                                    if (daThanhToan) return;
+
                                     $.getJSON('<?= _API_THANH_TOAN ?>', function (response) {
-                                        if (response.error || !response.data) return;
+                                        if (daThanhToan || response.error || !response.data) return;
 
                                         const giaoDichHopLe = response.data.find(gd => {
                                             const moTa = (gd["Mô tả"] || '').toLowerCase();
@@ -367,17 +368,21 @@ if ($f->isLogin())
                                         });
 
                                         if (giaoDichHopLe) {
+                                            daThanhToan = true; // PHẢI đặt trước để các lần khác không chạy
                                             clearInterval(intervalId);
+
                                             Swal.fire({
                                                 title: "Thanh toán thành công!",
                                                 icon: "success",
-                                                draggable: true,
-                                                timer: 3000
+                                                timer: 3000,
+                                                showConfirmButton: false,
+                                                didClose: () => {
+                                                    form.submit();
+                                                }
                                             });
-                                            form.submit();
                                         }
                                     });
-                                }, 3000); // mỗi 3 giây
+                                }, 3000);
                             },
                             error: function () {
                                 alert('Không thể tạo mã QR.');
@@ -389,7 +394,15 @@ if ($f->isLogin())
                     }
                 });
             } else {
-                form.submit();
+                Swal.fire({
+                    title: "Đặt hàng thành công!",
+                    icon: "success",
+                    timer: 3000,
+                    showConfirmButton: false,
+                    didClose: () => {
+                        form.submit();
+                    }
+                });
             }
         });
         $(document).on('click', '.btn-close-qr', function () {
