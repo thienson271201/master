@@ -1,36 +1,34 @@
 <?php
-if ($func->isPOST())
-{
-    $filterAll = $func->filter();
+if ($func->isPOST()) {
+   if($_POST['update_san_pham']){
+     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
-        'ma_san_pham'=>$filterAll['maSP'],
+        'ma_san_pham' => $filterAll['maSP'],
         'duong_dan' => $filterAll['slug'],
         'ten_san_pham' => $filterAll['title'],
         'gia_goc' => $filterAll['original_price'],
         'gia_sau_khuyen_mai' => $filterAll['price'],
         'mo_ta' => $filterAll['description'],
-        'mo_ta_dai'=>$_POST['mo_ta_dai'],
+        'mo_ta_dai' => $_POST['mo_ta_dai'],
         'thong_so_kich_thuoc' => $_POST['content'],
-        
-       
+
+
     ];
-    if (!empty($_POST['product_type_id']))
-    {
+    if (!empty($_POST['product_type_id'])) {
         $data_update['thuong_hieu_id'] = $_POST['product_type_id'];
     }
-    if (!empty($_POST['danh_muc_san_pham_id']))
-    {
+    if (!empty($_POST['danh_muc_san_pham_id'])) {
         $data_update['danh_muc_san_pham_id'] = $_POST['danh_muc_san_pham_id'];
     }
     $image = $func->upload('imageUpload', 'images');
-    if ($image != 'noimage.jpg')
-    {
+    if ($image != 'noimage.jpg') {
         $data_update['hinh_anh'] = $image;
     }
     $db->update('san_pham', $data_update, "id='$id'");
     setFlashData('smg', 'Chỉnh sửa thành công');
     // $func->redirect("?com=product&act=edit&id=$id");
+   }
 }
 $id = $func->filter()['id'];
 $product = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$id'");
@@ -68,8 +66,7 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg))
-            {
+            if (!empty($smg)) {
                 $func->getSmg($smg);
             }
             ?>
@@ -153,11 +150,11 @@ $smg = getFlashData('smg');
                             <div class="card-body">
                                 <label for="cap1" class="form-label fw-bold">Thương Hiệu:</label>
                                 <select name="product_type_id" class="form-select mb-3">
-                                  
+
                                     <?php
                                     $brand_list = $db->getRaw('SELECT * FROM thuong_hieu');
                                     foreach ($brand_list as $brand):
-                                        ?>
+                                    ?>
                                         <option value="<?= $brand['id'] ?>"
                                             <?= $product['thuong_hieu_id'] == $brand['id'] ? 'selected' : '' ?>>
                                             <?= $brand['ten_thuong_hieu'] ?>
@@ -166,11 +163,11 @@ $smg = getFlashData('smg');
                                 </select>
                                 <label for="cap1" class="form-label fw-bold">Danh Mục:</label>
                                 <select name="danh_muc_san_pham_id" class="form-select">
-                              
+
                                     <?php
                                     $product_type_list = $db->getRaw('SELECT * FROM danh_muc_san_pham');
                                     foreach ($product_type_list as $produc_type):
-                                        ?>
+                                    ?>
                                         <option value="<?= $produc_type['id'] ?>"
                                             <?= $product['danh_muc_san_pham_id'] == $produc_type['id'] ? 'selected' : '' ?>>
                                             <?= $produc_type['ten_danh_muc'] ?>
@@ -195,47 +192,95 @@ $smg = getFlashData('smg');
                         </div>
                     </div>
                     <div class="col-12">
-                        <!-- <div class="card card-primary card-outline mb-4">
-                            <div class="card-header">
-                                <div class="card-title">Thiết lập SEO</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-12">
-                                        <label for="seo_title" class="form-label fw-bold">SEO Title:</label>
-                                        <input type="text" name="seo_title" class="form-control"
-                                            value="<?= $product['seo_title'] ?>">
-                                    </div>
-                                    <div class="mb-3 col-12">
-                                        <label for="seo_keywords" class="form-label fw-bold">SEO Keywords:</label>
-                                        <input type="text" name="seo_keywords" class="form-control"
-                                            value="<?= $product['seo_keywords'] ?>">
-                                    </div>
-                                    <div class="mb-3 col-12">
-                                        <label for="seo_description" class="form-label fw-bold">SEO Description:</label>
-                                        <textarea type="text" name="seo_description" class="form-control"
-                                            style="height: 120px;"><?= $product['seo_desc'] ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" name="update_san_pham">
                             Lưu
                         </button>
                     </div>
                     <!--begin::Footer-->
                 </div>
             </form>
-            <!--end::Form-->
+            <div class="row mt-3">
+                <div class="col-12 col-md-8">
+                    <div class="card card-primary card-outline mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Hình ảnh sản phẩm
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="6%" class="text-center">STT</th>
+                                        <th width="10%">Hình ảnh</th>
+                                        <th width="10%" class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $dem = 1;
+                                    foreach ($product_type_list as $item):
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <input data-id="1" class="form-control text-center stt-input"
+                                                    type="text" value="<?= $dem++ ?>">
+                                            </td>
+                                            <td>
+                                                <img style="height: 50px;"
+                                                    src="../upload/images/<?= $item['hinh_anh'] ?>"
+                                                    onerror="this.src='assets/img/noimage.jpg'">
+
+                                            </td>
+
+
+                                            <td class="text-center">
+                                               
+                                                <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card card-primary card-outline mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Thêm Hình Ảnh
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                <input type="file" class="form-control" name="imageUpload" id="imageUpload"
+                                    accept="image/*">
+                                <img id="previewImage" src="../upload/images/<?= $product['hinh_anh'] ?>"
+                                    onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
+                                    style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover">
+                                <button type="submit" name="them_anh" class="btn btn-success mt-4"> Thêm Ảnh</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--end::Form-->
+            </div>
+            <!--end::Container-->
         </div>
-        <!--end::Container-->
-    </div>
-    <!--end::App Content-->
+        <!--end::App Content-->
 </main>
 <!--end::App Main-->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         function formatCurrency(input) {
             let value = $(input).val();
 
@@ -256,18 +301,18 @@ $smg = getFlashData('smg');
         }
 
         // Định dạng các giá trị hiện có khi load trang
-        $('#original_price, #discounted_price').each(function () {
+        $('#original_price, #discounted_price').each(function() {
             formatCurrency(this);
         });
 
         // Lắng nghe sự kiện input cho cả hai thẻ input
-        $('#original_price, #discounted_price').on('input', function () {
+        $('#original_price, #discounted_price').on('input', function() {
             formatCurrency(this);
         });
 
         // Trước khi submit form, loại bỏ định dạng tiền tệ
-        $('#edit-product').on('submit', function () {
-            $('#original_price, #discounted_price').each(function () {
+        $('#edit-product').on('submit', function() {
+            $('#original_price, #discounted_price').each(function() {
                 let value = $(this).val();
 
                 // Loại bỏ tất cả ký tự không phải số

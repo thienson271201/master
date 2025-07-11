@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 08, 2025 lúc 07:55 PM
+-- Thời gian đã tạo: Th7 11, 2025 lúc 08:17 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -68,7 +68,9 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (181, 1, '26abbbd6de677a9e4c628a8141cb832c3d887a84', '2025-07-06 00:32:33'),
 (183, 4, 'a6538d676824b1f96ea9975d5fbc168cc85dd3ff', '2025-07-07 23:59:23'),
 (184, 1, '060b63541b275c7ac87fd86301df824a6a7a1d26', '2025-07-08 06:01:33'),
-(185, 1, 'd56a6f7b372827f200ecc1ec81596d5ec9d7c38a', '2025-07-08 19:03:31');
+(185, 1, 'd56a6f7b372827f200ecc1ec81596d5ec9d7c38a', '2025-07-08 19:03:31'),
+(186, 1, 'b288976ed74c5a564cfe0f2125ab4d46e85560f3', '2025-07-09 07:30:15'),
+(187, 1, '0bd917c0f6985f1be202636c8d3add0a81e539a9', '2025-07-11 22:53:47');
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,9 @@ INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`,
 (57, 52, 5, 0, 22990000, 0),
 (58, 52, 43, 0, 10000, 0),
 (59, 53, 4, 1, 18000000, 18000000),
-(60, 53, 9, 1, 23490000, 23490000);
+(60, 53, 9, 1, 23490000, 23490000),
+(61, 54, 3, 1, 5000, 5000),
+(62, 54, 43, 1, 10000, 10000);
 
 -- --------------------------------------------------------
 
@@ -165,7 +169,20 @@ INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, 
 (50, 'FBXVKTSS', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 40000000, 'cod', 1, '2025-07-07 16:50:49', NULL),
 (51, 'XWNEXT7D', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 127690000, 'cod', 1, '2025-07-07 16:51:59', NULL),
 (52, 'QL5LQ1B2', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 0, 'cod', 1, '2025-07-08 16:41:11', NULL),
-(53, 'LAXPO0S3', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 41490000, 'cod', 1, '2025-07-08 17:54:05', NULL);
+(53, 'LAXPO0S3', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 41490000, 'cod', 1, '2025-07-08 17:54:05', NULL),
+(54, '69U701S2', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 15000, 'transfer', 2, '2025-07-09 00:54:31', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hinh_san_pham`
+--
+
+CREATE TABLE `hinh_san_pham` (
+  `id` int(11) NOT NULL,
+  `san_pham_id` int(11) DEFAULT NULL,
+  `hinh_anh` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -213,7 +230,7 @@ CREATE TABLE `khach_hang` (
 --
 
 INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `chi_tieu`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 200910000, '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
+(13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 200925000, '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
 (15, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, 'Ấp Hoà Bình', 26497, 742, 75, '$2y$10$8Tm6SzPoaYI1hUPX6xQbveTUlJmToFXvi2OkLTjGxKfp6z4KQjKp2', '1749202308.jpg', '2025-06-06 09:31:03', '2025-06-06 09:31:48'),
 (18, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 167690000, 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$5Uq9SwScMMVu0M8u4lF4vOmmV0eT2Vg6OqVU21r6Bce4Czalxd/lO', NULL, '2025-07-06 16:57:47', '2025-07-07 16:50:37');
 
@@ -236,7 +253,8 @@ CREATE TABLE `khach_hang_token` (
 
 INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
 (44, 18, '06bb7ba80b5d63845d8d9ec4975ac30da40e3522', '2025-07-07 16:49:51'),
-(45, 13, 'ba0cd7ed18889d3ff8dbd25e5b37cf1c1c1dba96', '2025-07-08 12:01:24');
+(45, 13, 'ba0cd7ed18889d3ff8dbd25e5b37cf1c1c1dba96', '2025-07-08 12:01:24'),
+(46, 13, 'ffb0722331d599cab1360b0b615e6cf5f97ed545', '2025-07-09 00:30:29');
 
 -- --------------------------------------------------------
 
@@ -11830,6 +11848,12 @@ ALTER TABLE `don_hang`
   ADD KEY `khach_hang_id` (`khach_hang_id`);
 
 --
+-- Chỉ mục cho bảng `hinh_san_pham`
+--
+ALTER TABLE `hinh_san_pham`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `images`
 --
 ALTER TABLE `images`
@@ -11902,13 +11926,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
@@ -11920,7 +11944,13 @@ ALTER TABLE `danh_muc_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT cho bảng `hinh_san_pham`
+--
+ALTER TABLE `hinh_san_pham`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -11938,7 +11968,7 @@ ALTER TABLE `khach_hang`
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
