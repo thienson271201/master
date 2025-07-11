@@ -21,6 +21,39 @@ GROUP BY m.thang
 ORDER BY m.thang;
 ");
 
+$san_pham_ban_chay = $db->getRaw("SELECT 
+    sp.id AS san_pham_id,
+    sp.ten_san_pham,
+    th.ten_thuong_hieu,
+    SUM(ctdh.so_luong) AS tong_so_luong_ban
+FROM 
+    chi_tiet_don_hang ctdh
+JOIN 
+    san_pham sp ON ctdh.san_pham_id = sp.id
+JOIN 
+    thuong_hieu th ON sp.thuong_hieu_id = th.id
+GROUP BY 
+    sp.id, sp.ten_san_pham, th.ten_thuong_hieu
+ORDER BY 
+    tong_so_luong_ban DESC
+LIMIT 5;
+");
+$thuong_hieu_ban_chay = $db->getRaw("SELECT 
+    th.id AS thuong_hieu_id,
+    th.ten_thuong_hieu,
+    SUM(ctdh.so_luong) AS tong_so_luong_ban
+FROM 
+    chi_tiet_don_hang ctdh
+JOIN 
+    san_pham sp ON ctdh.san_pham_id = sp.id
+JOIN 
+    thuong_hieu th ON sp.thuong_hieu_id = th.id
+GROUP BY 
+    th.id, th.ten_thuong_hieu
+ORDER BY 
+    tong_so_luong_ban DESC
+LIMIT 5;
+");
 
 ?>
 
@@ -43,6 +76,7 @@ ORDER BY m.thang;
     <!--end::App Content Header-->
     <!--begin::App Content-->
     <div class="app-content">
+        
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Row-->
@@ -87,6 +121,15 @@ ORDER BY m.thang;
                     </div> <!--end::Small Box Widget 3-->
                 </div> <!--end::Col-->
             </div>
+            
+            <!--begin::Row-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="mb-0">Thống kê sản phẩm bán chạy</h3>
+                </div>
+            </div>
+            <!--end::Row-->
+        
             <canvas id="doanhThuChart"></canvas>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -140,6 +183,7 @@ ORDER BY m.thang;
             <!--end::Row-->
         </div>
         <!--end::Container-->
+        
     </div>
     <!--end::App Content-->
 </main>

@@ -1,4 +1,4 @@
-<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="ligh">
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
@@ -101,24 +101,32 @@
                             <i class="nav-arrow bi bi-chevron-right"></i>
                         </p>
                     </a>
+                    <?php
+                    if (isset($_GET['type'])) {
+                        if ($_GET['type'] == 'favicon') {
+                            $type = 'favicon';
+                        } else {
+                            $type = '';
+                        }
+                    }
+                    ?>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="?com=photo&act=photo_static&type=favicon"
-                                class="nav-link <?= $_GET['type'] == 'favicon' ? 'active' : '' ?>">
+                                class="nav-link <?= $type == 'favicon' ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Favicon</p>
                             </a>
                         </li>
+                    </ul>
                 </li>
-            </ul>
-            </li>
-            <li class="nav-header">Cấu hình website</li>
-            <li class="nav-item">
-                <a href="?com=setting&act=update" class="nav-link <?= $com == 'setting' ? 'active' : '' ?>">
-                    <i class="nav-icon bi bi-gear-fill"></i>
-                    <p>Cấu hình website</p>
-                </a>
-            </li>
+                <li class="nav-header">Cấu hình website</li>
+                <li class="nav-item">
+                    <a href="?com=setting&act=update" class="nav-link <?= $com == 'setting' ? 'active' : '' ?>">
+                        <i class="nav-icon bi bi-gear-fill"></i>
+                        <p>Cấu hình website</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

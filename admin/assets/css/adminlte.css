@@ -13160,11 +13160,11 @@ textarea.form-control-lg {
   background-color: var(--lte-sidebar-submenu-bg);
 }
 .sidebar-wrapper .nav-header {
-  color: var(--lte-sidebar-header-color);
+  color: var(--bs-black);
   background-color: inherit;
 }
 .sidebar-wrapper a {
-  color: var(--lte-sidebar-color);
+  color: var(--bs-black);
 }
 .sidebar-wrapper .nav-treeview > .nav-item > .nav-link {
   color: var(--lte-sidebar-submenu-color);
