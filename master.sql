@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 11, 2025 lúc 08:17 PM
+-- Thời gian đã tạo: Th7 12, 2025 lúc 08:19 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -70,7 +70,8 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (184, 1, '060b63541b275c7ac87fd86301df824a6a7a1d26', '2025-07-08 06:01:33'),
 (185, 1, 'd56a6f7b372827f200ecc1ec81596d5ec9d7c38a', '2025-07-08 19:03:31'),
 (186, 1, 'b288976ed74c5a564cfe0f2125ab4d46e85560f3', '2025-07-09 07:30:15'),
-(187, 1, '0bd917c0f6985f1be202636c8d3add0a81e539a9', '2025-07-11 22:53:47');
+(187, 1, '0bd917c0f6985f1be202636c8d3add0a81e539a9', '2025-07-11 22:53:47'),
+(189, 1, '6c6a2dd4c6211880f8a47c4a1d9ac3e4e57e1e46', '2025-07-13 00:50:09');
 
 -- --------------------------------------------------------
 
@@ -184,6 +185,14 @@ CREATE TABLE `hinh_san_pham` (
   `hinh_anh` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `hinh_san_pham`
+--
+
+INSERT INTO `hinh_san_pham` (`id`, `san_pham_id`, `hinh_anh`) VALUES
+(16, 14, '1752343850.png'),
+(17, 14, '1752343856.jpeg');
+
 -- --------------------------------------------------------
 
 --
@@ -254,7 +263,8 @@ CREATE TABLE `khach_hang_token` (
 INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALUES
 (44, 18, '06bb7ba80b5d63845d8d9ec4975ac30da40e3522', '2025-07-07 16:49:51'),
 (45, 13, 'ba0cd7ed18889d3ff8dbd25e5b37cf1c1c1dba96', '2025-07-08 12:01:24'),
-(46, 13, 'ffb0722331d599cab1360b0b615e6cf5f97ed545', '2025-07-09 00:30:29');
+(46, 13, 'ffb0722331d599cab1360b0b615e6cf5f97ed545', '2025-07-09 00:30:29'),
+(47, 13, 'e871b7036406de0aef9ca03f0d415e4d10f782a0', '2025-07-12 11:16:45');
 
 -- --------------------------------------------------------
 
@@ -11926,7 +11936,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
@@ -11950,7 +11960,7 @@ ALTER TABLE `don_hang`
 -- AUTO_INCREMENT cho bảng `hinh_san_pham`
 --
 ALTER TABLE `hinh_san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -11968,7 +11978,7 @@ ALTER TABLE `khach_hang`
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`

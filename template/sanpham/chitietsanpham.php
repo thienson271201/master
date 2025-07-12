@@ -37,10 +37,22 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
             <div class="responsive-1by1 offs-md" data-preview-image="product-preview"></div>
             <div class="owl-carousel" data-autoplay="false" data-owl-loop="false" data-owl-responsive="3;3;3;3">
               <div class="item">
-                <a class="responsive-1by1" target="_blank" href="assets/images/shop/usb-hub.jpg"
+                <a class="responsive-1by1" target="_blank" href="upload/images/<?= $product['hinh_anh'] ?>"
                   data-preview-image-source="product-preview"><img src="upload/images/<?= $product['hinh_anh'] ?>"
                     alt="" /></a>
               </div>
+              <?php 
+              $thu_vien_anh=$db->getRaw("select * from hinh_san_pham where san_pham_id=".$product['id']);
+              foreach ( $thu_vien_anh as $item):
+              ?>
+                <div class="item">
+                <a class="responsive-1by1" target="_blank" href="upload/images/<?= $item['hinh_anh'] ?>"
+                  data-preview-image-source="product-preview"><img src="upload/images/<?= $item['hinh_anh'] ?>"
+                    alt="" /></a>
+              </div>
+                <?php
+                endforeach;
+                ?>
 
             </div>
           </div>

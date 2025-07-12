@@ -1,36 +1,55 @@
 <?php
 if ($func->isPOST()) {
-   if($_POST['update_san_pham']){
-     $filterAll = $func->filter();
-    $id = $filterAll['id'];
-    $data_update = [
-        'ma_san_pham' => $filterAll['maSP'],
-        'duong_dan' => $filterAll['slug'],
-        'ten_san_pham' => $filterAll['title'],
-        'gia_goc' => $filterAll['original_price'],
-        'gia_sau_khuyen_mai' => $filterAll['price'],
-        'mo_ta' => $filterAll['description'],
-        'mo_ta_dai' => $_POST['mo_ta_dai'],
-        'thong_so_kich_thuoc' => $_POST['content'],
+    if (isset($_POST['update_san_pham'])) {
+        $filterAll = $func->filter();
+        $id = $filterAll['id'];
+        $data_update = [
+            'ma_san_pham' => $filterAll['maSP'],
+            'duong_dan' => $filterAll['slug'],
+            'ten_san_pham' => $filterAll['title'],
+            'gia_goc' => $filterAll['original_price'],
+            'gia_sau_khuyen_mai' => $filterAll['price'],
+            'mo_ta' => $filterAll['description'],
+            'mo_ta_dai' => $_POST['mo_ta_dai'],
+            'thong_so_kich_thuoc' => $_POST['content'],
 
 
-    ];
-    if (!empty($_POST['product_type_id'])) {
-        $data_update['thuong_hieu_id'] = $_POST['product_type_id'];
+        ];
+        if (!empty($_POST['product_type_id'])) {
+            $data_update['thuong_hieu_id'] = $_POST['product_type_id'];
+        }
+        if (!empty($_POST['danh_muc_san_pham_id'])) {
+            $data_update['danh_muc_san_pham_id'] = $_POST['danh_muc_san_pham_id'];
+        }
+        $image = $func->upload('imageUpload', 'images');
+        if ($image != 'noimage.jpg') {
+            $data_update['hinh_anh'] = $image;
+        }
+        $db->update('san_pham', $data_update, "id='$id'");
+        setFlashData('smg', 'Chỉnh sửa thành công');
+        // $func->redirect("?com=product&act=edit&id=$id");
     }
-    if (!empty($_POST['danh_muc_san_pham_id'])) {
-        $data_update['danh_muc_san_pham_id'] = $_POST['danh_muc_san_pham_id'];
+    if (isset($_POST['them_anh'])) {
+
+        $data_update = [
+            'san_pham_id' => $_POST['id'],
+
+        ];
+        $image = $func->upload('imageUpload2', 'images');
+        if ($image != 'noimage.jpg') {
+            $data_update['hinh_anh'] = $image;
+        }
+        $db->insert('hinh_san_pham', $data_update);
+        // header("Location: index.php?com=san_pham&act=sua&id=14&rand=" . time() . "#thu_vien_anh");
+        // exit;
+
+
+        // echo '<pre>';
+        // print_r($data_update);
+        // echo '</pre>';
     }
-    $image = $func->upload('imageUpload', 'images');
-    if ($image != 'noimage.jpg') {
-        $data_update['hinh_anh'] = $image;
-    }
-    $db->update('san_pham', $data_update, "id='$id'");
-    setFlashData('smg', 'Chỉnh sửa thành công');
-    // $func->redirect("?com=product&act=edit&id=$id");
-   }
 }
-$id = $func->filter()['id'];
+$id = $_GET['id'];
 $product = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$id'");
 
 $smg = getFlashData('smg');
@@ -201,52 +220,61 @@ $smg = getFlashData('smg');
                     <!--begin::Footer-->
                 </div>
             </form>
-            <div class="row mt-3">
+            <div class="row mt-3" id="thu_vien_anh">
                 <div class="col-12 col-md-8">
                     <div class="card card-primary card-outline mb-4">
                         <div class="card-header">
                             <div class="card-title">
-                                Hình ảnh sản phẩm
+                                Thư viện ảnh sản phẩm
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th width="6%" class="text-center">STT</th>
-                                        <th width="10%">Hình ảnh</th>
-                                        <th width="10%" class="text-center">Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $dem = 1;
-                                    foreach ($product_type_list as $item):
-                                    ?>
+                            <?php
+                            $thu_vien_anh = $db->getRaw("select * from hinh_san_pham where san_pham_id=$id");
+                            if ($thu_vien_anh):
+                            ?>
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <input data-id="1" class="form-control text-center stt-input"
-                                                    type="text" value="<?= $dem++ ?>">
-                                            </td>
-                                            <td>
-                                                <img style="height: 50px;"
-                                                    src="../upload/images/<?= $item['hinh_anh'] ?>"
-                                                    onerror="this.src='assets/img/noimage.jpg'">
-
-                                            </td>
-
-
-                                            <td class="text-center">
-                                               
-                                                <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
-                                                    class="btn btn-danger btn-sm">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <th width="6%" class="text-center">STT</th>
+                                            <th class="ps-5">Hình ảnh</th>
+                                            <th width="10%" class="text-center">Thao tác</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $dem = 1;
+                                        foreach ($thu_vien_anh as $item):
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <input data-id="1" class="form-control text-center stt-input"
+                                                        type="text" value="<?= $dem++ ?>">
+                                                </td>
+                                                <td>
+                                                    <img style="height: 150px;"
+                                                        src="../upload/images/<?= $item['hinh_anh'] ?>"
+                                                        onerror="this.src='assets/img/noimage.jpg'">
+
+                                                </td>
+
+
+                                                <td class="text-center">
+
+                                                    <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                            else:
+                                $func->getSmg('Thư viện ảnh đang trống', 'warning');
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -258,13 +286,14 @@ $smg = getFlashData('smg');
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post">
-                                <input type="file" class="form-control" name="imageUpload" id="imageUpload"
+                            <form method="post" enctype="multipart/form-data">
+                                <input required type="file" class="form-control" name="imageUpload2" id="imageUpload2"
                                     accept="image/*">
-                                <img id="previewImage" src="../upload/images/<?= $product['hinh_anh'] ?>"
-                                    onerror="this.src='assets/img/noimage.jpg'" alt="Ảnh xem trước"
+                                <img id="previewImage2" src="" onerror="this.src='assets/img/noimage.jpg'"
+                                    alt="Ảnh xem trước"
                                     style="width: 100%; height: 200px; margin-top: 20px; object-fit: cover">
-                                <button type="submit" name="them_anh" class="btn btn-success mt-4"> Thêm Ảnh</button>
+                                <input type="hidden" value="<?= $id ?>" name="id">
+                                <button type="submit" name="them_anh" class="btn btn-success mt-4"> Lưu Ảnh</button>
                             </form>
 
                         </div>

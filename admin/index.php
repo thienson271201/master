@@ -271,6 +271,20 @@ if ($ad->isLogin())
                     reader.readAsDataURL(this.files[0]);
                 }
             });
+              $("#imageUpload2").on("change", function (event) {
+                // Kiểm tra xem có file được chọn hay không
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // Cập nhật nguồn ảnh cho thẻ img
+                        $("#previewImage2").attr("src", e.target.result);
+                        // Hiển thị thẻ img
+                        // $('#previewImage').css('display', 'block');
+                    };
+                    // Đọc dữ liệu của file được chọn
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
         });
     </script>
 
