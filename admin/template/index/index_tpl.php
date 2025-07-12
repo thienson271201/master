@@ -76,7 +76,7 @@ LIMIT 5;
     <!--end::App Content Header-->
     <!--begin::App Content-->
     <div class="app-content">
-        
+
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Row-->
@@ -121,69 +121,142 @@ LIMIT 5;
                     </div> <!--end::Small Box Widget 3-->
                 </div> <!--end::Col-->
             </div>
-            
+
             <!--begin::Row-->
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mb-0">Thống kê sản phẩm bán chạy</h3>
+           <div class="card card-primary card-outline mb-4">
+                <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">Thống kê sản phẩm bán chạy</div>
+                </div>
+                <!--end::Header-->
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="6%" class="text-center">STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Tên thương hiệu</th>
+                                <th width="10%" class="text-center">Số lượng bán</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $dem=1;
+                            foreach ($san_pham_ban_chay as $item):
+                                ?>
+                                <tr>
+                                    <td class="text-center"><?= $dem++ ?></td>
+                                    
+                                    <td><?= $item['ten_san_pham'] ?></td>
+                                    <td><?= $item['ten_thuong_hieu'] ?></td>
+                                   
+                                    <td class="text-center"><?= $item['tong_so_luong_ban'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            <div class="card card-primary card-outline mb-4">
+                <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">Thống kê thương hiệu bán chạy</div>
+                </div>
+                <!--end::Header-->
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="6%" class="text-center">STT</th>
+                                <th>Tên thương hiệu</th>
+                                <th width="10%" class="text-center">Số lượng bán</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $dem=1;
+                            foreach ($san_pham_ban_chay as $item):
+                                ?>
+                                <tr>
+                                    <td class="text-center"><?= $dem++ ?></td>
+                                    
+                                    
+                                    <td><?= $item['ten_thuong_hieu'] ?></td>
+                                    <td class="text-center"><?= $item['tong_so_luong_ban'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card card-primary card-outline mb-4">
+                <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">Thống kê doanh thu theo tháng</div>
+                </div>
+                <!--end::Header-->
+                <div class="card-body">
+                    
+                    <canvas id="doanhThuChart"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <p class="text-center mt-4 fst-italic">Biểu đồ doanh thu từ tháng 5 đến tháng 10 năm 2025</p>
+                </div>
+            </div>
+
+    
             <!--end::Row-->
-        
-            <canvas id="doanhThuChart"></canvas>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-        // Gọi dữ liệu PHP
-        const dataFromPHP = <?php echo json_encode($thong_ke); ?>;
+            <script>
+                // Gọi dữ liệu PHP
+                const dataFromPHP = <?php echo json_encode($thong_ke); ?>;
 
-        // Tách nhãn (tháng) và doanh thu
-        const labels = dataFromPHP.map(item => 'Tháng ' + item.thang);
-        const data = dataFromPHP.map(item => item.doanh_thu);
+                // Tách nhãn (tháng) và doanh thu
+                const labels = dataFromPHP.map(item => 'Tháng ' + item.thang);
+                const data = dataFromPHP.map(item => item.doanh_thu);
 
-        // Cấu hình biểu đồ
-        const ctx = document.getElementById('doanhThuChart').getContext('2d');
-        const doanhThuChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Doanh thu (VNĐ)',
-                    data: data,
-                    backgroundColor: '#4CAF50',
-                    borderColor: '#388E3C',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return value.toLocaleString('vi-VN') + ' ₫';
+                // Cấu hình biểu đồ
+                const ctx = document.getElementById('doanhThuChart').getContext('2d');
+                const doanhThuChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Doanh thu (VNĐ)',
+                            data: data,
+                            backgroundColor: '#4CAF50',
+                            borderColor: '#388E3C',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString('vi-VN') + ' ₫';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' +
+                                            context.parsed.y.toLocaleString('vi-VN') + ' ₫';
+                                    }
+                                }
                             }
                         }
                     }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.dataset.label + ': ' +
-                                       context.parsed.y.toLocaleString('vi-VN') + ' ₫';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+                });
+            </script>
             <!--end::Row-->
         </div>
         <!--end::Container-->
-        
+
     </div>
     <!--end::App Content-->
 </main>
