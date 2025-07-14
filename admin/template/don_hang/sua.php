@@ -1,19 +1,28 @@
 <?php
-if ($func->isPOST())
-{
+if ($func->isPOST()) {
     $filterAll = $func->filter();
     $id = $filterAll['id'];
     $data_update = [
         'trang_thai' => $filterAll['status']
     ];
     $db->update('don_hang', $data_update, "id = '$id'");
+    if ($filterAll['trang_thai'] == 5) {
+        if (isset($filterAll['khach_hang_id'])) {
+            $khach_hang_id = $filterAll['khach_hang_id'];
+            $chi_tieu = $db->oneRaw("select * from khach_hang where id=$khach_hang_id")['chi_tieu'];
+            $khach_hang_update = [
+                'chi_tieu' => $chi_tieu - $filterAll['chi_tieu']
+            ];
+            $db->update('khach_hang', $khach_hang_update);
+        }
+    }
     setFlashData('smg', 'Đã cập nhật đơn hàng');
 }
 $id = $func->filter()['id'];
 $order = $db->oneRaw("SELECT * FROM don_hang WHERE id = '$id'");
 $code = $order['id'];
 $order_detail = $db->getRaw("SELECT * FROM chi_tiet_don_hang WHERE don_hang_id = '$code'");
-$diachidaydu = $func->laydiachi($order['dia_chi'], $order['xa_phuong'], $order['quan_huyen'], $order['tinh_thanhpho'], );
+$diachidaydu = $func->laydiachi($order['dia_chi'], $order['xa_phuong'], $order['quan_huyen'], $order['tinh_thanhpho'],);
 $smg = getFlashData('smg');
 ?>
 <!--begin::App Main-->
@@ -46,8 +55,7 @@ $smg = getFlashData('smg');
         <!--begin::Container-->
         <div class="container-fluid">
             <?php
-            if (!empty($smg))
-            {
+            if (!empty($smg)) {
                 $func->getSmg($smg);
             }
             ?>
@@ -71,13 +79,23 @@ $smg = getFlashData('smg');
                         <div class="col-md-6">
                             <label for="status" class="fw-bold form-label">Cập nhật trạng thái: </label>
                             <select name="status" class="form-select mb-3">
-                                <?php for ((int) $i = $order['trang_thai']; $i <= 5; $i++): ?>
+                                <?php
+                                $temp = $order['trang_thai'] == 4 ? 4 : 5;
+                                for ((int) $i = $order['trang_thai']; $i <= $temp; $i++): ?>
                                     <option value="<?= $i ?>" <?= $order['trang_thai'] == $i ? 'selected' : '' ?>>
                                         <?= $func->status_order($i) ?>
                                     </option>
                                 <?php endfor; ?>
                             </select>
                             <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                            <?php
+                            if ($order['khach_hang_id'] != ''):
+                                $chi_tieu = $db->oneRaw("select * from khach_hang where id=" . $order['khach_hang_id'])['chi_tieu'];
+                            ?>
+                                <input type="hidden" name="chi_tieu" value="<?= $chi_tieu ?>">
+
+                            <?php endif;
+                            ?>
                             <button class="btn btn-success" type="submit">Cập nhật</button>
                         </div>
                     </form>
@@ -111,7 +129,7 @@ $smg = getFlashData('smg');
                             foreach ($order_detail as $item):
                                 $item_id = $item['san_pham_id'];
                                 $item_db = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$item_id'");
-                                ?>
+                            ?>
                                 <?php if ($item_db): ?>
                                     <tr>
                                         <td><?= ++$dem ?></td>

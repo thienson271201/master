@@ -97,7 +97,7 @@ $number_cart = $f->tinhTongSanPhamTrongGioHang();
 <script>
   window.addEventListener('scroll', function () {
     const cartIcon = document.querySelector('.cart-icon-on-scroll');
-    if (window.scrollY > 100) {
+    if (window.scrollY > 94) {
       cartIcon.classList.remove('hidden');
       cartIcon.classList.add('visible');
     } else {

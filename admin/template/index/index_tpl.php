@@ -1,9 +1,9 @@
 <?php
 $tong_don_hang = $db->oneRaw("SELECT COUNT(*) FROM don_hang");
 $tong_thanh_vien = $db->oneRaw("SELECT COUNT(*) FROM khach_hang ");
-$tong_doanh_thu = $db->oneRaw("SELECT SUM(tong_tien) FROM don_hang");
-
-$thong_ke = $db->getRaw("-- Tạo bảng tạm chứa các tháng từ 5 đến 10
+$tong_doanh_thu = $db->oneRaw("SELECT SUM(tong_tien) FROM don_hang WHERE trang_thai = 4");
+//thống kê cả biểu đồ
+$thong_ke = $db->getRaw("
 SELECT 
     m.thang,
     IFNULL(SUM(d.tong_tien), 0) AS doanh_thu
@@ -16,7 +16,9 @@ FROM (
     SELECT 10
 ) AS m
 LEFT JOIN don_hang d
-    ON MONTH(d.ngay_tao) = m.thang AND YEAR(d.ngay_tao) = 2025
+    ON MONTH(d.ngay_tao) = m.thang 
+    AND YEAR(d.ngay_tao) = 2025
+    AND d.trang_thai != 5
 GROUP BY m.thang
 ORDER BY m.thang;
 ");
@@ -29,14 +31,18 @@ $san_pham_ban_chay = $db->getRaw("SELECT
 FROM 
     chi_tiet_don_hang ctdh
 JOIN 
+    don_hang dh ON ctdh.don_hang_id = dh.id
+JOIN 
     san_pham sp ON ctdh.san_pham_id = sp.id
 JOIN 
     thuong_hieu th ON sp.thuong_hieu_id = th.id
+WHERE 
+    dh.trang_thai != 5
 GROUP BY 
     sp.id, sp.ten_san_pham, th.ten_thuong_hieu
 ORDER BY 
     tong_so_luong_ban DESC
-LIMIT 5;
+LIMIT 5
 ");
 $thuong_hieu_ban_chay = $db->getRaw("SELECT 
     th.id AS thuong_hieu_id,
@@ -45,14 +51,18 @@ $thuong_hieu_ban_chay = $db->getRaw("SELECT
 FROM 
     chi_tiet_don_hang ctdh
 JOIN 
+    don_hang dh ON ctdh.don_hang_id = dh.id
+JOIN 
     san_pham sp ON ctdh.san_pham_id = sp.id
 JOIN 
     thuong_hieu th ON sp.thuong_hieu_id = th.id
+WHERE 
+    dh.trang_thai != 5
 GROUP BY 
     th.id, th.ten_thuong_hieu
 ORDER BY 
     tong_so_luong_ban DESC
-LIMIT 5;
+LIMIT 5
 ");
 
 ?>
@@ -66,7 +76,7 @@ LIMIT 5;
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Bảng điều khiển</h3>
+                    <h3 class="mb-0">Thống kê</h3>
                 </div>
             </div>
             <!--end::Row-->

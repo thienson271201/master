@@ -29,7 +29,7 @@
 // print_r($_SESSION['gio_hang']);
 // echo '</pre>';
 if (isset($_SESSION['gio_hang'])):
-    ?>
+?>
     <section class="content-section">
         <div class="container">
             <form method="POST">
@@ -50,7 +50,7 @@ if (isset($_SESSION['gio_hang'])):
                             $id = $item['id'];
                             $sanphamgiohang = $db->oneRaw("select * from san_pham where id = $id");
                             $tong += $sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']
-                                ?>
+                        ?>
                             <div class="item cart-item-line" data-inview-showup="showup-translate-up">
                                 <div class="item-image">
                                     <div class="responsive-1by1">
@@ -86,7 +86,7 @@ if (isset($_SESSION['gio_hang'])):
 
                                 </div>
                             </div>
-                            <?php
+                        <?php
                         endforeach;
                         ?>
                     </div>
@@ -103,33 +103,10 @@ if (isset($_SESSION['gio_hang'])):
                 </div>
             </form>
             <div class="muted-bg block-md" data-inview-showup="showup-translate-up">
-                <div class="row cols-lg rows-lg">
-                    <div class="sm-col-6">
-                        <form action="https://amigos-themes.com/profix/cart.html" method="POST" class="offs-md">
-                            <h5 class="text-upper">Mã giảm giá</h5>
-                            <div class="row cols-md rows-md">
-                                <div class="sm-col-7">
-                                    <div class="field-group">
-                                        <div class="field-wrap">
-                                            <input class="field-control" name="coupon" placeholder="Nhập mã giảm giá"
-                                                required="required" />
-                                            <span class="field-back"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sm-col-5">
-                                    <button class="btn btns-bordered text-upper col-12">
-                                        Áp dụng
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="sm-col-4 sm-push-2">
-                        <div class="cart-total-line offs-sm shift-sm">
-                            <div class="title text-upper">Khuyến mãi</div>
-                            <div class="value">0₫</div>
-                        </div>
+                <div class="row cols-lg rows-lg " style="display: flex;justify-content: end;">
+
+                    <div class="sm-col-4 " >
+
                         <div class="cart-total-line text-sm">
                             <div class="title text-upper text-semibold">Tạm tính</div>
                             <div id="tong-tien" class="value text-colorful text-bold"><?= $f->format_tiente($tong) ?>₫</div>
@@ -141,9 +118,9 @@ if (isset($_SESSION['gio_hang'])):
             </div>
         </div>
     </section>
-    <?php
+<?php
 else:
-    ?>
+?>
     <section class="text-center content-section">
         <div class="container">
             <!-- <img class="image offs-md" src="assets/images/error/404.png" alt="" data-inview-showup="showup-scale" /> -->
@@ -155,12 +132,12 @@ else:
             <a class="btn text-upper" href="./" data-inview-showup="showup-translate-up">Quay về trang chủ</a>
         </div>
     </section>
-    <?php
+<?php
 endif;
 ?>
 <!-- Xoá giỏ hàng tổng -->
 <script>
-    $('#btn-xoa-gio-hang').on('click', function () {
+    $('#btn-xoa-gio-hang').on('click', function() {
         Swal.fire({
             title: "Xác nhận xoá?",
             text: "Bạn sẽ xoá tất cả sản phẩm trong giỏ hàng!",
@@ -175,7 +152,7 @@ endif;
                 $.ajax({
                     url: 'api/xoa_gio_hang.php',
                     type: 'POST',
-                    success: function (response) {
+                    success: function(response) {
                         Swal.fire({
                             title: "Thông báo!",
                             text: "Đã xoá thành công",
@@ -185,7 +162,7 @@ endif;
                             location.reload();
                         });
                     },
-                    error: function () {
+                    error: function() {
                         Swal.fire({
                             title: "Lỗi!",
                             text: "Có lỗi xảy ra khi xoá giỏ hàng.",
@@ -203,15 +180,15 @@ endif;
 
 <!-- Tăng giảm số lượng sản phẩm -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Lắng nghe khi bấm nút + hoặc -
-        $('.field-increment, .field-decrement').on('click', function () {
+        $('.field-increment, .field-decrement').on('click', function() {
             // Tìm ô input số lượng gần nhất
             const $wrap = $(this).closest('.field-wrap');
             const $input = $wrap.find('input[name="quantity"]');
 
             // Chờ 100ms để template cập nhật giá trị xong
-            setTimeout(function () {
+            setTimeout(function() {
                 const productId = $input.data('id');
                 const quantity = parseInt($input.val());
 
@@ -224,7 +201,7 @@ endif;
                 $.post('api/cap_nhat_so_luong.php', {
                     id: productId,
                     quantity: quantity
-                }, function (response) {
+                }, function(response) {
                     console.log('Server response:', response);
                     if (response.success) {
                         $wrap.closest('.cart-item-line').find('.item-total').text(response.item_total + '₫');
@@ -239,8 +216,8 @@ endif;
 </script>
 <!-- xoá sản phẩm trong giỏ hàng -->
 <script>
-    $(document).ready(function () {
-        $('.remove').on('click', function (e) {
+    $(document).ready(function() {
+        $('.remove').on('click', function(e) {
             e.preventDefault();
             let id = $(this).data('id');
             let $this = $(this);
@@ -248,16 +225,18 @@ endif;
             $.ajax({
                 url: 'api/xoa_san_pham_gio_hang.php',
                 type: 'POST',
-                data: { id: id },
+                data: {
+                    id: id
+                },
                 dataType: 'json',
-                success: function (response) {
+                success: function(response) {
                     if (response.reload) {
                         location.reload(); // Reload lại toàn trang để load giao diện trống
                     } else {
                         $this.closest('.cart-item-line').remove();
                         // Sau khi remove
                         let newTotal = 0;
-                        $('.item-total').each(function () {
+                        $('.item-total').each(function() {
                             let val = $(this).text().replace(/[^\d]/g, '');
                             newTotal += parseInt(val || 0);
                         });

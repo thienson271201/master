@@ -22,7 +22,7 @@
                 <li class="nav-item">
                     <a href="index.php" class="nav-link <?= $com == '' && $act == '' ? 'active' : '' ?>">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>Bảng điều khiển</p>
+                        <p>Tổng quan</p>
                     </a>
                 </li>
                 <li class="nav-header">Quản lý sản phẩm</li>
@@ -67,13 +67,13 @@
                         <p>Quản lý đơn hàng</p>
                     </a>
                 </li>
-                <li class="nav-header">Quản lý nhập hàng</li>
+                <!-- <li class="nav-header">Quản lý nhập hàng</li>
                 <li class="nav-item">
                     <a href="?com=nhap_hang&act=danh_sach" class="nav-link <?= $com == 'nhap_hang' ? 'active' : '' ?>">
                         <i class="nav-icon fa-solid fa-right-to-bracket fa-rotate-90"></i>
                         <p>Quản lý nhập hàng</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-header">Quản lý khách hàng</li>
                 <li class="nav-item">
                     <a href="?com=khach_hang&act=danh_sach"
