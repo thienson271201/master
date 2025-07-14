@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 12, 2025 lúc 08:50 PM
+-- Thời gian đã tạo: Th7 14, 2025 lúc 08:17 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -71,7 +71,10 @@ INSERT INTO `admin_token` (`id`, `admin_id`, `token`, `create_at`) VALUES
 (185, 1, 'd56a6f7b372827f200ecc1ec81596d5ec9d7c38a', '2025-07-08 19:03:31'),
 (186, 1, 'b288976ed74c5a564cfe0f2125ab4d46e85560f3', '2025-07-09 07:30:15'),
 (187, 1, '0bd917c0f6985f1be202636c8d3add0a81e539a9', '2025-07-11 22:53:47'),
-(189, 1, '6c6a2dd4c6211880f8a47c4a1d9ac3e4e57e1e46', '2025-07-13 00:50:09');
+(189, 1, '6c6a2dd4c6211880f8a47c4a1d9ac3e4e57e1e46', '2025-07-13 00:50:09'),
+(190, 1, '29b03269d5d3576ebb9f9ea2e7c506ec34a8855e', '2025-07-13 09:09:14'),
+(191, 1, '7c4f17a42007b151d252385f17ccc7b91aeb5278', '2025-07-13 20:42:03'),
+(192, 1, 'c48d2e7bbf44c50b45e771de628b7cc66b4a2323', '2025-07-14 23:54:11');
 
 -- --------------------------------------------------------
 
@@ -103,12 +106,12 @@ INSERT INTO `chi_tiet_don_hang` (`id`, `don_hang_id`, `san_pham_id`, `so_luong`,
 (54, 50, 6, 1, 22000000, 22000000),
 (55, 51, 14, 1, 27790000, 27790000),
 (56, 51, 22, 1, 99900000, 99900000),
-(57, 52, 5, 0, 22990000, 0),
-(58, 52, 43, 0, 10000, 0),
 (59, 53, 4, 1, 18000000, 18000000),
 (60, 53, 9, 1, 23490000, 23490000),
 (61, 54, 3, 1, 5000, 5000),
-(62, 54, 43, 1, 10000, 10000);
+(62, 54, 43, 1, 10000, 10000),
+(63, 55, 5, 1, 22990000, 22990000),
+(64, 56, 43, 1, 10000, 10000);
 
 -- --------------------------------------------------------
 
@@ -162,16 +165,17 @@ CREATE TABLE `don_hang` (
 --
 
 INSERT INTO `don_hang` (`id`, `ma_don_hang`, `khach_hang_id`, `ten_khach_hang`, `email`, `so_dien_thoai`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `ghi_chu`, `tong_tien`, `hinh_thuc_thanh_toan`, `trang_thai`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(45, 'GYWVHK4O', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22000000, 'cod', 1, '2025-07-03 07:18:52', NULL),
-(46, 'VIFLYC9J', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22990000, 'cod', 1, '2025-07-03 09:23:29', NULL),
-(47, 'VUKJ8HE1', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 22990000, 'cod', 1, '2025-07-04 16:36:54', NULL),
-(48, 'Z8OUVJZV', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 23490000, 'cod', 1, '2025-07-04 16:37:20', NULL),
-(49, 'KDF2K7BS', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 112940000, 'cod', 2, '2025-07-04 17:03:41', NULL),
-(50, 'FBXVKTSS', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 40000000, 'cod', 1, '2025-07-07 16:50:49', NULL),
-(51, 'XWNEXT7D', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 127690000, 'cod', 1, '2025-07-07 16:51:59', NULL),
-(52, 'QL5LQ1B2', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 0, 'cod', 1, '2025-07-08 16:41:11', NULL),
-(53, 'LAXPO0S3', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 41490000, 'cod', 1, '2025-07-08 17:54:05', NULL),
-(54, '69U701S2', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 15000, 'transfer', 2, '2025-07-09 00:54:31', NULL);
+(45, 'GYWVHK4O', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22000000, 'cod', 4, '2025-07-03 07:18:52', NULL),
+(46, 'VIFLYC9J', 15, 'Huỳnh Minh Tâm', 'huynhminhtamm2002@gmail.com', '0878100084', 'Ấp Hoà Bình', 26497, 742, 75, '', 22990000, 'cod', 5, '2025-07-03 09:23:29', NULL),
+(47, 'VUKJ8HE1', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 22990000, 'cod', 5, '2025-07-04 16:36:54', NULL),
+(48, 'Z8OUVJZV', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 23490000, 'cod', 5, '2025-07-04 16:37:20', NULL),
+(49, 'KDF2K7BS', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 112940000, 'cod', 5, '2025-07-04 17:03:41', NULL),
+(50, 'FBXVKTSS', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 40000000, 'cod', 4, '2025-07-07 16:50:49', NULL),
+(51, 'XWNEXT7D', 18, 'Lê Hoàng Minh', 'minh.boy200@gmail.com', '0779767361', 'ấp Xoài Đôi', 28111, 806, 80, '', 127690000, 'cod', 5, '2025-07-07 16:51:59', NULL),
+(53, 'LAXPO0S3', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 41490000, 'cod', 5, '2025-07-08 17:54:05', NULL),
+(54, '69U701S2', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 15000, 'transfer', 5, '2025-07-09 00:54:31', NULL),
+(55, 'UTNCDA85', 13, 'Huỳnh Thiên Sơn', 'huynhthienson01012002@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 22990000, 'cod', 4, '2025-07-12 18:55:37', NULL),
+(56, 'HJGPH9V0', 19, 'Huỳnh Thiên Sơn', 'anpha1305@gmail.com', '0376191598', '209 Ấp Tân Thuận', 28642, 822, 82, '', 10000, 'transfer', 5, '2025-07-13 13:41:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -258,7 +262,10 @@ INSERT INTO `hinh_san_pham` (`id`, `san_pham_id`, `hinh_anh`) VALUES
 (81, 40, '1752346090.png'),
 (82, 40, '1752346095.png'),
 (83, 41, '1752346116.jpg'),
-(84, 41, '1752346124.jpg');
+(84, 41, '1752346124.jpg'),
+(85, 9, '1752516868.png'),
+(86, 9, '1752516875.png'),
+(87, 9, '1752516882.png');
 
 -- --------------------------------------------------------
 
@@ -306,9 +313,10 @@ CREATE TABLE `khach_hang` (
 --
 
 INSERT INTO `khach_hang` (`id`, `email`, `so_dien_thoai`, `ten_khach_hang`, `chi_tieu`, `dia_chi`, `xa_phuong`, `quan_huyen`, `tinh_thanhpho`, `mat_khau`, `anh_dai_dien`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 200925000, '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
+(13, 'huynhthienson01012002@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 223915000, '209 Ấp Tân Thuận', 28642, 822, 82, '$2y$10$2AT.b2ReuIDzFJDLCMtQYeyrApEUuHGp6yt9K8Rcg/rbVhNtkUANi', '1749005307.png', '2025-05-25 01:49:37', '2025-06-04 02:48:27'),
 (15, 'huynhminhtamm2002@gmail.com', '0878100084', 'Huỳnh Minh Tâm', NULL, 'Ấp Hoà Bình', 26497, 742, 75, '$2y$10$8Tm6SzPoaYI1hUPX6xQbveTUlJmToFXvi2OkLTjGxKfp6z4KQjKp2', '1749202308.jpg', '2025-06-06 09:31:03', '2025-06-06 09:31:48'),
-(18, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 167690000, 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$5Uq9SwScMMVu0M8u4lF4vOmmV0eT2Vg6OqVU21r6Bce4Czalxd/lO', NULL, '2025-07-06 16:57:47', '2025-07-07 16:50:37');
+(18, 'minh.boy200@gmail.com', '0779767361', 'Lê Hoàng Minh', 167690000, 'ấp Xoài Đôi', 28111, 806, 80, '$2y$10$5Uq9SwScMMVu0M8u4lF4vOmmV0eT2Vg6OqVU21r6Bce4Czalxd/lO', NULL, '2025-07-06 16:57:47', '2025-07-07 16:50:37'),
+(19, 'anpha1305@gmail.com', '0376191598', 'Huỳnh Thiên Sơn', 10000, NULL, NULL, NULL, NULL, '$2y$10$PA4AiqxIfg6wjyw7yZlL9uSOmxVAUi8uAMWCyLRY6qGCM2He5vCSK', NULL, '2025-07-13 13:37:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -331,7 +339,9 @@ INSERT INTO `khach_hang_token` (`id`, `khach_hang_id`, `token`, `ngay_tao`) VALU
 (44, 18, '06bb7ba80b5d63845d8d9ec4975ac30da40e3522', '2025-07-07 16:49:51'),
 (45, 13, 'ba0cd7ed18889d3ff8dbd25e5b37cf1c1c1dba96', '2025-07-08 12:01:24'),
 (46, 13, 'ffb0722331d599cab1360b0b615e6cf5f97ed545', '2025-07-09 00:30:29'),
-(47, 13, 'e871b7036406de0aef9ca03f0d415e4d10f782a0', '2025-07-12 11:16:45');
+(47, 13, 'e871b7036406de0aef9ca03f0d415e4d10f782a0', '2025-07-12 11:16:45'),
+(48, 13, '82bf869338c5830cc8e28fcb09096d05aed66886', '2025-07-12 18:54:19'),
+(50, 13, '517837ede297652ab8ae434e746043c76fc0d475', '2025-07-14 16:46:32');
 
 -- --------------------------------------------------------
 
@@ -12003,13 +12013,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `admin_token`
 --
 ALTER TABLE `admin_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_san_pham`
@@ -12021,13 +12031,13 @@ ALTER TABLE `danh_muc_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT cho bảng `hinh_san_pham`
 --
 ALTER TABLE `hinh_san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -12039,13 +12049,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang_token`
 --
 ALTER TABLE `khach_hang_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
