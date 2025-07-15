@@ -9,13 +9,16 @@ if ($f->isPOST())
 
   // Kiểm tra email có hợp lệ không
   // 2 khách hàng khác nhau không được trùng email
-  if ($db->oneRaw("SELECT * FROM khach_hang WHERE email = '$email'") == null)
+  $quen_mat_khau = $db->oneRaw("SELECT * FROM khach_hang WHERE email = '$email'");
+  if ($quen_mat_khau == null)
   {
     $error_email = 'Email không tồn tại trong hệ thống';
   } else
   {
     $otp = random_int(100000, 999999);
     setSession('otp', $otp);
+    setSession('id_quen_mat_khau', $quen_mat_khau['id']);
+    // Gửi OTP đến email
     $f->gui_otp($email, $otp);
     $f->redirect('./nhap-opt');
   }

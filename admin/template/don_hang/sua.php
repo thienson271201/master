@@ -6,14 +6,20 @@ if ($func->isPOST()) {
         'trang_thai' => $filterAll['status']
     ];
     $db->update('don_hang', $data_update, "id = '$id'");
-    if ($filterAll['trang_thai'] == 5) {
+    if ($filterAll['status'] == 5) {
         if (isset($filterAll['khach_hang_id'])) {
             $khach_hang_id = $filterAll['khach_hang_id'];
             $chi_tieu = $db->oneRaw("select * from khach_hang where id=$khach_hang_id")['chi_tieu'];
+            // echo $chi_tieu;
+            // echo '<br>';
+            // echo $filterAll['tong_tien'];
             $khach_hang_update = [
-                'chi_tieu' => $chi_tieu - $filterAll['chi_tieu']
+                'chi_tieu' => $chi_tieu - $filterAll['tong_tien']
             ];
-            $db->update('khach_hang', $khach_hang_update);
+            // echo '<pre>';
+            // print_r($khach_hang_update);
+            // echo '</pre>';
+            $db->update('khach_hang', $khach_hang_update, "id = '$khach_hang_id'");
         }
     }
     setFlashData('smg', 'Đã cập nhật đơn hàng');
@@ -90,10 +96,10 @@ $smg = getFlashData('smg');
                             <input type="hidden" name="id" value="<?= $order['id'] ?>">
                             <?php
                             if ($order['khach_hang_id'] != ''):
-                                $chi_tieu = $db->oneRaw("select * from khach_hang where id=" . $order['khach_hang_id'])['chi_tieu'];
+                                
                             ?>
-                                <input type="hidden" name="chi_tieu" value="<?= $chi_tieu ?>">
-
+                               <input type="hidden" value="<?= $order['tong_tien'] ?>" name="tong_tien">
+                                <input type="hidden" name="khach_hang_id" value="<?= $order['khach_hang_id'] ?>">
                             <?php endif;
                             ?>
                             <button class="btn btn-success" type="submit">Cập nhật</button>

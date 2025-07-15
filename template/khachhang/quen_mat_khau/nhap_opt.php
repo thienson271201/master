@@ -52,7 +52,7 @@ if ($f->isPOST())
                             <div class="offs-lg">
                                 <div class="field-group">
                                     <div class="field-wrap has-icon">
-                                        <input class="field-control" name="email" type="text"
+                                        <input class="field-control" name="otp" type="text"
                                             placeholder="Nhập otp đã được gửi trong email" required>
                                         <span class="field-icon">
                                             <i class="far fa-envelope"></i>

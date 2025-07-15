@@ -12,7 +12,7 @@
                 Đơn hàng của quý khách đã thanh toán thành công
             </p>
         </div>
-        <a class="btn text-upper" href="index.php?page=trangChu" data-inview-showup="showup-translate-up">Quay về trang
+        <a class="btn text-upper" href="./" data-inview-showup="showup-translate-up">Quay về trang
             chủ</a>
     </div>
 </section>

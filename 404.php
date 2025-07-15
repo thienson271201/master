@@ -6,7 +6,7 @@
         Lỗi
       </h2>
       <p data-inview-showup="showup-translate-left">
-        Thanh toán thành công
+        Duyệt trang không tồn tại hoặc đã bị xoá
       </p>
     </div>
     <a class="btn text-upper" href="./" data-inview-showup="showup-translate-up">Quay về trang chủ</a>

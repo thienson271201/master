@@ -65,21 +65,32 @@
           // echo '<pre>';
           // print_r($chi_tiet_don_hang);
           // echo '</pre>';
-          foreach ($chi_tiet_don_hang as $ctdh):
+          foreach ($chi_tiet_don_hang as $ctdh) {
+
             $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
-            ?>
-            <div class="user-dashboard-item text-upper">
-              <div class="user-dashboard-item-number"><?= $don_hang['ma_don_hang'] ?></div>
-              <div class="user-dashboard-item-title"><?= $san_pham['ten_san_pham'] ?></div>
-              <div class="user-dashboard-item-date"><?= date("d-m-Y", strtotime($don_hang['ngay_tao'])) ?></div>
-              <div class="user-dashboard-item-price">
-                <!-- <span class="currency">$</span>55.4 -->
-                <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
-              </div>
-              <div class="user-dashboard-item-status pending" style="color: <?= $f->color_order_2($don_hang['trang_thai']) ?>;"><?= $f->status_order($don_hang['trang_thai']) ?></div>
+            $ten_san_pham = '';
+            foreach ($chi_tiet_don_hang as $ctdh) {
+              $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
+              if ($ten_san_pham == '') {
+                $ten_san_pham = $san_pham['ten_san_pham'];
+              } else {
+                $ten_san_pham .= ', ' . $san_pham['ten_san_pham'];
+              }
+            }
+          }
+        ?>
+          <div class="user-dashboard-item text-upper">
+            <div class="user-dashboard-item-number"><?= $don_hang['ma_don_hang'] ?></div>
+            <div class="user-dashboard-item-title"><?= $ten_san_pham ?></div>
+            <div class="user-dashboard-item-date"><?= date("d-m-Y", strtotime($don_hang['ngay_tao'])) ?></div>
+            <div class="user-dashboard-item-price">
+              <!-- <span class="currency">$</span>55.4 -->
+              <?= $f->format_tiente($ctdh['tong_tien']) ?>₫
             </div>
-            <?php
-          endforeach;
+            <div class="user-dashboard-item-status pending" style="color: <?= $f->color_order_2($don_hang['trang_thai']) ?>;"><?= $f->status_order($don_hang['trang_thai']) ?></div>
+          </div>
+      <?php
+
         endforeach;
       endif;
       ?>
