@@ -8,7 +8,8 @@ $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $base_path = '/' . URL;
 
 // Loại bỏ base path khỏi URL
-if (strpos($url, $base_path) === 0) {
+if (strpos($url, $base_path) === 0)
+{
     $url = substr($url, strlen($base_path));
 }
 
@@ -20,7 +21,8 @@ $url = ltrim($url, '/');
 ob_start();
 
 
-switch ($url) {
+switch ($url)
+{
     // Trang chủ
     case '':
         require_once TEMPLATE . 'index/index_tpl.php';
@@ -54,51 +56,61 @@ switch ($url) {
         break;
     // Đăng nhập
     case 'dang-nhap':
-        if ($f->isLogin()) {
+        if ($f->isLogin())
+        {
             $f->redirect('thanh-vien?page=thong_tin_khach_hang');
-        } else {
+        } else
+        {
             $title = 'Đăng Nhập';
             require_once TEMPLATE . 'khachhang/dangnhap.php';
             $noidung = ob_get_clean();
             break;
         }
-        // Thông tin khách hàng
+    // Thông tin khách hàng
     case 'thanh-vien':
         // Gán mặc định
-        if (!empty($_GET['page'])) {
+        if (!empty($_GET['page']))
+        {
             $duongdan = $_GET['page'];
-        } else {
+        } else
+        {
             $duongdan = 'bang-dieu-khien';
         }
         // Xử lý đăng xuất
-        if ($duongdan == 'dang_xuat') {
+        if ($duongdan == 'dang_xuat')
+        {
             removeSession('userLoginToken');
         }
-        if ($f->isLogin()) {
+        if ($f->isLogin())
+        {
             require_once TEMPLATE . 'khachhang/layout/top.php';
 
-            if ($duongdan == 'bang-dieu-khien') {
+            if ($duongdan == 'bang-dieu-khien')
+            {
                 $title = 'Bảng điều khiển';
                 require_once TEMPLATE . 'khachhang/bangdieukhien.php';
                 $noidung = ob_get_clean();
                 break;
             }
-            if ($duongdan == 'ho-so') {
+            if ($duongdan == 'ho-so')
+            {
                 $title = 'Hồ sơ';
                 require_once TEMPLATE . 'khachhang/hoso.php';
                 $noidung = ob_get_clean();
                 break;
             }
-            if ($duongdan == 'don-hang') {
+            if ($duongdan == 'don-hang')
+            {
                 $title = 'Đơn hàng';
                 require_once TEMPLATE . 'khachhang/donhang.php';
                 $noidung = ob_get_clean();
                 break;
             }
-        } else {
+        } else
+        {
             $f->redirect('dang-nhap');
         }
-        // Danh sách sản phẩm
+    // Danh sách sản phẩm
     case 'san-pham':
         $title = 'Sản phẩm';
         require_once TEMPLATE . 'sanpham/danhsachsanpham.php';
@@ -114,16 +126,20 @@ switch ($url) {
     case 'thanh-toan':
         if (!isset($_SESSION['gio_hang']))
             $f->redirect('./');
-        else {
-            if (isset($_GET['vnp_ResponseCode'])) {
-                if ($_GET['vnp_ResponseCode'] == '00') {
+        else
+        {
+            if (isset($_GET['vnp_ResponseCode']))
+            {
+                if ($_GET['vnp_ResponseCode'] == '00')
+                {
                     $data_insert = getFlashData('data_vnpay');
                     require_once TEMPLATE . 'thanh_toan/tao_don_hang.php';
                     $title = "Kết quả thanh toán đơn hàng";
                     require_once TEMPLATE . 'thanh_toan/vnpay/vnpay_return.php';
                     $noidung = ob_get_clean();
                 }
-            } else {
+            } else
+            {
                 require_once TEMPLATE . 'thanh_toan/thanh_toan.php';
                 $noidung = ob_get_clean();
             }
@@ -131,9 +147,11 @@ switch ($url) {
         break;
     // Quên mật khẩu
     case 'quen-mat-khau':
-        if ($f->isLogin()) {
-            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
-        } else {
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=bang-dieu-khien');
+        } else
+        {
             // nếu có opt thì vô không thì trở ra trang cũ
             $title = 'Quên mật khẩu';
             require_once TEMPLATE . 'khachhang/quen_mat_khau/quen_mat_khau.php';
@@ -141,11 +159,14 @@ switch ($url) {
             break;
         }
     case 'tao_mat_khau':
-        if ($f->isLogin()) {
-            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
-        } else {
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=bang-dieu-khien');
+        } else
+        {
             $otp = getSession('otp');
-            if ($otp) {
+            if ($otp)
+            {
                 // nếu có opt thì vô không thì trở ra trang cũ
                 $title = 'Nhập mật khẩu mới';
                 require_once TEMPLATE . 'khachhang/quen_mat_khau/tao_mat_khau.php';
@@ -155,11 +176,14 @@ switch ($url) {
                 $f->redirect('./quen-mat-khau');
         }
     case 'nhap-opt':
-        if ($f->isLogin()) {
-            $f->redirect('thanh-vien?page=thong_tin_khach_hang');
-        } else {
+        if ($f->isLogin())
+        {
+            $f->redirect('thanh-vien?page=bang-dieu-khien');
+        } else
+        {
             $otp = getSession('otp');
-            if ($otp) {
+            if ($otp)
+            {
                 $title = 'Nhập OPT';
                 require_once TEMPLATE . 'khachhang/quen_mat_khau/nhap_opt.php';
                 $noidung = ob_get_clean();
@@ -177,7 +201,8 @@ switch ($url) {
 
         // // Tra cứu sản phẩm
         $product = $db->oneRaw("SELECT * FROM san_pham WHERE duong_dan = '$url'");
-        if (!empty($product)) {
+        if (!empty($product))
+        {
             $title = $product['ten_san_pham'];
             require_once TEMPLATE . 'sanpham/chitietsanpham.php';
             $noidung = ob_get_clean();
