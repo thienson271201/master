@@ -48,6 +48,19 @@ if ($func->isPOST()) {
         // print_r($data_update);
         // echo '</pre>';
     }
+    if (isset($_POST['option'])){
+        $filterAll = $func->filter();
+        // echo '<pre>';
+        // print_r($filterAll);
+        // echo '</pre>';
+        $optioninsert=[
+            'san_pham_id'=>$filterAll['id'],
+            'RAM'=>$filterAll['ram'],
+            'SSD'=>$filterAll['ssd'],
+            'thanh_tien'=>$filterAll['thanh_tien']
+        ];
+        $db->insert('tuy_chon_cau_hinh',$optioninsert);
+    }
 }
 $id = $_GET['id'];
 $product = $db->oneRaw("SELECT * FROM san_pham WHERE id = '$id'");
@@ -220,6 +233,104 @@ $smg = getFlashData('smg');
                     <!--begin::Footer-->
                 </div>
             </form>
+            <div class="row mt-3" id="">
+                <div class="col-12 col-md-8">
+                    <div class="card card-primary card-outline mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Chi tiết cấu hình nâng cao
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            $cau_hinh = $db->getRaw('select * from tuy_chon_cau_hinh where san_pham_id=' . $id);
+                            if ($cau_hinh):
+                            ?>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="6%" class="text-center">STT</th>
+                                            <th>RAM</th>
+                                            <th>SSD</th>
+                                            <th>Thành Tiền</th>
+                                            <th width="10%" class="text-center">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $dem = 1;
+                                        foreach ($cau_hinh as $item):
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <input data-id="1" class="form-control text-center stt-input"
+                                                        type="text" value="<?= $dem++ ?>">
+                                                </td>
+                                                <td>
+                                                    <?= $item['RAM'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $item['SSD'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $func->format_tiente($item['thanh_tien']) ?> đ
+                                                </td>
+
+
+                                                <td class="text-center">
+
+                                                    <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                            else:
+                                $func->getSmg('Danh sách cấu hình đang trống', 'warning');
+                            endif;
+                            ?>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card card-primary card-outline mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Thêm cấu hình
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" class="row" id="them_cau_hinh">
+                                <div class="mb-3 col-12">
+                                    <label for="">RAM</label>
+                                    <input class="form-control" type="text" name="ram">
+                                </div>
+                                <div class="mb-3 col-12">
+                                    <label for="">SSD</label>
+                                    <input class="form-control" type="text" name="ssd">
+                                </div>
+                                <div class="mb-3 col-12">
+                                    <label for="">Thành Tiền</label>
+                                    <input class="form-control" type="text" id="option_price" name="thanh_tien">
+                                </div>
+                                <div class="col-12">
+                                    <input type="hidden" name="id" value="<?=$id?>">
+                                    <button class="btn btn-success  w-25" name="option">Lưu</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--end::Form-->
+            </div>
             <div class="row mt-3" id="thu_vien_anh">
                 <div class="col-12 col-md-8">
                     <div class="card card-primary card-outline mb-4">
@@ -330,18 +441,18 @@ $smg = getFlashData('smg');
         }
 
         // Định dạng các giá trị hiện có khi load trang
-        $('#original_price, #discounted_price').each(function() {
+        $('#original_price, #discounted_price,#option_price').each(function() {
             formatCurrency(this);
         });
 
         // Lắng nghe sự kiện input cho cả hai thẻ input
-        $('#original_price, #discounted_price').on('input', function() {
+        $('#original_price, #discounted_price,#option_price').on('input', function() {
             formatCurrency(this);
         });
 
         // Trước khi submit form, loại bỏ định dạng tiền tệ
-        $('#edit-product').on('submit', function() {
-            $('#original_price, #discounted_price').each(function() {
+        $('#edit-product,#them_cau_hinh').on('submit', function() {
+            $('#original_price, #discounted_price,#option_price').each(function() {
                 let value = $(this).val();
 
                 // Loại bỏ tất cả ký tự không phải số
