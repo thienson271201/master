@@ -11,7 +11,7 @@ $total_san_pham = $db->oneRaw('SELECT COUNT(*) as count FROM san_pham')['count']
 // Tính toán tổng số trang  
 $total_trang = ceil($total_san_pham / $limit);
 // Lấy danh sách sản phẩm với phân trang
-$list_san_pham = $db->getRaw('select * from san_pham limit ' . $offset . ', ' . $limit.'and trang_thai=1');
+$list_san_pham = $db->getRaw('select * from san_pham limit ' . $offset . ', ' . $limit);
 
 
 
