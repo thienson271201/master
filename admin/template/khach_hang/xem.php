@@ -112,7 +112,7 @@ $smg = getFlashData('smg');
                                                 <img class="w-100" src="../upload/images/<?= $item_db['hinh_anh'] ?>"
                                                     onerror="this.src='../assets/images/noimage/noimage.jpg'">
                                             </td>
-                                            <td><?= $item_db['ten_san_pham'] ?></td>
+                                            <td><?= $item_db['ten_san_pham'].($item['RAM']!=""?' | '.$item['RAM']:"").($item['SSD']!=""?' | '.$item['SSD']:"") ?></td>
                                             <td class="text-end"><?= $func->format_tiente($item['don_gia']) ?>đ</td>
                                             <td class="text-center"><?= $item['so_luong'] ?></td>
                                             <td class="text-end"><?= $func->format_tiente($item['so_luong'] * $item['don_gia']) ?>đ

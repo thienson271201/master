@@ -45,11 +45,11 @@ if (isset($_SESSION['gio_hang'])):
                     <div class="items">
                         <?php
                         $tong = 0;
-                        foreach ($_SESSION['gio_hang'] as $item):
+                        foreach ($_SESSION['gio_hang'] as $key=> $item ):
 
                             $id = $item['id'];
                             $sanphamgiohang = $db->oneRaw("select * from san_pham where id = $id");
-                            $tong += $sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']
+                            $tong += ($sanphamgiohang['gia_sau_khuyen_mai']+$item['option_price'] )* $item['quantity']
                         ?>
                             <div class="item cart-item-line" data-inview-showup="showup-translate-up">
                                 <div class="item-image">
@@ -58,16 +58,16 @@ if (isset($_SESSION['gio_hang'])):
                                     </div>
                                 </div>
                                 <div class="item-name">
-                                    <a href="shop-item.html" class="content-link"><?= $sanphamgiohang['ten_san_pham'] ?></a>
+                                    <a href="./<?=$sanphamgiohang['duong_dan'] ?>" class="content-link"><?= $sanphamgiohang['ten_san_pham'].($item['ram']!=""?' | '.$item['ram']:"").($item['ssd']!=""?' | '.$item['ssd']:"")?></a>
                                 </div>
-                                <div class="item-price"><?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai']) ?>₫</div>
+                                <div class="item-price"><?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai']+$item['option_price']) ?> ₫</div>
                                 <div class="item-quantity">
                                     <div class="field-group field-spin-sides">
                                         <div class="field-wrap">
                                             <input
                                                 class="field-control montserrat-bold alt-color text-sm soluonginput text-center"
                                                 type="text" name="quantity" value="<?= $item['quantity'] ?>" min="1" max="10"
-                                                data-id="<?= $item['id'] ?>"
+                                                data-id="<?= $key ?>"
                                                 data-action-role="field-wheel-spin field-arrows-spin" autocomplete="off" />
                                             <span class="field-back"></span>
                                             <span class="field-actions"><span class="field-increment"
@@ -79,10 +79,10 @@ if (isset($_SESSION['gio_hang'])):
                                     </div>
                                 </div>
                                 <div class="item-total">
-                                    <?= $f->format_tiente($sanphamgiohang['gia_sau_khuyen_mai'] * $item['quantity']) ?>₫
+                                    <?= $f->format_tiente(($sanphamgiohang['gia_sau_khuyen_mai']+$item['option_price'] )* $item['quantity']) ?>₫
                                 </div>
                                 <div class="item-remove">
-                                    <a href="#" class="remove" data-id="<?= $item['id'] ?>"><i class="fas fa-times"></i></a>
+                                    <a href="#" class="remove" data-id="<?= $key ?>"><i class="fas fa-times"></i></a>
 
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ if (isset($_SESSION['gio_hang'])):
                     <div class="sm-col-4 " >
 
                         <div class="cart-total-line text-sm">
-                            <div class="title text-upper text-semibold">Tạm tính</div>
+                            <div class="title text-upper text-semibold">Tổng Tiền</div>
                             <div id="tong-tien" class="value text-colorful text-bold"><?= $f->format_tiente($tong) ?>₫</div>
                         </div>
                         <div class="top-separator out-lg"></div>
@@ -199,7 +199,7 @@ endif;
                 // Gửi AJAX nếu cần
 
                 $.post('api/cap_nhat_so_luong.php', {
-                    id: productId,
+                    key: productId,
                     quantity: quantity
                 }, function(response) {
                     console.log('Server response:', response);
@@ -226,7 +226,7 @@ endif;
                 url: 'api/xoa_san_pham_gio_hang.php',
                 type: 'POST',
                 data: {
-                    id: id
+                    key: id
                 },
                 dataType: 'json',
                 success: function(response) {

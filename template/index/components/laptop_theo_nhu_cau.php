@@ -1,5 +1,5 @@
 <?php
-$list_san_pham = $db->getRaw('select * from san_pham ');
+$list_san_pham = $db->getRaw('select * from san_pham where trang_thai=1');
 
 // echo '<pre>';
 // print_r ($list_san_pham);

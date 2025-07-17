@@ -1,7 +1,7 @@
 <?php
 $tong_don_hang = $db->oneRaw("SELECT COUNT(*) FROM don_hang");
 $tong_thanh_vien = $db->oneRaw("SELECT COUNT(*) FROM khach_hang ");
-$tong_doanh_thu = $db->oneRaw("SELECT SUM(tong_tien) FROM don_hang WHERE trang_thai = 4");
+$tong_doanh_thu = $db->oneRaw("SELECT SUM(tong_tien) FROM don_hang WHERE trang_thai !=5");
 //thống kê cả biểu đồ
 $thong_ke = $db->getRaw("
 SELECT 
@@ -15,12 +15,13 @@ FROM (
     SELECT 9 UNION
     SELECT 10
 ) AS m
-LEFT JOIN don_hang d
-    ON MONTH(d.ngay_tao) = m.thang 
-    AND YEAR(d.ngay_tao) = 2025
-    AND d.trang_thai != 5
+LEFT JOIN (
+    SELECT * FROM don_hang WHERE YEAR(ngay_tao) = 2025 AND trang_thai != 5
+) AS d
+    ON MONTH(d.ngay_tao) = m.thang
 GROUP BY m.thang
-ORDER BY m.thang;
+ORDER BY m.thang
+
 ");
 
 $san_pham_ban_chay = $db->getRaw("SELECT 
@@ -37,7 +38,7 @@ JOIN
 JOIN 
     thuong_hieu th ON sp.thuong_hieu_id = th.id
 WHERE 
-    dh.trang_thai != 5
+    dh.trang_thai <> 5
 GROUP BY 
     sp.id, sp.ten_san_pham, th.ten_thuong_hieu
 ORDER BY 
@@ -57,7 +58,7 @@ JOIN
 JOIN 
     thuong_hieu th ON sp.thuong_hieu_id = th.id
 WHERE 
-    dh.trang_thai != 5
+    dh.trang_thai <> 5
 GROUP BY 
     th.id, th.ten_thuong_hieu
 ORDER BY 

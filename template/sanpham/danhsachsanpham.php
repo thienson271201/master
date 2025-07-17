@@ -11,7 +11,7 @@ $total_san_pham = $db->oneRaw('SELECT COUNT(*) as count FROM san_pham')['count']
 // Tính toán tổng số trang  
 $total_trang = ceil($total_san_pham / $limit);
 // Lấy danh sách sản phẩm với phân trang
-$list_san_pham = $db->getRaw('select * from san_pham limit ' . $offset . ', ' . $limit);
+$list_san_pham = $db->getRaw('select * from san_pham limit ' . $offset . ', ' . $limit.'and trang_thai=1');
 
 
 
@@ -50,7 +50,7 @@ if (isset($_GET['thuong-hieu']) && $_GET['thuong-hieu'] !== 'tat-ca')
 if (isset($_GET['tim-kiem']) && $_GET['tim-kiem'] !== '')
 {
   $tim_kiem = $_GET['tim-kiem'];
-  $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE ten_san_pham LIKE '%$tim_kiem%'");
+  $list_san_pham = $db->getRaw("SELECT * FROM san_pham WHERE ten_san_pham LIKE '%$tim_kiem%'and trang_thai=1");
   if (empty($list_san_pham))
   {
     setFlashData('tim_kiem', '<div class="alert alert-warning">

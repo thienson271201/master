@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chọn tùy chọn sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    .option-group {
+      margin-bottom: 20px;
+    }
+
+    .option-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .option-button {
+      padding: 10px 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .option-button.active {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+    .option-button:hover {
+      border-color: #007bff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Chọn cấu hình sản phẩm</h2>
+
+  <div class="option-group">
+    <h3>RAM</h3>
+    <div class="option-buttons" id="ram-options">
+      <div class="option-button">8GB</div>
+      <div class="option-button">16GB</div>
+      <div class="option-button">32GB</div>
+    </div>
+  </div>
+
+  <div class="option-group">
+    <h3>SSD</h3>
+    <div class="option-buttons" id="ssd-options">
+      <div class="option-button">256GB</div>
+      <div class="option-button">512GB</div>
+      <div class="option-button">1TB</div>
+    </div>
+  </div>
+
+  <script>
+    function setupOptionGroup(groupId) {
+      const group = document.getElementById(groupId);
+      const buttons = group.querySelectorAll('.option-button');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          button.classList.add('active');
+        });
+      });
+    }
+
+    setupOptionGroup('ram-options');
+    setupOptionGroup('ssd-options');
+  </script>
+
+</body>
+</html>

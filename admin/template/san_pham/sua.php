@@ -48,18 +48,18 @@ if ($func->isPOST()) {
         // print_r($data_update);
         // echo '</pre>';
     }
-    if (isset($_POST['option'])){
+    if (isset($_POST['option'])) {
         $filterAll = $func->filter();
         // echo '<pre>';
         // print_r($filterAll);
         // echo '</pre>';
-        $optioninsert=[
-            'san_pham_id'=>$filterAll['id'],
-            'RAM'=>$filterAll['ram'],
-            'SSD'=>$filterAll['ssd'],
-            'thanh_tien'=>$filterAll['thanh_tien']
+        $optioninsert = [
+            'san_pham_id' => $filterAll['id'],
+            'RAM' => $filterAll['ram'],
+            'SSD' => $filterAll['ssd'],
+            'thanh_tien' => $filterAll['thanh_tien']
         ];
-        $db->insert('tuy_chon_cau_hinh',$optioninsert);
+        $db->insert('tuy_chon_cau_hinh', $optioninsert);
     }
 }
 $id = $_GET['id'];
@@ -279,7 +279,7 @@ $smg = getFlashData('smg');
 
                                                 <td class="text-center">
 
-                                                    <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
+                                                    <a href="?com=san_pham&act=xoa&type=cau_hinh&id=<?= $item['id'] ?>&san_pham_id=<?= $id ?>"
                                                         class="btn btn-danger btn-sm">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </a>
@@ -319,7 +319,7 @@ $smg = getFlashData('smg');
                                     <input class="form-control" type="text" id="option_price" name="thanh_tien">
                                 </div>
                                 <div class="col-12">
-                                    <input type="hidden" name="id" value="<?=$id?>">
+                                    <input type="hidden" name="id" value="<?= $id ?>">
                                     <button class="btn btn-success  w-25" name="option">Lưu</button>
                                 </div>
                             </form>
@@ -372,7 +372,7 @@ $smg = getFlashData('smg');
 
                                                 <td class="text-center">
 
-                                                    <a href="?com=thuong_hieu&act=xoa&id=<?= $item['id'] ?>"
+                                                    <a href="?com=san_pham&act=xoa&type=thu_vien_anh&id=<?= $item['id'] ?>&san_pham_id=<?= $id ?>"
                                                         class="btn btn-danger btn-sm">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </a>

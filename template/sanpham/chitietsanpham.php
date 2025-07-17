@@ -41,18 +41,18 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
                   data-preview-image-source="product-preview"><img src="upload/images/<?= $product['hinh_anh'] ?>"
                     alt="" /></a>
               </div>
-              <?php 
-              $thu_vien_anh=$db->getRaw("select * from hinh_san_pham where san_pham_id=".$product['id']);
-              foreach ( $thu_vien_anh as $item):
+              <?php
+              $thu_vien_anh = $db->getRaw("select * from hinh_san_pham where san_pham_id=" . $product['id']);
+              foreach ($thu_vien_anh as $item):
               ?>
                 <div class="item">
-                <a class="responsive-1by1" target="_blank" href="upload/images/<?= $item['hinh_anh'] ?>"
-                  data-preview-image-source="product-preview"><img src="upload/images/<?= $item['hinh_anh'] ?>"
-                    alt="" /></a>
-              </div>
-                <?php
-                endforeach;
-                ?>
+                  <a class="responsive-1by1" target="_blank" href="upload/images/<?= $item['hinh_anh'] ?>"
+                    data-preview-image-source="product-preview"><img src="upload/images/<?= $item['hinh_anh'] ?>"
+                      alt="" /></a>
+                </div>
+              <?php
+              endforeach;
+              ?>
 
             </div>
           </div>
@@ -82,31 +82,59 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
             </div>
             <form class="out-lg">
               <div class="row cols-md rows-md">
-                <!-- <div class="sm-col-5">
-                  <div class="field-group field-spin-sides">
-                    <div class="field-wrap">
-                      <input
-                        class="field-control montserrat-bold alt-color text-sm text-center"
-                        type="text"
-                        name="quantity"
-                        value="1"
-                        min="1"
-                        max="100"
-                        data-action-role="field-wheel-spin field-arrows-spin"
-                        autocomplete="off" />
-                      <span class="field-back"></span>
-                      <span class="field-actions"><span
-                          class="field-increment"
-                          data-action-role="field-increment"><i
-                            class="fas fa-plus"
-                            aria-hidden="true"></i></span><span
-                          class="field-decrement"
-                          data-action-role="field-decrement"><i
-                            class="fas fa-minus"
-                            aria-hidden="true"></i></span></span>
-                    </div>
+                <?php
+                $ram = $db->getRaw("select * from tuy_chon_cau_hinh where RAM <>'' and san_pham_id=" . $product['id']);
+                $ssd = $db->getRaw("select * from tuy_chon_cau_hinh where SSD <>'' and san_pham_id=" . $product['id']);
+                if ($ram || $ssd):
+
+                ?>
+
+                  <div class="product-available col-12 " style="padding-bottom: 0px;">
+                    Chọn cấu hình nâng cấp
                   </div>
-                </div> -->
+                  <?php
+                  if ($ram):
+                  ?>
+                    <div class="option-group col-12 pt-0">
+                      <div class="product-available ">
+                        RAM
+                      </div>
+
+                      <div class="option-buttons" id="ram-options">
+                        <?php foreach ($ram as $item): ?>
+                          <div class="option-button"
+                            data-type="ram"
+                            data-value="<?= $item['RAM'] ?>"
+                            data-price="<?= $item['thanh_tien'] ?>">
+                            <?= $item['RAM'] ?>: + <?= $f->format_tiente($item['thanh_tien']) ?> đ
+                          </div>
+                        <?php endforeach; ?>
+
+                      </div>
+                    </div>
+                  <?php endif;
+                  if ($ssd): ?>
+                    <div class="option-group col-12 pt-0">
+                      <div class="product-available ">
+                        SSD
+                      </div>
+
+                      <div class="option-buttons" id="ssd-options">
+                        <?php foreach ($ssd as $item): ?>
+                          <div class="option-button"
+                            data-type="ssd"
+                            data-value="<?= $item['SSD'] ?>"
+                            data-price="<?= $item['thanh_tien'] ?>">
+                            <?= $item['SSD'] ?>: + <?= $f->format_tiente($item['thanh_tien']) ?> đ
+                          </div>
+                        <?php endforeach; ?>
+
+                      </div>
+                    </div>
+                <?php
+                  endif;
+                endif;
+                ?>
                 <div class="sm-col-12">
                   <button class="btn-add-to-cart btn text-upper col-12" data-id="<?= $product['id'] ?>">
                     <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp; Thêm vào giỏ hàng
@@ -316,23 +344,26 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
 </div>
 
 
-
 <script>
-  $(document).ready(function () {
-    $('.btn-add-to-cart').off('click').on('click', function (e) {
-      e.preventDefault(); // Ngăn không cho nhảy trang vì thẻ <a href="#">
+  $(document).ready(function() {
+    $('.btn-add-to-cart').off('click').on('click', function(e) {
+      e.preventDefault();
       let productId = $(this).data('id');
 
+      // Lấy tùy chọn được chọn nếu có
+      let ramOption = $('#ram-options .option-button.active').data('value') || '';
+      let ssdOption = $('#ssd-options .option-button.active').data('value') || '';
+
       $.ajax({
-        url: 'api/themspvaogiohang.php', // file PHP xử lý thêm vào giỏ hàng
+        url: 'api/themspvaogiohang.php',
         method: 'POST',
         dataType: 'json',
         data: {
-          id: productId
+          id: productId,
+          ram: ramOption,
+          ssd: ssdOption
         },
-        success: function (response) {
-          // Xử lý sau khi thêm thành công
-          // alert('Đã thêm sản phẩm vào giỏ hàng!');
+        success: function(response) {
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -340,25 +371,41 @@ $danhmuc = $db->oneRaw("SELECT*FROM danh_muc_san_pham WHERE id='$id'");
             showConfirmButton: false,
             timer: 1500
           });
-          // Hoặc bạn có thể cập nhật số lượng giỏ hàng ở header, etc.
+
           const htmlString = response.html;
-
-          // Tạo DOM tạm
           const $temp = $('<div>').html(htmlString);
-
-          // Lấy phần nội dung bên trong .items
           const newItemsContent = $temp.find('.cart-inner-inner').html();
-
-          // Cập nhật vào DOM thật
           $('#gio_hang_component .cart-inner-inner').html(newItemsContent);
-          // Cập nhật số lượng giỏ hàng
           $('#number-cart').text(response.number_cart);
           $('#number-cart2').text(response.number_cart);
         },
-        error: function () {
+        error: function() {
           alert('Đã xảy ra lỗi, vui lòng thử lại.');
         }
       });
     });
+  });
+</script>
+<script>
+  function setupOptionGroup(groupId) {
+    const $group = $('#' + groupId);
+
+    $group.on('click', '.option-button', function() {
+      const $clicked = $(this);
+
+      // Nếu đang active thì bỏ chọn
+      if ($clicked.hasClass('active')) {
+        $clicked.removeClass('active');
+      } else {
+        // Bỏ active các button khác trong nhóm
+        $group.find('.option-button').removeClass('active');
+        $clicked.addClass('active');
+      }
+    });
+  }
+
+  $(document).ready(function() {
+    setupOptionGroup('ram-options');
+    setupOptionGroup('ssd-options');
   });
 </script>

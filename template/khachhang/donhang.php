@@ -20,9 +20,9 @@
                                 foreach ($chi_tiet_don_hang as $ctdh) {
                                     $san_pham = $db->oneRaw("SELECT * FROM san_pham WHERE id = " . $ctdh['san_pham_id']);
                                     if ($ten_san_pham == '') {
-                                        $ten_san_pham = $san_pham['ten_san_pham'];
+                                        $ten_san_pham = $san_pham['ten_san_pham'].($ctdh['RAM']!=""?' | '.$ctdh['RAM']:"").($ctdh['SSD']!=""?' | '.$ctdh['SSD']:"");
                                     } else {
-                                        $ten_san_pham .= ', ' . $san_pham['ten_san_pham'];
+                                        $ten_san_pham .= ', ' . $san_pham['ten_san_pham'].($ctdh['RAM']!=""?' | '.$ctdh['RAM']:"").($ctdh['SSD']!=""?' | '.$ctdh['SSD']:"");
                                     }
                                 }
                             ?>
@@ -51,7 +51,7 @@
                                             </div>
                                         </div>
                                         <div class="user-order-item-title text-upper">
-                                            <?= $san_pham['ten_san_pham'] ?>
+                                            <?= $san_pham['ten_san_pham'].($ctdh['RAM']!=""?' | '.$ctdh['RAM']:"").($ctdh['SSD']!=""?' | '.$ctdh['SSD']:"") ?>
                                         </div>
                                         <div class="user-order-item-price">
                                             <?= $f->format_tiente($ctdh['don_gia']) ?>₫

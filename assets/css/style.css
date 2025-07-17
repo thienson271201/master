@@ -164,3 +164,29 @@
 .cart-icon-on-scroll.visible {
   display: inline-block !important;
 }
+
+
+    .option-buttons {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    .option-button {
+      padding: 10px 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .option-button.active {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+    .option-button:hover {
+      border-color: #007bff;
+    }

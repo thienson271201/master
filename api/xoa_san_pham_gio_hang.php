@@ -3,21 +3,24 @@ session_start();
 
 $response = ['status' => 'success', 'reload' => false];
 
-if (isset($_POST['id']))
-{
-    $id = $_POST['id'];
+if (isset($_POST['key'])) {
+    $key = $_POST['key']; // key là kiểu '3_16GB_512GB', đã đầy đủ
 
-    if (isset($_SESSION['gio_hang'][$id]))
-    {
-        unset($_SESSION['gio_hang'][$id]);
+    if (isset($_SESSION['gio_hang'][$key])) {
+        unset($_SESSION['gio_hang'][$key]);
 
-        // Nếu sau khi xóa, giỏ hàng trống hoặc chỉ còn 1 sản phẩm
-        if (count($_SESSION['gio_hang']) <= 0)
-        {
+        if (count($_SESSION['gio_hang']) <= 0) {
             unset($_SESSION['gio_hang']);
             $response['reload'] = true;
         }
+
+        $response['success'] = true;
+    } else {
+        $response['error'] = 'Không tìm thấy sản phẩm trong giỏ hàng.';
     }
+} else {
+    $response['error'] = 'Thiếu thông tin key sản phẩm.';
 }
+
 
 echo json_encode($response);

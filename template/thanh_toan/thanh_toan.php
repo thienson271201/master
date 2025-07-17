@@ -188,13 +188,13 @@ if ($f->isLogin()) {
                         foreach ($_SESSION['gio_hang'] as $item):
                             $id = $item['id'];
                             $sanphamthanhtoan = $db->oneRaw("SELECT * FROM san_pham WHERE id = $id");
-                            $tong_tien += $sanphamthanhtoan['gia_sau_khuyen_mai'] * $item['quantity'];
+                            $tong_tien +=($sanphamthanhtoan['gia_sau_khuyen_mai'] + $item['option_price'])* $item['quantity'];
                         ?>
 
                             <div class="checkout-total-line">
-                                <div class="title"><?= $sanphamthanhtoan['ten_san_pham'] ?> x <?= $item['quantity'] ?></div>
+                                <div class="title"><?= $sanphamthanhtoan['ten_san_pham'].($item['ram']!=""?' | '.$item['ram']:"").($item['ssd']!=""?' | '.$item['ssd']:"") ?> x <?= $item['quantity'] ?></div>
                                 <div class="value">
-                                    <?= $f->format_tiente($sanphamthanhtoan['gia_sau_khuyen_mai'] * $item['quantity']) ?>₫
+                                    <?= $f->format_tiente(($sanphamthanhtoan['gia_sau_khuyen_mai']+$item['option_price'] )* $item['quantity']) ?> ₫
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -202,25 +202,20 @@ if ($f->isLogin()) {
                     <div class="muted-bg ins-sm offs-lg">
                         <div class="checkout-total-line text-sm text-semibold">
                             <div class="title text-upper">Tạm tính</div>
-                            <div class="value"><?= $f->format_tiente($tong_tien) ?>₫</div>
+                            <div class="value"><?= $f->format_tiente($tong_tien) ?> ₫</div>
                         </div>
                         <div class="checkout-total-line text-semibold">
                             <div class="title text-upper">Phí vận chuyển</div>
                             <div class="value">
-                                <div class="value-line">0₫</div>
+                                <div class="value-line">0 ₫</div>
                                 <!-- <div class="value-line">Miễn phí vận chuyển</div> -->
                             </div>
                         </div>
-                        <div class="checkout-total-line text-semibold">
-                            <div class="title text-upper">Giảm giá</div>
-                            <div class="value">
-                                <div class="value-line">0₫</div>
-                            </div>
-                        </div>
+                        
                         <div class="checkout-total-separator"></div>
                         <div class="checkout-total-line text-sm">
                             <div class="title text-upper text-semibold">Tổng cộng</div>
-                            <div class="value text-colorful text-bold"><?= $f->format_tiente($tong_tien) ?>₫</div>
+                            <div class="value text-colorful text-bold"><?= $f->format_tiente($tong_tien) ?> ₫</div>
                         </div>
                     </div>
                     <h4 class="text-upper">Chi tiết thanh toán</h4>

@@ -51,7 +51,7 @@ $smg = getFlashData('smg');
                             <tr>
                                 <th width="6%" class="text-center">STT</th>
                                 <th>Tên Danh Mục</th>
-                                <th width="10%" class="text-center">Hiển thị</th>
+                                <!-- <th width="10%" class="text-center">Hiển thị</th> -->
                                 <th width="10%" class="text-center">Thao tác</th>
                             </tr>
                         </thead>
@@ -73,10 +73,10 @@ $smg = getFlashData('smg');
                                         </a>
                                     </td>
                                    
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <input data-id="<?= $item['id'] ?>" type="checkbox" name="noibat" id="noibat"
                                             class="form-check-input highlight-checkbox" checked>
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">
                                         <a href="?com=danh_muc&act=sua&id=<?= $item['id'] ?>"
                                             class="btn btn-warning btn-sm">

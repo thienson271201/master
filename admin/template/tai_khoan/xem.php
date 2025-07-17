@@ -1,5 +1,23 @@
 <?php
-$list_order = $db->getRaw("SELECT * FROM admin ");
+if ($func->isPOST())
+{
+    $filterAll = $func->filter();
+    $data_insert = [
+      //  'username' => $filterAll['username'],
+        'fullname' => $filterAll['fullname'],
+        'email' => $filterAll['email'],
+        'phone' => $filterAll['phone'],
+        
+      
+    ];
+    // echo '<pre>';
+    // print_r($data_insert);
+    // echo '</pre>';
+    $db->update('admin', $data_insert,'id='.$_GET['id']);
+    setFlashData('smg', 'Cập nhật thành công');
+    //$func->redirect('?com=tai_khoan&act=danh_sach');
+}
+$admin = $db->oneRaw("SELECT * FROM admin where id=".$_GET['id']);
 $smg = getFlashData('smg');
 $smg_type = getFlashData('smg_type');
 
@@ -39,7 +57,7 @@ $smg_type = getFlashData('smg_type');
                 $func->getSmg($smg, $smg_type);
             }
             ?>
-            <form method="post">
+           <form method="post">
 
                 <div class="card card-primary card-outline mb-4">
                     <!--begin::Header-->
@@ -50,34 +68,30 @@ $smg_type = getFlashData('smg_type');
                     <!--begin::Form-->
                     <div class="card-body">
                         <div class="row">
-                            <div class="mb-3 col-12">
-                                <label for="company_name" class="form-label fw-bold">Tiêu đề website:</label>
-                                <input type="text" name="company_name" class="form-control"
-                                    value="<?= $company_name ?>">
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label for="address" class="form-label fw-bold">Địa chỉ:</label>
-                                <input type="text" name="address" class="form-control" value="<?= $address ?>">
-                            </div>
                             <div class="mb-3 col-12 col-lg-4">
-                                <label for="email" class="form-label fw-bold">Email:</label>
-                                <input type="email" name="email" class="form-control" value="<?= $email ?>">
+                                <label for="company_name" class="form-label fw-bold">Username:</label>
+                                <input type="text" name="username" class="form-control" disabled value="<?=$admin['username'] ?>">
                             </div>
-                            <div class="mb-3 col-6 col-lg-4">
+                            
+                            <div class="mb-3 col-12 col-lg-4">
                                 <label for="phone_number" class="form-label fw-bold">Điện thoại:</label>
-                                <input type="text" name="phone_number" class="form-control"
-                                    value="<?= $phone_number ?>">
+                                <input type="text" name="phone" class="form-control" value="<?=$admin['phone'] ?>">
                             </div>
-                            <div class="mb-3 col-6 col-lg-4">
-                                <label for="zalo" class="form-label fw-bold">Zalo:</label>
-                                <input type="text" name="zalo" class="form-control" value="<?= $zalo ?>">
+                            <div class="mb-3 col-12 col-lg-6">
+                                <label for="address" class="form-label fw-bold">Họ tên:</label>
+                                <input type="text" name="fullname" class="form-control" value="<?=$admin['fullname'] ?>">
                             </div>
+                            <div class="mb-3 col-12 col-lg-6">
+                                <label for="email" class="form-label fw-bold">Email:</label>
+                                <input type="email" name="email" class="form-control" value="<?=$admin['email'] ?>">
+                            </div>
+
                         </div>
                     </div>
                 </div>
                 <!--begin::Footer-->
                 <button type="submit" class="btn btn-primary">
-                    Cập nhật
+                    Lưu
                 </button>
             </form>
         </div>
